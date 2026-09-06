@@ -1,4 +1,4 @@
-# VISUAL_SYSTEM — jipbap v0.3
+# VISUAL_SYSTEM — jipbap v0.4
 
 ## 1. Reference authority
 
@@ -110,6 +110,16 @@ food macro인데 full-table/character medium이 나오면 CAMERA_COMPOSITION_FAI
 
 음식 비트는 얼굴을 의무로 하지 않는다.
 손/수저/그릇/음식 초근접 허용.
+
+### 9.1 Approved food-focus composition baseline — 2026-09-07
+
+- 현재 비트의 주인공이 음식 상태 변화라면 음식과 접촉 행동이 화면의 시각적 우선권을 가진다.
+- 손·젓가락·숟가락·그릇은 장식 소품이 아니라 행동 관계의 일부다. 접촉 위치와 도구 방향이 실제 동작과 맞아야 한다.
+- 먹기 전/행동 중/행동 후의 상태 차이가 컷 사이에서 읽혀야 한다. 인물 얼굴을 크게 보여주기 위해 이 변화를 희생하지 않는다.
+- 인물과 배경은 필요한 상황·감정·공간 정보를 제공하되 음식 초점을 경쟁적으로 빼앗지 않는다.
+- 감각이 음식 자체로 충분히 전달되는 경우 object/food-only 또는 hand/utensil-focused frame을 정상적인 완성 컷으로 인정한다.
+
+세부 상태 전이와 물리적 선행조건은 FOOD_STATE_SYSTEM이, 식문화 정합성은 MEAL_CONTEXT_SYSTEM이 소유한다. 이 절은 그 authority를 복제하지 않고 화면 우선순위만 정한다.
 
 ## 10. Anti-ad look
 
