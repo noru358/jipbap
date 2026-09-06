@@ -51,17 +51,13 @@ E002 compiled grammar:
 
 ### C. Whole-episode render/context leak
 
-Observed after A/B fix:
+Observed:
 - renderer generated multi-panel S01~S05 page
 - future-shot actions and lettering appeared in a supposed S02 render
 
-Cause:
-- image generation input was not isolated to current shot
-- full episode/storyboard/voice remained visible to renderer
-
 Fix:
 - current-shot render capsule
-- allowlist only current S02 + minimal continuity + style + relevant meal grammar
+- allowlist only current shot + minimal continuity + style + relevant meal grammar
 - deny future shots, voice copy, rejected outputs, locked-shot edit targets
 - multi-shot output = RENDER_CONTEXT_LEAK_FAIL
 
@@ -72,10 +68,12 @@ Canonical:
 
 ## Current execution blocker
 
-The present long chat context has demonstrated whole-episode leakage into image generation.
+The clean continuation context successfully restored GitHub state, so the previous whole-episode-context blocker is no longer presumed active.
 
-Therefore this environment is marked:
-RENDER_CONTEXT_UNSAFE_FOR_E002_S02
+However, required image binaries are not materialized in GitHub and are not bound to the renderer in the current execution context.
+
+Current blocker:
+REFERENCE_BINDING_REQUIRED_FOR_E002_S02
 
 This does NOT reset the episode.
 
@@ -86,8 +84,8 @@ Persisted state remains:
 
 ## Exact next action
 
-Resume in a context-isolated render execution.
-Auto-restore GitHub.
-Render S02 only from its capsule.
-After PASS auto-advance S03 → S04 → S05.
+Bind the actual STYLE_REF_001 image in the current render context.
+Bind the approved E002 S01 anchor when continuity pixels are needed; otherwise use only extracted continuity facts.
+Then render S02 only from its isolated capsule.
+After S02 PASS, auto-advance S03 → S04 → S05.
 Do not recreate S01.
