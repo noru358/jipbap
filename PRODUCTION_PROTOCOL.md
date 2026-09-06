@@ -1,4 +1,4 @@
-# PRODUCTION_PROTOCOL — jipbap v0.3
+# PRODUCTION_PROTOCOL — jipbap v0.4
 
 ## 0. Operating mode
 
@@ -41,9 +41,58 @@ S01을 다시 만들 수 있는 유일한 조건:
 - 사용자가 명시적으로 S01 승인을 철회하거나
 - 사용자가 S01 재제작을 직접 지시한 경우.
 
-운영자가 임의로 anchor 재생성을 선택할 수 없다.
+## 2. Current-shot render capsule
 
-## 2. Preproduction
+이미지 생성기는 전체 에피소드 문맥을 직접 받지 않는다.
+각 렌더 호출 전에 current-shot-only capsule을 컴파일한다.
+
+### ALLOWLIST
+렌더러에 전달 가능한 정보:
+1. target_shot_id
+2. current shot의 preconditions/action/postconditions
+3. current shot의 must_show/must_not_show
+4. current shot의 camera/composition
+5. STYLE_AUTHORITY
+6. 최소 continuity facts
+   - 동일 인물 identity facts
+   - 현재 음식/식기 상태
+   - 필요한 공간/소품 continuity
+7. current shot에 필요한 meal-context/dining-grammar subset
+8. output contract
+   - one panel
+   - one file
+   - text free
+
+### DENYLIST
+렌더러 입력에서 제외:
+- 전체 에피소드 storyboard
+- future shots
+- current shot 이후의 state
+- VOICE/lettering copy
+- 이전 컷의 자막/대사
+- 사용자 승인용 전체 패키지
+- rejected render attempts
+- APPROVED_LOCKED shot을 edit target로 쓰는 이미지 바인딩
+- 현재 컷에 불필요한 식탁/배경 디테일
+
+이 원칙을 위반하면 RENDER_CONTEXT_LEAK_FAIL이다.
+
+## 3. Manual/chat execution fail-closed
+
+현재 실행 환경이 렌더 입력을 current-shot capsule로 격리할 수 없고
+전체 대화/전체 에피소드 문맥이 이미지 생성에 섞이는 것이 확인되면:
+
+- 같은 환경에서 무한 재시도하지 않는다.
+- rejected output을 reference로 재사용하지 않는다.
+- 이전 approved shot을 다시 만들지 않는다.
+- 상태를 RENDER_CONTEXT_UNSAFE로 기록한다.
+- context isolation이 가능한 새 render context에서 같은 cursor shot부터 재개한다.
+
+중요:
+context reset은 episode reset이 아니다.
+GitHub의 render cursor/locked shots를 복원한 후 S02부터 그대로 이어간다.
+
+## 4. Preproduction
 
 1. MENU/MOMENT 선정
 2. MEAL CONTEXT + DINING GRAMMAR compile
@@ -56,63 +105,59 @@ S01을 다시 만들 수 있는 유일한 조건:
 9. 사용자에게 사전 패키지 제시
 10. 명시 승인 후 래스터 제작
 
-## 3. Visual preflight
+## 5. Visual preflight
 
-생성 전 각 컷에 대해:
+생성 전:
 - render cursor == target shot
-- target shot is not already APPROVED_LOCKED
+- target shot is not APPROVED_LOCKED
+- current-shot render capsule compiled
+- DENYLIST fields absent
 - actual style reference binding
 - reference role separation
-- episode continuity anchor binding if useful
 - meal context + dining grammar binding
-- preconditions/action/postconditions
-- must_show / must_not_show
-- camera/composition
 - text_free=true
 - single_panel=true
 
-하나라도 빠지면 렌더 금지.
+하나라도 실패하면 렌더 금지.
 
-## 4. S01 gate
+## 6. S01 gate
 
 S01 한 장만 생성한다.
-사용자가 다음을 본다.
-- 스타일
-- 인물
-- 음식 표현 밀도
-- 공간 분위기
-- 인물/음식 비중
-- 식탁 전체의 meal-context/dining-grammar 정합성
 
 PASS 직후:
-1. S01을 APPROVED_LOCKED로 기록
-2. S01 이미지는 continuity anchor로만 승격
-3. render cursor를 S02로 전진
-4. 다음 사용자 게이트를 RASTER_SET_USER_GATE로 설정
+1. S01 = APPROVED_LOCKED
+2. S01 = CONTINUITY_ANCHOR only
+3. render cursor = S02
+4. next user gate = RASTER_SET
 
-## 5. Remaining render
+## 7. Remaining render
 
 S01 PASS 후:
 - S02부터 마지막까지 한 장씩 생성
-- 각 컷 생성 후 내부 구조/시각/meal-context/dining-grammar/상태 QC
+- current-shot capsule만 사용
+- 각 컷 내부 QC
 - FAIL이면 같은 shot만 재시도
-- PASS이면 cursor를 다음 shot으로 자동 전진
-- 사용자에게 컷별 승인을 요구하지 않음
-
-중간에 사용자를 다시 부르는 조건:
-- 승인된 콘티/맛/스타일의 본질적 선택이 새로 필요한 경우
-- 원래 승인 계약 자체가 잘못되어 운영자가 임의 결정할 수 없는 경우
+- PASS이면 cursor 자동 전진
+- 컷별 사용자 승인 없음
 
 렌더러가 반복 실패하면:
-- 현재 shot의 render context/reference binding을 격리/재컴파일한다.
-- 이미 PASS한 이전 shot으로 cursor를 되돌리지 않는다.
+- current-shot capsule/reference binding을 재컴파일
+- context leak 여부 검사
+- 이전 PASS shot으로 돌아가지 않음
 
-## 6. Internal QC layers
+## 8. Internal QC layers
 
 ### State-machine QC
 - target shot == render cursor
 - approved locked shots are not regenerated
 - retry scope == current shot only
+
+### Render-context QC
+- no future-shot content
+- no voice/lettering content
+- no rejected outputs as references
+- no locked-shot edit target
+- only minimal continuity facts
 
 ### Structural output QC
 - one panel / one file
@@ -121,43 +166,37 @@ S01 PASS 후:
 
 ### Visual QC
 - reference fidelity
-- identity/space continuity
 - shot-specific camera/composition
+- action visibly realized
 - food-first framing
 - anti-ad rendering
 
 ### Meal-context / dining-grammar QC
-- declared cuisine/meal setting consistency
-- main/staple/soup/side-dish compatibility
-- preparation-form plausibility
-- vessel/material plausibility
-- ingredient/garnish plausibility
+- cuisine/meal-setting consistency
+- preparation/vessel/ingredient/garnish plausibility
 - utensil type/material/placement plausibility
 - hand/gesture/eating-action plausibility
-- shared-vs-individual table topology plausibility
+- table topology plausibility
 - cross-context contamination
 
 ### Food-state QC
 - pre/post continuity
 - bridge actions
-- quantity/location/state monotonicity where applicable
+- quantity/location/state monotonicity
 
-## 7. Raster-set gate
+## 9. Raster-set gate
 
-모든 컷이 내부 PASS일 때 전체 무자막 세트를 사용자에게 제시한다.
-사용자 PASS 후에만 레터링으로 넘어간다.
+모든 컷 내부 PASS 후 전체 무자막 세트를 사용자에게 제시한다.
+사용자 PASS 후 레터링.
 
-## 8. Lettering
+## 10. Lettering / final
 
-VOICE_SYSTEM에 따라 텍스트를 후단에서 합성한다.
-원본 래스터에 생성기로 한글을 굽지 않는다.
-
-## 9. Final QC
-
+VOICE_SYSTEM으로 후단 합성.
+최종 QC:
 - 컷 순서
 - 이미지/텍스트 대응
 - 모바일 가독성
-- 말투 일관성
-- meal-context/dining-grammar 일관성
-- 음식 상태 연속성
-- 최종 감정 여운
+- 말투
+- meal/dining grammar
+- food-state continuity
+- 감정 여운
