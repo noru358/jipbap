@@ -7,7 +7,10 @@
     "beat_role",
     "meal_context",
     "reference_bindings",
+    "subject_bindings",
     "context_firewall",
+    "coverage",
+    "geometry",
     "preconditions",
     "action",
     "postconditions",
@@ -53,6 +56,7 @@
     },
     "reference_bindings": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
         "required": [
@@ -83,8 +87,49 @@
           }
         },
         "additionalProperties": false
-      },
-      "minItems": 1
+      }
+    },
+    "subject_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "subject_id",
+          "recurring",
+          "visible"
+        ],
+        "properties": {
+          "subject_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "recurring": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "subject_lock_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "identity_anchor_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "identity_invariants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
     },
     "context_firewall": {
       "type": "object",
@@ -112,6 +157,70 @@
         }
       },
       "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "focal_owner",
+        "shot_scale",
+        "camera_relation",
+        "visual_delta_from_previous"
+      ],
+      "properties": {
+        "focal_owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "shot_scale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "camera_relation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visual_delta_from_previous": {
+          "type": "string"
+        },
+        "repetition_justification": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "geometry": {
+      "type": "object",
+      "required": [
+        "risk_level",
+        "contact_chain",
+        "anatomy_checks"
+      ],
+      "properties": {
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "contact_chain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "anatomy_checks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
     },
     "preconditions": {
       "type": "array",
@@ -172,12 +281,10 @@
       "type": [
         "string",
         "null"
-      ],
-      "description": "Reference ID for the persistent MEAL_SCENE_STATE used by new/revised shots when a meal scene continues."
+      ]
     },
     "state_delta": {
       "type": "object",
-      "description": "Per-shot changes to persistent meal-scene entities. Omitted/empty means persistent topology remains unchanged.",
       "additionalProperties": true
     }
   },
