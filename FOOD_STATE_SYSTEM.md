@@ -1,4 +1,4 @@
-# FOOD_STATE_SYSTEM — state-transition continuity v0.2
+# FOOD_STATE_SYSTEM — state-transition continuity v0.3
 
 ## 0. Why this exists
 
@@ -77,24 +77,24 @@
 
 행동은 전제 상태가 맞을 때만 허용한다.
 
-예: `break_yolk`
-- egg exists
-- egg.yolk == intact
-- egg.location == intended_serving_location
-- relevant utensil visible/usable
+예: `separate_food_piece`
+- target food exists
+- target food is in a separable state
+- target food is at the intended serving location
+- relevant utensil/hand is visible and usable
 
-이번 Episode 001에서 `break_yolk`의 intended_serving_location은 `on_rice`다.
-이 값은 해당 회차의 먹는 방식에서 결정되며 프로젝트 전역 하드코딩이 아니다.
+`intended_serving_location`과 세부 precondition은 해당 회차의 실제 음식/먹는 방식에서 결정한다.
+특정 과거 회차의 위치나 동작을 프로젝트 전역 하드코딩하지 않는다.
 
 ## 4. Postconditions
 
 행동 후 상태를 반드시 기록한다.
 
 예:
-- egg.yolk: intact → pierced/runny
-- rice.topping: egg_on_top
-- sauce: none → partial
-- bowl.fullness: full → partial
+- food.integrity: intact → separated
+- food.location: serving_vessel → utensil
+- sauce/coating: none → partial
+- vessel.fullness: full → partial
 
 다음 컷은 이 결과와 모순되면 안 된다.
 
@@ -109,21 +109,19 @@
 1. 빠진 행동을 독립 컷으로 추가하거나
 2. 다음 컷의 precondition에 이미 완료된 상태를 명확히 포함하고, 시각적으로 자연스럽게 이해 가능한 생략인지 확인한다.
 
-### Episode 001 example
+### Generic example
 잘못된 흐름:
-- S02: egg.location=plate, yolk=broken
-- S03: egg.location=on_rice
+- S02: food_piece.location=serving_plate
+- S03: food_piece.location=rice_bowl
 
-문제: `plate → on_rice` 이동 action 없음.
+문제: `serving_plate → rice_bowl` 이동 action 없음.
 
 수정 흐름:
-- S01 post: egg.location=plate, yolk=intact
-- bridge: place_egg_on_rice
-- S02 pre: egg.location=on_rice, yolk=intact
-- S02 action: break_yolk
-- S02 post: egg.location=on_rice, yolk=runny
+- S02 post: food_piece.location=serving_plate
+- bridge: move_food_piece
+- S03 pre: food_piece.location=rice_bowl
 
-bridge는 별도 컷이 아닐 수도 있다. 단, 다음 컷의 시작 상태가 자연스럽고 명시적으로 보여야 한다.
+bridge는 별도 컷이 아닐 수도 있다. 단, 다음 컷의 시작 상태가 자연스럽고 명시적으로 이해되어야 한다.
 
 ## 6. Food continuity QC
 
@@ -144,7 +142,7 @@ bridge는 별도 컷이 아닐 수도 있다. 단, 다음 컷의 시작 상태�
 
 ## 7. Generalization rule
 
-이 시스템은 "계란은 밥 위에서 깨야 한다"를 전역 규칙으로 저장하지 않는다.
+이 시스템은 "특정 음식은 항상 특정 위치/순서로 먹어야 한다" 같은 회차 종속 사실을 전역 규칙으로 저장하지 않는다.
 
 저장할 것은:
 - 음식 행동에는 precondition이 있다
