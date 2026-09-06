@@ -6,21 +6,33 @@ This manifest records the authoritative binary references required by the curren
 
 ## STYLE_REF_001
 
-- intended repository path: `assets/references/STYLE_REF_001.jpg`
+- intended repository path: assets/references/STYLE_REF_001.jpg
 - role: project visual/style authority supplied explicitly by the user
 - original dimensions: 864 × 1536
-- SHA-256: `792be650dc2aae9a2ca5ee6d2fadd51054475d9171eaf5b427fb5192893ec972`
-- repository binary status: `BINARY_REQUIRED_NOT_YET_MATERIALIZED`
+- SHA-256: 792be650dc2aae9a2ca5ee6d2fadd51054475d9171eaf5b427fb5192893ec972
+- repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+- current-session verification: hash matched user-supplied binary on 2026-09-06
 
 ## Episode 001 S01 temporary anchor
 
-- intended repository path: `episodes/001/anchors/S01_TEMP_ANCHOR.png`
+- intended repository path: episodes/001/anchors/S01_TEMP_ANCHOR.png
 - role: episode-local continuity anchor only
-- user verdict: `TEMPORARY_PASS`
-- project style-lock authority: `NO`
+- user verdict: TEMPORARY_PASS
+- project style-lock authority: NO
 - original dimensions: 1122 × 1402
-- SHA-256: `c5769b8a789b75d80764798368f029d68479fe93ff36178c1460c73ae96227fd`
-- repository binary status: `BINARY_REQUIRED_NOT_YET_MATERIALIZED`
+- SHA-256: c5769b8a789b75d80764798368f029d68479fe93ff36178c1460c73ae96227fd
+- repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+
+## Episode 002 S01 approved anchor
+
+- intended repository path: episodes/002/anchors/S01_APPROVED_ANCHOR.png
+- role: Episode 002 continuity anchor
+- user verdict: PASS
+- project style-lock authority: NO
+- original dimensions: 1122 × 1402
+- SHA-256: cec9a1be2077772369e89098a9553d67b9ba028b6c5c5448f9ac8f44d1814050
+- repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+- current-session status: actual generated binary is available and hash-verified for this execution session
 
 ## Fail-closed rule
 
@@ -28,4 +40,4 @@ A document path or hash is not evidence that the renderer received the image byt
 
 Any renderer/environment that depends only on this Git repository MUST block reference-conditioned production until the required binary exists at the declared path and its SHA-256 matches this manifest.
 
-In the current ChatGPT session the originally supplied reference/temporary anchor may be available as chat media, but that session-local availability must never be recorded as repository materialization.
+In the current ChatGPT session, an actual binary may be available and hash-verified for rendering. Session-local availability must never be recorded as repository materialization.
