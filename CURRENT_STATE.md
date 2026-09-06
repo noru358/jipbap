@@ -4,49 +4,17 @@ Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Production state — active fresh 001
+## Production state — clean reset after structure test
 
-Execution authorization: **ACTIVE_S01_PENDING_REFERENCE_BINDING**
+Execution authorization: **IDLE_NO_ACTIVE_EPISODE**
 
-Active episode: **001**
-Next new episode number: **002**
+Active episode: NONE
+Next episode number: **001**
 
-Preproduction user gate: **PASS**
-BODY render stage: **S01_PENDING**
-Render cursor: **S01**
-Approved locked BODY shots: NONE
+The experimental fresh 001 package and all prototype raster outputs from the just-completed structure test are retired.
+They are not active episode authority, approval evidence, continuity anchors, subject identity anchors, cover assets or repair sources.
 
-The fresh 001 preproduction package is stored under `episodes/001`.
-The retired pre-reset 001/002 packages remain invalid and must not be restored.
-
-## Active E001 contract
-
-MENU/MOMENT:
-- 집에서 부친 김치전 + 작은 간장 종지
-- 바삭한 가장자리 조각을 집어 간장은 끝에만 살짝 찍고 첫입 먹는 순간
-
-SENSORY ROUTE:
-- PURE_SENSORY
-- 바삭한 가장자리 → 촉촉한 안쪽 → 간장이 묻은 끝 → 첫입 → 다음 조각
-- ending: CONTINUING_BITE
-
-BODY:
-- S01 ARRIVAL
-- S02 PICK
-- S03 DIP
-- S04 BITE
-- S05 RESIDUE / CONTINUING_BITE
-
-COVER:
-- separate product asset
-- working title: 김치전은 가장자리부터
-- reuse approved BODY artwork first
-
-Durable episode authority:
-- episodes/001/PREPRODUCTION.md
-- episodes/001/MEAL_SCENE_STATE.json
-- episodes/001/RENDER_STATE.json
-- episodes/001/shot_contracts/S01.json ... S05.json
+Only generalized structure improvements promoted into canonical authority remain valid.
 
 ## Canonical baseline
 
@@ -59,34 +27,67 @@ Fresh production uses:
 - PRODUCTION_PROTOCOL.md
 - assets/REFERENCE_MANIFEST.md
 - schemas/shot_contract.schema.json
+- schemas/render_state.schema.json
 
-Carousel structure:
+Carousel product order:
 `COVER → BODY S01 → S02 → ... → Sfinal`
 
-BODY gate topology:
-`pre-raster user gate → S01 user anchor → S02..final internal QC → raster-set user gate → cover/lettering → final carousel user gate`
+COVER is a separate mandatory product slot.
+It may be produced by BODY reuse, dedicated generation, or external import, but final completion is blocked until cover_status=PASS.
 
-## Reference / dispatch blocker
+BODY production:
+`pre-raster user gate → S01 user anchor → S02..final internal QC → whole-sequence QC → raster-set user gate → cover/lettering → final carousel user gate`
 
-STYLE_REF_001 is still declared in `assets/REFERENCE_MANIFEST.md` as:
-`BINARY_REQUIRED_NOT_YET_MATERIALIZED`.
+## New structural requirements from the prototype
 
-No current render-context evidence has yet proven that the actual STYLE_REF_001 image bytes are bound to the renderer.
+1. **EPISODE_SUBJECT_LOCK**
+   - any person recurring in 2+ BODY shots gets an episode-local identity lock;
+   - later shots use canonical style authority + subject lock + approved identity-anchor media when supported;
+   - episode reset deletes this lock.
 
-Therefore:
-- do not render S01 yet;
-- do not substitute prompt prose, repository path, hash, chat memory, or retired episode images;
-- do not create an episode continuity anchor before S01 user PASS.
+2. **SHOT_COVERAGE_RHYTHM**
+   - storyboard records focal owner, shot scale, camera relation, visual delta from previous and repetition justification;
+   - fixed left/right/front quotas are forbidden;
+   - whole-set viewer-perceived redundancy QC occurs before the raster-set user gate.
+
+3. **HUMAN_GEOMETRY_QC**
+   - high-risk hand/arm/utensil/mouth contact has an explicit geometry risk/contact chain;
+   - broken anatomy/contact geometry is a hard fail.
+
+4. **STYLE_DOMAIN_COHERENCE**
+   - food may be more detailed than people but must remain in the same illustration abstraction/rendering language;
+   - semi-realistic food + flat-toon person drift is a hard fail.
+
+5. **MANDATORY_COVER_GATE**
+   - cover omission cannot be treated as a completed carousel;
+   - cover may be created/imported elsewhere but must be registered and PASS before final gate.
+
+## Fail-closed reset rule
+
+While Active episode is NONE:
+- do not render;
+- do not restore the retired prototype 001 menu/story/copy/shot contracts/approvals;
+- do not restore prototype S01-S05 outputs as references;
+- do not infer an old menu/story from chat history;
+- do not create a render cursor;
+- do not create an EPISODE_SUBJECT_LOCK until a fresh episode proposal exists.
+
+Project-level style-reference runtime requirements remain governed by assets/REFERENCE_MANIFEST.md.
 
 ## Exact next action
 
-1. Bind the actual STYLE_REF_001 image to the current renderer context.
-2. Verify binary identity/hash when the environment exposes the bytes.
-3. Compile/authorize the S01-only render capsule.
-4. Render **S01 only**, text-free, one panel / one file.
-5. Present S01 for the explicit user anchor gate.
+In a new session, restore AutoPipeline + jipbap HEADs and create a fresh **001 preproduction proposal only**:
 
-After S01 PASS:
-- lock S01;
-- set render cursor=S02;
-- render S02..S05 sequentially with internal QC and no per-shot user gate.
+1. MENU/MOMENT;
+2. SENSORY ROUTE;
+3. meal context + dining grammar;
+4. initial MEAL_SCENE_STATE;
+5. recurring-subject detection + EPISODE_SUBJECT_LOCK plan;
+6. body emotional/state beats;
+7. body visual coverage plan + adjacent visual-delta review;
+8. per-shot geometry risk/contact chain;
+9. BODY storyboard;
+10. COVER brief + cover source route;
+11. voice/copy plan.
+
+Present the complete package for explicit user approval before creating/activating `episodes/001` or rendering BODY S01.
