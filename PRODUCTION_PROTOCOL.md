@@ -1,32 +1,34 @@
-# PRODUCTION_PROTOCOL — jipbap v0.1
+# PRODUCTION_PROTOCOL — jipbap v0.2
 
 ## 0. Operating mode
 
-현재 기본 모드: `MANUAL_VALIDATION`
+현재 기본 모드: MANUAL_VALIDATION
 
 사용자 승인 구조:
 
-`content/storyboard contract → S01 USER anchor → S02..final OPERATOR INTERNAL QC → complete text-free raster-set USER gate → lettering/final USER gate`
+content/storyboard contract → S01 USER anchor → S02..final OPERATOR INTERNAL QC → complete text-free raster-set USER gate → lettering/final USER gate
 
-**one frame = one file** 이지만 **one frame = one user gate**는 아니다.
+one frame = one file 이지만 one frame = one user gate는 아니다.
 
 ## 1. Preproduction
 
 1. MENU/MOMENT 선정
-2. 콘텐츠 비트 작성
-3. VOICE 역할/문구 작성
-4. 전체 콘티 작성
-5. FOOD STATE graph 작성
-6. bridge action 검사
-7. 전체 시각 리듬 설계
-8. 사용자에게 사전 패키지 제시
-9. 명시 승인 후 래스터 제작
+2. MEAL CONTEXT contract 컴파일
+3. 콘텐츠 비트 작성
+4. VOICE 역할/문구 작성
+5. 전체 콘티 작성
+6. FOOD STATE graph 작성
+7. bridge action 검사
+8. 전체 시각 리듬 설계
+9. 사용자에게 사전 패키지 제시
+10. 명시 승인 후 래스터 제작
 
 ## 2. Visual preflight
 
 생성 전 각 컷에 대해:
 - actual style reference binding
 - episode anchor binding if available
+- meal context binding + relevant constraints
 - preconditions/action/postconditions
 - must_show / must_not_show
 - camera/composition
@@ -44,6 +46,7 @@ S01 한 장만 생성한다.
 - 음식 표현 밀도
 - 공간 분위기
 - 인물/음식 비중
+- 식탁 전체의 meal-context 정합성
 
 PASS는 회차 앵커 승인과 프로젝트 스타일 락 승인을 구분해 기록한다.
 
@@ -51,7 +54,7 @@ PASS는 회차 앵커 승인과 프로젝트 스타일 락 승인을 구분해 �
 
 S01 PASS 후:
 - S02부터 마지막까지 한 장씩 생성
-- 각 컷 생성 후 내부 구조/시각/상태 QC
+- 각 컷 생성 후 내부 구조/시각/meal-context/상태 QC
 - FAIL은 내부 재시도
 - 사용자에게 컷별 승인을 기본적으로 요구하지 않음
 
@@ -71,6 +74,14 @@ S01 PASS 후:
 - identity/space continuity
 - food-first framing
 - anti-ad rendering
+
+### Meal-context QC
+- declared cuisine/meal setting consistency
+- main/staple/soup/side-dish compatibility
+- preparation-form plausibility
+- vessel/material plausibility
+- ingredient/garnish plausibility
+- cross-context contamination
 
 ### Food state QC
 - pre/post continuity
@@ -93,5 +104,6 @@ VOICE_SYSTEM에 따라 텍스트를 후단에서 합성한다.
 - 이미지/텍스트 대응
 - 모바일 가독성
 - 말투 일관성
+- meal-context 일관성
 - 음식 상태 연속성
 - 최종 감정 여운
