@@ -99,35 +99,29 @@ S01이 예쁘더라도 PERSON style fidelity가 낮으면 내부적으로 PASS �
 ### EDIT_TARGET
 사용자가 실제 수정 대상으로 지정한 이미지에만 사용.
 
-## 3. Approved anchor immutability
+## 3. Approved production-asset immutability
 
-S01 PASS 후:
-- S01 = APPROVED_LOCKED
-- S01 = CONTINUITY_ANCHOR only
-- S02+에서 is_edit_target=false
-- S02+의 camera/action authority는 current shot contract
+An approved PERSON / FOOD / BACKGROUND / PROP asset is hash-bound.
 
-S01이 current shot output으로 다시 등장하면 HARD FAIL.
+- do not mutate bytes under the same approved asset ID;
+- replacement receives a new version/ID;
+- food-state variation must not silently redesign an accepted PERSON asset;
+- a scene repair should first change composition or the smallest faulty asset;
+- rejected/replaced assets are not continuity anchors.
 
-## 4. Reference fact extraction
+## 4. Reference influence isolation
 
-S02+에서 continuity가 필요할 때는 가능하면 승인 anchor의 전체 픽셀을 그대로 강하게 conditioning하지 않고
-필요한 사실만 추출한다.
+Authoring references control only their declared domains.
 
-예:
-- character hair/clothes
-- bowl/plate family
-- mackerel appearance
-- table material
+When a new asset is authored, extract only the facts needed for that asset:
+- PERSON: identity / line / fill / hair / clothing;
+- FOOD: ingredient/form/state facts;
+- BACKGROUND: location/style facts;
+- CONTACT: hand/tool/food geometry.
 
-불필요한 사실:
-- S01 camera
-- S01 body pose
-- S01 full-table layout
-- S01 incidental background
+Do not let a reference's camera, pose, incidental table layout or unrelated object state become mandatory merely because it appears in the image.
 
-anchor over-copy가 감지되면:
-STYLE_AUTHORITY + extracted continuity facts + current shot contract만 사용한다.
+Final-frame camera/composition belongs to storyboard + deterministic scene composition.
 
 ## 4.5 Episode-local subject identity lock
 
@@ -191,26 +185,31 @@ QC FAIL 이미지:
 
 실패 이미지를 기반으로 반복 수정하면 오류가 누적되므로 금지한다.
 
-## 6. Current-shot context firewall
+## 6. Generative asset context firewall
 
-렌더러에는 current shot만 전달한다.
+When generation is used, send only the current ASSET_GAP / exception contract plus minimum required references.
 
-금지:
-- full storyboard
-- future shots
-- voice copy
-- multi-shot page description
+Do not intentionally include:
+- future BODY states;
+- unrelated storyboard beats;
+- rejected outputs;
+- meaning-bearing copy that should be composed later.
 
-렌더 결과가 여러 shot을 한 번에 포함하면 MULTI_SHOT_CONTEXT_LEAK_FAIL이다.
+If the output contains multiple unrelated scenes/assets or future-state leakage, reject it.
 
-## 7. Output contract
+## 7. Asset / final-output contract
 
-- 기본: 4:5 portrait
-- one shot = one image file
-- one render invocation = one shot
-- multi-panel/grid/collage/contact sheet = HARD FAIL
-- no lettering
-- text_free=true이면 우발적 벽/냉장고/간판 글자도 금지
+Generated asset:
+- one requested asset per output by default;
+- no grid/collage/contact sheet as a production asset;
+- no baked lettering;
+- appropriate transparency/isolation when the asset class needs composition flexibility.
+
+Final BODY frame:
+- 4:5 portrait;
+- one frame = one image file;
+- assembled from approved assets by the shared compositor;
+- meaning-bearing text stays editable.
 
 ## 8. Shot-specific camera authority
 
