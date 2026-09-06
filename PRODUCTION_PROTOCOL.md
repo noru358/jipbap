@@ -1,61 +1,49 @@
 # PRODUCTION_PROTOCOL — jipbap v0.7
 
-## 0. Operating mode\n\n### Architecture precedence — 2026-09-07
+## 0. Operating mode
 
-The canonical final-visual path is now the `VISUAL_SYSTEM §0` hybrid asset-composition policy.
-Older sections below that say BODY S02..final should each be freshly rendered as complete images are retained as historical/exception behavior and do not override the new default.
+현재 기본 모드: MANUAL_VALIDATION + COMPOSITION_FIRST_HYBRID_FOOD.
 
-Current topology:
+Canonical topology:
 
-`content/storyboard gate → reusable asset resolve → missing asset authoring/QC → approved asset set → BODY deterministic composition → sequence QC → cover/lettering composition → final gate`
+`content/storyboard USER gate → asset resolution → ASSET_GAP authoring/QC/approval → deterministic BODY composition → sequence QC → mandatory COVER + lettering composition → final CAROUSEL USER gate`
 
-A PERSON/style calibration asset may still receive a user visual gate, but approval is attached to the asset bytes and reused. It is not a requirement to resample one whole S01 frame before every episode.
+핵심 승인 단위는 이제 “매번 다시 그린 S01”이 아니라 **새로 만든 production asset bytes**다.
+이미 승인된 PERSON/배경/소품 asset은 다음 컷/회차에서 다시 생성하지 않고 재사용할 수 있다.
 
+Full-frame stochastic render는 explicit exception lane일 때만 허용한다.
 
+## 1. Hybrid asset/composition state machine
 
-현재 기본 모드: MANUAL_VALIDATION
-
-User-gate topology:
-
-content/storyboard contract
-→ VISUAL ANCHOR ROUTE RESOLUTION
-→ ANCHOR USER gate (BODY_S01 or non-public A00)
-→ remaining BODY OPERATOR INTERNAL render/QC
-→ complete BODY text-free raster-set USER gate
-→ mandatory COVER acquisition/assembly + BODY lettering
-→ final CAROUSEL USER gate
-
-one frame = one file 이지만 one frame = one user gate는 아니다.
-
-## 1. Render state machine
-
-렌더 단계는 명시적 cursor를 가진다.
-
-PREPRODUCTION_USER_GATE
-→ ANCHOR_PENDING
-→ [BODY_S01 route: S01 USER-approved/locked, cursor=S02]
-   OR
-   [DEDICATED_A00 route: A00 USER-approved anchor, cursor=S01]
-→ POST_ANCHOR_INTERNAL_RENDER
-→ RENDER_CURSOR=next BODY shot ... → RENDER_CURSOR=Sfinal
-→ RASTER_SET_USER_GATE
+`PREPRODUCTION_USER_GATE
+→ ASSET_RESOLUTION
+→ [ASSET_GAP_PENDING ↔ ASSET_AUTHORING_QC]*
+→ COMPOSITION_READY
+→ BODY_COMPOSITION
+→ SEQUENCE_QC
 → POST_RASTER_COMPOSITION
 → FINAL_USER_GATE
+→ EXPORT_READY`
 
-### Hard invariant: approved-shot immutability
+### Approved-asset immutability
 
-사용자가 S01을 PASS하면:
-- S01 status = APPROVED_LOCKED
-- S01은 더 이상 생성 대상이 아니다.
-- 다음 render target은 반드시 S02다.
-- 이후 실패/재시도는 현재 cursor shot에만 국한한다.
-- S02 실패 때문에 S01을 다시 생성하거나 수정하면 PROTOCOL_FAIL이다.
+USER/authorized PASS가 asset hash에 붙으면:
+- 같은 asset ID의 bytes를 바꾸지 않는다;
+- 수정본은 새 version/ID로 등록한다;
+- FOOD variation 때문에 승인 PERSON asset을 다시 생성하지 않는다;
+- 한 asset이 FAIL/RETIRED되면 그 asset에 의존하는 scene만 invalidation한다;
+- unrelated approved scenes/assets는 보존한다.
 
-S01을 다시 만들 수 있는 유일한 조건:
-- 사용자가 명시적으로 S01 승인을 철회하거나
-- 사용자가 S01 재제작을 직접 지시한 경우.
+### Asset gap invariant
 
-## 1.5 Visual anchor routing
+필요한 FOOD_STATE, pose, expression, prop, contact geometry가 registry에 없으면:
+1. story beat를 약화시키지 않는다;
+2. whole frame generation으로 자동 우회하지 않는다;
+3. missing element를 ASSET_GAP으로 만들고 최소 범위를 author한다;
+4. QC PASS 후 registry에 등록한다;
+5. deterministic composition으로 복귀한다.
+
+## 1.5 Legacy visual-anchor routing — asset-authoring / exception reference only
 
 사용자 시각 승인 게이트와 공개 BODY 첫 컷을 동일한 파일로 강제하지 않는다.
 
@@ -102,7 +90,7 @@ A00 규칙:
 
 S01이 anchor 역할 때문에 더 안전한 중경 인물컷으로 바뀌면 `ANCHOR_ROLE_COLLISION_FAIL`이다.
 
-## 2. Current-shot render capsule
+## 2. Generative asset / exception dispatch capsule
 
 이미지 생성기는 전체 에피소드 문맥을 직접 받지 않는다.
 각 렌더 호출 전에 current-shot-only capsule을 컴파일한다.
