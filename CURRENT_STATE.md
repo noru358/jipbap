@@ -10,7 +10,7 @@ episodes/002/README.md
 
 ## Episode 002 state
 
-Stage: LETTERING
+Stage: FINAL_USER_GATE
 Render cursor: null
 Approved locked shots: S01, S02, S03, S04, S05
 Retry scope: CURRENT_SHOT_ONLY
@@ -22,6 +22,29 @@ Raster-set user gate: PASS on 2026-09-06.
 
 The text-free S01~S05 set is approved and immutable unless the user explicitly invalidates a shot.
 
+## Lettering result
+
+Applied non-destructively to the approved raster set in the current execution session.
+
+Copy:
+- S01: 오늘은 고등어 한 마리
+- S02: 껍질부터 젓가락이 간다
+- S03: 살은 크게 떼어서
+- S04: SILENT
+- S05: 가시만 남았다
+
+## Final QC
+
+PASS:
+- shot order S01 → S05
+- text/image mapping
+- mobile-readable lettering
+- one shot = one file
+- S04 remains text-free
+- food-state continuity: intact → opened → on rice → bite → bones/remnants
+- Korean meal-context continuity
+- no artwork regeneration during lettering
+
 ## Structural fixes retained
 
 - approved-shot immutability / explicit render cursor
@@ -31,21 +54,8 @@ The text-free S01~S05 set is approved and immutable unless the user explicitly i
 - rejected-output quarantine
 - food-state monotonicity and bridge-action QC
 
-## Lettering copy
-
-- S01: 오늘은 고등어 한 마리
-- S02: 껍질부터 젓가락이 간다
-- S03: 살은 크게 떼어서
-- S04: SILENT
-- S05: 가시만 남았다
-
-Copy authority:
-- Episode 002 approved preproduction package
-- VOICE_SYSTEM.md
-
 ## Exact next action
 
-Apply lettering to the approved raster set without regenerating the artwork.
-Preserve one-shot-one-file.
-Run final QC for shot order, text/image mapping, readability, meal continuity and food-state continuity.
-Then present the final set at FINAL_USER_GATE.
+Present the final lettered S01~S05 set at FINAL_USER_GATE.
+If user passes, mark Episode 002 COMPLETE.
+If user rejects a specific item, invalidate only the minimum required downstream artifact; do not automatically regenerate approved upstream artwork.
