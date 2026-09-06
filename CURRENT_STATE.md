@@ -3,78 +3,73 @@
 Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
+Architecture: COMPOSITION_FIRST_HYBRID_FOOD
 
-## Production state — E001 retrospective / revision required
+## Production state — asset/composition calibration
 
-Execution authorization: **STRUCTURE_HARDENED_TEMPLATE_CALIBRATION_NEXT**
+Execution authorization: **ASSET_AND_TEMPLATE_CALIBRATION_ONLY**
 
-Active episode: **001 (evaluation run; not COMPLETE)**
-Next production episode: UNRESOLVED until template calibration
+Active episode: **NONE**
+Next production episode: **001 after calibration**
 
-## E001 disposition
-- BODY S01–S05: prior raster-set gate PASS preserved as historical approval evidence
-- final carousel candidate: **REVISION_REQUIRED / NOT APPROVED FOR COMPLETE**
-- publication status: NOT_APPROVED
-- do not automatically repair or publish E001
-- E001 outputs remain evaluation evidence unless the user explicitly reopens/rebuilds the episode
+The prior E001/evaluation outputs are historical evidence only. They are not COMPLETE, are not publication authority, and are not automatically promoted into the new production asset registry.
+
+## Canonical rendering decision
+
+Default BODY path:
+
+`storyboard → reusable PERSON/BACKGROUND resolve → missing FOOD/FOOD_STATE/POSE/CONTACT asset authoring → approved registry → deterministic scene composition → lettering/cover → QC/export`
+
+Domain routing:
+- PERSON identity: reuse approved assets; do not resample with every meal state.
+- FOOD/FOOD_STATE: episode-local generation is expected when the menu/state is new.
+- HAND/UTENSIL/CONTACT: episode-local interaction asset is allowed when needed.
+- BACKGROUND: reuse plates/components where practical.
+- full-frame generation: explicit exception only.
 
 Authority:
-- CALIBRATION_STATE.json
-- calibration/COMPOSITION_CANDIDATES.md
 - CONTENT_SYSTEM.md
 - VOICE_SYSTEM.md
 - VISUAL_SYSTEM.md
+- FOOD_STATE_SYSTEM.md
+- MEAL_CONTEXT_SYSTEM.md
 - PRODUCTION_PROTOCOL.md
 - assets/REFERENCE_MANIFEST.md
-- episodes/001/RETROSPECTIVE.md
-- episodes/001/render_state.json
+- assets/production/registry.json
 
-## Structural changes now canonical
+## Registry state
 
-1. PROXY_EATER is the core audience promise.
-2. BODY planning includes appetite/sensory beat, appetite-value gate and temporal-distinguishability.
-3. Copy uses concrete sensory payload and a salivation gate.
-4. STYLE_REF_001 is PERSON-only authority; S01 must pass person-style fidelity preflight.
-5. Background uses NONE / LOCAL / FULL exposure scopes; full-room continuity is only locked when actually needed.
-6. Cover and lettering have no approved visual template yet; E001 test composition is not a template lock.
-7. A structural rule change must be committed and verified before any dependent render.
-8. AutoPipeline media references now have coverage_scope / allowed_influence.
+`assets/production/registry.json` currently contains **0 approved production assets**.
 
-## Reference state
+STYLE_REF_001 remains PERSON authoring authority metadata, not a production pose asset.
 
-STYLE_REF_001:
-- role: PERSON_STYLE_AUTHORITY
-- sha256: fd763500b9c34e24d85805eb2c74b5b37a5361b82b3749644254c93922da6422
-- repository binary: NOT_YET_MATERIALIZED
-- coverage: PERSON only
+## Preserved structural decisions
 
-Important:
-The binary is not stored in the repository yet. The manifest contains identity/hash/role only.
-Future renderer execution still requires the actual image bytes to be supplied or otherwise recovered.
-
-## Structural resolutions completed
-
-1. Public BODY S01 and visual anchor are now independently routed:
-   - BODY_S01 when the opener is naturally suitable;
-   - non-public DEDICATED_A00 when anchor needs would weaken the appetite-first opener.
-2. AutoPipeline now distinguishes pre-dispatch authorized bindings from post-dispatch SUPPLIED proof and requires a hash-locked dispatch receipt with explicit media-input handles before result import.
-3. Reference influence is domain-scoped and requested influence cannot exceed declared coverage.
+1. PROXY_EATER remains the core audience promise.
+2. FOOD_STATE / meal-context / Korean dining-grammar checks remain active.
+3. BODY visual rhythm and temporal distinguishability remain active.
+4. Cover is a mandatory product slot and lettering remains editable/deterministic.
+5. PERSON reference coverage does not automatically claim FOOD/BACKGROUND style authority.
+6. Accepted person identity is now stabilized primarily by asset reuse rather than per-shot regeneration/QC.
+7. Food variability does not reopen accepted person pixels.
 
 ## Remaining blockers
 
-1. STYLE_REF_001 binary is still not materialized in Git. The executable packet/receipt path can prove use of a binary once registered, but the repository does not yet contain that image file.
-2. The new dispatch-receipt path still needs one live end-to-end validation with the actual ChatGPT image renderer when image generation is available.
-3. COVER and LETTERING have no USER_LOCKED template artifacts yet.
-4. PERSON style and FOOD anti-photoreal calibration still require image generation.
+1. STYLE_REF_001 binary is still not materialized in Git.
+2. COVER and LETTERING still need USER_LOCKED composition templates.
+3. No approved PERSON starter assets exist in the production registry.
+4. No menu-specific FOOD_STATE asset pack has been tested under the hybrid compositor path.
+5. Shared AutoPipeline compositor/registry validation must be used for the first pilot.
 
 ## Exact next action
 
-Present the deterministic COVER and LETTERING calibration candidates for user selection.
+Finish the deterministic COVER and LETTERING template calibration because it requires no new image generation.
 
-- COVER: choose A / B / C, reject all, or request a hybrid.
-- LETTERING: choose A / B / C, reject all, or request a hybrid.
-- do not promote any candidate to USER_LOCKED before explicit selection.
-- no image generation is required for this gate.
+Then run one small hybrid visual pilot:
+- one approved PERSON pose/identity asset set;
+- one meal with 2–3 FOOD_STATE assets;
+- only necessary hand/utensil/contact assets;
+- deterministic assembly into separate BODY frames;
+- no full-frame generation unless explicitly marked as an exception.
 
-After both composition templates are USER_LOCKED, defer PERSON/FOOD image calibration until image generation is available.
-
+Do not start a fresh publishable 001 until this pilot validates the hybrid boundary.
