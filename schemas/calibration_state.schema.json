@@ -11,28 +11,19 @@
     "next_action"
   ],
   "properties": {
-    "version": {
-      "type": "string"
-    },
-    "person_style": {
-      "$ref": "#/$defs/item"
-    },
-    "food_style": {
-      "$ref": "#/$defs/item"
-    },
-    "cover_template": {
-      "$ref": "#/$defs/item"
-    },
-    "lettering_template": {
-      "$ref": "#/$defs/item"
-    },
+    "version": {"type": "string"},
+    "person_style": {"$ref": "#/$defs/item"},
+    "food_style": {"$ref": "#/$defs/item"},
+    "cover_template": {"$ref": "#/$defs/item"},
+    "lettering_template": {"$ref": "#/$defs/item"},
     "next_action": {
       "type": "string",
       "enum": [
-        "PERSON_STYLE",
-        "FOOD_STYLE",
-        "COVER_TEMPLATE",
-        "LETTERING_TEMPLATE",
+        "COMPOSITION_SPEC_SELECTION",
+        "BODY_FIXTURE_ASSET_RESOLUTION",
+        "BODY_FIXTURE_ASSET_AUTHORING",
+        "BODY_FIXTURE_COMPOSITION",
+        "TEMPLATE_PIXEL_VALIDATION",
         "READY_FOR_EPISODE"
       ]
     }
@@ -40,39 +31,37 @@
   "$defs": {
     "item": {
       "type": "object",
-      "required": [
-        "status"
-      ],
+      "required": ["status"],
       "properties": {
         "status": {
           "type": "string",
           "enum": [
             "PENDING",
             "IN_TEST",
+            "SPEC_LOCKED",
             "USER_LOCKED",
             "FAILED"
           ]
         },
-        "authority_ref": {
-          "type": [
-            "string",
-            "null"
-          ]
+        "authority_ref": {"type": ["string", "null"]},
+        "selected_candidate": {"type": ["string", "null"]},
+        "approved_spec_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
         },
         "approved_artifact_sha256": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pixel_validation_status": {
+          "enum": ["PENDING", "IN_TEST", "PASSED", "FAILED"]
         },
         "notes": {
           "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "items": {"type": "string"}
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
