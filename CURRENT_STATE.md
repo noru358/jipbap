@@ -60,15 +60,20 @@ A. PERSON style calibration
 - compare eye ratio, face simplification, line, fill, shading, hair density against the reference;
 - user-lock the accepted person rendering direction.
 
-B. COVER template calibration
+B. FOOD style / appetite calibration
+- test a small number of food close-ups under the PERSON style abstraction envelope;
+- remove glossy semi-real/ad drift while preserving enough texture to trigger appetite;
+- if text rules alone are insufficient, approve a separate FOOD_STYLE_AUTHORITY.
+
+C. COVER template calibration
 - make 2–3 structural cover variants using the same approved hero;
 - compare title hierarchy, food/character ratio, series mark, safe area and phone-size readability;
 - lock one template.
 
-C. LETTERING template calibration
+D. LETTERING template calibration
 - test 2–3 font/weight/size/box/no-box treatments on the same BODY frame;
 - validate negative-space placement and mobile readability;
 - lock one project lettering template.
 
-Only after A/B/C are approved should a new production episode start.
+Only after A/B/C/D are approved should a new production episode start.
 Do not mark E001 COMPLETE unless the user explicitly asks to repair/reopen it.
