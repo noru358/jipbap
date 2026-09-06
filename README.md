@@ -31,15 +31,16 @@ menu/moment → sensory-route + meal-context compile → meal-scene state → co
 - assets/REFERENCE_MANIFEST.md — 실제 참조 바이너리의 역할/해시/materialization 상태
 - schemas/shot_contract.schema.json — 컷 계약의 기계 판독용 최소 스키마
 
-## Current experiment
+## Production reset — fresh 001
 
-Episode 002는 고등어구이 + 흰밥.
+기존 구조 개편 이전의 구체 회차 패키지는 모두 폐기했다.
 
-- 사전 콘티: 승인
-- S01: 사용자 PASS
-- S01에서 발견된 구조 학습: 식탁 전체가 한식인데 반찬/국/그릇 일부가 일본식 시각 관습으로 오염될 수 있음
-- 해결: MEAL_CONTEXT_SYSTEM.md를 추가하고 meal-context compile + context QC를 모든 회차 공통 단계로 승격
-- 현재 단계: S02~S05 내부 렌더/QC
+- active episode: NONE
+- 다음 제작 번호: 001
+- 옛 회차의 메뉴·대사·콘티·승인·QC·episode anchor는 현행 제작 권위가 아니다.
+- 옛 제작에서 얻은 일반화된 학습만 canonical project authority에 남긴다.
+- 새 001은 현재 CONTENT / FOOD_STATE / MEAL_CONTEXT / VISUAL / VOICE / PRODUCTION authority를 기준으로 처음부터 설계한다.
+- 사전 패키지 승인 전에는 이전 회차를 복구하거나 render cursor를 임의 생성하지 않는다.
 
 ## Repository topology
 
