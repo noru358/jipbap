@@ -47,7 +47,7 @@ Before visual work, resolve:
 - menu/moment;
 - PROXY_EATER sensory arc;
 - meal-context / cultural grammar;
-- FOOD_STATE preconditions, actions and postconditions;
+- FOOD_STATE keyframe states and ordered bridge actions;
 - BODY slide roles;
 - which entities are visible in each slide;
 - focal owner / shot scale / visual delta;
