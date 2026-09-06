@@ -4,90 +4,75 @@ Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Production state — clean reset after structure test
+## Production state — fresh E001 active
 
-Execution authorization: **IDLE_NO_ACTIVE_EPISODE**
+Execution authorization: **ACTIVE_BLOCKED_RENDER_CONTEXT_UNSAFE**
 
-Active episode: NONE
-Next episode number: **001**
+Active episode: **001**
+Next episode number: 002
 
-The experimental fresh 001 package and all prototype raster outputs from the just-completed structure test are retired.
-They are not active episode authority, approval evidence, continuity anchors, subject identity anchors, cover assets or repair sources.
+Approved preproduction authority:
+- episodes/001/PREPRODUCTION.md
+- episodes/001/SUBJECT_LOCK.md
+- episodes/001/SHOT_CONTRACTS.md
 
-Only generalized structure improvements promoted into canonical authority remain valid.
+Render state authority:
+- episodes/001/render_state.json
+- episodes/001/ASSET_MANIFEST.md
 
-## Canonical baseline
+## Current render state
 
-Fresh production uses:
-- CONTENT_SYSTEM.md
-- FOOD_STATE_SYSTEM.md
-- MEAL_CONTEXT_SYSTEM.md
-- VISUAL_SYSTEM.md
-- VOICE_SYSTEM.md
-- PRODUCTION_PROTOCOL.md
-- assets/REFERENCE_MANIFEST.md
-- schemas/shot_contract.schema.json
-- schemas/render_state.schema.json
+- BODY S01: **APPROVED_LOCKED**
+- S01 user approval: PASS
+- S01 role: CONTINUITY_ANCHOR + DINER_01 episode-local identity anchor
+- render cursor: **S02**
+- next user gate: **RASTER_SET**
+- cover source route: BODY_REUSE
+- cover status: NOT_STARTED
+- sequence QC: NOT_RUN
+- lettering: NOT_STARTED
 
-Carousel product order:
-`COVER → BODY S01 → S02 → ... → Sfinal`
+Hard invariant:
+S01 must not be regenerated or edited unless the user explicitly withdraws approval or explicitly orders S01 reproduction.
 
-COVER is a separate mandatory product slot.
-It may be produced by BODY reuse, dedicated generation, or external import, but final completion is blocked until cover_status=PASS.
+## Active blocker — RENDER_CONTEXT_UNSAFE
 
-BODY production:
-`pre-raster user gate → S01 user anchor → S02..final internal QC → whole-sequence QC → raster-set user gate → cover/lettering → final carousel user gate`
+The current conversation contains the full approved E001 storyboard and future-shot descriptions.
+The available image-generation path in this chat cannot be proven to receive only an isolated current-shot capsule.
 
-## New structural requirements from the prototype
+Under PRODUCTION_PROTOCOL section 3, S02+ rendering is therefore fail-closed in this render context.
 
-1. **EPISODE_SUBJECT_LOCK**
-   - any person recurring in 2+ BODY shots gets an episode-local identity lock;
-   - later shots use canonical style authority + subject lock + approved identity-anchor media when supported;
-   - episode reset deletes this lock.
+This is a context reset, not an episode reset.
+E001, S01 approval, identity lock and render cursor remain valid.
 
-2. **SHOT_COVERAGE_RHYTHM**
-   - storyboard records focal owner, shot scale, camera relation, visual delta from previous and repetition justification;
-   - fixed left/right/front quotas are forbidden;
-   - whole-set viewer-perceived redundancy QC occurs before the raster-set user gate.
+## Reference binding state
 
-3. **HUMAN_GEOMETRY_QC**
-   - high-risk hand/arm/utensil/mouth contact has an explicit geometry risk/contact chain;
-   - broken anatomy/contact geometry is a hard fail.
+Project style authority for fresh E001:
+- STYLE_REF_001
+- sha256: fd763500b9c34e24d85805eb2c74b5b37a5361b82b3749644254c93922da6422
+- repository binary: NOT_YET_MATERIALIZED
 
-4. **STYLE_DOMAIN_COHERENCE**
-   - food may be more detailed than people but must remain in the same illustration abstraction/rendering language;
-   - semi-realistic food + flat-toon person drift is a hard fail.
+Approved S01:
+- E001_S01_APPROVED
+- sha256: aa277caf908100d277a878072189d6b0829258c464823a28b83465aec5b54c4c
+- repository binary: NOT_YET_MATERIALIZED
 
-5. **MANDATORY_COVER_GATE**
-   - cover omission cannot be treated as a completed carousel;
-   - cover may be created/imported elsewhere but must be registered and PASS before final gate.
-
-## Fail-closed reset rule
-
-While Active episode is NONE:
-- do not render;
-- do not restore the retired prototype 001 menu/story/copy/shot contracts/approvals;
-- do not restore prototype S01-S05 outputs as references;
-- do not infer an old menu/story from chat history;
-- do not create a render cursor;
-- do not create an EPISODE_SUBJECT_LOCK until a fresh episode proposal exists.
-
-Project-level style-reference runtime requirements remain governed by assets/REFERENCE_MANIFEST.md.
+Before S02 render, actual bytes for both required media must be bound in the clean render context.
+A path/hash/prose description alone is insufficient.
 
 ## Exact next action
 
-In a new session, restore AutoPipeline + jipbap HEADs and create a fresh **001 preproduction proposal only**:
+Start a **new clean session** and:
 
-1. MENU/MOMENT;
-2. SENSORY ROUTE;
-3. meal context + dining grammar;
-4. initial MEAL_SCENE_STATE;
-5. recurring-subject detection + EPISODE_SUBJECT_LOCK plan;
-6. body emotional/state beats;
-7. body visual coverage plan + adjacent visual-delta review;
-8. per-shot geometry risk/contact chain;
-9. BODY storyboard;
-10. COVER brief + cover source route;
-11. voice/copy plan.
+1. restore AutoPipeline + jipbap HEADs;
+2. read this CURRENT_STATE and episodes/001/render_state.json;
+3. do **not** re-plan E001 and do **not** regenerate S01;
+4. bind the actual STYLE_REF_001 image bytes and approved E001_S01_APPROVED image bytes;
+5. compile the S02 current-shot-only capsule from episodes/001/SHOT_CONTRACTS.md;
+6. verify render cursor == S02 and S01 remains APPROVED_LOCKED;
+7. render S02 only;
+8. after internal PASS, advance S03 → S04 → S05 with current-shot-only capsules and per-shot QC;
+9. run whole-sequence coverage/state/geometry QC;
+10. present the complete text-free BODY raster set at the RASTER_SET user gate.
 
-Present the complete package for explicit user approval before creating/activating `episodes/001` or rendering BODY S01.
+If either required image binary cannot be bound in the new session, stop and request/recover that exact media instead of substituting memory.
