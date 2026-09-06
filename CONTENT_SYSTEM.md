@@ -1,4 +1,4 @@
-# CONTENT_SYSTEM — jipbap v0.3
+# CONTENT_SYSTEM — jipbap v0.4
 
 ## 1. Format purpose
 
@@ -81,7 +81,34 @@
 ### B. State beat
 컷 전후 음식·도구·그릇의 상태 변화.
 
-둘 중 하나만 있으면 콘티 미완성이다.
+### C. Visual coverage beat
+같은 상태 전이를 어떤 시각적 관계로 보여줄지 정의한다.
+
+최소 기록:
+- focal owner — 현재 비트의 시각적 주인공
+- shot scale — macro / close / medium-close / medium / wide 등 회차에 필요한 거리
+- camera relation — 현재 비트를 가장 잘 읽히게 하는 카메라/피사체 관계
+- interaction geometry — 손·도구·음식·입이 연결될 때 핵심 접촉 관계
+- visual delta from previous — 이전 컷과 무엇이 실제로 달라 보여야 하는지
+- repetition justification — 유사 구도가 정말 필요할 때만 그 이유
+
+A/B/C 중 하나라도 비어 있으면 콘티 미완성이다.
+
+### 4.1 Adjacent-beat visual-delta / redundancy preflight
+
+상태 변화가 있다고 해서 자동으로 별도 컷 가치가 생기는 것은 아니다.
+
+인접 컷이 같은 거리·높이·카메라측·인물 크기·손 위치·표정으로 반복되고 의미 변화가 작은 경우
+`VISUAL_REDUNDANCY_RISK`로 표시한다.
+
+해결은 고정 좌/우/정면 quota가 아니다.
+1. 두 비트를 합칠 수 있는지 먼저 검토한다.
+2. 분리가 필요하면 비트를 더 잘 보여주는 다른 story-valid camera/body/focal 관계가 있는지 검토한다.
+3. 유사 구도가 감각의 연속성을 위해 필요하면 repetition justification을 기록한다.
+4. 전체 raster set에서 viewer-perceived redundancy를 다시 검사한다.
+
+한 회차 안에서 모든 컷이 안전한 중경 인물+음식 구도로 수렴하면,
+각 컷이 개별적으로 예쁘더라도 sequence QC는 FAIL할 수 있다.
 
 ## 5. Anti-generic rule
 
