@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "fixture_id": "JIPBAP_HYBRID_BODY4_V2",
+  "resolution_status": "COMPLETE",
+  "production_registry": {
+    "path": "assets/production/registry.json",
+    "approved_asset_count": 0,
+    "sha256": "5d7572aea12757f02e262b10a65d217103152bd1e6ffe835a2347c2fceb251a1"
+  },
+  "registry_matches": [],
+  "asset_gaps": [
+    {
+      "asset_id": "PERSON_CONTEXT_SEATED",
+      "category": "PERSON_POSE",
+      "scope": "EPISODE_LOCAL",
+      "depends_on": [
+        "STYLE_REF_001_MEDIA"
+      ],
+      "dispatch_status": "BLOCKED",
+      "blocker": "STYLE_REF_001 actual bytes are not materialized/verified in the current runtime"
+    },
+    {
+      "asset_id": "FOOD_EGG_RICE_INTACT",
+      "category": "FOOD_STATE",
+      "scope": "EPISODE_LOCAL",
+      "depends_on": [],
+      "dispatch_status": "READY_AFTER_JOB_COMPILE",
+      "blocker": null
+    },
+    {
+      "asset_id": "INTERACTION_BREAK_YOLK",
+      "category": "INTERACTION_COMPOSITE",
+      "scope": "EPISODE_LOCAL",
+      "depends_on": [
+        "PERSON_CONTEXT_SEATED",
+        "FOOD_EGG_RICE_INTACT"
+      ],
+      "dispatch_status": "WAITING_DEPENDENCIES",
+      "blocker": null
+    },
+    {
+      "asset_id": "FOOD_EGG_RICE_RESIDUE",
+      "category": "FOOD_STATE",
+      "scope": "EPISODE_LOCAL",
+      "depends_on": [
+        "FOOD_EGG_RICE_INTACT",
+        "INTERACTION_BREAK_YOLK"
+      ],
+      "dispatch_status": "WAITING_DEPENDENCIES",
+      "blocker": null
+    },
+    {
+      "asset_id": "INTERACTION_BITE_APPROACH",
+      "category": "INTERACTION_COMPOSITE",
+      "scope": "EPISODE_LOCAL",
+      "depends_on": [
+        "PERSON_CONTEXT_SEATED",
+        "FOOD_EGG_RICE_RESIDUE"
+      ],
+      "dispatch_status": "WAITING_DEPENDENCIES",
+      "blocker": null
+    }
+  ],
+  "next_dispatchable_work": {
+    "can_prepare_food_job": true,
+    "can_dispatch_person_job": false,
+    "person_dispatch_blocker": "STYLE_REF_001_MEDIA_UNAVAILABLE_OR_UNVERIFIED"
+  },
+  "approval_flow": [
+    "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
+    "compose S01 from registered foundation assets",
+    "USER visual pass on S01 promotes person appearance to episode identity anchor",
+    "dependent interaction assets bind that user-validated identity anchor",
+    "no per-asset user gate unless a new lock-worthy decision appears"
+  ],
+  "full_frame_exception_assessment": "UNASSESSED"
+}
