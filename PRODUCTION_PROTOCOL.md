@@ -160,6 +160,9 @@ pending structural change가 있으면 visual preflight FAIL이다.
 - 반복 인물이 있으면 EPISODE_SUBJECT_LOCK 존재
 - S02+ 반복 인물이 있으면 승인 identity-anchor media binding 가능 여부 확인
 - shot coverage fields 존재
+- appetite.functions / sensory_payload / observable_cues 존재
+- entity_visibility required/allowed/forbidden 존재
+- background_scope가 NONE/LOCAL/FULL 중 하나로 선언됨
 - geometry risk/contact chain 존재
 - meal context + dining grammar binding
 - text_free=true
@@ -228,6 +231,8 @@ S01 PASS 후:
 
 ### Shot visual QC
 - shot-specific camera/composition
+- undeclared visible entity 생성 여부 — entity_visibility allowlist 밖의 반찬/그릇/소품이 생기면 FAIL
+- sensory_payload가 observable_cues로 실제 시각화되었는지
 - declared focal_owner / shot_scale / camera_relation 실현
 - action visibly realized
 - food-first framing
