@@ -1,7 +1,13 @@
 # COMPOSITION CALIBRATION CANDIDATES — two-phase template lock
 
-Status: IN_TEST
+Status: SPEC_SELECTION_COMPLETE
 Updated: 2026-09-07
+
+Selected by user:
+- COVER C — `calibration/locks/COVER_SPEC_V1.json`
+- LETTERING A — `calibration/locks/LETTERING_SPEC_V1.json`
+
+The candidate list remains calibration evidence. Only the selected lock files are active Phase-1 authority.
 
 These candidates define composition grammar only. They are not production assets and they do not become USER_LOCKED from placeholder review alone.
 
@@ -84,13 +90,10 @@ Phase-1 sample copy is placeholder text only. Korean font bytes and exact glyph 
 - intent: warmer diary/memo feel
 - fixture: `calibration/fixtures/lettering_C.plan.json`
 
-## Approval gate
+## Approval record
 
-User must choose:
-- one COVER candidate A/B/C, reject all, or request a hybrid;
-- one LETTERING candidate A/B/C, reject all, or request a hybrid.
+Phase-1 selection is complete: COVER C + LETTERING A.
 
-The selected candidate is recorded in `CALIBRATION_STATE.json` with status `SPEC_LOCKED`.
-Only the selected spec is carried into the BODY pilot and later real-pixel validation.
-
-Rejected candidates remain calibration evidence only and must not silently become defaults.
+The selected specs are recorded as `SPEC_LOCKED` in `CALIBRATION_STATE.json` and canonicalized in `calibration/locks/`.
+A/B alternatives remain calibration evidence only and must not silently become defaults.
+Phase-2 real-pixel approval is still required before either template becomes `USER_LOCKED`.
