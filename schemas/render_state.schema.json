@@ -8,10 +8,16 @@
     "render_cursor",
     "approved_locked_shots",
     "retry_scope",
-    "next_user_gate"
+    "next_user_gate",
+    "sequence_qc_status",
+    "cover_status",
+    "cover_source_route",
+    "lettering_status"
   ],
   "properties": {
-    "episode_id": {"type": "string"},
+    "episode_id": {
+      "type": "string"
+    },
     "stage": {
       "type": "string",
       "enum": [
@@ -19,26 +25,105 @@
         "S01_PENDING",
         "POST_S01_INTERNAL_RENDER",
         "RASTER_SET_USER_GATE",
-        "LETTERING",
+        "POST_RASTER_COMPOSITION",
         "FINAL_USER_GATE",
         "COMPLETE"
       ]
     },
-    "render_cursor": {"type": ["string", "null"]},
+    "render_cursor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "approved_locked_shots": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true
     },
-    "retry_scope": {"const": "CURRENT_SHOT_ONLY"},
+    "retry_scope": {
+      "const": "CURRENT_SHOT_ONLY"
+    },
     "next_user_gate": {
       "type": "string",
-      "enum": ["S01", "RASTER_SET", "FINAL", "NONE"]
+      "enum": [
+        "S01",
+        "RASTER_SET",
+        "FINAL",
+        "NONE"
+      ]
     },
     "anchor_policy": {
       "type": "string",
       "const": "CONTINUITY_ONLY_UNLESS_EXPLICIT_EDIT"
+    },
+    "sequence_qc_status": {
+      "type": "string",
+      "enum": [
+        "NOT_RUN",
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "cover_status": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "PENDING",
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "cover_source_route": {
+      "type": "string",
+      "enum": [
+        "UNRESOLVED",
+        "BODY_REUSE",
+        "DEDICATED",
+        "EXTERNAL_IMPORT"
+      ]
+    },
+    "lettering_status": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "PASS",
+        "FAIL"
+      ]
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "enum": [
+              "FINAL_USER_GATE",
+              "COMPLETE"
+            ]
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sequence_qc_status": {
+            "const": "PASS"
+          },
+          "cover_status": {
+            "const": "PASS"
+          },
+          "lettering_status": {
+            "const": "PASS"
+          }
+        }
+      }
+    }
+  ],
   "additionalProperties": true
 }
