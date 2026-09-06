@@ -1,0 +1,33 @@
+{
+  "episode_id": "001",
+  "stage": "POST_S01_INTERNAL_RENDER",
+  "render_cursor": "S02",
+  "approved_locked_shots": [
+    "S01"
+  ],
+  "retry_scope": "CURRENT_SHOT_ONLY",
+  "next_user_gate": "RASTER_SET",
+  "anchor_policy": "CONTINUITY_ONLY_UNLESS_EXPLICIT_EDIT",
+  "sequence_qc_status": "NOT_RUN",
+  "cover_status": "NOT_STARTED",
+  "cover_source_route": "BODY_REUSE",
+  "lettering_status": "NOT_STARTED",
+  "execution_blocker": "RENDER_CONTEXT_UNSAFE",
+  "blocker_reason": "Current chat contains the full approved storyboard and image-generation instructions cannot be proven current-shot-only. Resume S02 in a clean render context after restoring repository authority and binding the actual style + approved S01 media.",
+  "approved_artifacts": {
+    "S01": {
+      "status": "APPROVED_LOCKED",
+      "role": [
+        "CONTINUITY_ANCHOR",
+        "EPISODE_IDENTITY_ANCHOR"
+      ],
+      "sha256": "aa277caf908100d277a878072189d6b0829258c464823a28b83465aec5b54c4c",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "repository_binary_status": "NOT_MATERIALIZED",
+      "source": "ChatGPT image generation in approved E001 session"
+    }
+  }
+}
