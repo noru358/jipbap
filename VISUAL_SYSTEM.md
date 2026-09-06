@@ -1,4 +1,4 @@
-# VISUAL_SYSTEM — jipbap v0.6
+# VISUAL_SYSTEM — jipbap v0.7
 
 ## 1. Reference authority
 
