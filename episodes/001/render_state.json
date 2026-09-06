@@ -72,5 +72,8 @@
   },
   "publication_status": "NOT_APPROVED",
   "retrospective_ref": "episodes/001/RETROSPECTIVE.md",
-  "repair_policy": "DO_NOT_AUTO_REPAIR_UNLESS_USER_EXPLICITLY_REOPENS"
+  "repair_policy": "DO_NOT_AUTO_REPAIR_UNLESS_USER_EXPLICITLY_REOPENS",
+  "anchor_route": "BODY_S01",
+  "anchor_gate_status": "PASS",
+  "anchor_artifact_id": "S01"
 }
