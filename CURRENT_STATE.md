@@ -51,37 +51,49 @@ Important:
 The binary is not stored in the repository yet. The manifest contains identity/hash/role only.
 Future renderer execution still requires the actual image bytes to be supplied or otherwise recovered.
 
-## Remaining structural blockers
+## Structural resolutions completed
 
-1. BODY S01 currently doubles as published first frame and user visual anchor. This can bias the opening toward a person/context shot even when a stronger appetite-first opener is food-only. Anchor routing must be resolved before the next production episode.
-2. STYLE_REF_001 binary is still not materialized in Git. Hash/manifest alone cannot eliminate future-session re-upload/binding burden.
-3. COVER and LETTERING calibration now have project-level machine state, but no USER_LOCKED template artifacts yet.
-4. FOOD style has no approved domain reference yet; calibration must determine whether text-only abstraction rules are sufficient.
+1. Public BODY S01 and visual anchor are now independently routed:
+   - BODY_S01 when the opener is naturally suitable;
+   - non-public DEDICATED_A00 when anchor needs would weaken the appetite-first opener.
+2. AutoPipeline now distinguishes pre-dispatch authorized bindings from post-dispatch SUPPLIED proof and requires a hash-locked dispatch receipt with explicit media-input handles before result import.
+3. Reference influence is domain-scoped and requested influence cannot exceed declared coverage.
+
+## Remaining blockers
+
+1. STYLE_REF_001 binary is still not materialized in Git. The executable packet/receipt path can prove use of a binary once registered, but the repository does not yet contain that image file.
+2. The new dispatch-receipt path still needs one live end-to-end validation with the actual ChatGPT image renderer when image generation is available.
+3. COVER and LETTERING have no USER_LOCKED template artifacts yet.
+4. PERSON style and FOOD anti-photoreal calibration still require image generation.
 
 ## Exact next action
 
-Run a **template/style calibration session before another full episode**:
+Because image generation is currently unavailable/over limit, perform the deterministic composition calibrations first:
 
-A. PERSON style calibration
+A. COVER template calibration
+- use existing E001 approved/evaluation raster only; no new image generation;
+- make 2–3 hierarchy variants;
+- compare food hero ratio, title hierarchy, series mark, safe area and phone-size readability;
+- user-lock one template.
+
+B. LETTERING template calibration
+- use the same existing BODY frame(s); no new image generation;
+- compare 2–3 font/weight/size/box/no-box treatments;
+- validate negative-space placement and phone-size readability;
+- user-lock one template.
+
+After image generation becomes available:
+
+C. PERSON style calibration
 - use the supplied PERSON reference as actual media;
 - generate a minimal subject/style test;
 - compare eye ratio, face simplification, line, fill, shading, hair density against the reference;
 - user-lock the accepted person rendering direction.
 
-B. FOOD style / appetite calibration
+D. FOOD style / appetite calibration
 - test a small number of food close-ups under the PERSON style abstraction envelope;
 - remove glossy semi-real/ad drift while preserving enough texture to trigger appetite;
 - if text rules alone are insufficient, approve a separate FOOD_STYLE_AUTHORITY.
-
-C. COVER template calibration
-- make 2–3 structural cover variants using the same approved hero;
-- compare title hierarchy, food/character ratio, series mark, safe area and phone-size readability;
-- lock one template.
-
-D. LETTERING template calibration
-- test 2–3 font/weight/size/box/no-box treatments on the same BODY frame;
-- validate negative-space placement and mobile readability;
-- lock one project lettering template.
 
 Only after A/B/C/D are approved should a new production episode start.
 Do not mark E001 COMPLETE unless the user explicitly asks to repair/reopen it.
