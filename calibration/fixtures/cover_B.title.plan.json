@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "cover-B-title-placeholder",
+  "purpose": "CALIBRATION_PLACEHOLDER",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [250, 246, 237, 255]},
+  "base_image": {"path": "calibration/fixtures/output/cover_B_art.png", "sha256": "7fb23a2dee480d12d840d3eac1545ad80baf4c39f218b3f988db84c1ede5e749"},
+  "text_layers": [
+    {
+      "layer_id": "title_plate", "z": 10, "lines": ["JIPBAP", "EPISODE TITLE"], "x": 62, "y": 60, "anchor": "LEFT",
+      "font": {"mode": "PIL_DEFAULT", "size": 38},
+      "fill_rgba": [38, 35, 32, 255], "stroke_width": 0, "line_spacing": 5,
+      "box": {
+        "type": "RECT", "padding": [18, 14, 18, 14],
+        "fill_rgba": [250, 246, 237, 235],
+        "outline_rgba": [92, 84, 75, 255], "outline_width": 2
+      }
+    }
+  ]
+}
