@@ -119,7 +119,9 @@ Required:
 - no Japanese/Western dining grammar is accidentally substituted for a Korean context unless the story calls for it.
 
 No fixed left/right/front quota.
-No fixed BODY frame count inherited from a calibration test.
+
+Calibration fixture: BODY 4 slides exactly, with COVER separate. This fixed count exists only to control architecture-test variables.
+Normal production has no inherited BODY=4 rule; frame count is determined by the approved sensory/food-state arc.
 
 ## 8. Cover + lettering
 
