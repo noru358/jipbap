@@ -5,19 +5,29 @@
 시각적 최상위 권위는 실제 승인 이미지 레퍼런스다.
 
 현재 기준:
-- `assets/references/STYLE_REF_001.jpg`
+- intended binary: `assets/references/STYLE_REF_001.jpg`
+- integrity/status authority: `assets/REFERENCE_MANIFEST.md`
+
+**경로 문자열이나 해시만으로 레퍼런스가 전달된 것으로 간주하지 않는다.**
+독립 실행 환경에서는 실제 바이너리가 선언 경로에 존재하고 manifest SHA-256과 일치해야 reference-conditioned production을 허용한다.
+
+현재 원본 레퍼런스는 이 ChatGPT 세션에 실제 이미지로 공급되어 있으나, GitHub 커넥터의 현재 쓰기 경로는 UTF-8 텍스트와 Git object 조작만 노출되어 있어 해당 바이너리는 원격 저장소에 아직 materialize되지 않았다. 저장소 단독 실행은 이 상태에서 FAIL-CLOSED 한다.
 
 레퍼런스는 선, 얼굴 비율, 눈/입 단순화, 색감, 배경 밀도, 만화적 표현 수준을 판단하는 기준이다.
 텍스트 프롬프트는 레퍼런스를 설명/보조할 뿐 대체하지 않는다.
 
 ## 2. Temporary anchor rule
 
-`episodes/001/anchors/S01_TEMP_ANCHOR.png`는 Episode 001 진행용 연속성 앵커다.
+Episode 001 진행용 임시 앵커의 intended path:
+- `episodes/001/anchors/S01_TEMP_ANCHOR.png`
+
+integrity/status는 `assets/REFERENCE_MANIFEST.md`가 소유한다.
 
 사용자 판정: 임시 PASS.
 - 동일 회차의 인물/공간/식탁 연속성 보조에 사용 가능
 - 프로젝트 전체의 최종 STYLE LOCK으로 승격 금지
-- 원본 STYLE_REF_001보다 높은 시각 권위를 갖지 않음
+- STYLE_REF_001보다 높은 시각 권위를 갖지 않음
+- 저장소 단독 실행에서는 실제 바이너리 materialization 전까지 사용 금지
 
 ## 3. Output contract
 
