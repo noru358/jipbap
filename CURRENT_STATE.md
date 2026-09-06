@@ -19,6 +19,7 @@ Next production episode: UNRESOLVED until template calibration
 - E001 outputs remain evaluation evidence unless the user explicitly reopens/rebuilds the episode
 
 Authority:
+- CALIBRATION_STATE.json
 - CONTENT_SYSTEM.md
 - VOICE_SYSTEM.md
 - VISUAL_SYSTEM.md
@@ -49,6 +50,13 @@ STYLE_REF_001:
 Important:
 The binary is not stored in the repository yet. The manifest contains identity/hash/role only.
 Future renderer execution still requires the actual image bytes to be supplied or otherwise recovered.
+
+## Remaining structural blockers
+
+1. BODY S01 currently doubles as published first frame and user visual anchor. This can bias the opening toward a person/context shot even when a stronger appetite-first opener is food-only. Anchor routing must be resolved before the next production episode.
+2. STYLE_REF_001 binary is still not materialized in Git. Hash/manifest alone cannot eliminate future-session re-upload/binding burden.
+3. COVER and LETTERING calibration now have project-level machine state, but no USER_LOCKED template artifacts yet.
+4. FOOD style has no approved domain reference yet; calibration must determine whether text-only abstraction rules are sufficient.
 
 ## Exact next action
 
