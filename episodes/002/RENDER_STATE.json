@@ -1,12 +1,12 @@
 {
   "episode_id": "002",
-  "stage": "POST_S01_INTERNAL_RENDER",
-  "render_cursor": "S02",
-  "approved_locked_shots": ["S01"],
+  "stage": "LETTERING",
+  "render_cursor": null,
+  "approved_locked_shots": ["S01", "S02", "S03", "S04", "S05"],
   "retry_scope": "CURRENT_SHOT_ONLY",
-  "next_user_gate": "RASTER_SET",
+  "next_user_gate": "FINAL",
   "anchor_policy": "CONTINUITY_ONLY_UNLESS_EXPLICIT_EDIT",
-  "auto_advance_through": "S05",
   "user_invalidation_required_to_regenerate_locked_shot": true,
-  "execution_blocker": "REFERENCE_BINDING_REQUIRED_FOR_E002_S02"
+  "raster_set_user_gate": "PASS",
+  "execution_blocker": null
 }
