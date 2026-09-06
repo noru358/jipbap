@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Jipbap Production Asset Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "assets"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_id", "category", "scope", "status", "path", "sha256",
+          "width", "height", "approved_by"
+        ],
+        "properties": {
+          "asset_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9_.:-]+$"},
+          "category": {
+            "enum": [
+              "PERSON_POSE", "PERSON_EXPRESSION",
+              "FOOD", "FOOD_STATE",
+              "HAND_CONTACT", "UTENSIL",
+              "BACKGROUND", "PROP", "COVER_HERO",
+              "EXCEPTION_OUTPUT"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "PROJECT_CANONICAL", "PROJECT_REUSABLE",
+              "EPISODE_LOCAL", "EXCEPTION_OUTPUT"
+            ]
+          },
+          "status": {"enum": ["APPROVED", "REJECTED", "RETIRED"]},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "width": {"type": "integer", "minimum": 1},
+          "height": {"type": "integer", "minimum": 1},
+          "subject_id": {"type": ["string", "null"]},
+          "episode_id": {"type": ["string", "null"]},
+          "menu_id": {"type": ["string", "null"]},
+          "food_state_id": {"type": ["string", "null"]},
+          "contact_role": {"type": ["string", "null"]},
+          "approved_by": {"enum": ["USER", "AUTHORIZED_OPERATOR"]},
+          "approval_note": {"type": "string"}
+        }
+      }
+    }
+  }
+}
