@@ -7,11 +7,14 @@ This manifest records project-level authoritative binary references. Episode-loc
 ## STYLE_REF_001
 
 - intended repository path: assets/references/STYLE_REF_001.jpg
-- role: project visual/style authority supplied explicitly by the user for fresh E001
+- role: PERSON_STYLE_AUTHORITY supplied explicitly by the user for fresh E001
+- coverage_scope: PERSON only
+- allowed_influence: face construction, eye grammar, linework, flat color, hair simplification, person visual density
+- excluded_influence: FOOD style pixels, BACKGROUND/LOCATION design, camera/composition, cover/lettering
 - original dimensions: 1448 × 1086
 - SHA-256: fd763500b9c34e24d85805eb2c74b5b37a5361b82b3749644254c93922da6422
 - repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
-- current approved runtime source: user-supplied image in the E001 session
+- current approved runtime source: user-supplied person-style image in the E001 session
 
 This entry supersedes the retired pre-reset STYLE_REF_001 binary metadata.
 
@@ -41,3 +44,11 @@ Before every reference-conditioned render execution:
 A document path or hash is not evidence that the renderer received the image bytes.
 
 Any renderer/environment that depends only on this Git repository MUST block reference-conditioned production until each required binary exists at the declared path and its SHA-256 matches this manifest.
+
+
+## E001 S01 style-fidelity note
+
+The approved E001 S01 is an episode continuity/identity anchor only.
+It must NOT replace STYLE_REF_001 as project PERSON style authority.
+E001 retrospective found visible drift toward generic polished anime: larger doll-like eyes, richer rendering/background prior, and extra beautification.
+Future S01 preflight must compare directly against STYLE_REF_001 before recommending approval.
