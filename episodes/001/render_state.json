@@ -61,7 +61,7 @@
       ]
     }
   },
-  "final_user_approval": "PENDING",
+  "final_user_approval": "REVISION_REQUIRED",
   "final_candidate": {
     "cover_sha256": "b2789c145a8cffc84411d324a26d3f3cc14796e563c17f30fee5e645a60222ee",
     "s01_sha256": "de9d6313f113785b07f0e199cf34614fb45bcd993274875fb0170248b0bc8c91",
@@ -69,5 +69,8 @@
     "s03_sha256": "cb640b9e2a3ff64f23c53e5c993624afc66077072f7fcd19b5352ef1500cf144",
     "s04_sha256": "1efe9cfc6f3a495b6ff54adb91717a1ccbed2dbdeca3242e30882499f5f68b76",
     "s05_sha256": "7a8487cba25d2deaa5bb4d1839bb7c2fc24b515e47037698b403c0f08f3bdd36"
-  }
+  },
+  "publication_status": "NOT_APPROVED",
+  "retrospective_ref": "episodes/001/RETROSPECTIVE.md",
+  "repair_policy": "DO_NOT_AUTO_REPAIR_UNLESS_USER_EXPLICITLY_REOPENS"
 }
