@@ -41,13 +41,17 @@
 - CURRENT_STATE.md — 현재 상태와 정확한 다음 행동
 - assets/REFERENCE_MANIFEST.md — authoring reference 권위/해시
 - assets/production/registry.json — approved production assets
+- schemas/asset_registry.schema.json — Jipbap production-asset registry contract
 - schemas/shot_contract.schema.json — shot semantics
+- CALIBRATION_STATE.json — two-phase template/style calibration state
+- calibration/COMPOSITION_CANDIDATES.md — placeholder spec candidates and approval boundary
 
 ## Current state
 
 현재 active episode는 NONE이며 asset/template calibration 중이다.
-폐기된 001 execution package는 working tree에서 제거했다. Git history만 archive다.
-hybrid pilot은 BODY 4 slides 고정 fixture이며 COVER는 별도다. fresh 001은 이 pilot이 통과한 뒤 시작한다.
+COVER/LETTERING은 placeholder `SPEC_LOCKED`와 real-pixel `USER_LOCKED`를 분리한다.
+production registry는 placeholder calibration과 분리되며 현재 0 assets 상태를 유지한다.
+hybrid pilot은 BODY 4 slides 고정 fixture이며 COVER는 별도다. fresh 001은 이 pilot과 real-pixel template validation이 통과한 뒤 시작한다.
 
 ## Repository topology
 
