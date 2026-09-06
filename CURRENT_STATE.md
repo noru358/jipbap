@@ -30,6 +30,9 @@ Domain routing:
 Authority:
 - CALIBRATION_STATE.json
 - calibration/COMPOSITION_CANDIDATES.md
+- calibration/locks/COVER_SPEC_V1.json
+- calibration/locks/LETTERING_SPEC_V1.json
+- calibration/body4/FIXTURE.json
 - CONTENT_SYSTEM.md
 - VOICE_SYSTEM.md
 - VISUAL_SYSTEM.md
@@ -51,13 +54,42 @@ STYLE_REF_001 remains PERSON authoring authority metadata, not a production pose
 
 ## Template lock state
 
-COVER and LETTERING use two gates:
+COVER and LETTERING use:
 
 `IN_TEST → SPEC_LOCKED → USER_LOCKED`
 
-- SPEC_LOCKED: deterministic placeholder review locks layout/type grammar only.
-- USER_LOCKED: selected spec is rerendered with approved pilot artwork + hash-bound production font bytes and explicitly approved at pixel level.
-- direct IN_TEST → USER_LOCKED is forbidden.
+Current:
+- COVER: **SPEC_LOCKED C — FOOD_FIRST_POSTER**
+- LETTERING: **SPEC_LOCKED A — DIRECT_EDITORIAL**
+- placeholder pixels/fonts have no production authority;
+- USER_LOCKED remains pending real-pixel validation after the BODY pilot.
+
+## BODY4 fixture state
+
+Candidate fixture: `JIPBAP_HYBRID_BODY4_V1`
+Status: **AWAITING USER APPROVAL**
+
+Calibration meal:
+- fried egg already on top of rice;
+- intact yolk → spoon breaks yolk in place → yolk-coated spoonful is eaten → residue remains;
+- Korean simple home-meal grammar;
+- no full-frame generation.
+
+Planned BODY sequence:
+1. S01 ANTICIPATION — person secondary, intact egg-on-rice foreground.
+2. S02 TRANSFORMATION — macro spoon/yolk contact.
+3. S03 INGESTION — same person identity, spoon-to-mouth bite.
+4. S04 FOOD_RESIDUE — food-only close crop.
+
+Minimal required asset gaps:
+1. PERSON_CONTEXT_SEATED
+2. PERSON_BITE_SPOON_CONTACT
+3. FOOD_EGG_RICE_INTACT
+4. FOOD_EGG_RICE_BROKEN
+5. FOOD_EGG_RICE_RESIDUE
+6. CONTACT_SPOON_PRESS_YOLK
+
+`FOOD_EGG_RICE_RESIDUE` is intentionally reused in S03 and S04 with different deterministic composition/crop to prove approved-pixel reuse.
 
 ## Preserved structural decisions
 
@@ -70,37 +102,28 @@ COVER and LETTERING use two gates:
 7. Food variability does not reopen accepted person pixels.
 8. One frame = one image file, but one frame does not equal one user approval gate.
 9. BODY=4 is calibration-only, never a normal production hard-code.
+10. Registry entry order is generation/import → QC → explicit user approval → SHA-256 registration.
 
 ## Remaining blockers
 
-1. COVER candidate spec is not yet user-selected.
-2. LETTERING candidate spec is not yet user-selected.
-3. STYLE_REF_001 binary is still not materialized in Git for future PERSON authoring.
-4. No approved PERSON starter assets exist in the production registry.
-5. No menu-specific FOOD_STATE asset pack has been tested under the hybrid compositor path.
-6. Real-pixel COVER/LETTERING validation cannot occur until the BODY pilot has approved artwork and production font bytes.
+1. BODY4 calibration content/storyboard requires explicit user approval.
+2. STYLE_REF_001 binary is still not materialized in Git for PERSON asset authoring.
+3. Production registry still has 0 approved assets.
+4. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
 
 ## Exact next action
 
-Run deterministic **placeholder composition calibration** with the shared AutoPipeline compositor + lettering renderer.
+Obtain explicit user approval for `calibration/body4/FIXTURE.json`.
 
-- render COVER A/B/C from `calibration/fixtures`;
-- render LETTERING A/B/C from `calibration/fixtures`;
-- production registry remains untouched;
-- user selects one COVER spec and one LETTERING spec;
-- record each selection as SPEC_LOCKED, not USER_LOCKED.
+PASS:
+- mark fixture APPROVED;
+- advance CALIBRATION_STATE to BODY_FIXTURE_ASSET_RESOLUTION;
+- resolve the six requirements against the production registry;
+- since registry is currently empty, create only those six ASSET_GAP authoring jobs;
+- do not call a renderer until required actual reference media is bound and parent media authorization passes.
 
-Then run one fixed hybrid visual fixture: **BODY 4 slides**.
-- resolve required visible entities from the storyboard;
-- create ASSET_GAP only for missing PERSON/FOOD_STATE/CONTACT/BACKGROUND capabilities;
-- generated/imported assets must pass QC and explicit user approval before hash registration;
-- deterministic assembly into exactly four separate BODY frames;
-- COVER is a separate product slot and is not counted in the four BODY slides;
-- no full-frame generation unless explicitly marked as an exception.
-
-After BODY pilot assets are approved:
-- rerender the selected COVER/LETTERING specs with real assets and production font bytes;
-- user pixel-validates them;
-- promote to USER_LOCKED only after that approval.
+FAIL:
+- revise only the fixture/storyboard scope requested by the user;
+- do not generate assets.
 
 Do not start a fresh publishable 001 until the hybrid pilot and real-pixel template validation both pass.
