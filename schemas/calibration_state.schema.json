@@ -20,6 +20,7 @@
       "type": "string",
       "enum": [
         "COMPOSITION_SPEC_SELECTION",
+        "BODY_FIXTURE_USER_GATE",
         "BODY_FIXTURE_ASSET_RESOLUTION",
         "BODY_FIXTURE_ASSET_AUTHORING",
         "BODY_FIXTURE_COMPOSITION",
