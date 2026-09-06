@@ -1,10 +1,10 @@
-# COMPOSITION CALIBRATION CANDIDATES — E001 reuse test
+# COMPOSITION CALIBRATION CANDIDATES — template grammar
 
 Status: IN_TEST
 Date: 2026-09-07
-Generation cost: no image generation; existing E001 raster reuse only.
+Status note: prior previews were test evidence. Rebuild previews from current approved assets before final USER_LOCK.
 
-These are calibration candidates, not approved project templates.
+These are composition grammars, not approved project templates. Artifact hashes below are historical test evidence only and are not current production assets.
 
 ## COVER
 
