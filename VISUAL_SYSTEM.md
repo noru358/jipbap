@@ -384,28 +384,48 @@ Cover QC:
 
 ## 12. Composition-template validation status
 
-현재 COVER_TEMPLATE 구조 규칙은 존재하지만 **시각 템플릿(폰트/크기/여백/타이틀 블록)은 아직 사용자 승인된 lock이 아니다.**
-E001에서 임시로 만든 상단 흰 영역 + 굵은 산세리프 표지는 TEST ONLY이며 project template로 승격하지 않는다.
+COVER/LETTERING template calibration is explicitly two-phase.
 
-다음 calibration에서:
-- 2~3개 cover hierarchy 시안
-- food hero 비율
-- character slot 비율
-- series mark 위치
-- phone-size title legibility
-를 비교한 뒤 하나만 lock한다.
+### Phase 1 — SPEC_LOCKED
+
+Production registry assets are not required. Use only `calibration/fixtures` placeholder assets and the shared deterministic compositor/lettering runtime.
+
+The user compares:
+- hierarchy and safe-area behavior;
+- food-hero / character-slot ratio;
+- crop/overflow behavior;
+- title/lettering anchor strategy;
+- box vs no-box treatment;
+- typography class, not final font pixels.
+
+Explicit selection promotes the chosen grammar to `SPEC_LOCKED` only.
+Placeholder pixels, runtime default fonts and calibration hashes are never production visual authority.
+
+### Phase 2 — USER_LOCKED
+
+After the BODY pilot has approved real PERSON/FOOD/CONTACT assets:
+- rerender only the selected spec;
+- bind actual production font bytes by SHA-256;
+- inspect real Korean glyph metrics and phone-size readability;
+- verify food dominance, character/style coherence and collision with actual artwork.
+
+Only explicit user approval of this real-pixel result promotes the template to `USER_LOCKED`.
+
+Direct `IN_TEST → USER_LOCKED` promotion is forbidden.
 
 ## 13. Lettering-template policy
 
 BODY lettering은 generic UI 흰색 rounded box를 기본값으로 사용하지 않는다.
 
-template lock 전 원칙:
+공통 원칙:
 - 음식 focal area와 얼굴을 가리지 않는 negative-space 우선 배치
 - 이미지마다 임의 위치가 아니라 scene-aware anchor 규칙 사용
 - 한눈에 읽히되 이미지보다 먼저 튀지 않는 hierarchy
-- 의미 단위 line-break
-- 모바일 실제 크기 preview에서 판독성 검증
-- font family / weight / size scale / line height / padding / box treatment는 calibration 후 프로젝트 lock
+- 의미 단위 line-break는 editable plan에 명시
 - silent shot에는 장식성 텍스트를 추가하지 않음
+- parent `pipeline/lettering.py`가 deterministic preview와 receipt를 소유
+- calibration placeholder의 runtime default font는 SPEC 비교 전용
+- production font는 project file + SHA-256 binding 필수
+- exact font family / size / line height / Korean glyph metrics는 Phase-2 pixel validation에서 확정
 
 E001 임시 Noto Sans Bold + 큰 rounded box는 승인된 lettering template이 아니다.
