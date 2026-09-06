@@ -1,0 +1,13 @@
+{
+  "episode_id": "001",
+  "stage": "S01_PENDING",
+  "render_cursor": "S01",
+  "approved_locked_shots": [],
+  "retry_scope": "CURRENT_SHOT_ONLY",
+  "next_user_gate": "S01",
+  "anchor_policy": "CONTINUITY_ONLY_UNLESS_EXPLICIT_EDIT",
+  "preproduction_user_gate": "PASS",
+  "raster_set_user_gate": "PENDING",
+  "lettering_status": "NOT_STARTED",
+  "execution_blocker": "STYLE_REF_001_REQUIRED_IN_CURRENT_RENDER_CONTEXT"
+}

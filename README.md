@@ -31,16 +31,18 @@ menu/moment → sensory-route + meal-context compile → meal-scene state → co
 - assets/REFERENCE_MANIFEST.md — 실제 참조 바이너리의 역할/해시/materialization 상태
 - schemas/shot_contract.schema.json — 컷 계약의 기계 판독용 최소 스키마
 
-## Production reset — fresh 001
+## Production reset — active fresh 001
 
 기존 구조 개편 이전의 구체 회차 패키지는 모두 폐기했다.
 
-- active episode: NONE
-- 다음 제작 번호: 001
+- active episode: 001
+- preproduction user gate: PASS
+- current render stage: S01_PENDING
+- 다음 신규 회차 번호: 002
 - 옛 회차의 메뉴·대사·콘티·승인·QC·episode anchor는 현행 제작 권위가 아니다.
 - 옛 제작에서 얻은 일반화된 학습만 canonical project authority에 남긴다.
-- 새 001은 현재 CONTENT / FOOD_STATE / MEAL_CONTEXT / VISUAL / VOICE / PRODUCTION authority를 기준으로 처음부터 설계한다.
-- 사전 패키지 승인 전에는 이전 회차를 복구하거나 render cursor를 임의 생성하지 않는다.
+- fresh 001은 현재 CONTENT / FOOD_STATE / MEAL_CONTEXT / VISUAL / VOICE / PRODUCTION authority로 새로 승인되어 `episodes/001`에 저장된다.
+- S01은 아직 승인 anchor가 아니며, 실제 STYLE_REF_001 media binding이 확인되기 전에는 렌더하지 않는다.
 
 ## Repository topology
 

@@ -4,17 +4,49 @@ Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Production state — clean reset
+## Production state — active fresh 001
 
-Execution authorization: **IDLE_NO_ACTIVE_EPISODE**
+Execution authorization: **ACTIVE_S01_PENDING_REFERENCE_BINDING**
 
-Active episode: NONE
+Active episode: **001**
+Next new episode number: **002**
 
-Next episode number: **001**
+Preproduction user gate: **PASS**
+BODY render stage: **S01_PENDING**
+Render cursor: **S01**
+Approved locked BODY shots: NONE
 
-The previous 001/002 episode packages, their menu/story/copy decisions, approvals, QC records and episode-local anchors are retired and removed from active production state.
+The fresh 001 preproduction package is stored under `episodes/001`.
+The retired pre-reset 001/002 packages remain invalid and must not be restored.
 
-Only generalized project rules that were promoted into canonical authority remain valid.
+## Active E001 contract
+
+MENU/MOMENT:
+- 집에서 부친 김치전 + 작은 간장 종지
+- 바삭한 가장자리 조각을 집어 간장은 끝에만 살짝 찍고 첫입 먹는 순간
+
+SENSORY ROUTE:
+- PURE_SENSORY
+- 바삭한 가장자리 → 촉촉한 안쪽 → 간장이 묻은 끝 → 첫입 → 다음 조각
+- ending: CONTINUING_BITE
+
+BODY:
+- S01 ARRIVAL
+- S02 PICK
+- S03 DIP
+- S04 BITE
+- S05 RESIDUE / CONTINUING_BITE
+
+COVER:
+- separate product asset
+- working title: 김치전은 가장자리부터
+- reuse approved BODY artwork first
+
+Durable episode authority:
+- episodes/001/PREPRODUCTION.md
+- episodes/001/MEAL_SCENE_STATE.json
+- episodes/001/RENDER_STATE.json
+- episodes/001/shot_contracts/S01.json ... S05.json
 
 ## Canonical baseline
 
@@ -28,31 +60,33 @@ Fresh production uses:
 - assets/REFERENCE_MANIFEST.md
 - schemas/shot_contract.schema.json
 
-The active carousel structure is:
+Carousel structure:
 `COVER → BODY S01 → S02 → ... → Sfinal`
 
-COVER is a separate product asset, not BODY S01.
-BODY production remains:
+BODY gate topology:
 `pre-raster user gate → S01 user anchor → S02..final internal QC → raster-set user gate → cover/lettering → final carousel user gate`
 
-## Fail-closed reset rule
+## Reference / dispatch blocker
 
-While Active episode is NONE:
-- do not render;
-- do not restore old episode approvals or anchors;
-- do not infer an old menu/story from chat history;
-- do not create a render cursor;
-- do not treat historical episode numbers as active production state.
+STYLE_REF_001 is still declared in `assets/REFERENCE_MANIFEST.md` as:
+`BINARY_REQUIRED_NOT_YET_MATERIALIZED`.
+
+No current render-context evidence has yet proven that the actual STYLE_REF_001 image bytes are bound to the renderer.
+
+Therefore:
+- do not render S01 yet;
+- do not substitute prompt prose, repository path, hash, chat memory, or retired episode images;
+- do not create an episode continuity anchor before S01 user PASS.
 
 ## Exact next action
 
-Create a fresh 001 **preproduction proposal only** from the current canonical structure:
-1. MENU/MOMENT;
-2. SENSORY ROUTE;
-3. meal context + dining grammar;
-4. initial MEAL_SCENE_STATE;
-5. body sensory/food-state beats;
-6. body storyboard + cover brief;
-7. voice/copy plan.
+1. Bind the actual STYLE_REF_001 image to the current renderer context.
+2. Verify binary identity/hash when the environment exposes the bytes.
+3. Compile/authorize the S01-only render capsule.
+4. Render **S01 only**, text-free, one panel / one file.
+5. Present S01 for the explicit user anchor gate.
 
-Present that package for explicit user approval before creating/activating `episodes/001` or rendering BODY S01.
+After S01 PASS:
+- lock S01;
+- set render cursor=S02;
+- render S02..S05 sequentially with internal QC and no per-shot user gate.

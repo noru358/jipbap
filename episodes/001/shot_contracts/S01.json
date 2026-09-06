@@ -1,0 +1,85 @@
+{
+  "shot_id": "S01",
+  "beat_role": "ARRIVAL",
+  "meal_context": {
+    "context_id": "E001_KOREAN_HOME_KIMCHI_PANCAKE",
+    "constraints": [
+      "Korean home meal / simple late-evening snack context",
+      "ordinary ceramic main plate and small ceramic dipping dish",
+      "metal chopsticks",
+      "kimchi pancake is cooked and pre-cut into bite-sized pieces",
+      "do not add unrelated side dishes, soup, garnish or extra utensils"
+    ],
+    "dining_grammar": [
+      "main plate is in the diner area",
+      "dipping dish is in a naturally reachable adjacent area",
+      "chopsticks belong to the diner",
+      "persistent world-space table topology changes only through explicit state_delta",
+      "visible tableware, gesture and utensil use must remain coherent with the declared meal context"
+    ]
+  },
+  "reference_bindings": [
+    {
+      "ref_id": "STYLE_REF_001",
+      "role": "STYLE_AUTHORITY",
+      "is_edit_target": false,
+      "allowed_influence": [
+        "line",
+        "coloring",
+        "texture",
+        "face simplification",
+        "visual density"
+      ]
+    }
+  ],
+  "context_firewall": {
+    "target_only": true,
+    "deny_future_shots": true,
+    "deny_voice_copy": true,
+    "deny_rejected_outputs": true,
+    "deny_locked_shot_as_edit_target": true
+  },
+  "scene_state_ref": "E001_MEAL_SCENE_STATE_v1",
+  "preconditions": [
+    "edge_piece_A is intact, uncoated and on pancake_plate",
+    "chopsticks hold no food and belong to the diner",
+    "pancake_plate and sauce_dish are in their initial persistent topology"
+  ],
+  "action": "Diner moves metal chopsticks toward edge_piece_A and stops just before or at initial contact without lifting the piece.",
+  "postconditions": [
+    "edge_piece_A remains on pancake_plate",
+    "edge_piece_A remains intact and uncoated",
+    "chopsticks are positioned at edge_piece_A ready to grip"
+  ],
+  "must_show": [
+    "kimchi pancake as the dominant visual subject",
+    "clearly browned/crisp edge on edge_piece_A",
+    "metal chopsticks approaching the intended edge piece",
+    "ordinary home ceramic plate"
+  ],
+  "must_not_show": [
+    "edge_piece_A already lifted",
+    "sauce already on edge_piece_A",
+    "unrelated side dishes or extra utensils",
+    "lettering or readable environmental text",
+    "multi-panel layout or collage"
+  ],
+  "composition": "Food-dominant close or medium-close view; crisp edge is the primary focal area; character face is optional and secondary.",
+  "state_delta": {
+    "chopsticks": {
+      "active_action": "approach_edge_piece_A",
+      "holding": null
+    },
+    "edge_piece_A": {
+      "location": "plate",
+      "coating": "none"
+    }
+  },
+  "output": {
+    "target_shot_id": "S01",
+    "single_panel": true,
+    "text_free": true,
+    "delivery_mode": "SEPARATE_FILE",
+    "aspect_ratio": "4:5"
+  }
+}

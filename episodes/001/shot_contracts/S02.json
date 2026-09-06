@@ -1,0 +1,85 @@
+{
+  "shot_id": "S02",
+  "beat_role": "PICK",
+  "meal_context": {
+    "context_id": "E001_KOREAN_HOME_KIMCHI_PANCAKE",
+    "constraints": [
+      "Korean home meal / simple late-evening snack context",
+      "ordinary ceramic main plate and small ceramic dipping dish",
+      "metal chopsticks",
+      "kimchi pancake is cooked and pre-cut into bite-sized pieces",
+      "do not add unrelated side dishes, soup, garnish or extra utensils"
+    ],
+    "dining_grammar": [
+      "main plate is in the diner area",
+      "dipping dish is in a naturally reachable adjacent area",
+      "chopsticks belong to the diner",
+      "persistent world-space table topology changes only through explicit state_delta",
+      "visible tableware, gesture and utensil use must remain coherent with the declared meal context"
+    ]
+  },
+  "reference_bindings": [
+    {
+      "ref_id": "STYLE_REF_001",
+      "role": "STYLE_AUTHORITY",
+      "is_edit_target": false,
+      "allowed_influence": [
+        "line",
+        "coloring",
+        "texture",
+        "face simplification",
+        "visual density"
+      ]
+    }
+  ],
+  "context_firewall": {
+    "target_only": true,
+    "deny_future_shots": true,
+    "deny_voice_copy": true,
+    "deny_rejected_outputs": true,
+    "deny_locked_shot_as_edit_target": true
+  },
+  "scene_state_ref": "E001_MEAL_SCENE_STATE_v1",
+  "preconditions": [
+    "edge_piece_A is intact, uncoated and on pancake_plate",
+    "chopsticks are positioned at edge_piece_A",
+    "sauce_dish remains in its persistent adjacent position"
+  ],
+  "action": "Metal chopsticks visibly grip edge_piece_A and lift that same piece from pancake_plate.",
+  "postconditions": [
+    "edge_piece_A location changes plate → chopsticks",
+    "chopsticks holding changes null → edge_piece_A",
+    "edge_piece_A remains intact and uncoated",
+    "a plausible gap/removal trace remains where edge_piece_A was lifted"
+  ],
+  "must_show": [
+    "clear chopstick-to-food contact",
+    "edge_piece_A visibly leaving the plate",
+    "the plate state reflecting removal of that piece",
+    "food-first close framing"
+  ],
+  "must_not_show": [
+    "a different piece replacing edge_piece_A",
+    "sauce coating before the dip",
+    "edge_piece_A simultaneously on plate and chopsticks",
+    "lettering or readable environmental text",
+    "multi-panel layout or collage"
+  ],
+  "composition": "Contact-focused close shot emphasizing grip geometry and plate → utensil transition.",
+  "state_delta": {
+    "edge_piece_A": {
+      "location": "utensil"
+    },
+    "chopsticks": {
+      "holding": "edge_piece_A",
+      "active_action": "lift"
+    }
+  },
+  "output": {
+    "target_shot_id": "S02",
+    "single_panel": true,
+    "text_free": true,
+    "delivery_mode": "SEPARATE_FILE",
+    "aspect_ratio": "4:5"
+  }
+}
