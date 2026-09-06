@@ -12,7 +12,10 @@
     "sequence_qc_status",
     "cover_status",
     "cover_source_route",
-    "lettering_status"
+    "lettering_status",
+    "anchor_route",
+    "anchor_gate_status",
+    "anchor_artifact_id"
   ],
   "properties": {
     "episode_id": {
@@ -27,7 +30,9 @@
         "RASTER_SET_USER_GATE",
         "POST_RASTER_COMPOSITION",
         "FINAL_USER_GATE",
-        "COMPLETE"
+        "COMPLETE",
+        "ANCHOR_PENDING",
+        "POST_ANCHOR_INTERNAL_RENDER"
       ]
     },
     "render_cursor": {
@@ -52,7 +57,8 @@
         "S01",
         "RASTER_SET",
         "FINAL",
-        "NONE"
+        "NONE",
+        "ANCHOR"
       ]
     },
     "anchor_policy": {
@@ -93,6 +99,29 @@
         "PASS",
         "FAIL"
       ]
+    },
+    "anchor_route": {
+      "type": "string",
+      "enum": [
+        "UNRESOLVED",
+        "BODY_S01",
+        "DEDICATED_A00"
+      ]
+    },
+    "anchor_gate_status": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "PENDING",
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "anchor_artifact_id": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "allOf": [
@@ -120,6 +149,57 @@
           },
           "lettering_status": {
             "const": "PASS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "anchor_route": {
+            "const": "BODY_S01"
+          },
+          "anchor_gate_status": {
+            "const": "PASS"
+          }
+        },
+        "required": [
+          "anchor_route",
+          "anchor_gate_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "anchor_artifact_id": {
+            "const": "S01"
+          },
+          "approved_locked_shots": {
+            "contains": {
+              "const": "S01"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "anchor_route": {
+            "const": "DEDICATED_A00"
+          },
+          "anchor_gate_status": {
+            "const": "PASS"
+          }
+        },
+        "required": [
+          "anchor_route",
+          "anchor_gate_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "anchor_artifact_id": {
+            "const": "A00"
           }
         }
       }
