@@ -1,58 +1,58 @@
 # CURRENT_STATE
 
-Updated: 2026-09-06
+Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Active episode
+## Production state — clean reset
 
-episodes/002/README.md
+Execution authorization: **IDLE_NO_ACTIVE_EPISODE**
 
-## Episode 002 state
+Active episode: NONE
 
-Stage: LETTERING_QC_FIX
-Render cursor: null
-Approved locked shots: S01, S02, S03, S04, S05
-Retry scope: CURRENT_SHOT_ONLY
-Next user gate: FINAL
+Next episode number: **001**
 
-## User gate result
+The previous 001/002 episode packages, their menu/story/copy decisions, approvals, QC records and episode-local anchors are retired and removed from active production state.
 
-Raster-set user gate: PASS on 2026-09-06.
+Only generalized project rules that were promoted into canonical authority remain valid.
 
-The text-free S01~S05 artwork remains approved and immutable unless the user explicitly invalidates a shot.
+## Canonical baseline
 
-## Lettering copy
+Fresh production uses:
+- CONTENT_SYSTEM.md
+- FOOD_STATE_SYSTEM.md
+- MEAL_CONTEXT_SYSTEM.md
+- VISUAL_SYSTEM.md
+- VOICE_SYSTEM.md
+- PRODUCTION_PROTOCOL.md
+- assets/REFERENCE_MANIFEST.md
+- schemas/shot_contract.schema.json
 
-Copy itself: PASS.
+The active carousel structure is:
+`COVER → BODY S01 → S02 → ... → Sfinal`
 
-- S01: 오늘은 고등어 한 마리
-- S02: 껍질부터 젓가락이 간다
-- S03: 살은 크게 떼어서
-- S04: SILENT
-- S05: 가시만 남았다
+COVER is a separate product asset, not BODY S01.
+BODY production remains:
+`pre-raster user gate → S01 user anchor → S02..final internal QC → raster-set user gate → cover/lettering → final carousel user gate`
 
-## Lettering visual QC
+## Fail-closed reset rule
 
-Previous FINAL_QC=PASS is invalidated.
-
-Current result: FAIL.
-
-Observed defects:
-- fixed top-left placement ignores per-shot composition
-- oversized/heavy outlined type competes with focal food/character
-- text overlaps or crowds semantic subjects and action zones
-- identical placement rule produces inconsistent balance across shots
-- readability was checked, but composition integration / hierarchy / negative-space fit were not
-
-Artwork status:
-- raster artwork remains PASS/LOCKED
-- copy remains PASS
-- only lettering layout/style layer is invalidated
+While Active episode is NONE:
+- do not render;
+- do not restore old episode approvals or anchors;
+- do not infer an old menu/story from chat history;
+- do not create a render cursor;
+- do not treat historical episode numbers as active production state.
 
 ## Exact next action
 
-Define composition-aware lettering placement/style constraints.
-Re-letter S01, S02, S03 and S05 only; keep S04 silent.
-Do not regenerate artwork.
-Run lettering visual QC before returning to FINAL_USER_GATE.
+Create a fresh 001 **preproduction proposal only** from the current canonical structure:
+1. MENU/MOMENT;
+2. SENSORY ROUTE;
+3. meal context + dining grammar;
+4. initial MEAL_SCENE_STATE;
+5. body sensory/food-state beats;
+6. body storyboard + cover brief;
+7. voice/copy plan.
+
+Present that package for explicit user approval before creating/activating `episodes/001` or rendering BODY S01.
