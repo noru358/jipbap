@@ -11,13 +11,30 @@ Operating mode: MANUAL_VALIDATION
 ## Approved
 
 - 독립 프로젝트로 운영: instatoon E008/하위 포맷 아님
+- AutoPipeline의 별도 child project
 - 큰 제작 공정만 instatoon에서 재사용
 - Episode 001 menu/moment: 계란후라이 + 흰밥
 - 5컷 콘티 방향 승인
 - 말투 시스템 승인
 - 기본 말투 수정: `먹고 싶었음`보다 `먹고 싶었다` 같은 자연스러운 서술형 종결을 선호
-- 실제 시각 레퍼런스 지정: `assets/references/STYLE_REF_001.jpg`
+- 실제 시각 레퍼런스 지정
 - S01 생성물은 **진행용 임시 PASS**. 스타일 확정이 아님
+
+## Repository / reference state
+
+Remote repository: `noru358/jipbap`
+
+Canonical text systems, Episode 001 state and shot-contract schema are materialized on `main`.
+`AutoPipeline` registers `jipbap` as an independent submodule child.
+
+Reference integrity authority:
+- `assets/REFERENCE_MANIFEST.md`
+
+Current binary status:
+- STYLE_REF_001: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+- S01_TEMP_ANCHOR: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+
+This is a **transport/materialization blocker for repository-only execution**, not a reversal of the user's visual approval. The current chat has the actual reference media; a future clean environment must fail closed until repository binaries are restored and hash-verified.
 
 ## Known failures / learnings
 
@@ -32,12 +49,14 @@ Operating mode: MANUAL_VALIDATION
 
 ## Exact next action
 
-Episode 001 콘티를 상태 전이 기준으로 재컴파일한다.
+Current-chat continuation:
+1. Episode 001 콘티를 상태 전이 기준으로 사용한다.
+2. S01 임시 PASS를 유지한다.
+3. 실제 chat-supplied reference media를 렌더 입력으로 사용한다.
+4. S02~S05를 single-panel / text-free / state-transition contract로 다시 제작하고 내부 QC한다.
+5. 완전한 무자막 세트를 사용자에게 제시한다.
 
-1. S01: 밥/접시 위 intact egg/김/간장 준비 상태
-2. S02: egg.location = on_rice 인 상태에서 yolk를 터뜨림
-3. S03: 이미 터진 노른자 + 밥 위 계란에 간장을 소량 추가
-4. S04: 첫 한입
-5. S05: 거의 비운 그릇 + 잔여 행동
-
-그 후 새 시각계약으로 S02~S05를 다시 제작한다. S01 임시 PASS는 유지하되 최종 스타일 확정으로 승격하지 않는다.
+Repository-only / clean-environment continuation:
+1. manifest에 선언된 두 바이너리를 intended path에 materialize한다.
+2. SHA-256을 검증한다.
+3. 그 후에만 reference-conditioned rendering을 허용한다.
