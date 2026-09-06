@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "lock_id": "JIPBAP_COVER_SPEC_V1",
+  "phase": "SPEC_LOCKED",
+  "selected_candidate": "C",
+  "spec_id": "COVER_C_FOOD_FIRST_POSTER",
+  "source_refs": [
+    "calibration/COMPOSITION_CANDIDATES.md#c--food_first_poster",
+    "calibration/fixtures/cover_C.scene.json",
+    "calibration/fixtures/cover_C.title.plan.json"
+  ],
+  "invariants": {
+    "aspect_ratio": "4:5",
+    "cover_is_separate_from_body": true,
+    "food_is_primary_visual_mass": true,
+    "food_may_crop_beyond_canvas": true,
+    "character_is_secondary": true,
+    "title_zone_is_separate_from_food_focal_area": true,
+    "series_mark_is_small_and_stable": true
+  },
+  "variables": [
+    "episode_title",
+    "food_hero_asset",
+    "character_asset",
+    "exact_crop",
+    "exact_character_position",
+    "production_font"
+  ],
+  "pixel_authority": "NONE_UNTIL_PHASE2",
+  "approval": {
+    "actor": "USER",
+    "scope": "SPEC_ONLY",
+    "approved_on": "2026-09-07"
+  }
+}
