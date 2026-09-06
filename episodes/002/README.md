@@ -1,6 +1,6 @@
 # Episode 002 — 고등어구이 + 흰밥
 
-Status: LETTERING
+Status: FINAL_USER_GATE
 Render cursor: null
 Next user gate: FINAL
 
@@ -39,7 +39,7 @@ These are E002-specific compiled constraints, not global hardcodes.
 - S04: bite of rice + mackerel
 - S05: mostly bones/remnants + nearly empty rice
 
-## Approved lettering copy
+## Final lettering
 
 - S01: `오늘은 고등어 한 마리`
 - S02: `껍질부터 젓가락이 간다`
@@ -47,14 +47,18 @@ These are E002-specific compiled constraints, not global hardcodes.
 - S04: 무자막
 - S05: `가시만 남았다`
 
-Voice intent:
-- LOW internetness
-- short personal-record tone
-- no direct taste-rating copy
-- end on residual/result state
+## Final QC
+
+PASS:
+- ordering
+- copy mapping
+- readability
+- meal/dining grammar continuity
+- food-state monotonicity
+- one-shot-one-file
+- artwork preserved under lettering
 
 ## Exact next action
 
-Apply the approved copy as a non-destructive lettering layer to the approved raster files.
-Do not regenerate artwork.
-Run final QC and present S01~S05 at FINAL_USER_GATE.
+Present the final set at FINAL_USER_GATE.
+On PASS, mark Episode 002 COMPLETE.
