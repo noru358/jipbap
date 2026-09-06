@@ -6,63 +6,51 @@ Operating mode: MANUAL_VALIDATION
 
 ## Active episode
 
-`episodes/002/README.md`
+episodes/002/README.md
 
-Episode 001 is paused at `PREPRODUCTION_RECOMPILE` / remaining-render retry. It is not deleted or treated as complete.
-
-## Latest user direction
-
-Start a new Episode 002 now.
-
-This newer instruction supersedes the previous "continue Episode 001 next" action. The repository state is reconciled by pausing Episode 001 and starting Episode 002 from the canonical pipeline entry point.
+Episode 001 remains paused at PREPRODUCTION_RECOMPILE.
 
 ## Episode 002 current stage
 
-`PREPRODUCTION_USER_GATE`
+REMAINING_RENDER_INTERNAL_QC
 
-Proposed menu/moment:
-- 고등어구이 + 흰밥
-- 막 구운 고등어의 껍질을 가르고 살을 크게 떼어 밥 위에 올려 먹는 순간
+Approved:
+- preproduction package
+- S01 visual style
+- corrected S01 Korean meal-context presentation
+- S01 as Episode 002 continuity anchor
 
-Prepared:
-- menu/moment
-- content beats
-- voice draft
-- 5-shot storyboard
-- food-state graph
-- bridge-action check
-- visual rhythm
-- per-shot must_show / must_not_show
+## Structural learning now canonical
 
-Not yet authorized:
-- raster generation
-- lettering
+S01 exposed a cross-cuisine contamination failure:
+a Korean home-meal scene can drift into visually similar foreign meal conventions even when the main dish is correct.
 
-## Canonical operating rules still in force
+This is now handled structurally through:
+- MEAL_CONTEXT_SYSTEM.md
+- meal-context compile in preproduction
+- meal-context binding in each shot contract
+- meal-context QC in remaining render
+- meal_context required by schemas/shot_contract.schema.json
 
-- one frame = one image file
-- raster images are text-free
-- pre-raster user gate before S01
-- S01 is the user visual-anchor gate
-- S01 PASS → S02..final internal render/QC without per-shot user gates
-- full text-free raster-set user gate before lettering
-- every food shot uses precondition/action/postcondition continuity
-- approved actual image reference is the highest visual authority
-- reference path/hash alone is not media binding; reference-conditioned rendering fails closed without verified image bytes
+No global hardcoded rule such as all Korean soup must use X is introduced.
+Each episode compiles its own cuisine/meal-setting constraints.
 
-## Reference integrity authority
+## Reference state for current session
 
-- `assets/REFERENCE_MANIFEST.md`
+STYLE_REF_001:
+- actual binary available
+- SHA-256 verified against manifest
 
-Repository binary status remains:
-- STYLE_REF_001: BINARY_REQUIRED_NOT_YET_MATERIALIZED
-- Episode 001 S01 temporary anchor: BINARY_REQUIRED_NOT_YET_MATERIALIZED
-
-For Episode 002 rendering, the execution environment must have an actual verified style-reference image binding before S01. Repository-only execution remains blocked until the required reference binary is materialized and hash-verified.
+Episode 002 S01 approved anchor:
+- actual binary available in current session
+- SHA-256: cec9a1be2077772369e89098a9553d67b9ba028b6c5c5448f9ac8f44d1814050
+- user verdict: PASS
+- repository binary still not materialized
 
 ## Exact next action
 
-1. User reviews Episode 002 preproduction package in `episodes/002/README.md`.
-2. If approved, run visual preflight and verify actual style-reference binding.
-3. Generate S01 only, single-panel / text-free / 4:5.
-4. Present S01 for the user anchor gate.
+1. Generate S02 single-panel / text-free using style ref + S01 anchor.
+2. Internal QC: structural + visual + meal-context + food-state.
+3. Continue S03, S04, S05 with the same procedure.
+4. When all four PASS, present the full S01~S05 text-free raster set to the user.
+5. Await raster-set gate before lettering.
