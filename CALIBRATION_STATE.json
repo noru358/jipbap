@@ -21,9 +21,8 @@
     "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#COVER",
     "approved_artifact_sha256": null,
     "notes": [
-      "E001 cover is TEST ONLY.",
-      "Can be calibrated deterministically from existing E001 raster without image generation.",
-      "Candidates A/B/C generated from existing E001 raster; awaiting user selection."
+      "Candidate grammar exists but no template is USER_LOCKED.",
+      "Rebuild deterministic previews from current approved production assets when calibration resumes."
     ]
   },
   "lettering_template": {
@@ -31,9 +30,8 @@
     "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#LETTERING",
     "approved_artifact_sha256": null,
     "notes": [
-      "E001 Noto Sans rounded-box composition is TEST ONLY.",
-      "Can be calibrated deterministically from existing E001 raster without image generation.",
-      "Candidates A/B/C generated from existing E001 raster; awaiting user selection."
+      "Candidate grammar exists but no template is USER_LOCKED.",
+      "Rebuild deterministic previews from current approved production assets when calibration resumes."
     ]
   },
   "next_action": "COVER_TEMPLATE"
