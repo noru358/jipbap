@@ -23,30 +23,30 @@
     ]
   },
   "cover_template": {
-    "status": "IN_TEST",
+    "status": "SPEC_LOCKED",
     "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#cover",
-    "selected_candidate": null,
-    "approved_spec_sha256": null,
+    "selected_candidate": "C",
+    "approved_spec_sha256": "93fba15df2a0ca9d04a1f4307db6abefb60cfa3b61025fb2a210bbda1cb137da",
     "approved_artifact_sha256": null,
     "pixel_validation_status": "PENDING",
     "notes": [
-      "Phase 1 uses deterministic placeholder fixtures and does not depend on production registry assets.",
-      "User selection promotes only the layout/type grammar to SPEC_LOCKED.",
-      "USER_LOCKED requires rerender with approved pilot assets and explicit pixel-level approval."
+      "COVER C (food_first_poster) explicitly selected by user.",
+      "Spec-only lock: placeholder pixels are not production authority.",
+      "USER_LOCKED still requires real pilot artwork + production-font pixel validation."
     ]
   },
   "lettering_template": {
-    "status": "IN_TEST",
+    "status": "SPEC_LOCKED",
     "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#lettering",
-    "selected_candidate": null,
-    "approved_spec_sha256": null,
+    "selected_candidate": "A",
+    "approved_spec_sha256": "65aa678920b36a33ab39b34b02d3111d48c135221b15cea6488e4f009216211e",
     "approved_artifact_sha256": null,
     "pixel_validation_status": "PENDING",
     "notes": [
-      "Phase 1 uses the shared deterministic lettering renderer with calibration-only placeholder fonts.",
-      "User selection promotes only the layout/type grammar to SPEC_LOCKED.",
-      "Production font bytes and final Korean metrics are hash-bound and pixel-validated later."
+      "LETTERING A (direct_editorial) explicitly selected by user.",
+      "Spec-only lock: placeholder font/pixels are not production authority.",
+      "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "COMPOSITION_SPEC_SELECTION"
+  "next_action": "BODY_FIXTURE_ASSET_RESOLUTION"
 }
