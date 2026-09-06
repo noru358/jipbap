@@ -1,50 +1,68 @@
 # BODY 4 calibration fixture — hybrid boundary pilot
 
 Status: **AWAITING USER APPROVAL**  
+Fixture: `JIPBAP_HYBRID_BODY4_V2`  
 Purpose: architecture calibration only; this is not publishable episode 001.
 
-## Why this meal
+## Temporal model
 
-The fixture uses **fried egg on rice** because one compact meal exercises the exact boundaries the new architecture is meant to prove:
+A still panel is a **keyframe**, not a miniature video.
 
-1. PERSON identity appears in more than one shot but is not regenerated with every food state.
-2. FOOD_STATE has an unambiguous chain: intact yolk → broken yolk coating rice → one bite removed.
-3. S02 forces a real hand/spoon/food contact check.
-4. S03 forces a high-risk spoon-to-mouth geometry check.
-5. S03 and S04 intentionally reuse the **same approved residue-food asset** with different composition/crop.
-6. No full-frame stochastic render is needed.
+- each panel declares the exact visible state;
+- every state change from the previous panel is an ordered bridge step;
+- a bridge may happen between panels only when the omission is explicit, causally unambiguous and not itself worth a panel;
+- menu-specific actions remain episode data, not global hard-coded rules.
+
+This prevents ambiguous jumps such as “food was broken, then somehow it is already in the mouth.”
 
 ## BODY sequence
 
-- **S01 — anticipation:** person secondary, egg-on-rice foreground; intact yolk.
-- **S02 — transformation:** macro; spoon breaks yolk while the egg is still on the rice.
-- **S03 — ingestion:** same person identity; yolk-coated spoonful reaches the mouth.
-- **S04 — residue:** food-only close crop; partial bowl and yolk streaks prove the bite happened.
+- **S01 — anticipation:** intact fried egg already on rice; person secondary.
+- **S02 — transformation:** exact spoon/yolk breaking contact is visible.
+- **S03 — pre-bite keyframe:** yolk-coated rice has been scooped and the spoon is immediately before the mouth; **no mouth contact yet**.
+- **S04 — residue:** the bite happened between frames; the same already-partial bowl pixels from S03 are reused unchanged.
 
-COVER remains a separate product slot and BODY=4 remains calibration-only.
+The omitted S03→S04 ingestion step is explicitly recorded. In normal production, if the bite/contact itself has enough sensory value, it becomes its own panel rather than being silently skipped.
 
-## Minimal starter asset set
+COVER remains separate and BODY=4 remains calibration-only.
 
-Exactly six current gaps:
+## Stable asset boundary
 
-1. PERSON_CONTEXT_SEATED
-2. PERSON_BITE_SPOON_CONTACT
-3. FOOD_EGG_RICE_INTACT
-4. FOOD_EGG_RICE_BROKEN
-5. FOOD_EGG_RICE_RESIDUE
-6. CONTACT_SPOON_PRESS_YOLK
+The compositor is not required to align tiny independent layers at brittle high-risk contact points.
 
-No background asset is required for this pilot. LOCAL/NONE context uses deterministic canvas/background exposure so the test remains focused on the hybrid asset boundary.
+Use five gaps:
 
-The bite pose keeps hand + spoon + mouth contact as one semantically coherent PERSON/contact asset. Splitting that interaction into tiny face/hand/spoon fragments would make composition less reliable rather than more modular.
+1. `PERSON_CONTEXT_SEATED`
+2. `FOOD_EGG_RICE_INTACT`
+3. `INTERACTION_BREAK_YOLK`
+4. `FOOD_EGG_RICE_RESIDUE`
+5. `INTERACTION_BITE_APPROACH`
 
-## Registry resolution
+`INTERACTION_COMPOSITE` is an episode-local compound asset for inseparable high-risk geometry. It is still smaller than a full-frame exception and excludes unrelated text/background where practical.
 
-Current production registry contains 0 approved assets, so all six requirements are ASSET_GAPs.
+`FOOD_EGG_RICE_RESIDUE` is intentionally reused in both S03 and S04 with different composition/crop to prove approved-pixel reuse.
 
-This is expected. **Do not register anything before generation/import → QC → explicit user approval → SHA-256 registration.**
+## Dependency order
+
+1. Bind actual STYLE_REF_001 media; author/QC foundation PERSON + intact FOOD.
+2. Operator may hash-register QC-passed foundation assets for this bounded pilot.
+3. Compose S01 and obtain the **user visual anchor pass**.
+4. Only then author interaction assets that depend on the accepted person identity.
+5. Continue deterministic composition and internal QC.
+6. User receives the later final/template gates defined in canonical protocol.
+
+This avoids parallel resampling of the same person while also avoiding one user approval per isolated raw asset.
+
+## Exception status
+
+Full-frame exception need is **UNASSESSED**, not predeclared false.
+
+First attempt:
+`stable asset boundary → approved assets → deterministic composition`.
+
+Only a shot that still cannot preserve the required semantics/contact may open a bounded full-frame exception.
 
 ## User gate
 
-Asset authoring must not start until this fixture is explicitly approved.  
-Approval is for the calibration content/storyboard only; it is not approval of any future generated pixels.
+The current gate approves this calibration content/storyboard and execution structure only.
+It does not approve future generated pixels.
