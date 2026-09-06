@@ -8,53 +8,69 @@ Operating mode: MANUAL_VALIDATION
 
 episodes/002/README.md
 
-Episode 001 remains paused at PREPRODUCTION_RECOMPILE.
+Episode 001 remains paused.
 
-## Episode 002 current stage
+## Episode 002 render state
 
-S02_RENDER_BLOCKED_INTERNAL_QC
+Stage: POST_S01_INTERNAL_RENDER
+Render cursor: S02
+Approved locked shots: S01
+Retry scope: CURRENT_SHOT_ONLY
+Next user gate: RASTER_SET
 
-Approved:
-- preproduction package
-- S01 visual style
-- corrected S01 Korean meal-context presentation
-- S01 as Episode 002 continuity anchor
+Machine state:
+- episodes/002/RENDER_STATE.json
 
-## Canonical structural learning
+## User-approved facts
 
-Cross-cuisine contamination is handled through MEAL_CONTEXT_SYSTEM.md:
-- episode-level meal-context compile
-- shot-level meal-context binding
-- context QC for preparation form, vessel/material, ingredients/garnish and table ecology
-- no cuisine-specific one-off rule is promoted globally
+- Episode 002 preproduction: PASS
+- corrected S01 visual/cultural result: PASS
+- S01 is immutable unless the user explicitly withdraws approval
 
-## Reference state for current session
+## Structural corrections applied
 
-STYLE_REF_001:
-- actual binary available
-- SHA-256 verified against manifest
+### 1. S01 regeneration bug
 
-Episode 002 S01 approved anchor:
-- actual binary available in current session
-- SHA-256: cec9a1be2077772369e89098a9553d67b9ba028b6c5c5448f9ac8f44d1814050
-- user verdict: PASS
-- repository binary still not materialized
+Root cause:
+- continuity anchor and edit target roles were not separated
+- render cursor was not machine-explicit
 
-## S02 renderer blocker
+Fix:
+- approved-shot immutability
+- explicit render cursor
+- current-shot-only retry
+- reference-role isolation
+- S01 continuity anchor cannot be S02 edit target
 
-The S02 contract requires a text-free food macro showing chopsticks opening the mackerel skin and exposing flesh.
+Canonical:
+- PRODUCTION_PROTOCOL.md
+- VISUAL_SYSTEM.md
+- schemas/render_state.schema.json
+- episodes/002/RENDER_STATE.json
 
-Repeated internal attempts failed because the renderer kept returning S01-like full-table scenes, omitted the required action, included character-dominant framing, and generated text.
+### 2. Cross-cuisine dining-grammar drift
 
-All such attempts are rejected and are not episode assets.
+Root cause:
+- cuisine label existed, but utensil placement / table topology / gesture grammar were not compiled
+- renderer filled the missing detail using generic East-Asian/Japanese visual priors
 
-See:
-- episodes/002/QC_LOG.md
+Fix:
+- MEAL_CONTEXT_SYSTEM v0.2 compiles dining grammar
+- shot QC now includes utensil type/material/placement + hand/gesture rules
+- E002 explicitly compiles Korean-home-dinner grammar without making those details global project rules
+
+## Current E002 dining grammar
+
+- Korean spoon + chopsticks, metal default for this episode
+- spoon/chopsticks at diner’s right side; no Japanese horizontal chopstick-rest staging
+- no palms-together pre-meal pose as default
+- hands must perform the current shot action or rest naturally
+- individual rice/soup + Korean home-table shared main/sides
+- reject Japanese miso-bowl / garnish / rolled-egg / utensil-layout contamination
 
 ## Exact next action
 
-1. Retry S02 using a rendering route/context that can honor the approved shot contract.
-2. Require single-panel + text-free + food-macro + explicit pry-open action.
-3. Run structural + visual + meal-context + food-state QC.
-4. Only after S02 PASS, continue S03 → S05 internally.
-5. Present the complete S01~S05 text-free raster set at the next user gate.
+Render S02 only under the new state and reference-role isolation.
+Do not regenerate S01.
+On S02 PASS, auto-advance to S03, then S04, then S05.
+Next user-facing approval is the complete text-free raster set.
