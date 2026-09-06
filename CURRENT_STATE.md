@@ -8,9 +8,7 @@ Operating mode: MANUAL_VALIDATION
 
 episodes/002/README.md
 
-Episode 001 remains paused.
-
-## Episode 002 render state
+## Episode 002 state
 
 Stage: POST_S01_INTERNAL_RENDER
 Render cursor: S02
@@ -18,59 +16,78 @@ Approved locked shots: S01
 Retry scope: CURRENT_SHOT_ONLY
 Next user gate: RASTER_SET
 
-Machine state:
-- episodes/002/RENDER_STATE.json
+## Confirmed structural failures and fixes
 
-## User-approved facts
+### A. Approved S01 was effectively regenerated
 
-- Episode 002 preproduction: PASS
-- corrected S01 visual/cultural result: PASS
-- S01 is immutable unless the user explicitly withdraws approval
-
-## Structural corrections applied
-
-### 1. S01 regeneration bug
-
-Root cause:
-- continuity anchor and edit target roles were not separated
-- render cursor was not machine-explicit
+Cause:
+- anchor/edit-target role leakage
+- render cursor not enforced at generation boundary
 
 Fix:
-- approved-shot immutability
+- S01 APPROVED_LOCKED
+- S01 CONTINUITY_ANCHOR only
+- S01 is_edit_target=false
 - explicit render cursor
 - current-shot-only retry
-- reference-role isolation
-- S01 continuity anchor cannot be S02 edit target
 
-Canonical:
-- PRODUCTION_PROTOCOL.md
-- VISUAL_SYSTEM.md
-- schemas/render_state.schema.json
-- episodes/002/RENDER_STATE.json
+### B. Korean meal drifted into Japanese visual grammar
 
-### 2. Cross-cuisine dining-grammar drift
-
-Root cause:
-- cuisine label existed, but utensil placement / table topology / gesture grammar were not compiled
-- renderer filled the missing detail using generic East-Asian/Japanese visual priors
+Cause:
+- cuisine label without compiled dining grammar
 
 Fix:
-- MEAL_CONTEXT_SYSTEM v0.2 compiles dining grammar
-- shot QC now includes utensil type/material/placement + hand/gesture rules
-- E002 explicitly compiles Korean-home-dinner grammar without making those details global project rules
+- MEAL_CONTEXT_SYSTEM v0.2
+- utensil material/type/placement
+- table topology
+- hand/gesture grammar
+- cross-context contamination QC
 
-## Current E002 dining grammar
+E002 compiled grammar:
+- Korean metal spoon + chopsticks
+- right-side placement; no Japanese horizontal chopstick-rest staging
+- no palms-together pre-meal pose
+- current food action controls hand pose
 
-- Korean spoon + chopsticks, metal default for this episode
-- spoon/chopsticks at diner’s right side; no Japanese horizontal chopstick-rest staging
-- no palms-together pre-meal pose as default
-- hands must perform the current shot action or rest naturally
-- individual rice/soup + Korean home-table shared main/sides
-- reject Japanese miso-bowl / garnish / rolled-egg / utensil-layout contamination
+### C. Whole-episode render/context leak
+
+Observed after A/B fix:
+- renderer generated multi-panel S01~S05 page
+- future-shot actions and lettering appeared in a supposed S02 render
+
+Cause:
+- image generation input was not isolated to current shot
+- full episode/storyboard/voice remained visible to renderer
+
+Fix:
+- current-shot render capsule
+- allowlist only current S02 + minimal continuity + style + relevant meal grammar
+- deny future shots, voice copy, rejected outputs, locked-shot edit targets
+- multi-shot output = RENDER_CONTEXT_LEAK_FAIL
+
+Canonical:
+- PRODUCTION_PROTOCOL.md v0.4
+- VISUAL_SYSTEM.md v0.3
+- schemas/shot_contract.schema.json
+
+## Current execution blocker
+
+The present long chat context has demonstrated whole-episode leakage into image generation.
+
+Therefore this environment is marked:
+RENDER_CONTEXT_UNSAFE_FOR_E002_S02
+
+This does NOT reset the episode.
+
+Persisted state remains:
+- S01 PASS/LOCKED
+- cursor S02
+- next user gate RASTER_SET
 
 ## Exact next action
 
-Render S02 only under the new state and reference-role isolation.
-Do not regenerate S01.
-On S02 PASS, auto-advance to S03, then S04, then S05.
-Next user-facing approval is the complete text-free raster set.
+Resume in a context-isolated render execution.
+Auto-restore GitHub.
+Render S02 only from its capsule.
+After PASS auto-advance S03 → S04 → S05.
+Do not recreate S01.
