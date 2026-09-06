@@ -34,7 +34,7 @@ All candidates use a 4:5 canvas. COVER remains separate from BODY.
 - title: bold sans editorial class, large two-level hierarchy
 - series mark: small, stable top-area slot
 - intent: immediate series recognition and strongest title readability
-- fixture: `calibration/fixtures/cover_A.scene.json`
+- fixture: `calibration/fixtures/cover_A.scene.json` + `calibration/fixtures/cover_A.title.plan.json`
 
 ### B — full_bleed_plate
 - spec_id: `COVER_B_FULL_BLEED_PLATE`
@@ -43,7 +43,7 @@ All candidates use a 4:5 canvas. COVER remains separate from BODY.
 - character: optional small corner slot
 - title: compact editorial class; plate is rectangular, not a generic rounded UI pill
 - intent: preserve artwork immersion while keeping title legible
-- fixture: `calibration/fixtures/cover_B.scene.json`
+- fixture: `calibration/fixtures/cover_B.scene.json` + `calibration/fixtures/cover_B.title.plan.json`
 
 ### C — food_first_poster
 - spec_id: `COVER_C_FOOD_FIRST_POSTER`
@@ -52,7 +52,7 @@ All candidates use a 4:5 canvas. COVER remains separate from BODY.
 - character: stable secondary slot and never larger than the food focal mass
 - title: bold sans poster class
 - intent: make the meal unmistakably the channel hero
-- fixture: `calibration/fixtures/cover_C.scene.json`
+- fixture: `calibration/fixtures/cover_C.scene.json` + `calibration/fixtures/cover_C.title.plan.json`
 
 ## LETTERING
 
