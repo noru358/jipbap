@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "fixture_id": "JIPBAP_HYBRID_BODY4_V2",
-  "status": "AWAITING_USER_APPROVAL",
+  "status": "APPROVED",
   "purpose": "ARCHITECTURE_CALIBRATION_ONLY",
   "temporal_model": "KEYFRAME_PLUS_ORDERED_BRIDGE",
   "body_slide_count": 4,
@@ -438,6 +438,7 @@
   "approval_gate": {
     "required_before_asset_authoring": true,
     "actor": "USER",
-    "decision": null
+    "decision": "APPROVED",
+    "approval_note": "User accepted the post-scoop/pre-mouth interpretation for S03 and instructed structural review plus continuation; V2 applies that condition and passed internal structural QC."
   }
 }
