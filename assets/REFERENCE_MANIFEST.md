@@ -1,8 +1,8 @@
 # REFERENCE_MANIFEST
 
-Updated: 2026-09-06
+Updated: 2026-09-07
 
-This manifest records the authoritative binary references required by the current manual-validation experiment.
+This manifest records project-level authoritative binary references. Episode-local anchors are registered only inside a newly approved active episode and are not carried across the clean reset.
 
 ## STYLE_REF_001
 
@@ -12,25 +12,11 @@ This manifest records the authoritative binary references required by the curren
 - SHA-256: 792be650dc2aae9a2ca5ee6d2fadd51054475d9171eaf5b427fb5192893ec972
 - repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
 
-## Episode 001 S01 temporary anchor
+## Episode-local anchor reset
 
-- intended repository path: episodes/001/anchors/S01_TEMP_ANCHOR.png
-- role: episode-local continuity anchor only
-- user verdict: TEMPORARY_PASS
-- project style-lock authority: NO
-- original dimensions: 1122 × 1402
-- SHA-256: c5769b8a789b75d80764798368f029d68479fe93ff36178c1460c73ae96227fd
-- repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+No episode-local anchor is active.
 
-## Episode 002 S01 approved anchor
-
-- intended repository path: episodes/002/anchors/S01_APPROVED_ANCHOR.png
-- role: Episode 002 continuity anchor
-- user verdict: PASS
-- project style-lock authority: NO
-- original dimensions: 1122 × 1402
-- SHA-256: cec9a1be2077772369e89098a9553d67b9ba028b6c5c5448f9ac8f44d1814050
-- repository binary status: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+Previous 001/002 anchors are retired and must not be restored or supplied as continuity media for the fresh 001.
 
 ## Runtime binding rule
 
