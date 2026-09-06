@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "cover-A-title-placeholder",
+  "purpose": "CALIBRATION_PLACEHOLDER",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [250, 246, 237, 255]},
+  "base_image": {"path": "calibration/fixtures/output/cover_A_art.png", "sha256": "8ed928339a0ad470e0d7598743702bc9bcab5ae3e132e342278280c1e135db6b"},
+  "text_layers": [
+    {
+      "layer_id": "series", "z": 10, "lines": ["JIPBAP"], "x": 50, "y": 38, "anchor": "LEFT",
+      "font": {"mode": "PIL_DEFAULT", "size": 26},
+      "fill_rgba": [48, 44, 40, 255], "stroke_width": 0, "line_spacing": 0,
+      "box": {"type": "NONE"}
+    },
+    {
+      "layer_id": "title", "z": 11, "lines": ["EPISODE", "TITLE"], "x": 50, "y": 92, "anchor": "LEFT",
+      "font": {"mode": "PIL_DEFAULT", "size": 58},
+      "fill_rgba": [38, 35, 32, 255], "stroke_width": 0, "line_spacing": 8,
+      "box": {"type": "NONE"}
+    }
+  ]
+}
