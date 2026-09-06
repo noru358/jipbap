@@ -10,7 +10,7 @@ episodes/002/README.md
 
 ## Episode 002 state
 
-Stage: FINAL_USER_GATE
+Stage: LETTERING_QC_FIX
 Render cursor: null
 Approved locked shots: S01, S02, S03, S04, S05
 Retry scope: CURRENT_SHOT_ONLY
@@ -20,42 +20,39 @@ Next user gate: FINAL
 
 Raster-set user gate: PASS on 2026-09-06.
 
-The text-free S01~S05 set is approved and immutable unless the user explicitly invalidates a shot.
+The text-free S01~S05 artwork remains approved and immutable unless the user explicitly invalidates a shot.
 
-## Lettering result
+## Lettering copy
 
-Applied non-destructively to the approved raster set in the current execution session.
+Copy itself: PASS.
 
-Copy:
 - S01: 오늘은 고등어 한 마리
 - S02: 껍질부터 젓가락이 간다
 - S03: 살은 크게 떼어서
 - S04: SILENT
 - S05: 가시만 남았다
 
-## Final QC
+## Lettering visual QC
 
-PASS:
-- shot order S01 → S05
-- text/image mapping
-- mobile-readable lettering
-- one shot = one file
-- S04 remains text-free
-- food-state continuity: intact → opened → on rice → bite → bones/remnants
-- Korean meal-context continuity
-- no artwork regeneration during lettering
+Previous FINAL_QC=PASS is invalidated.
 
-## Structural fixes retained
+Current result: FAIL.
 
-- approved-shot immutability / explicit render cursor
-- current-shot render capsule and context firewall
-- Korean meal-context + dining-grammar compile
-- reference role isolation
-- rejected-output quarantine
-- food-state monotonicity and bridge-action QC
+Observed defects:
+- fixed top-left placement ignores per-shot composition
+- oversized/heavy outlined type competes with focal food/character
+- text overlaps or crowds semantic subjects and action zones
+- identical placement rule produces inconsistent balance across shots
+- readability was checked, but composition integration / hierarchy / negative-space fit were not
+
+Artwork status:
+- raster artwork remains PASS/LOCKED
+- copy remains PASS
+- only lettering layout/style layer is invalidated
 
 ## Exact next action
 
-Present the final lettered S01~S05 set at FINAL_USER_GATE.
-If user passes, mark Episode 002 COMPLETE.
-If user rejects a specific item, invalidate only the minimum required downstream artifact; do not automatically regenerate approved upstream artwork.
+Define composition-aware lettering placement/style constraints.
+Re-letter S01, S02, S03 and S05 only; keep S04 silent.
+Do not regenerate artwork.
+Run lettering visual QC before returning to FINAL_USER_GATE.
