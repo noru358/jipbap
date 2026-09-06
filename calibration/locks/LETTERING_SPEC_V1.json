@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "lock_id": "JIPBAP_LETTERING_SPEC_V1",
+  "phase": "SPEC_LOCKED",
+  "selected_candidate": "A",
+  "spec_id": "LETTERING_A_DIRECT_EDITORIAL",
+  "source_refs": [
+    "calibration/COMPOSITION_CANDIDATES.md#a--direct_editorial",
+    "calibration/fixtures/lettering_A.plan.json"
+  ],
+  "invariants": {
+    "box_default": "NONE",
+    "negative_space_first": true,
+    "artwork_precedes_text_hierarchy": true,
+    "meaning_unit_line_breaks": true,
+    "silent_shot_allows_no_text": true,
+    "generic_rounded_ui_box_forbidden_as_default": true
+  },
+  "variables": [
+    "copy",
+    "line_breaks",
+    "scene_anchor",
+    "production_font",
+    "font_size",
+    "stroke_or_contrast_aid"
+  ],
+  "pixel_authority": "NONE_UNTIL_PHASE2",
+  "approval": {
+    "actor": "USER",
+    "scope": "SPEC_ONLY",
+    "approved_on": "2026-09-07"
+  }
+}
