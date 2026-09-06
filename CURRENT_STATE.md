@@ -6,57 +6,63 @@ Operating mode: MANUAL_VALIDATION
 
 ## Active episode
 
-`episodes/001/README.md`
+`episodes/002/README.md`
 
-## Approved
+Episode 001 is paused at `PREPRODUCTION_RECOMPILE` / remaining-render retry. It is not deleted or treated as complete.
 
-- 독립 프로젝트로 운영: instatoon E008/하위 포맷 아님
-- AutoPipeline의 별도 child project
-- 큰 제작 공정만 instatoon에서 재사용
-- Episode 001 menu/moment: 계란후라이 + 흰밥
-- 5컷 콘티 방향 승인
-- 말투 시스템 승인
-- 기본 말투 수정: `먹고 싶었음`보다 `먹고 싶었다` 같은 자연스러운 서술형 종결을 선호
-- 실제 시각 레퍼런스 지정
-- S01 생성물은 **진행용 임시 PASS**. 스타일 확정이 아님
+## Latest user direction
 
-## Repository / reference state
+Start a new Episode 002 now.
 
-Remote repository: `noru358/jipbap`
+This newer instruction supersedes the previous "continue Episode 001 next" action. The repository state is reconciled by pausing Episode 001 and starting Episode 002 from the canonical pipeline entry point.
 
-Canonical text systems, Episode 001 state and shot-contract schema are materialized on `main`.
-`AutoPipeline` registers `jipbap` as an independent submodule child.
+## Episode 002 current stage
 
-Reference integrity authority:
+`PREPRODUCTION_USER_GATE`
+
+Proposed menu/moment:
+- 고등어구이 + 흰밥
+- 막 구운 고등어의 껍질을 가르고 살을 크게 떼어 밥 위에 올려 먹는 순간
+
+Prepared:
+- menu/moment
+- content beats
+- voice draft
+- 5-shot storyboard
+- food-state graph
+- bridge-action check
+- visual rhythm
+- per-shot must_show / must_not_show
+
+Not yet authorized:
+- raster generation
+- lettering
+
+## Canonical operating rules still in force
+
+- one frame = one image file
+- raster images are text-free
+- pre-raster user gate before S01
+- S01 is the user visual-anchor gate
+- S01 PASS → S02..final internal render/QC without per-shot user gates
+- full text-free raster-set user gate before lettering
+- every food shot uses precondition/action/postcondition continuity
+- approved actual image reference is the highest visual authority
+- reference path/hash alone is not media binding; reference-conditioned rendering fails closed without verified image bytes
+
+## Reference integrity authority
+
 - `assets/REFERENCE_MANIFEST.md`
 
-Current binary status:
+Repository binary status remains:
 - STYLE_REF_001: BINARY_REQUIRED_NOT_YET_MATERIALIZED
-- S01_TEMP_ANCHOR: BINARY_REQUIRED_NOT_YET_MATERIALIZED
+- Episode 001 S01 temporary anchor: BINARY_REQUIRED_NOT_YET_MATERIALIZED
 
-This is a **transport/materialization blocker for repository-only execution**, not a reversal of the user's visual approval. The current chat has the actual reference media; a future clean environment must fail closed until repository binaries are restored and hash-verified.
-
-## Known failures / learnings
-
-1. S02 생성 시 모델이 단일 컷 대신 멀티패널 합본을 반복 생성함.
-   - 해결 원칙: one-shot-one-file 계약을 생성 전/후 모두 검증. 합본은 자동 FAIL.
-   - 임시 크롭 복구는 실험 진행용일 뿐 정식 생산 방식이 아님.
-
-2. 음식 상태 연속성 오류:
-   - 잘못된 흐름: 접시 위 계란 노른자 파열 → 다음 컷에서 계란이 밥 위로 이동
-   - 자연스러운 흐름: 계란을 밥 위에 올림 → 그 상태에서 노른자를 터뜨림 → 간장 → 한입
-   - 해결: `FOOD_STATE_SYSTEM.md`의 상태 전이 계약을 모든 회차에 적용
+For Episode 002 rendering, the execution environment must have an actual verified style-reference image binding before S01. Repository-only execution remains blocked until the required reference binary is materialized and hash-verified.
 
 ## Exact next action
 
-Current-chat continuation:
-1. Episode 001 콘티를 상태 전이 기준으로 사용한다.
-2. S01 임시 PASS를 유지한다.
-3. 실제 chat-supplied reference media를 렌더 입력으로 사용한다.
-4. S02~S05를 single-panel / text-free / state-transition contract로 다시 제작하고 내부 QC한다.
-5. 완전한 무자막 세트를 사용자에게 제시한다.
-
-Repository-only / clean-environment continuation:
-1. manifest에 선언된 두 바이너리를 intended path에 materialize한다.
-2. SHA-256을 검증한다.
-3. 그 후에만 reference-conditioned rendering을 허용한다.
+1. User reviews Episode 002 preproduction package in `episodes/002/README.md`.
+2. If approved, run visual preflight and verify actual style-reference binding.
+3. Generate S01 only, single-panel / text-free / 4:5.
+4. Present S01 for the user anchor gate.
