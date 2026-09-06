@@ -22,6 +22,42 @@
 - 식문화·그릇·수저·배치·손동작은 회차의 실제 meal context를 기준으로 정한다. 한 회차에서 맞았던 배치를 전역 정답으로 복제하지 않는다.
 - 레시피 설명, 정보 카드, 썰툰식 반전, 교훈형 마무리를 기본 구조로 강제하지 않는다.
 
+## 1.2 Proxy-eater promise
+
+집밥의 핵심 콘셉트는 **만화가 독자 대신 한입 먹어주는 경험**이다.
+
+인물은 독립적인 캐릭터 서사를 끌고 가기보다 독자의 입·손·감각을 대신하는 `PROXY_EATER` 역할을 한다.
+독자가 다음 컷을 넘기는 이유는 사건의 결말이 궁금해서가 아니라 **다음 한입이 먹고 싶어서**여야 한다.
+
+각 BODY beat는 최소 하나의 경험 가치를 가진다:
+- ANTICIPATION — 먹기 직전의 기대를 키운다.
+- SENSORY_REVEAL — 결, 수분, 바삭함, 농도, 김, 향을 시각적으로 드러낸다.
+- TRANSFORMATION — 자르기/깨기/섞기/적시기처럼 식감을 기대하게 만드는 상태 변화를 만든다.
+- INGESTION — 실제 한입의 접촉과 크기를 보여준다.
+- AFTERTASTE / SECONDARY_PAYOFF — 한입 뒤 남는 감각 또는 더 먹고 싶어지는 두 번째 조합/행동을 만든다.
+
+이 목록은 고정 컷 순서가 아니다. 메뉴에 맞게 합치거나 생략한다.
+
+### Appetite-value gate
+
+단순히 시간 순서상 필요한 행동이라고 해서 독립 컷 가치가 생기지 않는다.
+각 컷은 다음 중 적어도 하나를 만족해야 한다:
+1. 음식 상태를 의미 있게 변화시킨다.
+2. 독자가 이전에 못 본 감각 정보를 준다.
+3. 먹고 싶은 욕구를 올린다.
+4. 앞선 감각의 payoff를 제공한다.
+
+어느 것도 못 하면 `PROCEDURAL_BEAT_FAIL` 후보이며 합치기/삭제/재설계를 먼저 검토한다.
+
+### Temporal distinguishability
+
+시작 컷과 마지막 컷을 서로 바꿔도 거의 같은 의미로 보인다면 시퀀스의 상태/감각 설계가 약한 것이다.
+
+특히 엔딩은 단순히 "다시 숟가락을 든다"는 절차적 복귀보다,
+현재 음식에 맞는 새로운 sensory payoff가 있으면 그것을 우선 검토한다.
+예: 남은 소스/국물/토핑과 주식을 결합하기, 다른 질감 층을 깨뜨리기, 찍어 먹기, 비비기 등.
+특정 행동을 전역 하드코딩하지 않고 메뉴가 제공하는 **두 번째 군침 포인트**를 찾는다.
+
 ## 2. Menu / moment first
 
 메뉴명보다 먼저 **먹고 싶은 순간**을 정의한다.
@@ -73,7 +109,7 @@
 
 ## 4. Storyboard requirement
 
-콘티는 두 층으로 작성한다.
+콘티는 네 층으로 작성한다.
 
 ### A. Emotional beat
 컷이 독자에게 하는 역할.
@@ -84,6 +120,9 @@
 ### C. Visual coverage beat
 같은 상태 전이를 어떤 시각적 관계로 보여줄지 정의한다.
 
+### D. Appetite / sensory beat
+독자가 이 컷에서 대신 느끼게 될 감각과 군침 가치를 정의한다.
+
 최소 기록:
 - focal owner — 현재 비트의 시각적 주인공
 - shot scale — macro / close / medium-close / medium / wide 등 회차에 필요한 거리
@@ -91,8 +130,12 @@
 - interaction geometry — 손·도구·음식·입이 연결될 때 핵심 접촉 관계
 - visual delta from previous — 이전 컷과 무엇이 실제로 달라 보여야 하는지
 - repetition justification — 유사 구도가 정말 필요할 때만 그 이유
+- appetite_function — ANTICIPATION / SENSORY_REVEAL / TRANSFORMATION / INGESTION / AFTERTASTE / SECONDARY_PAYOFF 또는 회차별 동등 기능
+- sensory_payload — 온도/향/식감/농도/소리/맛의 방향/잔향 중 현재 컷이 실제로 전달할 1~2개 핵심 감각
+- reader_proxy_value — 독자가 왜 이 한입을 먹고 싶어져야 하는지
+- temporal_distinguishability — 이 컷의 시간적 역할이 이미지 자체에서 어떻게 구별되는지
 
-A/B/C 중 하나라도 비어 있으면 콘티 미완성이다.
+A/B/C/D 중 하나라도 비어 있으면 콘티 미완성이다.
 
 ### 4.1 Adjacent-beat visual-delta / redundancy preflight
 
