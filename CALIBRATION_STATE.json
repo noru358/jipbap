@@ -48,5 +48,5 @@
       "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "BODY_FIXTURE_USER_GATE"
+  "next_action": "BODY_FIXTURE_ASSET_RESOLUTION"
 }
