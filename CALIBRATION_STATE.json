@@ -17,21 +17,23 @@
     ]
   },
   "cover_template": {
-    "status": "PENDING",
-    "authority_ref": null,
+    "status": "IN_TEST",
+    "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#COVER",
     "approved_artifact_sha256": null,
     "notes": [
       "E001 cover is TEST ONLY.",
-      "Can be calibrated deterministically from existing E001 raster without image generation."
+      "Can be calibrated deterministically from existing E001 raster without image generation.",
+      "Candidates A/B/C generated from existing E001 raster; awaiting user selection."
     ]
   },
   "lettering_template": {
-    "status": "PENDING",
-    "authority_ref": null,
+    "status": "IN_TEST",
+    "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#LETTERING",
     "approved_artifact_sha256": null,
     "notes": [
       "E001 Noto Sans rounded-box composition is TEST ONLY.",
-      "Can be calibrated deterministically from existing E001 raster without image generation."
+      "Can be calibrated deterministically from existing E001 raster without image generation.",
+      "Candidates A/B/C generated from existing E001 raster; awaiting user selection."
     ]
   },
   "next_action": "COVER_TEMPLATE"
