@@ -133,7 +133,7 @@ Export order:
 Cover may reuse approved BODY/FOOD/PERSON assets or author a missing hero asset.
 Title, series mark, narration and speech text remain editable composition layers.
 
-Until CALIBRATION_STATE marks a cover/lettering template USER_LOCKED, candidate styles are tests only.
+Template calibration has two gates: placeholder review may promote one candidate to SPEC_LOCKED, but final production readiness still requires USER_LOCKED after rerender with approved pilot assets and hash-bound production font bytes. Placeholder fixtures never enter the production asset registry.
 
 ## 9. Final user gate
 
