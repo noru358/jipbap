@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "person_style": {
+    "status": "PENDING",
+    "authority_ref": "assets/REFERENCE_MANIFEST.md#STYLE_REF_001",
+    "approved_artifact_sha256": null,
+    "notes": [
+      "Actual PERSON reference media must be supplied during calibration."
+    ]
+  },
+  "food_style": {
+    "status": "PENDING",
+    "authority_ref": null,
+    "approved_artifact_sha256": null,
+    "notes": [
+      "Create separate FOOD_STYLE_AUTHORITY only if text abstraction rules are insufficient."
+    ]
+  },
+  "cover_template": {
+    "status": "PENDING",
+    "authority_ref": null,
+    "approved_artifact_sha256": null,
+    "notes": [
+      "E001 cover is TEST ONLY."
+    ]
+  },
+  "lettering_template": {
+    "status": "PENDING",
+    "authority_ref": null,
+    "approved_artifact_sha256": null,
+    "notes": [
+      "E001 Noto Sans rounded-box composition is TEST ONLY."
+    ]
+  },
+  "next_action": "PERSON_STYLE"
+}
