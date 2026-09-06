@@ -1,38 +1,52 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "person_style": {
     "status": "PENDING",
     "authority_ref": "assets/REFERENCE_MANIFEST.md#STYLE_REF_001",
+    "selected_candidate": null,
+    "approved_spec_sha256": null,
     "approved_artifact_sha256": null,
+    "pixel_validation_status": "PENDING",
     "notes": [
-      "Actual PERSON reference media must be supplied during calibration."
+      "Actual PERSON reference media must be supplied when BODY fixture asset authoring begins."
     ]
   },
   "food_style": {
     "status": "PENDING",
     "authority_ref": null,
+    "selected_candidate": null,
+    "approved_spec_sha256": null,
     "approved_artifact_sha256": null,
+    "pixel_validation_status": "PENDING",
     "notes": [
-      "Create separate FOOD_STYLE_AUTHORITY only if text abstraction rules are insufficient."
+      "Create separate FOOD_STYLE_AUTHORITY only if text abstraction rules are insufficient during BODY fixture authoring."
     ]
   },
   "cover_template": {
     "status": "IN_TEST",
-    "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#COVER",
+    "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#cover",
+    "selected_candidate": null,
+    "approved_spec_sha256": null,
     "approved_artifact_sha256": null,
+    "pixel_validation_status": "PENDING",
     "notes": [
-      "Candidate grammar exists but no template is USER_LOCKED.",
-      "Rebuild deterministic previews from current approved production assets when calibration resumes."
+      "Phase 1 uses deterministic placeholder fixtures and does not depend on production registry assets.",
+      "User selection promotes only the layout/type grammar to SPEC_LOCKED.",
+      "USER_LOCKED requires rerender with approved pilot assets and explicit pixel-level approval."
     ]
   },
   "lettering_template": {
     "status": "IN_TEST",
-    "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#LETTERING",
+    "authority_ref": "calibration/COMPOSITION_CANDIDATES.md#lettering",
+    "selected_candidate": null,
+    "approved_spec_sha256": null,
     "approved_artifact_sha256": null,
+    "pixel_validation_status": "PENDING",
     "notes": [
-      "Candidate grammar exists but no template is USER_LOCKED.",
-      "Rebuild deterministic previews from current approved production assets when calibration resumes."
+      "Phase 1 uses the shared deterministic lettering renderer with calibration-only placeholder fonts.",
+      "User selection promotes only the layout/type grammar to SPEC_LOCKED.",
+      "Production font bytes and final Korean metrics are hash-bound and pixel-validated later."
     ]
   },
-  "next_action": "COVER_TEMPLATE"
+  "next_action": "COMPOSITION_SPEC_SELECTION"
 }
