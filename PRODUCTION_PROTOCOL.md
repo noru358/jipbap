@@ -77,20 +77,38 @@ S01을 다시 만들 수 있는 유일한 조건:
 
 이 원칙을 위반하면 RENDER_CONTEXT_LEAK_FAIL이다.
 
-## 3. Manual/chat execution fail-closed
+## 3. Manual/chat render-context isolation
 
-현재 실행 환경이 렌더 입력을 current-shot capsule로 격리할 수 없고
-전체 대화/전체 에피소드 문맥이 이미지 생성에 섞이는 것이 확인되면:
+current-shot-only는 **대화 전체를 비워야 한다는 뜻이 아니라 실제 renderer dispatch 입력을 target shot capsule로 제한한다는 뜻**이다.
 
+따라서 같은 ChatGPT 세션 안에 전체 승인 storyboard, future-shot 계획 또는 이전 작업 기록이 존재한다는 사실만으로
+자동으로 RENDER_CONTEXT_UNSAFE가 되지 않는다.
+
+정상 same-session 실행 조건:
+- 호출 직전에 target shot capsule을 새로 컴파일한다.
+- renderer에 의도적으로 전달하는 prompt/reference binding은 ALLOWLIST만 사용한다.
+- future-shot instruction, future state, voice copy, rejected output은 dispatch payload에 넣지 않는다.
+- 결과물에서 future-shot semantic leakage / multi-shot leakage / current-shot state contradiction을 hard QC한다.
+- 결과가 PASS하면 같은 세션에서 다음 cursor shot으로 진행할 수 있다.
+
+RENDER_CONTEXT_UNSAFE는 다음과 같이 **실제 오염 증거 또는 격리 불능 증거**가 있을 때만 선언한다:
+- renderer 호출 경계에서 future-shot/전체-storyboard 정보가 실제 payload에 포함됨을 확인했다.
+- 결과물에 future-shot action/state가 섞였다.
+- single-panel 요청인데 multi-shot/page/collage가 반복된다.
+- rejected/locked artifact가 의도와 달리 edit target 또는 continuity seed로 재사용된다.
+- current-shot capsule을 재컴파일한 뒤에도 같은 hard context-leak contract가 반복 실패한다.
+- artifact/approval identity가 불명확해져 어떤 결과를 기준으로 이어가야 하는지 확정할 수 없다.
+
+이 경우:
 - 같은 환경에서 무한 재시도하지 않는다.
 - rejected output을 reference로 재사용하지 않는다.
 - 이전 approved shot을 다시 만들지 않는다.
 - 상태를 RENDER_CONTEXT_UNSAFE로 기록한다.
-- context isolation이 가능한 새 render context에서 같은 cursor shot부터 재개한다.
+- 필요한 경우에만 clean render context로 handoff하여 같은 cursor shot부터 재개한다.
 
 중요:
 context reset은 episode reset이 아니다.
-GitHub의 render cursor/locked shots를 복원한 후 S02부터 그대로 이어간다.
+GitHub의 render cursor/locked shots를 복원한 후 해당 cursor부터 그대로 이어간다.
 
 ## 4. Preproduction
 
