@@ -10,82 +10,42 @@ episodes/002/README.md
 
 ## Episode 002 state
 
-Stage: POST_S01_INTERNAL_RENDER
-Render cursor: S02
-Approved locked shots: S01
+Stage: LETTERING
+Render cursor: null
+Approved locked shots: S01, S02, S03, S04, S05
 Retry scope: CURRENT_SHOT_ONLY
-Next user gate: RASTER_SET
+Next user gate: FINAL
 
-## Confirmed structural failures and fixes
+## User gate result
 
-### A. Approved S01 was effectively regenerated
+Raster-set user gate: PASS on 2026-09-06.
 
-Cause:
-- anchor/edit-target role leakage
-- render cursor not enforced at generation boundary
+The text-free S01~S05 set is approved and immutable unless the user explicitly invalidates a shot.
 
-Fix:
-- S01 APPROVED_LOCKED
-- S01 CONTINUITY_ANCHOR only
-- S01 is_edit_target=false
-- explicit render cursor
-- current-shot-only retry
+## Structural fixes retained
 
-### B. Korean meal drifted into Japanese visual grammar
+- approved-shot immutability / explicit render cursor
+- current-shot render capsule and context firewall
+- Korean meal-context + dining-grammar compile
+- reference role isolation
+- rejected-output quarantine
+- food-state monotonicity and bridge-action QC
 
-Cause:
-- cuisine label without compiled dining grammar
+## Lettering copy
 
-Fix:
-- MEAL_CONTEXT_SYSTEM v0.2
-- utensil material/type/placement
-- table topology
-- hand/gesture grammar
-- cross-context contamination QC
+- S01: 오늘은 고등어 한 마리
+- S02: 껍질부터 젓가락이 간다
+- S03: 살은 크게 떼어서
+- S04: SILENT
+- S05: 가시만 남았다
 
-E002 compiled grammar:
-- Korean metal spoon + chopsticks
-- right-side placement; no Japanese horizontal chopstick-rest staging
-- no palms-together pre-meal pose
-- current food action controls hand pose
-
-### C. Whole-episode render/context leak
-
-Observed:
-- renderer generated multi-panel S01~S05 page
-- future-shot actions and lettering appeared in a supposed S02 render
-
-Fix:
-- current-shot render capsule
-- allowlist only current shot + minimal continuity + style + relevant meal grammar
-- deny future shots, voice copy, rejected outputs, locked-shot edit targets
-- multi-shot output = RENDER_CONTEXT_LEAK_FAIL
-
-Canonical:
-- PRODUCTION_PROTOCOL.md v0.4
-- VISUAL_SYSTEM.md v0.3
-- schemas/shot_contract.schema.json
-
-## Current execution blocker
-
-The clean continuation context successfully restored GitHub state, so the previous whole-episode-context blocker is no longer presumed active.
-
-However, required image binaries are not materialized in GitHub and are not bound to the renderer in the current execution context.
-
-Current blocker:
-REFERENCE_BINDING_REQUIRED_FOR_E002_S02
-
-This does NOT reset the episode.
-
-Persisted state remains:
-- S01 PASS/LOCKED
-- cursor S02
-- next user gate RASTER_SET
+Copy authority:
+- Episode 002 approved preproduction package
+- VOICE_SYSTEM.md
 
 ## Exact next action
 
-Bind the actual STYLE_REF_001 image in the current render context.
-Bind the approved E002 S01 anchor when continuity pixels are needed; otherwise use only extracted continuity facts.
-Then render S02 only from its isolated capsule.
-After S02 PASS, auto-advance S03 → S04 → S05.
-Do not recreate S01.
+Apply lettering to the approved raster set without regenerating the artwork.
+Preserve one-shot-one-file.
+Run final QC for shot order, text/image mapping, readability, meal continuity and food-state continuity.
+Then present the final set at FINAL_USER_GATE.
