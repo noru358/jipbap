@@ -1,4 +1,21 @@
 # VISUAL_SYSTEM — jipbap v0.7
+## 0. Asset-composition rendering policy
+
+2026-09-07부터 최종 BODY의 기본 시각 경로는 **COMPOSITION_FIRST_HYBRID_FOOD**다.
+
+`storyboard → reusable asset resolve → missing FOOD/POSE/PROP asset authoring → approved assets → deterministic scene composition → lettering`
+
+도메인별 기본:
+- **PERSON / recurring subject:** 승인된 인물/포즈 asset을 재사용한다. 음식 상태가 바뀐다는 이유로 사람 얼굴/몸 전체를 매 컷 다시 샘플링하지 않는다.
+- **BACKGROUND / reusable props:** 가능한 한 승인된 plate/component를 재사용하고 crop/scale/placement로 장면을 만든다.
+- **FOOD / FOOD_STATE:** 메뉴와 상태 변화가 핵심 의미이므로 회차별 신규 생성 비중을 높게 허용한다. 가능하면 음식/그릇/접촉에 필요한 asset 범위만 새로 만든다.
+- **HAND / UTENSIL / CONTACT:** 기존 asset으로 물리 관계를 표현하기 어려우면 episode-local interaction asset을 만들 수 있다.
+- **FULL FRAME GENERATION:** 조립으로 의미/접촉을 제대로 표현할 수 없는 샷의 명시적 exception lane이다.
+
+신규 생성물은 아래 기존 reference/style/meal/anatomy QC를 그대로 통과한다. 차이는 QC를 없애는 것이 아니라 **매 컷 전체를 다시 생성하는 대신 새 asset 경계에서 검수**한다는 점이다.
+
+accepted PERSON pixel을 FOOD variation 때문에 다시 샘플링하는 것은 기본적으로 `PERSON_RESAMPLE_FAIL`이다.
+
 
 ## 1. Reference authority
 
