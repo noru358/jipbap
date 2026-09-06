@@ -10,6 +10,49 @@
 
 reference path/hash만으로 media binding을 간주하지 않는다.
 
+## 1.1 Style-domain coverage map
+
+한 장의 reference가 모든 시각 영역을 자동으로 소유하지 않는다.
+
+각 style reference는 coverage domain을 선언한다:
+- PERSON
+- FOOD
+- BACKGROUND / LOCATION
+- TYPE / GRAPHIC_COMPOSITION
+- 또는 그 하위 범위
+
+현재 사용자가 제공한 `STYLE_REF_001`은 **PERSON 스타일 레퍼런스**다.
+사람의 얼굴 구조, 눈 문법, 선, 채색, 헤어 단순화에는 권위가 있지만
+음식 렌더링, 집 배경, 카메라, 표지 디자인을 직접 보여주지 않으므로 그 영역의 픽셀 스타일 권위로 간주하지 않는다.
+
+미포함 영역은:
+1. 프로젝트의 추상화/anti-ad 규칙을 보수적으로 적용하거나,
+2. 필요한 경우 별도 FOOD / BACKGROUND / COMPOSITION reference를 승인받는다.
+
+`REFERENCE_DOMAIN_OVERREACH_FAIL`:
+사람만 있는 시트를 근거로 음식/배경까지 "레퍼런스와 동일"하다고 주장하거나,
+모델의 generic anime/cozy prior를 reference style로 오인하면 실패다.
+
+## 1.2 PERSON style-fidelity preflight
+
+S01에서 반복 인물을 만들기 전에, PERSON_STYLE_AUTHORITY와 실제 생성 인물을 다음 기준으로 대조한다:
+- 머리 대비 얼굴 비율
+- 눈 흰자/동공 비율과 눈 크기 분포
+- 눈이 감정에 따라 변하는 방식
+- 코/입 단순화
+- 속눈썹/눈썹 밀도
+- 헤어 내부선 밀도
+- 외곽선 굵기와 정돈 정도
+- flat fill / blush / shading 강도
+- 얼굴의 generic polished anime 드리프트 여부
+
+특히 금지:
+- reference 분포보다 과도하게 커진 인형형 원형 눈을 기본값으로 고정
+- reference보다 속눈썹/광택/헤어 묘사를 과도하게 미려화
+- cinematic glow, depth-of-field, 고급 일러스트 텍스처를 PERSON style로 덧씌우기
+
+S01이 예쁘더라도 PERSON style fidelity가 낮으면 내부적으로 PASS 추천하지 않는다.
+
 ## 2. Reference-role isolation
 
 모든 이미지 reference는 역할을 가진다.
@@ -219,6 +262,26 @@ viewer가 보기에 거리, 높이, 카메라측, 인물 크기, 얼굴 방향, 
 
 세부 상태 전이와 물리적 선행조건은 FOOD_STATE_SYSTEM이, 식문화 정합성은 MEAL_CONTEXT_SYSTEM이 소유한다. 이 절은 그 authority를 복제하지 않고 화면 우선순위만 정한다.
 
+## 9.2 Background exposure policy
+
+집밥은 같은 집을 매 컷 풀배경으로 재현하는 프로젝트가 아니다.
+배경은 독자의 음식 경험에 필요한 만큼만 노출한다.
+
+shot마다 `background_scope`를 고른다:
+- NONE — 음식/손/입 macro에서 배경을 거의 제거
+- LOCAL — 테이블 재질, 그릇 일부, 창의 빛 등 현재 행동을 이해시키는 최소 맥락
+- FULL — 장소를 처음 잡거나 공간 자체가 감각 진입에 필요할 때만 전체 공간 노출
+
+같은 장소의 FULL 배경이 2컷 이상 반복될 때만 episode-local `LOCATION_LOCK`을 둔다.
+LOCK은 픽셀 좌표를 외우는 것이 아니라 최소 지속 facts만 가진다:
+- 주요 창/조명/가구의 상대 관계
+- 테이블/벽/바닥의 재질과 기본 색
+- 식사자의 위치 기준
+- 반복되어야 할 핵심 소품
+
+macro/close shot에서 보이지 않는 방 전체를 억지로 다시 생성하지 않는다.
+이 방식으로 continuity 부담을 줄이면서, 실제로 보이는 배경은 같은 집으로 읽히게 한다.
+
 ## 10. Anti-ad look
 
 억제:
@@ -301,3 +364,32 @@ Cover QC:
 - 해당 회차 캐릭터가 필요 이상으로 food focal area를 압도하지 않는가
 - 본편과 같은 drawing language / identity인가
 - 본편 상태 연속성을 잘못 암시하는 fake action/state를 만들지 않는가
+
+
+## 12. Composition-template validation status
+
+현재 COVER_TEMPLATE 구조 규칙은 존재하지만 **시각 템플릿(폰트/크기/여백/타이틀 블록)은 아직 사용자 승인된 lock이 아니다.**
+E001에서 임시로 만든 상단 흰 영역 + 굵은 산세리프 표지는 TEST ONLY이며 project template로 승격하지 않는다.
+
+다음 calibration에서:
+- 2~3개 cover hierarchy 시안
+- food hero 비율
+- character slot 비율
+- series mark 위치
+- phone-size title legibility
+를 비교한 뒤 하나만 lock한다.
+
+## 13. Lettering-template policy
+
+BODY lettering은 generic UI 흰색 rounded box를 기본값으로 사용하지 않는다.
+
+template lock 전 원칙:
+- 음식 focal area와 얼굴을 가리지 않는 negative-space 우선 배치
+- 이미지마다 임의 위치가 아니라 scene-aware anchor 규칙 사용
+- 한눈에 읽히되 이미지보다 먼저 튀지 않는 hierarchy
+- 의미 단위 line-break
+- 모바일 실제 크기 preview에서 판독성 검증
+- font family / weight / size scale / line height / padding / box treatment는 calibration 후 프로젝트 lock
+- silent shot에는 장식성 텍스트를 추가하지 않음
+
+E001 임시 Noto Sans Bold + 큰 rounded box는 승인된 lettering template이 아니다.
