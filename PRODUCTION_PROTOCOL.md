@@ -110,33 +110,53 @@ RENDER_CONTEXT_UNSAFE는 다음과 같이 **실제 오염 증거 또는 격리 �
 context reset은 episode reset이 아니다.
 GitHub의 render cursor/locked shots를 복원한 후 해당 cursor부터 그대로 이어간다.
 
+## 3.5 authority-change barrier
+
+사용자가 구조/규칙을 수정했고 그 변경이 다음 렌더에 영향을 준다면,
+대화에서 합의만 한 채 다음 렌더로 진행하지 않는다.
+
+필수 순서:
+1. canonical child/parent authority 수정
+2. commit/HEAD 검증
+3. 필요한 profile/submodule 정합성 확인
+4. 그 뒤에만 dependent render 실행
+
+pending structural change가 있으면 visual preflight FAIL이다.
+
 ## 4. Preproduction
 
 1. MENU/MOMENT 선정
-2. SENSORY ROUTE 선정 — PURE_SENSORY / TRIGGER_TO_MEAL / IMAGINED_OR_MEMORY 또는 동등한 회차별 변형
-3. MEAL CONTEXT + DINING GRAMMAR compile
-4. 초기 MEAL_SCENE_STATE / world-space table topology 정의
-5. 콘텐츠 비트 작성
-6. 반복 인물 탐지 — BODY 2컷 이상 등장하면 EPISODE_SUBJECT_LOCK 작성
-7. VOICE 역할/문구 작성
-8. 전체 BODY 콘티 작성 — emotional beat + state beat + visual coverage beat
-9. FOOD STATE graph + per-shot scene-state delta 작성
-10. bridge action 검사
-11. coverage rhythm / adjacent visual-delta 검사
-12. 각 컷 geometry risk + contact chain 정의
-13. COVER brief 작성 — title / hero 후보 / character slot / reuse-first 여부 + cover source route(BODY_REUSE / DEDICATED / EXTERNAL_IMPORT)
-14. 사용자에게 사전 패키지 제시
-15. 명시 승인 후 BODY 래스터 제작
+2. PROXY_EATER promise + APPETITE ARC 정의 — 독자가 어떤 순서로 군침/감각 payoff를 받는지
+3. SENSORY ROUTE 선정 — PURE_SENSORY / TRIGGER_TO_MEAL / IMAGINED_OR_MEMORY 또는 동등한 회차별 변형
+4. MEAL CONTEXT + DINING GRAMMAR compile
+5. 초기 MEAL_SCENE_STATE / world-space table topology 정의
+6. 콘텐츠 비트 작성
+7. 반복 인물 탐지 — BODY 2컷 이상 등장하면 EPISODE_SUBJECT_LOCK 작성
+8. style-domain coverage map + PERSON style-fidelity 기준 정의
+9. background_scope 계획 — NONE / LOCAL / FULL; 반복 FULL이면 LOCATION_LOCK plan
+10. VOICE sensory payload / 문구 계획
+11. 전체 BODY 콘티 작성 — emotional + state + visual coverage + appetite/sensory beat
+12. FOOD STATE graph + per-shot scene-state delta 작성
+13. bridge action 검사
+14. appetite-value gate + opening/ending temporal-distinguishability 검사
+15. coverage rhythm / adjacent visual-delta 검사
+16. 각 컷 geometry risk + contact chain 정의
+17. COVER brief 작성 — title / hero 후보 / character slot / reuse-first 여부 + cover source route(BODY_REUSE / DEDICATED / EXTERNAL_IMPORT)
+18. 사용자에게 사전 패키지 제시
+19. 명시 승인 후 BODY 래스터 제작
 
 ## 5. Visual preflight
 
 생성 전:
+- pending structural authority change가 없음
 - render cursor == target shot
 - target shot is not APPROVED_LOCKED
 - current-shot render capsule compiled
 - DENYLIST fields absent
 - actual style reference binding
 - reference role separation
+- reference coverage_scope가 current shot에서 요구하는 visual domain과 일치
+- PERSON이 보이면 PERSON style-fidelity preflight 기준 존재
 - 반복 인물이 있으면 EPISODE_SUBJECT_LOCK 존재
 - S02+ 반복 인물이 있으면 승인 identity-anchor media binding 가능 여부 확인
 - shot coverage fields 존재
@@ -150,6 +170,10 @@ GitHub의 render cursor/locked shots를 복원한 후 해당 cursor부터 그대
 ## 6. S01 gate
 
 S01 한 장만 생성한다.
+
+PASS 추천 전:
+- PERSON_STYLE_AUTHORITY 대비 얼굴/눈/선/채색/헤어 단순화 fidelity 내부 QC
+- generic polished anime drift가 있으면 사용자에게 PASS 추천하지 않음
 
 PASS 직후:
 1. S01 = APPROVED_LOCKED
@@ -225,6 +249,16 @@ S01 PASS 후:
 - table topology plausibility
 - cross-context contamination
 
+### Appetite / proxy-eater sequence QC
+BODY 전체 후보가 준비되면 검사:
+- 각 shot의 appetite_function / sensory_payload가 실제 이미지에 실현되는가
+- 단순 절차만 보여주는 low-value frame이 있는가
+- 독자가 "대신 먹고 있다"고 느낄 ingestion/contact/payoff가 충분한가
+- sequence 초반보다 후반의 감각 payoff가 약해지며 흐지부지 끝나지 않는가
+- opening과 ending을 바꿔도 거의 같은 장면이면 TEMPORAL_DISTINGUISHABILITY_FAIL 후보
+- menu-specific secondary payoff가 가능한데 단순 복귀 동작으로 끝내지는 않았는가
+- visual appetite cue가 음식의 실제 상태에 근거하며 광고용 과장이 아닌가
+
 ### Sequence coverage QC
 BODY 전체 후보가 준비되면 raster-set user gate 전에 검사:
 - viewer-perceived shot distance repetition
@@ -275,6 +309,8 @@ VOICE_SYSTEM으로 BODY 문구를 후단 합성하고 cover title을 editable la
 
 최종 QC:
 - cover/body 역할 분리
+- cover visual template이 사용자 승인된 lock인지; 아니면 template calibration gate로 전환
+- lettering font/size/placement/template이 사용자 승인된 lock인지; 아니면 ad-hoc finalization 금지
 - cover title/hero mobile legibility
 - 컷 순서
 - 이미지/텍스트 대응
