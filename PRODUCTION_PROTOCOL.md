@@ -1,6 +1,17 @@
-# PRODUCTION_PROTOCOL — jipbap v0.6
+# PRODUCTION_PROTOCOL — jipbap v0.7
 
-## 0. Operating mode
+## 0. Operating mode\n\n### Architecture precedence — 2026-09-07
+
+The canonical final-visual path is now the `VISUAL_SYSTEM §0` hybrid asset-composition policy.
+Older sections below that say BODY S02..final should each be freshly rendered as complete images are retained as historical/exception behavior and do not override the new default.
+
+Current topology:
+
+`content/storyboard gate → reusable asset resolve → missing asset authoring/QC → approved asset set → BODY deterministic composition → sequence QC → cover/lettering composition → final gate`
+
+A PERSON/style calibration asset may still receive a user visual gate, but approval is attached to the asset bytes and reused. It is not a requirement to resample one whole S01 frame before every episode.
+
+
 
 현재 기본 모드: MANUAL_VALIDATION
 
