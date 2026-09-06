@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "cover-A-editorial-header",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [250, 246, 237, 255]},
+  "layers": [
+    {"asset_id": "CAL_BAND_BLOCK", "x": 0, "y": 0, "z": 0, "scale": 72, "flip_x": false, "rotation_deg": 0, "opacity": 1},
+    {"asset_id": "CAL_FOOD_BLOCK", "x": 110, "y": 340, "z": 1, "scale": 45, "flip_x": false, "rotation_deg": 0, "opacity": 1},
+    {"asset_id": "CAL_PERSON_BLOCK", "x": 560, "y": 610, "z": 2, "scale": 12, "flip_x": false, "rotation_deg": 0, "opacity": 1}
+  ]
+}
