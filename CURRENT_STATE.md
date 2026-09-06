@@ -20,6 +20,7 @@ Next production episode: UNRESOLVED until template calibration
 
 Authority:
 - CALIBRATION_STATE.json
+- calibration/COMPOSITION_CANDIDATES.md
 - CONTENT_SYSTEM.md
 - VOICE_SYSTEM.md
 - VISUAL_SYSTEM.md
@@ -68,32 +69,12 @@ Future renderer execution still requires the actual image bytes to be supplied o
 
 ## Exact next action
 
-Because image generation is currently unavailable/over limit, perform the deterministic composition calibrations first:
+Present the deterministic COVER and LETTERING calibration candidates for user selection.
 
-A. COVER template calibration
-- use existing E001 approved/evaluation raster only; no new image generation;
-- make 2–3 hierarchy variants;
-- compare food hero ratio, title hierarchy, series mark, safe area and phone-size readability;
-- user-lock one template.
+- COVER: choose A / B / C, reject all, or request a hybrid.
+- LETTERING: choose A / B / C, reject all, or request a hybrid.
+- do not promote any candidate to USER_LOCKED before explicit selection.
+- no image generation is required for this gate.
 
-B. LETTERING template calibration
-- use the same existing BODY frame(s); no new image generation;
-- compare 2–3 font/weight/size/box/no-box treatments;
-- validate negative-space placement and phone-size readability;
-- user-lock one template.
+After both composition templates are USER_LOCKED, defer PERSON/FOOD image calibration until image generation is available.
 
-After image generation becomes available:
-
-C. PERSON style calibration
-- use the supplied PERSON reference as actual media;
-- generate a minimal subject/style test;
-- compare eye ratio, face simplification, line, fill, shading, hair density against the reference;
-- user-lock the accepted person rendering direction.
-
-D. FOOD style / appetite calibration
-- test a small number of food close-ups under the PERSON style abstraction envelope;
-- remove glossy semi-real/ad drift while preserving enough texture to trigger appetite;
-- if text rules alone are insufficient, approve a separate FOOD_STYLE_AUTHORITY.
-
-Only after A/B/C/D are approved should a new production episode start.
-Do not mark E001 COMPLETE unless the user explicitly asks to repair/reopen it.
