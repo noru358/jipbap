@@ -6,7 +6,7 @@
 
 ## Core production flow
 
-menu/moment → sensory-route + meal-context compile → meal-scene state → content/body storyboard + cover brief → pre-raster user gate → BODY S01 user anchor → BODY S02..final internal render/QC → complete text-free body-raster user gate → cover assembly + lettering → final carousel QC/export
+menu/moment → sensory-route + meal-context compile → meal-scene state → recurring-subject lock + coverage/geometry plan → body storyboard + mandatory cover brief → pre-raster user gate → BODY S01 user anchor → BODY S02..final internal render/QC → whole-sequence QC → complete text-free body-raster user gate → mandatory cover acquisition/assembly + lettering → final carousel QC/export
 
 핵심 운영 원칙:
 - 한 컷 = 한 이미지 파일. 멀티패널/콜라주/콘택트시트는 생산 결과로 인정하지 않는다.
@@ -15,9 +15,13 @@ menu/moment → sensory-route + meal-context compile → meal-scene state → co
 - 음식툰의 컷은 단순한 장면 목록이 아니라 상태 전이(state transition)로 설계한다.
 - 같은 식탁이 이어지는 회차는 MEAL_SCENE_STATE를 두고, 이후 컷은 persistent world-state + 명시적 delta로 이어간다.
 - 식탁은 개별 음식뿐 아니라 meal context / meal ecology 전체로 검수한다.
-- Instagram cover는 BODY S01과 분리된 product asset이며, export는 COVER → S01 → ... → Sfinal 순서다.
+- Instagram cover는 BODY S01과 분리된 **mandatory product slot**이며, export는 COVER → S01 → ... → Sfinal 순서다. 다른 도구/세션에서 만들어 import할 수는 있어도 생략할 수는 없다.
 - 스타일은 승인된 실제 이미지 레퍼런스가 최상위 시각 권위다. 텍스트 프롬프트나 임시 생성물이 이를 덮어쓰지 않는다.
 - reference path/hash ≠ actual media binding. 바이너리 존재와 hash 검증을 fail-closed로 요구한다.
+- 동일 인물이 BODY 2컷 이상 반복되면 episode-local subject lock을 만들며, style authority와 identity continuity를 분리한다.
+- 컷별 상태 전이뿐 아니라 focal/거리/camera relation/visual delta를 계획하고 whole-sequence redundancy QC를 거친다.
+- 손·팔·도구·입 접촉은 고위험 geometry로 별도 검수한다.
+- 음식은 더 자세할 수 있지만 인물과 다른 매체처럼 보일 정도로 준실사화되면 실패다.
 
 ## Canonical documents
 
@@ -31,18 +35,16 @@ menu/moment → sensory-route + meal-context compile → meal-scene state → co
 - assets/REFERENCE_MANIFEST.md — 실제 참조 바이너리의 역할/해시/materialization 상태
 - schemas/shot_contract.schema.json — 컷 계약의 기계 판독용 최소 스키마
 
-## Production reset — active fresh 001
+## Production reset — fresh 001 ready
 
-기존 구조 개편 이전의 구체 회차 패키지는 모두 폐기했다.
+구조 테스트용 001은 폐기했다.
 
-- active episode: 001
-- preproduction user gate: PASS
-- current render stage: S01_PENDING
-- 다음 신규 회차 번호: 002
-- 옛 회차의 메뉴·대사·콘티·승인·QC·episode anchor는 현행 제작 권위가 아니다.
-- 옛 제작에서 얻은 일반화된 학습만 canonical project authority에 남긴다.
-- fresh 001은 현재 CONTENT / FOOD_STATE / MEAL_CONTEXT / VISUAL / VOICE / PRODUCTION authority로 새로 승인되어 `episodes/001`에 저장된다.
-- S01은 아직 승인 anchor가 아니며, 실제 STYLE_REF_001 media binding이 확인되기 전에는 렌더하지 않는다.
+- active episode: NONE
+- 다음 제작 번호: 001
+- 테스트 001의 메뉴·문구·콘티·승인·prototype raster는 현행 제작 권위가 아니다.
+- 테스트에서 일반화된 구조 개선만 canonical project authority에 남긴다.
+- 다음 세션은 GitHub 상태를 다시 복원한 뒤 fresh 001 사전기획부터 시작한다.
+- episode-local subject lock, continuity anchor, cover status는 새 회차 승인 전에는 존재하지 않는다.
 
 ## Repository topology
 
