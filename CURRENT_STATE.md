@@ -4,53 +4,71 @@ Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Production state — E001 final user gate
+## Production state — E001 retrospective / revision required
 
-Execution authorization: **AWAITING_FINAL_USER_APPROVAL**
+Execution authorization: **STRUCTURE_HARDENED_TEMPLATE_CALIBRATION_NEXT**
 
-Active episode: **001**
-Next episode number: 002
+Active episode: **001 (evaluation run; not COMPLETE)**
+Next production episode: UNRESOLVED until template calibration
 
-## Approved BODY
-- S01–S05: APPROVED_LOCKED
-- raster-set user gate: PASS
-- sequence QC: PASS
-
-## Composition
-- cover source route: BODY_REUSE
-- cover status: PASS
-- lettering status: PASS
-- final carousel internal QC: PASS
-- final user approval: PENDING
+## E001 disposition
+- BODY S01–S05: prior raster-set gate PASS preserved as historical approval evidence
+- final carousel candidate: **REVISION_REQUIRED / NOT APPROVED FOR COMPLETE**
+- publication status: NOT_APPROVED
+- do not automatically repair or publish E001
+- E001 outputs remain evaluation evidence unless the user explicitly reopens/rebuilds the episode
 
 Authority:
-- episodes/001/PREPRODUCTION.md
-- episodes/001/SUBJECT_LOCK.md
-- episodes/001/SHOT_CONTRACTS.md
-- episodes/001/RASTER_SET_QC.md
-- episodes/001/ASSET_MANIFEST.md
-- episodes/001/COMPOSITION.md
+- CONTENT_SYSTEM.md
+- VOICE_SYSTEM.md
+- VISUAL_SYSTEM.md
+- PRODUCTION_PROTOCOL.md
+- assets/REFERENCE_MANIFEST.md
+- episodes/001/RETROSPECTIVE.md
 - episodes/001/render_state.json
 
-Final order:
-`COVER → S01 → S02 → S03 → S04 → S05`
+## Structural changes now canonical
 
-## Same-session isolation rule
+1. PROXY_EATER is the core audience promise.
+2. BODY planning includes appetite/sensory beat, appetite-value gate and temporal-distinguishability.
+3. Copy uses concrete sensory payload and a salivation gate.
+4. STYLE_REF_001 is PERSON-only authority; S01 must pass person-style fidelity preflight.
+5. Background uses NONE / LOCAL / FULL exposure scopes; full-room continuity is only locked when actually needed.
+6. Cover and lettering have no approved visual template yet; E001 test composition is not a template lock.
+7. A structural rule change must be committed and verified before any dependent render.
+8. AutoPipeline media references now have coverage_scope / allowed_influence.
 
-Full storyboard/future-shot material may exist in the operator conversation.
-That alone is not contamination. The isolation boundary is the actual target-only renderer dispatch capsule plus hard output QC.
-New-session handoff is reserved for actual leakage/repeated hard failure/artifact-identity uncertainty.
+## Reference state
+
+STYLE_REF_001:
+- role: PERSON_STYLE_AUTHORITY
+- sha256: fd763500b9c34e24d85805eb2c74b5b37a5361b82b3749644254c93922da6422
+- repository binary: NOT_YET_MATERIALIZED
+- coverage: PERSON only
+
+Important:
+The binary is not stored in the repository yet. The manifest contains identity/hash/role only.
+Future renderer execution still requires the actual image bytes to be supplied or otherwise recovered.
 
 ## Exact next action
 
-Present the final carousel candidate for explicit user approval.
+Run a **template/style calibration session before another full episode**:
 
-If PASS:
-1. bind the user approval to the final candidate hashes;
-2. set stage=COMPLETE;
-3. set next_user_gate=NONE;
-4. preserve BODY and final composition as immutable approved artifacts;
-5. advance CURRENT_STATE to next episode / retrospective action.
+A. PERSON style calibration
+- use the supplied PERSON reference as actual media;
+- generate a minimal subject/style test;
+- compare eye ratio, face simplification, line, fill, shading, hair density against the reference;
+- user-lock the accepted person rendering direction.
 
-If FAIL:
-repair only the minimum invalid composition subset unless the user explicitly reopens BODY artwork.
+B. COVER template calibration
+- make 2–3 structural cover variants using the same approved hero;
+- compare title hierarchy, food/character ratio, series mark, safe area and phone-size readability;
+- lock one template.
+
+C. LETTERING template calibration
+- test 2–3 font/weight/size/box/no-box treatments on the same BODY frame;
+- validate negative-space placement and mobile readability;
+- lock one project lettering template.
+
+Only after A/B/C are approved should a new production episode start.
+Do not mark E001 COMPLETE unless the user explicitly asks to repair/reopen it.
