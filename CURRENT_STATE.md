@@ -4,59 +4,53 @@ Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Production state — E001 post-raster composition
+## Production state — E001 final user gate
 
-Execution authorization: **ACTIVE_POST_RASTER_COMPOSITION**
+Execution authorization: **AWAITING_FINAL_USER_APPROVAL**
 
 Active episode: **001**
 Next episode number: 002
 
-Approved preproduction authority:
+## Approved BODY
+- S01–S05: APPROVED_LOCKED
+- raster-set user gate: PASS
+- sequence QC: PASS
+
+## Composition
+- cover source route: BODY_REUSE
+- cover status: PASS
+- lettering status: PASS
+- final carousel internal QC: PASS
+- final user approval: PENDING
+
+Authority:
 - episodes/001/PREPRODUCTION.md
 - episodes/001/SUBJECT_LOCK.md
 - episodes/001/SHOT_CONTRACTS.md
-
-Approved BODY authority:
-- episodes/001/render_state.json
-- episodes/001/ASSET_MANIFEST.md
 - episodes/001/RASTER_SET_QC.md
+- episodes/001/ASSET_MANIFEST.md
+- episodes/001/COMPOSITION.md
+- episodes/001/render_state.json
 
-## Current state
-- BODY S01–S05: **APPROVED_LOCKED**
-- raster-set user gate: **PASS**
-- sequence QC: **PASS**
-- render cursor: NONE
-- cover source route: **BODY_REUSE**
-- cover status: PENDING
-- lettering status: IN_PROGRESS
-- next user gate: **FINAL**
+Final order:
+`COVER → S01 → S02 → S03 → S04 → S05`
 
-## Same-session render isolation clarification
+## Same-session isolation rule
 
-The mere presence of the full storyboard or future-shot plans in the operator/chat context is not by itself a contamination failure.
-
-The operative boundary is the actual current-shot dispatch capsule:
-- compile only the target shot + minimum continuity/media bindings;
-- do not intentionally include future-shot instructions in renderer payload;
-- hard-QC the result for future-state/multi-shot leakage;
-- continue in the same session when the dispatch/result pass.
-
-A new session is required only after actual contamination evidence, repeated hard context-leak failure, or artifact/approval identity uncertainty.
-See PRODUCTION_PROTOCOL section 3 and AutoPipeline shared continuity policy.
+Full storyboard/future-shot material may exist in the operator conversation.
+That alone is not contamination. The isolation boundary is the actual target-only renderer dispatch capsule plus hard output QC.
+New-session handoff is reserved for actual leakage/repeated hard failure/artifact-identity uncertainty.
 
 ## Exact next action
 
-Complete POST_RASTER_COMPOSITION:
-1. use approved S01 via BODY_REUSE as the cover hero source unless cover QC proves it inadequate;
-2. compose the mandatory 4:5 COVER with editable title/series layers;
-3. apply the approved VOICE plan as editable BODY lettering:
-   - S01: 비 오니까 이게 생각났다.
-   - S02: SILENT
-   - S03: 첫 숟갈은 두부까지.
-   - S04: SILENT
-   - S05: 국물 한 번 더.
-4. preserve approved BODY raster pixels as locked artwork under the lettering layer;
-5. run cover/lettering/final-carousel QC;
-6. present final order COVER → S01 → S02 → S03 → S04 → S05 at FINAL_USER_GATE.
+Present the final carousel candidate for explicit user approval.
 
-Do not regenerate approved BODY shots during composition.
+If PASS:
+1. bind the user approval to the final candidate hashes;
+2. set stage=COMPLETE;
+3. set next_user_gate=NONE;
+4. preserve BODY and final composition as immutable approved artifacts;
+5. advance CURRENT_STATE to next episode / retrospective action.
+
+If FAIL:
+repair only the minimum invalid composition subset unless the user explicitly reopens BODY artwork.
