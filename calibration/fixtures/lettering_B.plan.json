@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "lettering-B-paper-tag",
+  "purpose": "CALIBRATION_PLACEHOLDER",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [239, 232, 218, 255]},
+  "base_image": null,
+  "text_layers": [
+    {
+      "layer_id": "note", "z": 0, "lines": ["FOOD NOTE", "SECOND LINE"], "x": 500, "y": 82, "anchor": "CENTER",
+      "font": {"mode": "PIL_DEFAULT", "size": 40},
+      "fill_rgba": [38, 35, 32, 255], "stroke_width": 0, "line_spacing": 7,
+      "box": {
+        "type": "RECT", "padding": [18, 14, 18, 14],
+        "fill_rgba": [250, 247, 239, 238],
+        "outline_rgba": [150, 140, 128, 255], "outline_width": 2
+      }
+    }
+  ]
+}
