@@ -11,15 +11,15 @@
     "context_firewall",
     "coverage",
     "geometry",
-    "preconditions",
-    "action",
-    "postconditions",
     "must_show",
     "must_not_show",
     "output",
     "appetite",
     "background",
-    "entity_visibility"
+    "entity_visibility",
+    "depicted_state",
+    "depicted_action_phase",
+    "transition_from_previous"
   ],
   "properties": {
     "shot_id": {
@@ -241,17 +241,20 @@
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "description": "Legacy/summary field only. Canonical temporal state is depicted_state + transition_from_previous."
     },
     "action": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Legacy narrative summary only. Do not use it to infer which micro-action is visible in the still frame."
     },
     "postconditions": {
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "description": "Legacy/summary field only. Canonical temporal state is depicted_state + transition_from_previous."
     },
     "must_show": {
       "type": "array",
@@ -421,6 +424,110 @@
         }
       },
       "additionalProperties": false
+    },
+    "depicted_state": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "depicted_action_phase": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "phase",
+            "description"
+          ],
+          "properties": {
+            "phase": {
+              "type": "string",
+              "enum": [
+                "STATIC",
+                "BEFORE_ACTION",
+                "ACTION_IN_PROGRESS",
+                "AFTER_ACTION"
+              ]
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "transition_from_previous": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "from_shot_id",
+            "steps"
+          ],
+          "properties": {
+            "from_shot_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "step_id",
+                  "action",
+                  "state_delta",
+                  "visibility"
+                ],
+                "properties": {
+                  "step_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "action": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "state_delta": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "visibility": {
+                    "type": "string",
+                    "enum": [
+                      "IMPLIED_BETWEEN_FRAMES",
+                      "DEPICTED_IN_CURRENT_FRAME"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "omission_justification": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     }
   },
   "additionalProperties": true
