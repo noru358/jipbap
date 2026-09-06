@@ -45,3 +45,26 @@ Raster-set user gate: PASS.
 Sequence-level QC: PASS.
 
 Rejected/prototype outputs are not registered here.
+
+## FINAL-GATE COMPOSITION ASSETS
+
+### E001_COVER_BODY_REUSE
+- status: INTERNAL_QC_PASS
+- source: approved S01 BODY raster
+- sha256: b2789c145a8cffc84411d324a26d3f3cc14796e563c17f30fee5e645a60222ee
+- dimensions: 1122 × 1402
+- title layer: editable in composition source
+
+### E001_S01_COMPOSED
+- sha256: de9d6313f113785b07f0e199cf34614fb45bcd993274875fb0170248b0bc8c91
+- BODY source remains APPROVED_LOCKED
+
+### E001_S03_COMPOSED
+- sha256: cb640b9e2a3ff64f23c53e5c993624afc66077072f7fcd19b5352ef1500cf144
+- BODY source remains APPROVED_LOCKED
+
+### E001_S05_COMPOSED
+- sha256: 7a8487cba25d2deaa5bb4d1839bb7c2fc24b515e47037698b403c0f08f3bdd36
+- BODY source remains APPROVED_LOCKED
+
+S02 and S04 are silent and retain their approved raster hashes.
