@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "lettering-C-hand-note",
+  "purpose": "CALIBRATION_PLACEHOLDER",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [239, 232, 218, 255]},
+  "base_image": null,
+  "text_layers": [
+    {
+      "layer_id": "note", "z": 0, "lines": ["FOOD NOTE", "SECOND LINE"], "x": 390, "y": 92, "anchor": "LEFT",
+      "font": {"mode": "PIL_DEFAULT", "size": 34},
+      "fill_rgba": [52, 47, 42, 255], "stroke_width": 0, "line_spacing": 5,
+      "box": {"type": "NONE"}
+    }
+  ]
+}
