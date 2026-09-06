@@ -101,6 +101,18 @@ Important PASS criteria:
 
 Rejected output is not a reference or registry asset.
 
+### 5.1 Approval scope
+
+`approved_by` may be USER or AUTHORIZED_OPERATOR, but their meaning differs.
+
+- AUTHORIZED_OPERATOR may register a QC-passed asset for bounded episode/pilot use so deterministic composition can proceed.
+- USER approval is required when a result becomes a creative/identity lock, project-reusable/canonical authority, or a named user gate.
+- A recurring PERSON foundation asset may be operator-approved first; the composed first anchor frame is then shown to the user.
+- Only after that composed anchor frame passes may its person appearance be promoted to the episode identity anchor used for dependent interaction assets.
+- If the user rejects the anchor frame, dependent authoring does not proceed and affected operator-approved assets are invalidated/replaced at minimum scope.
+
+This preserves `generate/import → QC → approval → hash registration` without forcing one user click per raw asset.
+
 ## 6. Deterministic BODY composition
 
 The AutoPipeline compositor owns final BODY assembly.
