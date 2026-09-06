@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "lettering-A-direct-editorial",
+  "purpose": "CALIBRATION_PLACEHOLDER",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [239, 232, 218, 255]},
+  "base_image": null,
+  "text_layers": [
+    {
+      "layer_id": "note", "z": 0, "lines": ["FOOD NOTE", "SECOND LINE"], "x": 360, "y": 80, "anchor": "CENTER",
+      "font": {"mode": "PIL_DEFAULT", "size": 44},
+      "fill_rgba": [38, 35, 32, 255], "stroke_width": 2,
+      "stroke_fill_rgba": [250, 247, 241, 255], "line_spacing": 8,
+      "box": {"type": "NONE"}
+    }
+  ]
+}
