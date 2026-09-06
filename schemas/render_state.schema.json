@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Jipbap Episode Render State",
+  "type": "object",
+  "required": [
+    "episode_id",
+    "stage",
+    "render_cursor",
+    "approved_locked_shots",
+    "retry_scope",
+    "next_user_gate"
+  ],
+  "properties": {
+    "episode_id": {"type": "string"},
+    "stage": {
+      "type": "string",
+      "enum": [
+        "PREPRODUCTION_USER_GATE",
+        "S01_PENDING",
+        "POST_S01_INTERNAL_RENDER",
+        "RASTER_SET_USER_GATE",
+        "LETTERING",
+        "FINAL_USER_GATE",
+        "COMPLETE"
+      ]
+    },
+    "render_cursor": {"type": ["string", "null"]},
+    "approved_locked_shots": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "retry_scope": {"const": "CURRENT_SHOT_ONLY"},
+    "next_user_gate": {
+      "type": "string",
+      "enum": ["S01", "RASTER_SET", "FINAL", "NONE"]
+    },
+    "anchor_policy": {
+      "type": "string",
+      "const": "CONTINUITY_ONLY_UNLESS_EXPLICIT_EDIT"
+    }
+  },
+  "additionalProperties": true
+}
