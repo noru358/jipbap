@@ -21,7 +21,8 @@
     "authority_ref": null,
     "approved_artifact_sha256": null,
     "notes": [
-      "E001 cover is TEST ONLY."
+      "E001 cover is TEST ONLY.",
+      "Can be calibrated deterministically from existing E001 raster without image generation."
     ]
   },
   "lettering_template": {
@@ -29,8 +30,9 @@
     "authority_ref": null,
     "approved_artifact_sha256": null,
     "notes": [
-      "E001 Noto Sans rounded-box composition is TEST ONLY."
+      "E001 Noto Sans rounded-box composition is TEST ONLY.",
+      "Can be calibrated deterministically from existing E001 raster without image generation."
     ]
   },
-  "next_action": "PERSON_STYLE"
+  "next_action": "COVER_TEMPLATE"
 }
