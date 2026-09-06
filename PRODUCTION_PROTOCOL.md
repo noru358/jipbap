@@ -1,4 +1,4 @@
-# PRODUCTION_PROTOCOL — jipbap v0.5
+# PRODUCTION_PROTOCOL — jipbap v0.6
 
 ## 0. Operating mode
 
@@ -10,7 +10,7 @@ content/storyboard contract
 → BODY S01 USER anchor gate
 → BODY S02..final OPERATOR INTERNAL render/QC
 → complete BODY text-free raster-set USER gate
-→ COVER assembly + BODY lettering
+→ mandatory COVER acquisition/assembly + BODY lettering
 → final CAROUSEL USER gate
 
 one frame = one file 이지만 one frame = one user gate는 아니다.
@@ -25,7 +25,7 @@ PREPRODUCTION_USER_GATE
 → RENDER_CURSOR=S02
 → RENDER_CURSOR=S03 ... → RENDER_CURSOR=Sfinal
 → RASTER_SET_USER_GATE
-→ LETTERING
+→ POST_RASTER_COMPOSITION
 → FINAL_USER_GATE
 
 ### Hard invariant: approved-shot immutability
@@ -99,14 +99,16 @@ GitHub의 render cursor/locked shots를 복원한 후 S02부터 그대로 이어
 3. MEAL CONTEXT + DINING GRAMMAR compile
 4. 초기 MEAL_SCENE_STATE / world-space table topology 정의
 5. 콘텐츠 비트 작성
-6. VOICE 역할/문구 작성
-7. 전체 BODY 콘티 작성
-8. FOOD STATE graph + per-shot scene-state delta 작성
-9. bridge action 검사
-10. 전체 시각 리듬 설계
-11. COVER brief 작성 — title / hero 후보 / character slot / reuse-first 여부
-12. 사용자에게 사전 패키지 제시
-13. 명시 승인 후 BODY 래스터 제작
+6. 반복 인물 탐지 — BODY 2컷 이상 등장하면 EPISODE_SUBJECT_LOCK 작성
+7. VOICE 역할/문구 작성
+8. 전체 BODY 콘티 작성 — emotional beat + state beat + visual coverage beat
+9. FOOD STATE graph + per-shot scene-state delta 작성
+10. bridge action 검사
+11. coverage rhythm / adjacent visual-delta 검사
+12. 각 컷 geometry risk + contact chain 정의
+13. COVER brief 작성 — title / hero 후보 / character slot / reuse-first 여부 + cover source route(BODY_REUSE / DEDICATED / EXTERNAL_IMPORT)
+14. 사용자에게 사전 패키지 제시
+15. 명시 승인 후 BODY 래스터 제작
 
 ## 5. Visual preflight
 
@@ -117,6 +119,10 @@ GitHub의 render cursor/locked shots를 복원한 후 S02부터 그대로 이어
 - DENYLIST fields absent
 - actual style reference binding
 - reference role separation
+- 반복 인물이 있으면 EPISODE_SUBJECT_LOCK 존재
+- S02+ 반복 인물이 있으면 승인 identity-anchor media binding 가능 여부 확인
+- shot coverage fields 존재
+- geometry risk/contact chain 존재
 - meal context + dining grammar binding
 - text_free=true
 - single_panel=true
@@ -130,18 +136,22 @@ S01 한 장만 생성한다.
 PASS 직후:
 1. S01 = APPROVED_LOCKED
 2. S01 = CONTINUITY_ANCHOR only
-3. render cursor = S02
-4. next user gate = RASTER_SET
+3. 반복 인물이 있으면 S01 subject appearance를 EPISODE_SUBJECT_LOCK과 대조하고 PASS 시 identity anchor로 등록
+4. render cursor = S02
+5. next user gate = RASTER_SET
 
 ## 7. Remaining render
 
 S01 PASS 후:
 - S02부터 마지막까지 한 장씩 생성
 - current-shot capsule만 사용
+- 반복 인물이 보이면 canonical STYLE_AUTHORITY + EPISODE_SUBJECT_LOCK + 승인 identity-anchor media를 함께 사용
 - 각 컷 내부 QC
 - FAIL이면 같은 shot만 재시도
 - PASS이면 cursor 자동 전진
 - 컷별 사용자 승인 없음
+- 다음 컷으로 가기 전 identity/style-domain/anatomy/contact geometry hard QC를 먼저 통과
+- 모든 BODY 후보가 나온 뒤 사용자에게 보여주기 전에 whole-sequence coverage/redundancy QC를 통과
 
 렌더러가 반복 실패하면:
 - current-shot capsule/reference binding을 재컴파일
@@ -167,12 +177,27 @@ S01 PASS 후:
 - no text, including incidental readable environment text
 - no collage
 
-### Visual QC
-- reference fidelity
+### Visual identity / style QC
+- canonical reference fidelity
+- EPISODE_SUBJECT_LOCK fidelity for recurring people
+- face/eye/hair/clothing/local-color consistency
+- cross-domain rendering coherence
+- STYLE_DOMAIN_SPLIT_FAIL 검사
+
+### Shot visual QC
 - shot-specific camera/composition
+- declared focal_owner / shot_scale / camera_relation 실현
 - action visibly realized
 - food-first framing
 - anti-ad rendering
+
+### Human geometry QC
+- shoulder/arm/wrist/hand continuity
+- finger count/overlap/thumb position
+- utensil grip
+- food→utensil→mouth contact geometry
+- garment/hair occlusion hiding impossible anatomy
+- high-risk geometry failure = HARD FAIL
 
 ### Meal-context / dining-grammar QC
 - cuisine/meal-setting consistency
@@ -181,6 +206,18 @@ S01 PASS 후:
 - hand/gesture/eating-action plausibility
 - table topology plausibility
 - cross-context contamination
+
+### Sequence coverage QC
+BODY 전체 후보가 준비되면 raster-set user gate 전에 검사:
+- viewer-perceived shot distance repetition
+- repeated camera side/height caused by renderer default
+- repeated person size/face orientation/body orientation/gaze
+- repeated hand/utensil layout
+- adjacent low-delta cuts that should have been merged or reframed
+- fixed direction quota 사용 금지
+- intentional repetition이면 storyboard의 repetition justification과 일치하는지
+
+실패하면 문제를 만드는 최소 subset만 재렌더한다.
 
 ### Food-state / meal-scene continuity QC
 - pre/post food continuity
@@ -193,8 +230,8 @@ S01 PASS 후:
 
 ## 9. Raster-set gate
 
-모든 BODY 컷 내부 PASS 후 전체 무자막 세트를 사용자에게 제시한다.
-사용자 PASS 후 COVER assembly와 BODY lettering으로 이동한다.
+모든 BODY 컷 내부 PASS 후 반드시 sequence coverage QC까지 PASS한 전체 무자막 세트를 사용자에게 제시한다.
+사용자 PASS 후 mandatory COVER acquisition/assembly와 BODY lettering으로 이동한다.
 
 Raster-set PASS는 BODY artwork를 잠그며, cover 정책 추가만으로 기존 승인 BODY artwork를 소급 무효화하지 않는다.
 
@@ -202,11 +239,14 @@ Raster-set PASS는 BODY artwork를 잠그며, cover 정책 추가만으로 기�
 
 VISUAL_SYSTEM의 COVER_TEMPLATE_v1을 따른다.
 
-1. 승인 BODY artwork에서 cover hero 후보를 먼저 찾는다.
-2. 충분하면 editable title/series mark와 함께 cover를 조립한다.
-3. 부족할 때만 dedicated cover hero를 별도 생성한다.
-4. dedicated cover hero는 BODY shot numbering/cursor에 포함하지 않는다.
-5. COVER는 S01 anchor나 FOOD_STATE/MEAL_SCENE_STATE authority가 아니다.
+1. preproduction에서 cover_source_route를 BODY_REUSE / DEDICATED / EXTERNAL_IMPORT 중 하나로 선언한다.
+2. BODY_REUSE면 승인 BODY artwork에서 cover hero 후보를 먼저 찾는다.
+3. 충분하면 editable title/series mark와 함께 cover를 조립한다.
+4. 부족할 때만 dedicated cover hero를 별도 생성한다.
+5. EXTERNAL_IMPORT면 외부/다른 세션에서 만든 cover asset을 identity/hash와 함께 등록한다.
+6. dedicated cover hero는 BODY shot numbering/cursor에 포함하지 않는다.
+7. COVER는 S01 anchor나 FOOD_STATE/MEAL_SCENE_STATE authority가 아니다.
+8. cover_status=PASS가 아니면 FINAL_USER_GATE 진입 금지.
 
 ## 11. Lettering / final carousel
 
@@ -227,3 +267,16 @@ VOICE_SYSTEM으로 BODY 문구를 후단 합성하고 cover title을 editable la
 - food-state continuity
 - meal-scene/table-topology continuity
 - 감정/감각 여운
+
+
+## 12. Episode reset boundary
+
+사용자가 회차 초기화를 명시하면:
+- active episode package 삭제/retire
+- render cursor 삭제
+- episode-local approvals/anchors/EPISODE_SUBJECT_LOCK/cover status 폐기
+- prototype/rejected outputs를 이후 reference나 continuity source로 재사용 금지
+- canonical project authority에서 일반화된 구조 개선만 유지
+- 다음 회차 번호는 사용자가 재시작을 명시한 경우 fresh 001로 되돌릴 수 있다
+
+episode reset은 project style authority나 canonical 구조를 지우는 동작이 아니다.
