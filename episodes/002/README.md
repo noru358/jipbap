@@ -1,16 +1,19 @@
 # Episode 002 — 고등어구이 + 흰밥
 
-Status: S02_WAITING_REFERENCE_BINDING
-Render cursor: S02
-Next user gate: RASTER_SET
+Status: LETTERING
+Render cursor: null
+Next user gate: FINAL
 
 ## Locked state
 
 - PREPRODUCTION: PASS
 - S01: APPROVED_LOCKED
-- S01 regeneration: FORBIDDEN unless user invalidates
-- S02~S05: internal render/QC
-- next user approval: full raster set
+- S02: APPROVED_LOCKED
+- S03: APPROVED_LOCKED
+- S04: APPROVED_LOCKED
+- S05: APPROVED_LOCKED
+- raster-set user gate: PASS
+- artwork regeneration: FORBIDDEN unless user explicitly invalidates a shot
 
 ## Meal context
 
@@ -28,71 +31,30 @@ Compiled dining grammar:
 
 These are E002-specific compiled constraints, not global hardcodes.
 
-## S01
+## Approved visual sequence
 
-Status: APPROVED_LOCKED
+- S01: arrival / intact grilled mackerel + full rice
+- S02: chopsticks pry open skin / flesh exposed
+- S03: separated mackerel flake placed on rice
+- S04: bite of rice + mackerel
+- S05: mostly bones/remnants + nearly empty rice
 
-Role:
-- continuity facts only
-- not edit target
-- not composition authority
+## Approved lettering copy
 
-## S02 render capsule
+- S01: `오늘은 고등어 한 마리`
+- S02: `껍질부터 젓가락이 간다`
+- S03: `살은 크게 떼어서`
+- S04: 무자막
+- S05: `가시만 남았다`
 
-target_shot_id: S02
-
-ALLOW:
-- STYLE_REF_001 style facts
-- S01 continuity facts:
-  - same woman identity if any person fragment is visible
-  - same mackerel appearance
-  - same ceramic tableware family
-  - same wooden table
-- E002 dining-grammar subset relevant to visible utensils
-- current food state only
-
-PRE:
-- mackerel.skin=intact
-- mackerel.flesh=mostly_intact
-
-ACTION:
-- chopstick tips physically pry open browned mackerel skin
-
-POST:
-- skin=opened
-- white flesh=exposed
-- one_flake=separated_or_ready
-
-COMPOSITION:
-- 4:5
-- single panel
-- food macro / oblique close-up
-- mackerel plate dominates frame
-- partial hand/chopsticks only if needed
-- no face
-- no full table
-
-MUST NOT:
-- S01 full-table composition
-- palms-together pose
-- fish on rice
-- future-shot actions
-- text/captions/letters
-- multi-panel page
-
-CONTEXT FIREWALL:
-- target_only=true
-- deny_future_shots=true
-- deny_voice_copy=true
-- deny_rejected_outputs=true
-- deny_locked_shot_as_edit_target=true
-
-## S03~S05
-
-Not included in S02 render input.
-They become visible to the renderer only after cursor advances.
+Voice intent:
+- LOW internetness
+- short personal-record tone
+- no direct taste-rating copy
+- end on residual/result state
 
 ## Exact next action
 
-Bind the actual STYLE_REF_001 image to the current renderer context.
-Then generate S02 only from the isolated capsule above.
+Apply the approved copy as a non-destructive lettering layer to the approved raster files.
+Do not regenerate artwork.
+Run final QC and present S01~S05 at FINAL_USER_GATE.
