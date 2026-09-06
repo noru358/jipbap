@@ -4,9 +4,9 @@ Updated: 2026-09-07
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 
-## Production state — fresh E001 active
+## Production state — E001 post-raster composition
 
-Execution authorization: **ACTIVE_BLOCKED_RENDER_CONTEXT_UNSAFE**
+Execution authorization: **ACTIVE_POST_RASTER_COMPOSITION**
 
 Active episode: **001**
 Next episode number: 002
@@ -16,63 +16,47 @@ Approved preproduction authority:
 - episodes/001/SUBJECT_LOCK.md
 - episodes/001/SHOT_CONTRACTS.md
 
-Render state authority:
+Approved BODY authority:
 - episodes/001/render_state.json
 - episodes/001/ASSET_MANIFEST.md
+- episodes/001/RASTER_SET_QC.md
 
-## Current render state
+## Current state
+- BODY S01–S05: **APPROVED_LOCKED**
+- raster-set user gate: **PASS**
+- sequence QC: **PASS**
+- render cursor: NONE
+- cover source route: **BODY_REUSE**
+- cover status: PENDING
+- lettering status: IN_PROGRESS
+- next user gate: **FINAL**
 
-- BODY S01: **APPROVED_LOCKED**
-- S01 user approval: PASS
-- S01 role: CONTINUITY_ANCHOR + DINER_01 episode-local identity anchor
-- render cursor: **S02**
-- next user gate: **RASTER_SET**
-- cover source route: BODY_REUSE
-- cover status: NOT_STARTED
-- sequence QC: NOT_RUN
-- lettering: NOT_STARTED
+## Same-session render isolation clarification
 
-Hard invariant:
-S01 must not be regenerated or edited unless the user explicitly withdraws approval or explicitly orders S01 reproduction.
+The mere presence of the full storyboard or future-shot plans in the operator/chat context is not by itself a contamination failure.
 
-## Active blocker — RENDER_CONTEXT_UNSAFE
+The operative boundary is the actual current-shot dispatch capsule:
+- compile only the target shot + minimum continuity/media bindings;
+- do not intentionally include future-shot instructions in renderer payload;
+- hard-QC the result for future-state/multi-shot leakage;
+- continue in the same session when the dispatch/result pass.
 
-The current conversation contains the full approved E001 storyboard and future-shot descriptions.
-The available image-generation path in this chat cannot be proven to receive only an isolated current-shot capsule.
-
-Under PRODUCTION_PROTOCOL section 3, S02+ rendering is therefore fail-closed in this render context.
-
-This is a context reset, not an episode reset.
-E001, S01 approval, identity lock and render cursor remain valid.
-
-## Reference binding state
-
-Project style authority for fresh E001:
-- STYLE_REF_001
-- sha256: fd763500b9c34e24d85805eb2c74b5b37a5361b82b3749644254c93922da6422
-- repository binary: NOT_YET_MATERIALIZED
-
-Approved S01:
-- E001_S01_APPROVED
-- sha256: aa277caf908100d277a878072189d6b0829258c464823a28b83465aec5b54c4c
-- repository binary: NOT_YET_MATERIALIZED
-
-Before S02 render, actual bytes for both required media must be bound in the clean render context.
-A path/hash/prose description alone is insufficient.
+A new session is required only after actual contamination evidence, repeated hard context-leak failure, or artifact/approval identity uncertainty.
+See PRODUCTION_PROTOCOL section 3 and AutoPipeline shared continuity policy.
 
 ## Exact next action
 
-Start a **new clean session** and:
+Complete POST_RASTER_COMPOSITION:
+1. use approved S01 via BODY_REUSE as the cover hero source unless cover QC proves it inadequate;
+2. compose the mandatory 4:5 COVER with editable title/series layers;
+3. apply the approved VOICE plan as editable BODY lettering:
+   - S01: 비 오니까 이게 생각났다.
+   - S02: SILENT
+   - S03: 첫 숟갈은 두부까지.
+   - S04: SILENT
+   - S05: 국물 한 번 더.
+4. preserve approved BODY raster pixels as locked artwork under the lettering layer;
+5. run cover/lettering/final-carousel QC;
+6. present final order COVER → S01 → S02 → S03 → S04 → S05 at FINAL_USER_GATE.
 
-1. restore AutoPipeline + jipbap HEADs;
-2. read this CURRENT_STATE and episodes/001/render_state.json;
-3. do **not** re-plan E001 and do **not** regenerate S01;
-4. bind the actual STYLE_REF_001 image bytes and approved E001_S01_APPROVED image bytes;
-5. compile the S02 current-shot-only capsule from episodes/001/SHOT_CONTRACTS.md;
-6. verify render cursor == S02 and S01 remains APPROVED_LOCKED;
-7. render S02 only;
-8. after internal PASS, advance S03 → S04 → S05 with current-shot-only capsules and per-shot QC;
-9. run whole-sequence coverage/state/geometry QC;
-10. present the complete text-free BODY raster set at the RASTER_SET user gate.
-
-If either required image binary cannot be bound in the new session, stop and request/recover that exact media instead of substituting memory.
+Do not regenerate approved BODY shots during composition.
