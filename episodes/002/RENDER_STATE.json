@@ -1,6 +1,6 @@
 {
   "episode_id": "002",
-  "stage": "LETTERING",
+  "stage": "FINAL_USER_GATE",
   "render_cursor": null,
   "approved_locked_shots": ["S01", "S02", "S03", "S04", "S05"],
   "retry_scope": "CURRENT_SHOT_ONLY",
@@ -8,5 +8,6 @@
   "anchor_policy": "CONTINUITY_ONLY_UNLESS_EXPLICIT_EDIT",
   "user_invalidation_required_to_regenerate_locked_shot": true,
   "raster_set_user_gate": "PASS",
+  "lettering_status": "PASS_INTERNAL_QC",
   "execution_blocker": null
 }
