@@ -1,6 +1,6 @@
 # Episode 002 — 고등어구이 + 흰밥
 
-Status: REMAINING_RENDER_INTERNAL_QC
+Status: S02_RENDER_BLOCKED_INTERNAL_QC
 
 ## Menu / moment
 
@@ -95,9 +95,17 @@ Food quantity/integrity may decrease but must not reset.
 - structural fix: MEAL_CONTEXT_SYSTEM.md added; context QC promoted to canonical pipeline
 - S01 corrected render: USER PASS
 
+## Current render status
+
+S01: PASS
+S02: INTERNAL QC BLOCKED — repeated renderer failures; rejected outputs are not assets.
+S03~S05: NOT STARTED because S02 must pass first.
+
+See episodes/002/QC_LOG.md.
+
 ## Exact next action
 
-Generate S02 → S05 one frame at a time using:
+Retry S02 one frame at a time using:
 - STYLE_REF_001 actual session-bound binary
 - S01 approved Episode 002 anchor
 - E002_KOREAN_HOME_DINNER meal context
