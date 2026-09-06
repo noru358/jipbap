@@ -7,8 +7,9 @@
 User-gate topology:
 
 content/storyboard contract
-→ BODY S01 USER anchor gate
-→ BODY S02..final OPERATOR INTERNAL render/QC
+→ VISUAL ANCHOR ROUTE RESOLUTION
+→ ANCHOR USER gate (BODY_S01 or non-public A00)
+→ remaining BODY OPERATOR INTERNAL render/QC
 → complete BODY text-free raster-set USER gate
 → mandatory COVER acquisition/assembly + BODY lettering
 → final CAROUSEL USER gate
@@ -20,10 +21,12 @@ one frame = one file 이지만 one frame = one user gate는 아니다.
 렌더 단계는 명시적 cursor를 가진다.
 
 PREPRODUCTION_USER_GATE
-→ S01_PENDING
-→ S01_APPROVED_LOCKED
-→ RENDER_CURSOR=S02
-→ RENDER_CURSOR=S03 ... → RENDER_CURSOR=Sfinal
+→ ANCHOR_PENDING
+→ [BODY_S01 route: S01 USER-approved/locked, cursor=S02]
+   OR
+   [DEDICATED_A00 route: A00 USER-approved anchor, cursor=S01]
+→ POST_ANCHOR_INTERNAL_RENDER
+→ RENDER_CURSOR=next BODY shot ... → RENDER_CURSOR=Sfinal
 → RASTER_SET_USER_GATE
 → POST_RASTER_COMPOSITION
 → FINAL_USER_GATE
@@ -40,6 +43,53 @@ PREPRODUCTION_USER_GATE
 S01을 다시 만들 수 있는 유일한 조건:
 - 사용자가 명시적으로 S01 승인을 철회하거나
 - 사용자가 S01 재제작을 직접 지시한 경우.
+
+## 1.5 Visual anchor routing
+
+사용자 시각 승인 게이트와 공개 BODY 첫 컷을 동일한 파일로 강제하지 않는다.
+
+`anchor_route`는 preproduction에서 반드시 하나를 고른다.
+
+### BODY_S01
+다음 조건을 모두 만족하면 사용한다.
+- S01 자체가 appetite arc에서 가장 좋은 공개 opener다.
+- S01을 anchor로 쓰기 위해 인물/배경/구도를 억지로 추가하거나 넓히지 않아도 된다.
+- 이후 반복 인물이 있다면 S01이 identity continuity에 필요한 시각 정보를 자연스럽게 충분히 보여준다.
+
+절차:
+1. S01 한 장만 렌더
+2. 사용자 ANCHOR gate
+3. PASS 시 S01=APPROVED_LOCKED + anchor_artifact_id=S01
+4. cursor=S02
+5. 이후 BODY는 내부 렌더/QC
+
+### DEDICATED_A00
+S01이 음식 macro, hand-only, food-only, unusual crop이거나,
+anchor 편의를 위해 S01의 군침/의미를 희생해야 하면 사용한다.
+
+A00 규칙:
+- 비공개 / carousel 미포함 / BODY numbering 미포함
+- 목적은 PERSON style + episode subject identity 확인뿐
+- FOOD_STATE / MEAL_SCENE_STATE authority 아님
+- 음식 스타일, 배경 디자인, camera/composition authority 아님
+- 가능하면 단순 neutral/local background와 충분히 읽히는 얼굴/상반신으로 구성
+- PASS 후 CONTINUITY/IDENTITY_ANCHOR로만 사용
+
+절차:
+1. A00 한 장 렌더
+2. 사용자 ANCHOR gate
+3. PASS 시 A00=APPROVED_ANCHOR + anchor_artifact_id=A00
+4. cursor=S01
+5. S01부터 Sfinal까지 BODY를 내부 렌더/QC
+6. BODY artwork의 사용자 승인은 raster-set gate에서 받는다.
+
+### Route decision invariant
+
+`BODY_S01`은 기본값이 아니다.
+`DEDICATED_A00`도 기본값이 아니다.
+**S01의 appetite/semantic intent를 손상시키지 않는 최소비용 route**를 고른다.
+
+S01이 anchor 역할 때문에 더 안전한 중경 인물컷으로 바뀌면 `ANCHOR_ROLE_COLLISION_FAIL`이다.
 
 ## 2. Current-shot render capsule
 
@@ -170,27 +220,28 @@ pending structural change가 있으면 visual preflight FAIL이다.
 
 하나라도 실패하면 렌더 금지.
 
-## 6. S01 gate
+## 6. Visual anchor user gate
 
-S01 한 장만 생성한다.
+preproduction에서 결정한 anchor_route의 target 하나만 생성한다.
 
 PASS 추천 전:
-- PERSON_STYLE_AUTHORITY 대비 얼굴/눈/선/채색/헤어 단순화 fidelity 내부 QC
+- PERSON이 보이면 PERSON_STYLE_AUTHORITY 대비 얼굴/눈/선/채색/헤어 단순화 fidelity 내부 QC
 - generic polished anime drift가 있으면 사용자에게 PASS 추천하지 않음
+- BODY_S01 route이면 S01의 appetite/semantic intent가 anchor 편의 때문에 약해지지 않았는지 검사
+- DEDICATED_A00 route이면 A00가 food/background/camera authority로 오염되지 않았는지 검사
 
 PASS 직후:
-1. S01 = APPROVED_LOCKED
-2. S01 = CONTINUITY_ANCHOR only
-3. 반복 인물이 있으면 S01 subject appearance를 EPISODE_SUBJECT_LOCK과 대조하고 PASS 시 identity anchor로 등록
-4. render cursor = S02
-5. next user gate = RASTER_SET
+- BODY_S01 → S01=APPROVED_LOCKED, anchor_artifact_id=S01, render_cursor=S02
+- DEDICATED_A00 → A00=APPROVED_ANCHOR, anchor_artifact_id=A00, render_cursor=S01
+- anchor_gate_status=PASS
+- next user gate=RASTER_SET
 
 ## 7. Remaining render
 
-S01 PASS 후:
-- S02부터 마지막까지 한 장씩 생성
+ANCHOR PASS 후:
+- render_cursor부터 마지막 BODY까지 한 장씩 생성
 - current-shot capsule만 사용
-- 반복 인물이 보이면 canonical STYLE_AUTHORITY + EPISODE_SUBJECT_LOCK + 승인 identity-anchor media를 함께 사용
+- 반복 인물이 보이면 canonical PERSON_STYLE_AUTHORITY + EPISODE_SUBJECT_LOCK + 승인 identity-anchor media(S01 또는 A00)를 함께 사용
 - 각 컷 내부 QC
 - FAIL이면 같은 shot만 재시도
 - PASS이면 cursor 자동 전진
