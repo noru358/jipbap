@@ -1,6 +1,6 @@
 # Episode 002 — 고등어구이 + 흰밥
 
-Status: S02_WAITING_CONTEXT_ISOLATION
+Status: S02_WAITING_REFERENCE_BINDING
 Render cursor: S02
 Next user gate: RASTER_SET
 
@@ -94,4 +94,5 @@ They become visible to the renderer only after cursor advances.
 
 ## Exact next action
 
-Use a context-isolated render execution and generate S02 from the capsule above.
+Bind the actual STYLE_REF_001 image to the current renderer context.
+Then generate S02 only from the isolated capsule above.
