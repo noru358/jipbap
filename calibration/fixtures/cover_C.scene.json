@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "cover-C-food-first-poster",
+  "canvas": {"width": 720, "height": 900, "background_rgba": [250, 246, 237, 255]},
+  "layers": [
+    {"asset_id": "CAL_FOOD_BLOCK", "x": -80, "y": 270, "z": 1, "scale": 70, "flip_x": false, "rotation_deg": 0, "opacity": 1},
+    {"asset_id": "CAL_PERSON_BLOCK", "x": 570, "y": 610, "z": 2, "scale": 13, "flip_x": false, "rotation_deg": 0, "opacity": 1}
+  ]
+}
