@@ -1,57 +1,55 @@
 # Episode 002 QC log
 
-## 2026-09-06 — S01
+## S01
 
-User verdict: PASS
+User verdict: PASS.
 
-Meaning:
-- visual style: PASS
-- Episode 002 continuity anchor: PASS
-- project-wide style-lock promotion: NO
+Lock:
+- S01 = APPROVED_LOCKED
+- S01 may not be regenerated unless user explicitly invalidates approval.
 
-Meal-context correction before final S01 PASS:
-- Korean meal scene had cross-context contamination risk
-- rolled egg form, soup vessel/material, and soup ingredient presentation needed Korean-home-meal consistency
+## Structural defect discovered after S01
 
-Structural response:
-- MEAL_CONTEXT_SYSTEM.md added
-- meal-context compile promoted into preproduction
-- meal-context binding added to shot contract
-- meal-context QC added to remaining-render QC
+### Defect A — approved anchor role leakage
 
-## 2026-09-06 — S02 internal render attempts
+Symptom:
+- S02 attempts repeatedly reproduced S01-like full-table composition and pre-meal pose.
 
-Required contract:
-- single panel
-- text free
-- food macro / oblique close-up
-- only mackerel plate + partial hand/chopsticks dominant
-- action: chopsticks pry open grilled mackerel skin and expose white flesh
-- fish remains on main plate
-- no fish on rice yet
-- preserve Episode 002 Korean-home-dinner context and approved visual style
+Root cause:
+- S01 continuity anchor was effectively allowed to influence composition/action like an edit target.
+- no machine-readable render cursor prevented accidental return to S01 semantics.
 
-Observed repeated failures:
-- renderer repeatedly reverted to S01-like full-table composition
-- character face/body remained dominant
-- requested pry-open action was absent
-- generated wall/refrigerator text appeared despite text_free=true
-- output sometimes added or drifted side dishes/table arrangement
+Fix:
+- reference role separation: STYLE_AUTHORITY / CONTINUITY_ANCHOR / EDIT_TARGET
+- S01 continuity anchor: is_edit_target=false
+- explicit episodes/002/RENDER_STATE.json
+- retry_scope=CURRENT_SHOT_ONLY
+- approved locked shots cannot be regenerated
 
-QC classification:
-- STRUCTURAL_OUTPUT_FAIL
-- CAMERA_COMPOSITION_FAIL
-- ACTION_STATE_FAIL
-- TEXT_FREE_FAIL
-- CONTINUITY_DRIFT
+### Defect B — cuisine label under-specification
 
-Disposition:
-- all failed S02 attempts are rejected and must not be used as episode assets
-- do not advance to S03 until a valid S02 exists
+Symptom:
+- Japanese-style horizontal chopstick placement / chopstick-rest visual grammar
+- palms-together pre-meal gesture
+- earlier Japanese-adjacent soup/rolled-egg conventions
 
-Current blocker:
-- renderer is not honoring shot-specific composition/action constraints in this execution context
+Root cause:
+- Korean-home-meal classification did not compile utensil placement, table topology and body/hand gesture into render constraints.
+- renderer filled the unspecified space using generic East-Asian/Japanese visual priors.
 
-Next valid action:
-- retry S02 through a rendering path/context that can honor the shot contract
-- run structural + visual + meal-context + food-state QC before advancing
+Fix:
+- MEAL_CONTEXT_SYSTEM v0.2 adds dining grammar
+- QC checks utensil type/material/placement and gesture grammar
+- episode-specific E002 grammar compiled in episodes/002/README.md
+
+## Rejected S02 attempts
+
+All S02 outputs created before these structural fixes are rejected.
+They are not assets and do not advance the cursor.
+
+## Current contract
+
+- render cursor: S02
+- S01: locked
+- retry: S02 only
+- next user gate: complete raster set
