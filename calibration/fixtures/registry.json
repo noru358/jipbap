@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "assets": [
+    {
+      "asset_id": "CAL_FOOD_BLOCK",
+      "status": "APPROVED",
+      "path": "calibration/fixtures/food_block.ppm",
+      "sha256": "2fb8c11e5951474c48ed5785e19626e853236371ce519ec7340e49f9f956bf58",
+      "width": 10,
+      "height": 10
+    },
+    {
+      "asset_id": "CAL_PERSON_BLOCK",
+      "status": "APPROVED",
+      "path": "calibration/fixtures/person_block.ppm",
+      "sha256": "597a8befa9c49a8272872096c16b27f895a201b81519ae90e36802a4976e7af5",
+      "width": 8,
+      "height": 12
+    },
+    {
+      "asset_id": "CAL_BAND_BLOCK",
+      "status": "APPROVED",
+      "path": "calibration/fixtures/band_block.ppm",
+      "sha256": "5e4880435099f40f70bac0afacb9290356f035d412e90eef4a21e9f159c52c92",
+      "width": 10,
+      "height": 4
+    }
+  ]
+}
