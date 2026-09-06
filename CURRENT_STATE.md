@@ -9,10 +9,10 @@ Architecture: COMPOSITION_FIRST_HYBRID_FOOD
 
 Execution authorization: **ASSET_AND_TEMPLATE_CALIBRATION_ONLY**
 
-Active episode: **NONE**
-Next production episode: **001 after calibration**
+Active episode: NONE
+Next production episode: 001 after calibration
 
-The prior E001/evaluation outputs are historical evidence only. They are not COMPLETE, are not publication authority, and are not automatically promoted into the new production asset registry.
+The prior E001/evaluation execution package has been removed from the working tree. Git history is the archive; no old raster/state file is current production authority.
 
 ## Canonical rendering decision
 
@@ -65,11 +65,14 @@ STYLE_REF_001 remains PERSON authoring authority metadata, not a production pose
 
 Finish the deterministic COVER and LETTERING template calibration because it requires no new image generation.
 
-Then run one small hybrid visual pilot:
+Then run one fixed hybrid visual fixture: **BODY 4 slides**.
 - one approved PERSON pose/identity asset set;
-- one meal with 2–3 FOOD_STATE assets;
+- one meal with enough FOOD_STATE assets to support four meaningful BODY beats;
 - only necessary hand/utensil/contact assets;
-- deterministic assembly into separate BODY frames;
+- deterministic assembly into exactly four separate BODY frames;
+- COVER is a separate product slot and is not counted in the four BODY slides;
 - no full-frame generation unless explicitly marked as an exception.
+
+The BODY-4 count is calibration-only. Normal Jipbap production length remains content/state-driven.
 
 Do not start a fresh publishable 001 until this pilot validates the hybrid boundary.
