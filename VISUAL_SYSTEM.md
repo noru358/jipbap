@@ -205,6 +205,29 @@ Generated asset:
 - no baked lettering;
 - appropriate transparency/isolation when the asset class needs composition flexibility.
 
+### 7.1 Asset-boundary rule for interaction geometry
+
+Asset modularity is not maximized blindly. Use the **smallest stable semantic unit** that preserves the required physical relation.
+
+Prefer separate reusable assets when independent placement is safe:
+- PERSON pose without exact contact;
+- FOOD/FOOD_STATE without a hand/tool attached;
+- background/prop components.
+
+Use episode-local `INTERACTION_COMPOSITE` when independent transforms would make a high-risk contact brittle:
+- hand + utensil + food contact;
+- hand + utensil + mouth/face contact;
+- tightly coupled food deformation/contact where one-pixel alignment carries meaning.
+
+An INTERACTION_COMPOSITE:
+- is still an asset, not automatically a full-frame exception;
+- should exclude unrelated background/text and remain crop-flexible where practical;
+- defaults to EPISODE_LOCAL;
+- if it contains a recurring person, must be authored from an already approved identity anchor rather than sampling identity independently;
+- may bundle multiple visual domains only because the contact geometry is inseparable, not because the renderer is allowed to ignore reusable assets.
+
+Only if a compound interaction asset plus deterministic composition still cannot preserve the scene should the full-frame exception lane be considered.
+
 Final BODY frame:
 - 4:5 portrait;
 - one frame = one image file;
