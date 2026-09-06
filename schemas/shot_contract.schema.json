@@ -16,7 +16,10 @@
     "postconditions",
     "must_show",
     "must_not_show",
-    "output"
+    "output",
+    "appetite",
+    "background",
+    "entity_visibility"
   ],
   "properties": {
     "shot_id": {
@@ -62,7 +65,8 @@
         "required": [
           "ref_id",
           "role",
-          "is_edit_target"
+          "is_edit_target",
+          "coverage_scope"
         ],
         "properties": {
           "ref_id": {
@@ -71,7 +75,10 @@
           "role": {
             "type": "string",
             "enum": [
-              "STYLE_AUTHORITY",
+              "PERSON_STYLE_AUTHORITY",
+              "FOOD_STYLE_AUTHORITY",
+              "BACKGROUND_STYLE_AUTHORITY",
+              "GRAPHIC_STYLE_AUTHORITY",
               "CONTINUITY_ANCHOR",
               "EDIT_TARGET"
             ]
@@ -84,6 +91,14 @@
             "items": {
               "type": "string"
             }
+          },
+          "coverage_scope": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "uniqueItems": true
           }
         },
         "additionalProperties": false
@@ -286,6 +301,126 @@
     "state_delta": {
       "type": "object",
       "additionalProperties": true
+    },
+    "appetite": {
+      "type": "object",
+      "required": [
+        "functions",
+        "sensory_payload",
+        "reader_proxy_value",
+        "observable_cues",
+        "temporal_distinguishability"
+      ],
+      "properties": {
+        "functions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ANTICIPATION",
+              "SENSORY_REVEAL",
+              "TRANSFORMATION",
+              "INGESTION",
+              "AFTERTASTE",
+              "SECONDARY_PAYOFF"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "sensory_payload": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "reader_proxy_value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observable_cues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "temporal_distinguishability": {
+          "type": "string",
+          "minLength": 1
+        },
+        "forbidden_ad_cues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "background": {
+      "type": "object",
+      "required": [
+        "scope",
+        "visible_facts"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "LOCAL",
+            "FULL"
+          ]
+        },
+        "visible_facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location_lock_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "entity_visibility": {
+      "type": "object",
+      "required": [
+        "required",
+        "allowed",
+        "forbidden"
+      ],
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "allowed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "forbidden": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": true
