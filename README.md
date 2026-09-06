@@ -46,8 +46,8 @@
 ## Current state
 
 현재 active episode는 NONE이며 asset/template calibration 중이다.
-과거 E001 평가 결과는 historical evidence일 뿐 현행 production authority가 아니다.
-fresh 001은 hybrid asset pilot이 통과한 뒤 시작한다.
+폐기된 001 execution package는 working tree에서 제거했다. Git history만 archive다.
+hybrid pilot은 BODY 4 slides 고정 fixture이며 COVER는 별도다. fresh 001은 이 pilot이 통과한 뒤 시작한다.
 
 ## Repository topology
 
