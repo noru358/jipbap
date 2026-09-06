@@ -63,8 +63,22 @@ For each planned BODY slide:
 1. list required visible entities;
 2. resolve each requirement against `assets/production/registry.json`;
 3. use existing approved assets if semantically adequate;
-4. create ASSET_GAP for only what is missing;
-5. do not weaken the food beat merely to avoid a justified gap.
+4. choose the smallest **stable** asset boundary for missing capability;
+5. keep independent assets separate when deterministic placement is safe;
+6. use episode-local INTERACTION_COMPOSITE when splitting high-risk contact would make geometry brittle;
+7. create ASSET_GAP for only what is missing;
+8. do not weaken the food beat merely to avoid a justified gap.
+
+Before authoring, build an asset dependency DAG.
+Examples of dependency types:
+- a repeated-person interaction asset depends on an approved PERSON identity anchor;
+- a later FOOD_STATE may depend on an earlier approved food appearance/state anchor;
+- a contact asset may depend on the approved tool/food/person facts it must preserve.
+
+Independent gaps may be authored in parallel. Dependent gaps may not be authored before their required anchors are approved/hash-bound.
+
+Full-frame-exception need is initially `UNASSESSED`.
+Do not predeclare `false` merely from storyboard confidence. Assess it only after stable asset boundaries and deterministic composition have been attempted.
 
 ## 5. Asset authoring gate
 
