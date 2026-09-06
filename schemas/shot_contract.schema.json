@@ -16,15 +16,38 @@
     "output"
   ],
   "properties": {
-    "shot_id": {"type": "string"},
-    "beat_role": {"type": "string"},
+    "shot_id": {
+      "type": "string"
+    },
+    "beat_role": {
+      "type": "string"
+    },
     "meal_context": {
       "type": "object",
-      "required": ["context_id", "constraints", "dining_grammar"],
+      "required": [
+        "context_id",
+        "constraints",
+        "dining_grammar"
+      ],
       "properties": {
-        "context_id": {"type": "string", "minLength": 1},
-        "constraints": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-        "dining_grammar": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+        "context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "dining_grammar": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
       },
       "additionalProperties": true
     },
@@ -32,12 +55,32 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["ref_id", "role", "is_edit_target"],
+        "required": [
+          "ref_id",
+          "role",
+          "is_edit_target"
+        ],
         "properties": {
-          "ref_id": {"type": "string"},
-          "role": {"type": "string", "enum": ["STYLE_AUTHORITY", "CONTINUITY_ANCHOR", "EDIT_TARGET"]},
-          "is_edit_target": {"type": "boolean"},
-          "allowed_influence": {"type": "array", "items": {"type": "string"}}
+          "ref_id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "STYLE_AUTHORITY",
+              "CONTINUITY_ANCHOR",
+              "EDIT_TARGET"
+            ]
+          },
+          "is_edit_target": {
+            "type": "boolean"
+          },
+          "allowed_influence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         },
         "additionalProperties": false
       },
@@ -45,31 +88,96 @@
     },
     "context_firewall": {
       "type": "object",
-      "required": ["target_only", "deny_future_shots", "deny_voice_copy", "deny_rejected_outputs"],
+      "required": [
+        "target_only",
+        "deny_future_shots",
+        "deny_voice_copy",
+        "deny_rejected_outputs"
+      ],
       "properties": {
-        "target_only": {"const": true},
-        "deny_future_shots": {"const": true},
-        "deny_voice_copy": {"const": true},
-        "deny_rejected_outputs": {"const": true},
-        "deny_locked_shot_as_edit_target": {"const": true}
+        "target_only": {
+          "const": true
+        },
+        "deny_future_shots": {
+          "const": true
+        },
+        "deny_voice_copy": {
+          "const": true
+        },
+        "deny_rejected_outputs": {
+          "const": true
+        },
+        "deny_locked_shot_as_edit_target": {
+          "const": true
+        }
       },
       "additionalProperties": false
     },
-    "preconditions": {"type": "array", "items": {"type": "string"}},
-    "action": {"type": "string", "minLength": 1},
-    "postconditions": {"type": "array", "items": {"type": "string"}},
-    "must_show": {"type": "array", "items": {"type": "string"}},
-    "must_not_show": {"type": "array", "items": {"type": "string"}},
-    "composition": {"type": "string"},
+    "preconditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "postconditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "must_show": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "must_not_show": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "composition": {
+      "type": "string"
+    },
     "output": {
       "type": "object",
-      "required": ["target_shot_id", "single_panel", "text_free", "delivery_mode"],
+      "required": [
+        "target_shot_id",
+        "single_panel",
+        "text_free",
+        "delivery_mode"
+      ],
       "properties": {
-        "target_shot_id": {"type": "string"},
-        "single_panel": {"const": true},
-        "text_free": {"const": true},
-        "delivery_mode": {"const": "SEPARATE_FILE"}
+        "target_shot_id": {
+          "type": "string"
+        },
+        "single_panel": {
+          "const": true
+        },
+        "text_free": {
+          "const": true
+        },
+        "delivery_mode": {
+          "const": "SEPARATE_FILE"
+        }
       },
+      "additionalProperties": true
+    },
+    "scene_state_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Reference ID for the persistent MEAL_SCENE_STATE used by new/revised shots when a meal scene continues."
+    },
+    "state_delta": {
+      "type": "object",
+      "description": "Per-shot changes to persistent meal-scene entities. Omitted/empty means persistent topology remains unchanged.",
       "additionalProperties": true
     }
   },

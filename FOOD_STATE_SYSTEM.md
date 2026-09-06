@@ -1,4 +1,4 @@
-# FOOD_STATE_SYSTEM — state-transition continuity v0.1
+# FOOD_STATE_SYSTEM — state-transition continuity v0.2
 
 ## 0. Why this exists
 
@@ -31,6 +31,35 @@
 - location
 - holding
 - active_action
+
+## 1.5 Meal-scene state / persistent topology
+
+음식 상태만 이어져도 식탁 전체가 컷마다 재배치되면 같은 한 끼로 보이지 않는다.
+따라서 식탁이 반복 등장하는 회차는 `MEAL_SCENE_STATE`를 가진다.
+
+`MEAL_SCENE_STATE`는 화면 좌표가 아니라 **세계 안의 상대 관계**를 저장한다.
+
+예:
+- diner 앞의 rice_bowl / soup_bowl 관계
+- main_plate가 개인 영역인지 중앙 shared 영역인지
+- side_dish가 어느 vessel/entity와 인접하는지
+- spoon/chopsticks가 어느 식사자 영역에 속하는지
+- 식탁/쟁반/상판의 지속 재질과 핵심 소품
+
+카메라가 바뀌면 화면상의 좌우/상하 projection은 달라질 수 있다.
+그러나 실제 world-space topology는 명시적 행동 없이 바뀌면 안 된다.
+
+각 shot은 필요할 때:
+- `scene_state_ref` — 이전에 확정된 meal-scene state
+- `state_delta` — 이번 컷에서 실제로 바뀌는 위치/소유/잔량/접촉 상태
+를 가진다.
+
+변경 명령이 없는 persistent entity는 그대로 유지한다.
+그릇을 옮기거나 접시를 당기는 등 위치 변화가 실제 행동이라면 그 변화가 action/state_delta에 기록되어야 한다.
+설명 없는 재배치, 소품 생성/소실, 이전 상태 복구는 `UNEXPLAINED_SCENE_DRIFT`다.
+
+이 구조는 특정 메뉴의 좌표를 프로젝트 전역에 하드코딩하지 않는다.
+회차별 meal context가 초기 topology를 결정하고, 이후 컷은 그 상태와 delta로 이어간다.
 
 ## 2. Shot contract
 
@@ -106,6 +135,9 @@ bridge는 별도 컷이 아닐 수도 있다. 단, 다음 컷의 시작 상태�
 - 먹은 양이 역행하지 않는가
 - 깨진/섞인/소스가 묻은 상태가 원상복구되지 않는가
 - 그릇/도구가 행동 논리와 맞는가
+- 초기 MEAL_SCENE_STATE의 world-space 관계가 명시적 action 없이 바뀌지 않았는가
+- 카메라 projection 변화와 실제 식탁 재배치를 혼동하지 않았는가
+- 없던 그릇/반찬/도구가 설명 없이 생기거나 사라지지 않았는가
 - 필수 bridge action이 빠지지 않았는가
 
 하나라도 핵심적으로 실패하면 해당 컷 또는 콘티를 FAIL 처리한다.

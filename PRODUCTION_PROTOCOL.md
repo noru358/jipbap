@@ -1,4 +1,4 @@
-# PRODUCTION_PROTOCOL — jipbap v0.4
+# PRODUCTION_PROTOCOL — jipbap v0.5
 
 ## 0. Operating mode
 
@@ -7,11 +7,11 @@
 User-gate topology:
 
 content/storyboard contract
-→ S01 USER anchor gate
-→ S02..final OPERATOR INTERNAL render/QC
-→ complete text-free raster-set USER gate
-→ lettering
-→ final USER gate
+→ BODY S01 USER anchor gate
+→ BODY S02..final OPERATOR INTERNAL render/QC
+→ complete BODY text-free raster-set USER gate
+→ COVER assembly + BODY lettering
+→ final CAROUSEL USER gate
 
 one frame = one file 이지만 one frame = one user gate는 아니다.
 
@@ -95,15 +95,18 @@ GitHub의 render cursor/locked shots를 복원한 후 S02부터 그대로 이어
 ## 4. Preproduction
 
 1. MENU/MOMENT 선정
-2. MEAL CONTEXT + DINING GRAMMAR compile
-3. 콘텐츠 비트 작성
-4. VOICE 역할/문구 작성
-5. 전체 콘티 작성
-6. FOOD STATE graph 작성
-7. bridge action 검사
-8. 전체 시각 리듬 설계
-9. 사용자에게 사전 패키지 제시
-10. 명시 승인 후 래스터 제작
+2. SENSORY ROUTE 선정 — PURE_SENSORY / TRIGGER_TO_MEAL / IMAGINED_OR_MEMORY 또는 동등한 회차별 변형
+3. MEAL CONTEXT + DINING GRAMMAR compile
+4. 초기 MEAL_SCENE_STATE / world-space table topology 정의
+5. 콘텐츠 비트 작성
+6. VOICE 역할/문구 작성
+7. 전체 BODY 콘티 작성
+8. FOOD STATE graph + per-shot scene-state delta 작성
+9. bridge action 검사
+10. 전체 시각 리듬 설계
+11. COVER brief 작성 — title / hero 후보 / character slot / reuse-first 여부
+12. 사용자에게 사전 패키지 제시
+13. 명시 승인 후 BODY 래스터 제작
 
 ## 5. Visual preflight
 
@@ -179,24 +182,48 @@ S01 PASS 후:
 - table topology plausibility
 - cross-context contamination
 
-### Food-state QC
-- pre/post continuity
+### Food-state / meal-scene continuity QC
+- pre/post food continuity
 - bridge actions
 - quantity/location/state monotonicity
+- persistent table/vessel/utensil topology
+- only declared state_delta changes persistent entities
+- camera projection change is not mistaken for world-space rearrangement
+- unexplained entity creation/disappearance/repositioning = FAIL
 
 ## 9. Raster-set gate
 
-모든 컷 내부 PASS 후 전체 무자막 세트를 사용자에게 제시한다.
-사용자 PASS 후 레터링.
+모든 BODY 컷 내부 PASS 후 전체 무자막 세트를 사용자에게 제시한다.
+사용자 PASS 후 COVER assembly와 BODY lettering으로 이동한다.
 
-## 10. Lettering / final
+Raster-set PASS는 BODY artwork를 잠그며, cover 정책 추가만으로 기존 승인 BODY artwork를 소급 무효화하지 않는다.
 
-VOICE_SYSTEM으로 후단 합성.
+## 10. Cover assembly
+
+VISUAL_SYSTEM의 COVER_TEMPLATE_v1을 따른다.
+
+1. 승인 BODY artwork에서 cover hero 후보를 먼저 찾는다.
+2. 충분하면 editable title/series mark와 함께 cover를 조립한다.
+3. 부족할 때만 dedicated cover hero를 별도 생성한다.
+4. dedicated cover hero는 BODY shot numbering/cursor에 포함하지 않는다.
+5. COVER는 S01 anchor나 FOOD_STATE/MEAL_SCENE_STATE authority가 아니다.
+
+## 11. Lettering / final carousel
+
+VOICE_SYSTEM으로 BODY 문구를 후단 합성하고 cover title을 editable layer로 조립한다.
+
+최종 carousel order:
+`COVER → S01 → S02 → ... → Sfinal`
+
 최종 QC:
+- cover/body 역할 분리
+- cover title/hero mobile legibility
 - 컷 순서
 - 이미지/텍스트 대응
+- composition-aware lettering placement
 - 모바일 가독성
 - 말투
 - meal/dining grammar
 - food-state continuity
-- 감정 여운
+- meal-scene/table-topology continuity
+- 감정/감각 여운

@@ -6,14 +6,16 @@
 
 ## Core production flow
 
-menu/moment → meal-context compile → content plan → storyboard → pre-raster user gate → S01 user anchor → S02..final internal render/QC → complete text-free raster-set user gate → lettering → final QC/export
+menu/moment → sensory-route + meal-context compile → meal-scene state → content/body storyboard + cover brief → pre-raster user gate → BODY S01 user anchor → BODY S02..final internal render/QC → complete text-free body-raster user gate → cover assembly + lettering → final carousel QC/export
 
 핵심 운영 원칙:
 - 한 컷 = 한 이미지 파일. 멀티패널/콜라주/콘택트시트는 생산 결과로 인정하지 않는다.
 - 래스터 이미지는 기본적으로 무문자. 내레이션·말풍선·대사는 후단 레터링에서 분리한다.
 - S01은 사용자 시각 앵커 게이트다. S01 통과 후 S02~마지막 컷은 운영자가 내부 QC하며 끝까지 진행하고, 중간 사용자 승인을 기본값으로 요구하지 않는다.
 - 음식툰의 컷은 단순한 장면 목록이 아니라 상태 전이(state transition)로 설계한다.
+- 같은 식탁이 이어지는 회차는 MEAL_SCENE_STATE를 두고, 이후 컷은 persistent world-state + 명시적 delta로 이어간다.
 - 식탁은 개별 음식뿐 아니라 meal context / meal ecology 전체로 검수한다.
+- Instagram cover는 BODY S01과 분리된 product asset이며, export는 COVER → S01 → ... → Sfinal 순서다.
 - 스타일은 승인된 실제 이미지 레퍼런스가 최상위 시각 권위다. 텍스트 프롬프트나 임시 생성물이 이를 덮어쓰지 않는다.
 - reference path/hash ≠ actual media binding. 바이너리 존재와 hash 검증을 fail-closed로 요구한다.
 

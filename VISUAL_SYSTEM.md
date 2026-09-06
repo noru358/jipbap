@@ -1,4 +1,4 @@
-# VISUAL_SYSTEM — jipbap v0.4
+# VISUAL_SYSTEM — jipbap v0.5
 
 ## 1. Reference authority
 
@@ -134,3 +134,50 @@ food macro인데 full-table/character medium이 나오면 CAMERA_COMPOSITION_FAI
 - 평범한 그릇
 - 먹으며 변하는 상태
 - 손동작/잔여 흔적
+
+
+## 11. Instagram carousel cover — COVER_TEMPLATE_v1
+
+집밥의 Instagram cover는 본편 음식 상태 시퀀스와 분리된 **product-composition asset**이다.
+
+Hard distinction:
+- `COVER` != `S01`
+- COVER는 FOOD_STATE / MEAL_SCENE_STATE의 첫 상태가 아니다.
+- COVER는 S01 user anchor를 대체하지 않는다.
+- COVER용 전용 이미지가 생겨도 본편 continuity anchor로 자동 승격하지 않는다.
+
+Carousel export order:
+`COVER → S01 → S02 → ... → Sfinal`
+
+### Fixed template grammar
+
+프로젝트 수준에서 고정/반복하는 요소:
+- 4:5 master ratio
+- 큰 제목의 기본 hierarchy와 safe area
+- hero 영역과 제목 영역의 대략적 비율
+- 시리즈 표식/브랜드 요소의 위치
+- 모바일에서 한눈에 같은 시리즈로 읽히는 밀도와 여백 원칙
+
+회차별 variable slots:
+- 제목
+- 대표 음식
+- 해당 회차 인물/표정/작은 행동
+- 최소 배경 맥락
+- 음식과 인물의 구체 배치
+
+템플릿은 픽셀 좌표를 모든 회차에 복제하는 고정 포스터가 아니다.
+시리즈 정체성은 유지하되 음식 hero와 캐릭터가 제목에 가려지지 않도록 composition을 회차별로 조정한다.
+
+### Reuse-first hero policy
+
+1. 승인된 본편 artwork 중 cover hero로 충분한 음식/인물 자산이 있으면 우선 재사용/재구성한다.
+2. 적합한 본편 자산이 없을 때만 `DEDICATED_COVER_HERO`를 만든다.
+3. dedicated cover hero는 가능하면 S01 및 body raster direction이 승인된 뒤 생성해 style/identity drift를 줄인다.
+4. cover title/series mark는 raster에 굽지 않고 COMPOSITION 단계에서 editable layer로 조립한다.
+
+Cover QC:
+- 제목이 phone-size에서 즉시 읽히는가
+- 음식이 회차의 주인공으로 보이는가
+- 해당 회차 캐릭터가 필요 이상으로 food focal area를 압도하지 않는가
+- 본편과 같은 drawing language / identity인가
+- 본편 상태 연속성을 잘못 암시하는 fake action/state를 만들지 않는가

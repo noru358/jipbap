@@ -1,4 +1,4 @@
-# MEAL_CONTEXT_SYSTEM — culinary/cultural coherence v0.2
+# MEAL_CONTEXT_SYSTEM — culinary/cultural coherence v0.3
 
 ## 0. Purpose
 
@@ -40,6 +40,10 @@ dining_grammar는 최소 다음을 포함한다.
 - rice/soup/main/side의 대략적 역할별 위치
 - shared dishes vs individual dishes
 - 개인 앞자리와 중앙 영역의 구분
+- topology는 기본적으로 world-space / diner-relative 관계로 기록한다.
+- 이미지의 screen-left/screen-right 좌표를 식문화 규칙으로 하드코딩하지 않는다.
+- 카메라/크롭이 바뀌어도 동일 식탁의 실제 상대 관계는 유지하며, 실제 재배치는 행동으로 설명되어야 한다.
+- FOOD_STATE_SYSTEM의 MEAL_SCENE_STATE가 회차 안에서 이 topology의 지속 상태와 per-shot delta를 소유한다.
 
 ### gesture grammar
 - 먹기 전 기본 손 위치
@@ -114,6 +118,8 @@ MENU/MOMENT 확정 후:
 - 수저 종류/재질/배치가 맞는가
 - 손/몸 제스처가 해당 식사 맥락과 맞는가
 - 식탁 topology가 자연스러운가
+- 동일 meal scene에서 그릇/음식/수저의 world-space 관계가 이유 없이 drift하지 않는가
+- camera projection 변화와 실제 table rearrangement를 구분했는가
 - 이전 컷과 문화적 정체성이 흔들리지 않는가
 
 핵심 오류가 있으면 작화가 좋아도 FAIL.
