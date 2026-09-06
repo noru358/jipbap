@@ -67,8 +67,8 @@ Current:
 
 ## BODY4 fixture state
 
-Candidate fixture: `JIPBAP_HYBRID_BODY4_V2`
-Status: **AWAITING USER APPROVAL**
+Fixture: `JIPBAP_HYBRID_BODY4_V2`
+Status: **APPROVED**
 
 Temporal model:
 - one still panel = one exact keyframe;
@@ -105,28 +105,40 @@ Stable required asset gaps:
 
 Raw assets do not each require a separate user click. USER approval is reserved for named gates/locks; operator approval may carry bounded pilot assets between those gates.
 
+## Asset resolution result
+
+`calibration/body4/ASSET_PLAN.json` is current.
+
+Registry matches: 0.
+Resolved ASSET_GAP count: 5.
+
+Dispatch state:
+- FOOD_EGG_RICE_INTACT: may be compiled independently from current text/meal authorities.
+- PERSON_CONTEXT_SEATED: **BLOCKED** until actual STYLE_REF_001 image bytes are materialized or explicitly supplied and SHA-256 verified.
+- all later interaction/residue assets wait on their declared dependencies.
+
 ## Remaining blockers
 
-1. BODY4 V2 calibration content/storyboard requires explicit user approval.
-2. STYLE_REF_001 binary is still not materialized in Git/current runtime for PERSON authoring.
-3. Production registry still has 0 approved assets.
-4. Full-frame exception need is UNASSESSED until stable assets are composed.
-5. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
+1. STYLE_REF_001 actual image bytes are not materialized/verified in the current runtime for PERSON authoring.
+2. Production registry still has 0 approved assets because no real pilot asset has passed authoring/QC yet.
+3. Full-frame exception need is UNASSESSED until stable assets are composed.
+4. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
 
 ## Exact next action
 
-Obtain explicit user approval for `calibration/body4/FIXTURE.json` V2.
+Asset resolution is complete. The pilot is now in **BODY_FIXTURE_ASSET_AUTHORING**.
 
-PASS:
-- mark fixture APPROVED;
-- advance CALIBRATION_STATE to BODY_FIXTURE_ASSET_RESOLUTION;
-- bind/materialize STYLE_REF_001 actual media before PERSON dispatch;
-- create only the five declared ASSET_GAPs in dependency order;
-- compose and present S01 as the next user visual anchor gate;
-- after S01 PASS, continue dependent asset authoring/composition without per-asset user gates unless a new lock-worthy decision appears.
+Fail-closed PERSON path:
+1. obtain the actual STYLE_REF_001 bytes;
+2. verify dimensions/hash against `assets/REFERENCE_MANIFEST.md`;
+3. bind the image through the parent media-input contract;
+4. only then dispatch PERSON_CONTEXT_SEATED.
 
-FAIL:
-- revise only the fixture/storyboard scope requested by the user;
-- do not generate assets.
+The independent FOOD_EGG_RICE_INTACT job may be prepared separately, but no PERSON-conditioned render may proceed from prose/path/hash alone.
+
+After foundation assets pass QC and bounded operator registration:
+- compose S01;
+- present S01 to the user as the visual/identity anchor gate;
+- only after S01 PASS author dependent interaction assets in DAG order.
 
 Do not start a fresh publishable 001 until the hybrid pilot and real-pixel template validation both pass.
