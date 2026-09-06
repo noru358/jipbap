@@ -1,0 +1,247 @@
+{
+  "schema_version": "1.0",
+  "fixture_id": "JIPBAP_HYBRID_BODY4_V1",
+  "status": "AWAITING_USER_APPROVAL",
+  "purpose": "ARCHITECTURE_CALIBRATION_ONLY",
+  "body_slide_count": 4,
+  "cover_separate": true,
+  "normal_production_length_rule": "CONTENT_STATE_DRIVEN",
+  "selected_template_specs": {
+    "cover": "calibration/locks/COVER_SPEC_V1.json",
+    "lettering": "calibration/locks/LETTERING_SPEC_V1.json"
+  },
+  "registry_snapshot": {
+    "path": "assets/production/registry.json",
+    "approved_asset_count": 0,
+    "sha256": "5d7572aea12757f02e262b10a65d217103152bd1e6ffe835a2347c2fceb251a1"
+  },
+  "menu_moment": {
+    "route": "PURE_SENSORY",
+    "menu_id": "FRIED_EGG_ON_RICE",
+    "moment": "막 부친 계란후라이를 밥 위에 올려 노른자를 터뜨리고 한 숟갈 먹는 순간",
+    "ending": "FOOD_RESIDUE"
+  },
+  "meal_context": {
+    "context_id": "KOREAN_HOME_SIMPLE_EGG_RICE",
+    "primary_cuisine_context": "Korean home meal",
+    "meal_setting": "simple home table",
+    "visible_entities": [
+      "ceramic rice bowl",
+      "white rice",
+      "fresh fried egg with runny yolk",
+      "Korean metal spoon when action requires it"
+    ],
+    "dining_grammar": [
+      "fried egg is already placed on top of rice before yolk-breaking begins",
+      "metal spoon may press and scoop the egg-rice",
+      "no Japanese-style tableware or chopstick placement is introduced by default",
+      "no extra soup, seaweed garnish, side dishes or condiments appear unless explicitly added"
+    ],
+    "cross_context_risks": [
+      "miso-soup visual prior",
+      "Japanese chopstick-rest/table-setting prior",
+      "Western breakfast plate prior"
+    ]
+  },
+  "slides": [
+    {
+      "shot_id": "S01",
+      "beat_role": "ANTICIPATION",
+      "state_before": "rice bowl full; fried egg intact on top; yolk unbroken and runny",
+      "action": "proxy eater leans attention toward the bowl; no food contact yet",
+      "state_after": "unchanged food state",
+      "focal_owner": "FOOD_WITH_PROXY_CONTEXT",
+      "shot_scale": "MEDIUM_CLOSE",
+      "camera_relation": "slightly elevated table-facing context view",
+      "visual_delta_from_previous": "opening state",
+      "geometry_risk": "LOW",
+      "background_scope": "LOCAL",
+      "must_show": [
+        "egg is visibly on top of rice",
+        "yolk remains intact",
+        "person is secondary to the bowl"
+      ],
+      "must_not_show": [
+        "broken yolk",
+        "food already on spoon",
+        "extra meal entities not declared by meal context"
+      ],
+      "appetite": {
+        "functions": ["ANTICIPATION", "SENSORY_REVEAL"],
+        "sensory_payload": ["slightly crisp fried-white edge", "soft runny yolk expectation"],
+        "observable_cues": ["thin browned edge on egg white", "rounded intact yolk surface"],
+        "reader_proxy_value": "the next action promises a visible texture change"
+      },
+      "copy_plan": {
+        "role": "SENSORY_OPENER",
+        "status": "DRAFT_FOR_CALIBRATION",
+        "copy": "흰자 끝은 살짝 바삭하고, 노른자는 아직 묽다."
+      }
+    },
+    {
+      "shot_id": "S02",
+      "beat_role": "TRANSFORMATION",
+      "state_before": "egg remains on rice; yolk intact",
+      "action": "metal spoon presses into the yolk while the egg stays on the rice",
+      "state_after": "yolk pierced; yolk begins coating nearby rice grains",
+      "focal_owner": "FOOD_CONTACT",
+      "shot_scale": "MACRO",
+      "camera_relation": "close food-contact view",
+      "visual_delta_from_previous": "person/context recedes; contact point and broken yolk dominate",
+      "geometry_risk": "HIGH",
+      "contact_chain": ["hand", "spoon handle", "spoon edge", "yolk surface", "rice support"],
+      "background_scope": "NONE",
+      "must_show": [
+        "spoon physically contacts yolk",
+        "egg is still positioned on rice",
+        "yolk break begins at the contact point"
+      ],
+      "must_not_show": [
+        "egg broken before being placed on rice",
+        "floating utensil",
+        "impossible hand or spoon angle"
+      ],
+      "appetite": {
+        "functions": ["TRANSFORMATION", "SENSORY_REVEAL"],
+        "sensory_payload": ["runny yolk coating rice"],
+        "observable_cues": ["yellow yolk spreads over a limited patch of white rice"],
+        "reader_proxy_value": "the transformation creates the bite texture rather than merely advancing time"
+      },
+      "copy_plan": {
+        "role": "SILENT",
+        "status": "LOCKED_SILENT_FOR_FIXTURE",
+        "copy": null
+      }
+    },
+    {
+      "shot_id": "S03",
+      "beat_role": "INGESTION",
+      "state_before": "yolk has coated part of the rice; one spoonful has been scooped",
+      "action": "proxy eater brings one yolk-coated spoonful into the mouth",
+      "state_after": "one bite consumed; bowl quantity becomes partial",
+      "focal_owner": "MOUTH_CONTACT",
+      "shot_scale": "MEDIUM_CLOSE",
+      "camera_relation": "side-oblique bite view preserving spoon-to-mouth contact",
+      "visual_delta_from_previous": "macro food-contact becomes body-scale ingestion",
+      "geometry_risk": "HIGH",
+      "contact_chain": ["shoulder", "arm", "wrist", "hand", "spoon", "food bite", "mouth"],
+      "background_scope": "LOCAL",
+      "must_show": [
+        "same proxy-eater identity as S01",
+        "spoonful visibly contains yolk-coated rice",
+        "spoon and mouth contact is physically plausible"
+      ],
+      "must_not_show": [
+        "different face/style identity",
+        "food teleporting without a spoonful",
+        "extra fingers or broken arm geometry"
+      ],
+      "appetite": {
+        "functions": ["INGESTION"],
+        "sensory_payload": ["soft rice coated by yolk"],
+        "observable_cues": ["small coherent spoonful; rice grains visibly coated rather than submerged"],
+        "reader_proxy_value": "the reader sees the promised transformed bite actually eaten"
+      },
+      "copy_plan": {
+        "role": "TEXTURE",
+        "status": "DRAFT_FOR_CALIBRATION",
+        "copy": "노른자 묻은 밥이 입안에서 금방 부드러워진다."
+      }
+    },
+    {
+      "shot_id": "S04",
+      "beat_role": "AFTERTASTE_RESIDUE",
+      "state_before": "one bite consumed; bowl quantity partial",
+      "action": "no new food action; camera reads the physical residue",
+      "state_after": "partial bowl remains with yolk streaks and missing bite",
+      "focal_owner": "FOOD_RESIDUE",
+      "shot_scale": "CLOSE",
+      "camera_relation": "tight residue crop",
+      "visual_delta_from_previous": "person disappears; same approved residue-food pixels are reused as the sole focal mass",
+      "geometry_risk": "LOW",
+      "background_scope": "NONE",
+      "must_show": [
+        "reduced rice quantity",
+        "yolk streaks remain where mixing/contact occurred",
+        "state is clearly later than S01"
+      ],
+      "must_not_show": [
+        "restored intact yolk",
+        "full bowl",
+        "new garnish or side dishes"
+      ],
+      "appetite": {
+        "functions": ["AFTERTASTE"],
+        "sensory_payload": ["lingering richness implied by residue"],
+        "observable_cues": ["yellow coating and spoon-scoop gap remain visible"],
+        "reader_proxy_value": "the ending proves the bite happened without an evaluative punchline"
+      },
+      "copy_plan": {
+        "role": "SILENT",
+        "status": "LOCKED_SILENT_FOR_FIXTURE",
+        "copy": null
+      }
+    }
+  ],
+  "required_assets": [
+    {
+      "requirement_id": "PERSON_CONTEXT_SEATED",
+      "category": "PERSON_POSE",
+      "initial_scope": "PROJECT_REUSABLE_CANDIDATE",
+      "used_by": ["S01"],
+      "description": "same proxy eater identity, seated/leaning attention toward bowl, isolated for composition"
+    },
+    {
+      "requirement_id": "PERSON_BITE_SPOON_CONTACT",
+      "category": "PERSON_POSE",
+      "initial_scope": "EPISODE_LOCAL",
+      "used_by": ["S03"],
+      "description": "same identity as context pose; integrated hand-spoon-mouth contact because over-atomizing this geometry is unsafe"
+    },
+    {
+      "requirement_id": "FOOD_EGG_RICE_INTACT",
+      "category": "FOOD_STATE",
+      "initial_scope": "EPISODE_LOCAL",
+      "used_by": ["S01"],
+      "description": "ceramic bowl, white rice, fried egg already on top, runny yolk intact"
+    },
+    {
+      "requirement_id": "FOOD_EGG_RICE_BROKEN",
+      "category": "FOOD_STATE",
+      "initial_scope": "EPISODE_LOCAL",
+      "used_by": ["S02"],
+      "description": "same meal after spoon contact begins; yolk broken and coating nearby rice"
+    },
+    {
+      "requirement_id": "FOOD_EGG_RICE_RESIDUE",
+      "category": "FOOD_STATE",
+      "initial_scope": "EPISODE_LOCAL",
+      "used_by": ["S03", "S04"],
+      "description": "partial bowl after one spoonful; intentionally reused across two composed frames with different crop/context"
+    },
+    {
+      "requirement_id": "CONTACT_SPOON_PRESS_YOLK",
+      "category": "HAND_CONTACT",
+      "initial_scope": "EPISODE_LOCAL",
+      "used_by": ["S02"],
+      "description": "hand + Korean metal spoon press geometry aligned to broken-yolk food state"
+    }
+  ],
+  "asset_resolution_result": {
+    "registry_matches": [],
+    "asset_gaps": [
+      "PERSON_CONTEXT_SEATED",
+      "PERSON_BITE_SPOON_CONTACT",
+      "FOOD_EGG_RICE_INTACT",
+      "FOOD_EGG_RICE_BROKEN",
+      "FOOD_EGG_RICE_RESIDUE",
+      "CONTACT_SPOON_PRESS_YOLK"
+    ],
+    "full_frame_exception_required": false
+  },
+  "approval_gate": {
+    "required_before_asset_authoring": true,
+    "actor": "USER",
+    "decision": null
+  }
+}
