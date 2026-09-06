@@ -3,53 +3,57 @@
 ## S01
 
 User verdict: PASS.
+S01 = APPROVED_LOCKED.
 
-Lock:
-- S01 = APPROVED_LOCKED
-- S01 may not be regenerated unless user explicitly invalidates approval.
-
-## Structural defect discovered after S01
-
-### Defect A — approved anchor role leakage
+## Defect A — anchor role leakage
 
 Symptom:
-- S02 attempts repeatedly reproduced S01-like full-table composition and pre-meal pose.
-
-Root cause:
-- S01 continuity anchor was effectively allowed to influence composition/action like an edit target.
-- no machine-readable render cursor prevented accidental return to S01 semantics.
+S02 attempts fell back to S01 full-table composition.
 
 Fix:
-- reference role separation: STYLE_AUTHORITY / CONTINUITY_ANCHOR / EDIT_TARGET
-- S01 continuity anchor: is_edit_target=false
-- explicit episodes/002/RENDER_STATE.json
-- retry_scope=CURRENT_SHOT_ONLY
-- approved locked shots cannot be regenerated
+- reference role separation
+- S01 continuity only
+- S01 not edit target
+- render cursor lock
 
-### Defect B — cuisine label under-specification
+## Defect B — cuisine/dining grammar under-specification
 
 Symptom:
-- Japanese-style horizontal chopstick placement / chopstick-rest visual grammar
-- palms-together pre-meal gesture
-- earlier Japanese-adjacent soup/rolled-egg conventions
-
-Root cause:
-- Korean-home-meal classification did not compile utensil placement, table topology and body/hand gesture into render constraints.
-- renderer filled the unspecified space using generic East-Asian/Japanese visual priors.
+- Japanese-style horizontal chopstick placement
+- palms-together pose
+- Japanese-adjacent meal presentation
 
 Fix:
-- MEAL_CONTEXT_SYSTEM v0.2 adds dining grammar
-- QC checks utensil type/material/placement and gesture grammar
-- episode-specific E002 grammar compiled in episodes/002/README.md
+- compiled dining grammar
+- utensil/table/gesture QC
+- E002-specific Korean home-meal constraints
 
-## Rejected S02 attempts
+## Defect C — whole-episode context leak
 
-All S02 outputs created before these structural fixes are rejected.
-They are not assets and do not advance the cursor.
+Observed after A/B structural fixes:
+- generated output became a multi-panel S01~S05 page
+- future-shot actions appeared
+- lettering appeared
+- S01 was included despite being locked
 
-## Current contract
+Classification:
+- RENDER_CONTEXT_LEAK_FAIL
+- MULTI_PANEL_FAIL
+- TEXT_FREE_FAIL
+- LOCKED_SHOT_REAPPEAR_FAIL
 
-- render cursor: S02
-- S01: locked
-- retry: S02 only
-- next user gate: complete raster set
+Root cause:
+- renderer input inherited full episode/storyboard/voice context instead of current S02 capsule.
+
+Fix:
+- current-shot render capsule
+- future-shot/voice/rejected-output denylist
+- locked-shot edit target denylist
+- fail-closed when execution context cannot isolate render input
+
+Disposition:
+- all post-S01 failed outputs rejected
+- none are assets
+- none may be future references
+- S01 remains approved/locked
+- cursor remains S02
