@@ -1,146 +1,111 @@
 # CURRENT_STATE
 
-Updated: 2026-09-07
+Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
-Architecture: COMPOSITION_FIRST_HYBRID_FOOD
+Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
+Execution authorization: **MEDIA_INTEGRITY_RECOVERY_ONLY**
 
-## Production state — asset/composition calibration
-
-Execution authorization: **ASSET_AND_TEMPLATE_CALIBRATION_ONLY**
+## Production state
 
 Active episode: NONE
-Next production episode: 001 after calibration
+Next production episode: 001 only after calibration.
 
-The prior E001/evaluation execution package remains retired. Git history is archive only; no retired raster/state file is current production authority.
+All rendering is suspended. The previous exact-next-action to rerender
+`PERSON_CONTEXT_SEATED` is superseded by media-integrity recovery.
 
-## Canonical rendering decision
+## Parent/child authority
 
-Default BODY path:
+Before work, verify current `jipbap/main` and that `AutoPipeline/main` pins that same child commit.
+README is descriptive only.
 
-`storyboard keyframes + explicit bridges → reusable asset resolve → stable ASSET_GAP boundaries → asset QC/approval/hash registration → deterministic scene composition → editable lettering/cover → QC/export`
-
-Domain routing:
-- PERSON identity: reuse approved assets; do not resample with every meal state.
-- FOOD/FOOD_STATE: episode-local generation is expected when the menu/state is new.
-- INTERACTION_COMPOSITE: use episode-locally when splitting high-risk contact would make geometry brittle.
-- BACKGROUND: reuse plates/components where practical.
-- full-frame generation: explicit exception only, assessed after composition is attempted.
-
-## Canonical authority
-
+Canonical current authority:
+- CURRENT_STATE.md
+- INTEGRITY_STATE.json
 - CALIBRATION_STATE.json
-- calibration/COMPOSITION_CANDIDATES.md
-- calibration/locks/COVER_SPEC_V1.json
-- calibration/locks/LETTERING_SPEC_V1.json
+- PRODUCTION_PROTOCOL.md
+- assets/reference_registry.json
+- assets/REFERENCE_MANIFEST.md
+- assets/production/registry.json
+- calibration/body4/FOUNDATION_QC.json
 - calibration/body4/FIXTURE.json
 - calibration/body4/ASSET_PLAN.json
-- calibration/person_style/COMPARE_PLAN.json
 - CONTENT_SYSTEM.md
 - VOICE_SYSTEM.md
 - VISUAL_SYSTEM.md
 - FOOD_STATE_SYSTEM.md
 - MEAL_CONTEXT_SYSTEM.md
-- PRODUCTION_PROTOCOL.md
-- assets/REFERENCE_MANIFEST.md
-- assets/production/registry.json
-- schemas/asset_registry.schema.json
-- schemas/shot_contract.schema.json
 
-## Registry state
+## Media-integrity incident
 
-`assets/production/registry.json` contains **1 approved production asset**: `FOOD_EGG_RICE_INTACT_V1`.
+The repository now has an executable fail-closed validator:
 
-Calibration references/evidence are stored outside the production registry and must not be registered as production pose assets.
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
+python -m pipeline.cli validate
+```
 
-## PERSON style lock
+It checks recorded SHA-256, PNG signature at byte 0, Pillow verify, full pixel decode with
+`Image.load()`, dimensions, and declared alpha policy.
 
-Status: **USER_LOCKED**
-Selected authority: **PERSON_STYLE_REF_1**
+The following prior binary approvals are suspended until that gate passes:
 
-Materialized source:
-- path: `assets/references/PERSON_STYLE_REF_1.png`
-- dimensions: 1448 × 483
-- SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
+1. `PERSON_STYLE_REF_1`
+   - creative selection decision: **PRESERVED**
+   - repository binary authority: **INVALIDATED**
+   - expected SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
 
-Materialized selection evidence:
-- path: `calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png`
-- dimensions: 770 × 1024
-- SHA-256: `acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b`
+2. `FOOD_EGG_RICE_INTACT_V1`
+   - prior operator approval: **SUSPENDED**
+   - registry status: **INVALIDATED_MEDIA_INTEGRITY**
+   - expected SHA-256: `20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61`
+   - alpha policy: `MIN_0_MAX_255`
 
-The user clarified that the S01–S04 evidence sheet was generated from the original Style 1 source and selected Style 1 as final. Style 2 remains non-production calibration evidence only.
+3. `PERSON_CONTEXT_SEATED_STYLE1_SELECTED`
+   - Style 1 selection decision: **PRESERVED**
+   - raster evidence authority: **INVALIDATED / OPTIONAL TO RECOVER**
+   - expected SHA-256: `acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b`
 
-The evidence sheet is a collage/reference artifact, not `PERSON_CONTEXT_SEATED` and not a production registry asset.
+No invalidated or quarantined raster may be used as renderer conditioning, continuity evidence,
+repair input, registry asset, or compositor input.
 
-## Template lock state
+## BODY4 calibration
 
-- COVER: **SPEC_LOCKED C — FOOD_FIRST_POSTER**
-- LETTERING: **SPEC_LOCKED A — DIRECT_EDITORIAL**
-- placeholder pixels/fonts have no production authority.
-- USER_LOCKED remains pending real-pixel validation after the BODY pilot.
-
-## BODY4 fixture state
-
-Fixture: `JIPBAP_HYBRID_BODY4_V2`
-Status: **APPROVED**
-
-Planned BODY sequence:
-1. S01 — intact fried egg already on rice; person secondary.
+The approved semantic fixture remains valid:
+1. S01 — intact fried egg already on rice.
 2. S02 — spoon/yolk breaking contact is visibly in progress.
-3. S03 — coated rice has been scooped; spoon is immediately before the mouth; **no mouth contact yet**.
-4. S04 — ingestion occurred between panels; unchanged partial-bowl residue is shown.
+3. S03 — coated rice is on the spoon immediately before mouth contact.
+4. S04 — ingestion occurred between panels; residue state remains.
 
-S03 is explicitly **after scoop / before mouth contact**.
+Content/food-state/meal-context/voice authorities are not invalidated by this byte incident.
 
-Required production asset gaps:
-1. PERSON_CONTEXT_SEATED
-2. FOOD_EGG_RICE_INTACT
-3. INTERACTION_BREAK_YOLK
-4. FOOD_EGG_RICE_RESIDUE
-5. INTERACTION_BITE_APPROACH
+## Rendering-architecture decision
 
-`FOOD_EGG_RICE_RESIDUE` is intentionally reused unchanged in S03 and S04 to prove approved-pixel reuse.
+**DEFERRED.**
 
-## Dispatch state
+Do not promote board-first or asset-first based on results produced from unverified input bytes.
+After media integrity is green, run the same BODY4 fixture through:
 
-- PERSON_CONTEXT_SEATED: **FAIL-CLOSED / NEW SESSION REQUIRED**. Two current-context attempts baked checkerboard pixels into RGB instead of producing alpha; both are quarantined.
-- FOOD_EGG_RICE_INTACT: **RESOLVED / APPROVED** as `FOOD_EGG_RICE_INTACT_V1`.
-- INTERACTION_BREAK_YOLK: waiting on PERSON_CONTEXT_SEATED + FOOD_EGG_RICE_INTACT.
-- FOOD_EGG_RICE_RESIDUE: waiting on intact food + yolk-break interaction.
-- INTERACTION_BITE_APPROACH: waiting on PERSON_CONTEXT_SEATED + residue.
+- Lane A: repaired hybrid asset/composition path.
+- Lane B: board-first comparison path.
 
-Raw assets do not each require a user click. AUTHORIZED_OPERATOR may bounded-register QC-passed foundation assets. USER approval is reserved for the composed S01 visual/identity anchor and named locks.
+Compare at minimum:
+- S02 contact geometry;
+- S03 hand/spoon/mouth geometry;
+- food texture retention after board-cell extraction/expansion;
+- food-state continuity;
+- PERSON/style continuity;
+- retries and reusable-asset cost.
 
-## Remaining blockers
-
-1. PERSON_CONTEXT_SEATED has no passing production asset; two no-alpha outputs are quarantined.
-2. S01 composition waits on a passing PERSON_CONTEXT_SEATED asset.
-3. Full-frame exception need is UNASSESSED until stable assets are composed.
-4. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
+A >4-slide boundary test is required before board-first can claim cross-board continuity.
 
 ## Exact next action
 
-**HANDOFF TO A CLEAN SESSION BEFORE THE NEXT PERSON RENDER.**
-
-Repository verification rule at handoff:
-- read this file from current `jipbap/main`;
-- verify `AutoPipeline/main` pins its `jipbap` gitlink to that same current commit before rendering.
-
-Completed:
-- Style 1 source and selected S01–S04 evidence are materialized and USER_LOCKED.
-- `FOOD_EGG_RICE_INTACT_V1` passed QC and is registered for bounded calibration use.
-
-Quarantined outputs:
-- PERSON attempt 1: `9086ae4bfc8bab2e119604395c071ae83f3d8e7fb5bf59721693e5dd00e12b4c` — RGB, baked checkerboard, pose/expression drift.
-- PERSON attempt 2: `aa9be0b19ac230d5044e6a23289d827f4412da10250a7a92e27a492ec6b7eade` — RGB, baked checkerboard.
-- Neither may be edited, referenced or registered.
-
-Next single action in a clean session:
-1. Restore Git heads and read this file.
-2. Dispatch **only** `PERSON_CONTEXT_SEATED` with the selected Style 1 source/evidence.
-3. Require a real RGBA alpha channel; do not depict a checkerboard pattern.
-4. Inspect channels/alpha before subjective visual QC.
-5. If PASS, bounded-register the PERSON asset and deterministically compose S01 using `FOOD_EGG_RICE_INTACT_V1`.
-6. Present composed S01 for the explicit user visual/identity anchor gate.
-
-Do not start publishable episode 001 yet.
+1. **Do not render anything.**
+2. Recover `PERSON_STYLE_REF_1` first.
+   - Prefer the exact original bytes matching the recorded SHA-256.
+   - If exact bytes are unavailable, re-supply the intended Style 1 source, fully validate the newly materialized bytes, compute a new SHA-256, and explicitly rebind the preserved Style 1 selection to them.
+3. For `FOOD_EGG_RICE_INTACT_V1`, either restore exact bytes or retire it and regenerate after the gate is green.
+4. `PERSON_CONTEXT_SEATED_STYLE1_SELECTED` may be restored if convenient; otherwise retire this raster evidence while preserving the Style 1 selection decision.
+5. Run `python -m pipeline.cli validate`.
+6. Only after PASS may BODY4 rendering/A-B comparison resume.
