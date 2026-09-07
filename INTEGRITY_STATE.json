@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "RESOLVED_STYLE1_VALIDATED",
+  "status": "RESOLVED_STYLE1_AND_TARGET_LOOK_VALIDATED",
   "scope": "MEDIA_BYTE_INTEGRITY",
   "validator": {
     "command": "python -m pipeline.cli validate",
@@ -93,6 +93,41 @@
       "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
       "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE",
       "recovery_status": "RETIRED_OPTIONAL_EVIDENCE"
+    },
+    {
+      "asset_id": "TARGET_LOOK_BOARD_REF_1",
+      "path": "assets/references/TARGET_LOOK_BOARD_REF_1.png",
+      "expected_sha256": "3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6",
+      "expected_dimensions": [
+        770,
+        1024
+      ],
+      "required_for_resume": true,
+      "recovery_policy": "Use the committed repository bytes only after clean-checkout full-decode validation. Preserve PERSON_STYLE_REF_1 as the primary source style authority; this board is auxiliary target-look guidance only.",
+      "recovery_status": "USER_LOCKED_VALIDATED",
+      "session_source_validation": {
+        "sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
+        "dimensions": [
+          770,
+          1024
+        ],
+        "format": "PNG",
+        "mode": "RGBA",
+        "png_signature": "PASS",
+        "pillow_verify": "PASS",
+        "full_pixel_decode": "PASS",
+        "decoded_rgba_pixel_sha256": "dc8761e133a2c28000852bac38bfd96706bee54182f5bf7884ebfae8959cd516"
+      },
+      "repository_validation": {
+        "sha256": "3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6",
+        "repository_blob_sha": "5180d5b9784bcabce4828c5a31625ad28ede4aa9",
+        "png_signature": "PASS",
+        "pillow_verify": "PASS",
+        "full_pixel_decode": "PASS",
+        "dimensions": "PASS",
+        "evidence_workflow_run_id": 34149050598,
+        "evidence_note": "First registry probe failed only on provisional SHA-256, revealing the actual repository hash; no signature/decode/dimension errors were reported."
+      }
     }
   ],
   "render_architecture_decision": {
@@ -100,7 +135,7 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "Run the repository validator against the rebound Style 1 authority. On PASS, exit MEDIA_INTEGRITY_RECOVERY and start the BODY4 asset-first versus board-first calibration comparison.",
+  "exact_next_action": "After parent/child pin parity is restored, resume clean-session PERSON_CONTEXT_SEATED with validated PERSON_STYLE_REF_1 as primary source style authority plus validated TARGET_LOOK_BOARD_REF_1 as auxiliary target-look anchor. Bind no rejected PERSON outputs.",
   "verification_evidence": {
     "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
     "workflow_run_id": 34137819408,
