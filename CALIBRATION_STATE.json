@@ -66,5 +66,33 @@
       "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "BODY4_RENDER_PATH_A_B_CALIBRATION"
+  "next_action": "PERSON_CONTEXT_SEATED_CLEAN_SESSION_WITH_HIERARCHICAL_REFERENCES",
+  "target_look_anchor": {
+    "status": "USER_LOCKED_VALIDATED",
+    "asset_id": "TARGET_LOOK_BOARD_REF_1",
+    "authority_ref": "assets/REFERENCE_MANIFEST.md#target-look-board-ref-1",
+    "source_style_authority": "PERSON_STYLE_REF_1",
+    "repository_sha256": "3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6",
+    "purpose": "AUXILIARY_TARGET_LOOK_ANCHOR",
+    "allowed_influence": [
+      "face construction",
+      "eye grammar",
+      "hair silhouette",
+      "line/texture/color",
+      "person-plus-food shared screen language"
+    ],
+    "excluded_influence": [
+      "text/copy",
+      "panel layout",
+      "shot/cut structure",
+      "menu/food-state semantics",
+      "camera/composition",
+      "meal-context entity selection"
+    ],
+    "notes": [
+      "PERSON_STYLE_REF_1 remains the primary source style authority.",
+      "This board is subordinate target-look guidance, not a replacement style authority.",
+      "Repository bytes passed clean-checkout signature/full-decode/dimension validation after SHA rebind."
+    ]
+  }
 }
