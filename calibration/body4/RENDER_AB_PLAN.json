@@ -15,7 +15,29 @@
     "story_semantics_locked": true,
     "meal_context_locked": true,
     "food_state_transitions_locked": true,
-    "copy_is_not_rendered_during_art_comparison": true
+    "copy_is_not_rendered_during_art_comparison": true,
+    "target_look_anchor": {
+      "asset_id": "TARGET_LOOK_BOARD_REF_1",
+      "path": "assets/references/TARGET_LOOK_BOARD_REF_1.png",
+      "repository_sha256": "3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6",
+      "status": "USER_LOCKED_VALIDATED",
+      "authority_relation": "AUXILIARY_TO_PERSON_STYLE_REF_1",
+      "allowed_influence": [
+        "face construction",
+        "eye grammar",
+        "hair silhouette",
+        "line/texture/color treatment",
+        "person-plus-food shared screen language"
+      ],
+      "excluded_influence": [
+        "text/copy",
+        "panel layout",
+        "shot/cut structure",
+        "menu/food-state semantics",
+        "camera/composition",
+        "meal-context entity selection"
+      ]
+    }
   },
   "fairness_rule": "The two lanes must depict the same four semantic keyframes. A lane may change only rendering architecture, not story meaning, food state, meal context, PERSON drawing language, or the physical action contract.",
   "lane_a": {
@@ -33,7 +55,8 @@
       "A checkerboard or chroma-colored background painted into RGB pixels is a hard failure.",
       "Use INTERACTION_COMPOSITE when contact geometry is inseparable at asset level.",
       "Use full-frame exception only when a compound interaction asset plus composition cannot preserve the shot.",
-      "Do not reuse either of the two previously quarantined PERSON attempts."
+      "Do not reuse either of the two previously quarantined PERSON attempts.",
+      "For PERSON_CONTEXT_SEATED, bind validated PERSON_STYLE_REF_1 as primary source style authority and validated TARGET_LOOK_BOARD_REF_1 only as auxiliary target-look guidance; never bind rejected PERSON attempts."
     ]
   },
   "lane_b": {
