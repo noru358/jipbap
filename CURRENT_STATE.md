@@ -136,10 +136,9 @@ A >4-slide boundary test is required before board-first can claim cross-board co
 
 ## Exact next action
 
-1. Run `python -m pipeline.cli validate` on the rebound Style 1 authority and require clean-checkout PASS.
-2. Using the same approved `JIPBAP_HYBRID_BODY4_V2` semantics and Style 1 authority, execute two calibration lanes:
-   - **Lane A — HYBRID_ASSET_COMPOSITION**: regenerate only the missing PERSON/FOOD/interaction assets, use interaction composites/full-frame only where separability requires it, then compose the BODY4 sequence.
-   - **Lane B — BOARD_FIRST**: generate the same four text-free BODY shots as one master board, split deterministically into separate 4:5 slides, and preserve the same semantic contracts.
-3. Do not change story, food-state transitions, meal context, PERSON style, or copy between lanes.
-4. Compare actual pixels for S02 contact geometry, S03 hand/spoon/mouth geometry, food texture retention, food-state continuity, PERSON/style continuity, retries, and reuse cost.
-5. Do not select a default render architecture until both lanes have comparable valid outputs.
+1. BODY4 A/B comparison contract is locked at `calibration/body4/RENDER_AB_PLAN.json`.
+2. **Lane A first dispatch:** generate `PERSON_CONTEXT_SEATED` from the validated Style 1 media with a real transparent background; no food, tableware, text, checkerboard, or chroma-key background.
+3. Hard-QC actual transparency before subjective style/anatomy QC. Do not repair or reuse a failed transparency output.
+4. Continue Lane A foundation DAG only after that asset passes.
+5. Independently dispatch the single 2×2 text-free Lane B master board from the same BODY4 semantics and Style 1 authority.
+6. Do not choose the default architecture until both lanes have comparable valid actual pixels.
