@@ -4,7 +4,7 @@ Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
-Execution authorization: **BODY4_A_B_CALIBRATION**
+Execution authorization: **CLEAN_SESSION_HANDOFF_PERSON_STYLE_FIDELITY**
 
 ## Production state
 
@@ -104,6 +104,16 @@ Local full-byte validation of the supplied file:
 Therefore no creative re-selection and no SHA rebinding are required. Only repository byte
 materialization remains.
 
+## Clean-session handoff checkpoint
+
+- Style 1 source: USER_LOCKED + validated in repository.
+- Media-integrity CI: PASS after repository-byte rebind with decoded-pixel equivalence.
+- A/B comparison contract: LOCKED at `calibration/body4/RENDER_AB_PLAN.json`.
+- Lane A PERSON: **NOT APPROVED / NOT REGISTERED**.
+- Alpha finding: real transparency succeeded repeatedly in later attempts.
+- Active failure: PERSON_STYLE_FIDELITY / FACE_CONSTRUCTION_DRIFT.
+- User decision: move to a clean session before further PERSON generation.
+
 ## BODY4 calibration
 
 The approved semantic fixture remains valid:
@@ -134,11 +144,33 @@ Compare at minimum:
 
 A >4-slide boundary test is required before board-first can claim cross-board continuity.
 
+## Current blocker
+
+The media-integrity and real-alpha problems are no longer the active blocker.
+
+In this session, multiple fresh `PERSON_CONTEXT_SEATED` outputs successfully produced real RGBA transparency
+(alpha extrema 0–255), but the user rejected them because the PERSON drawing language/face construction drifted
+from `PERSON_STYLE_REF_1`.
+
+The user specifically judged:
+- color/texture became close or acceptable;
+- the person still looked different from the desired reference;
+- therefore none of these outputs may be registered or reused.
+
+All rejected PERSON outputs from this session are quarantined. They are not references, edit targets,
+continuity anchors, or production assets.
+
 ## Exact next action
 
-1. BODY4 A/B comparison contract is locked at `calibration/body4/RENDER_AB_PLAN.json`.
-2. **Lane A first dispatch:** generate `PERSON_CONTEXT_SEATED` from the validated Style 1 media with a real transparent background; no food, tableware, text, checkerboard, or chroma-key background.
-3. Hard-QC actual transparency before subjective style/anatomy QC. Do not repair or reuse a failed transparency output.
-4. Continue Lane A foundation DAG only after that asset passes.
-5. Independently dispatch the single 2×2 text-free Lane B master board from the same BODY4 semantics and Style 1 authority.
-6. Do not choose the default architecture until both lanes have comparable valid actual pixels.
+1. **Start from a clean session.**
+2. Canonical boot latest `AutoPipeline/main` and `jipbap/main`; verify parent pin and run/read the current integrity authority before rendering.
+3. Resume only `PERSON_CONTEXT_SEATED` for Lane A.
+4. Bind the validated `PERSON_STYLE_REF_1` actual media. Do **not** bind any rejected PERSON output from this session.
+5. Primary visual gate is now **PERSON face-construction / drawing-language fidelity**, not transparency:
+   - preserve the reference's facial proportions, eye grammar, face width/jaw, hair silhouette and restrained expression construction;
+   - do not merely copy its muted palette/texture onto a different anime/chibi face;
+   - avoid generic polished-anime beautification.
+6. Preserve the now-proven real RGBA transparency contract: alpha 0–255, no checkerboard/chroma pixels.
+7. Only when PERSON passes both hard media QC and Style 1 fidelity may it be registered as the Lane A foundation asset.
+8. Then continue Lane A with fresh `FOOD_EGG_RICE_INTACT` → compose S01 → user visual/identity gate → remaining Lane A DAG → Lane B board-first comparison.
+9. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
