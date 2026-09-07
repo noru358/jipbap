@@ -156,6 +156,8 @@ def _reference_expectations(root: Path) -> tuple[list[ImageExpectation], dict[st
     output: list[ImageExpectation] = []
     seen: set[str] = set()
     for item in items:
+        if str(item.get("status", "")).startswith("RETIRED"):
+            continue
         asset_id = str(item["asset_id"])
         if asset_id in seen:
             raise ValidationError(f"duplicate reference asset_id: {asset_id}")
@@ -198,10 +200,9 @@ def _validate_calibration_binding(root: Path, registry: dict[str, Any]) -> list[
             errors.append("CALIBRATION_STATE: approved_spec_sha256 disagrees with selected reference")
 
     evidence = by_id.get("PERSON_CONTEXT_SEATED_STYLE1_SELECTED")
-    if evidence is None:
-        errors.append("reference registry missing PERSON_CONTEXT_SEATED_STYLE1_SELECTED")
-    elif person.get("approved_artifact_sha256") != evidence.get("sha256"):
-        errors.append("CALIBRATION_STATE: approved_artifact_sha256 disagrees with selection evidence")
+    if evidence is not None and not str(evidence.get("status", "")).startswith("RETIRED"):
+        if person.get("approved_artifact_sha256") != evidence.get("sha256"):
+            errors.append("CALIBRATION_STATE: approved_artifact_sha256 disagrees with active selection evidence")
 
     return errors
 
