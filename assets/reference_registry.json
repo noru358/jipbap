@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "assets": [
+    {
+      "asset_id": "PERSON_STYLE_REF_1",
+      "role": "PERSON_STYLE_AUTHORITY",
+      "status": "USER_SELECTED_BINARY_EXPECTED",
+      "path": "assets/references/PERSON_STYLE_REF_1.png",
+      "sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+      "width": 1448,
+      "height": 483,
+      "alpha_policy": "NONE"
+    },
+    {
+      "asset_id": "PERSON_CONTEXT_SEATED_STYLE1_SELECTED",
+      "role": "PERSON_STYLE_SELECTION_EVIDENCE",
+      "status": "USER_SELECTED_BINARY_EXPECTED",
+      "path": "calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png",
+      "sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
+      "width": 770,
+      "height": 1024,
+      "alpha_policy": "NONE"
+    }
+  ]
+}
