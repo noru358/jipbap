@@ -4,18 +4,10 @@
   "resolution_status": "COMPLETE",
   "production_registry": {
     "path": "assets/production/registry.json",
-    "approved_asset_count": 1,
+    "approved_asset_count": 0,
     "sha256": null
   },
-  "registry_matches": [
-    {
-      "requirement_id": "FOOD_EGG_RICE_INTACT",
-      "asset_id": "FOOD_EGG_RICE_INTACT_V1",
-      "status": "APPROVED",
-      "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
-      "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61"
-    }
-  ],
+  "registry_matches": [],
   "asset_gaps": [
     {
       "asset_id": "PERSON_CONTEXT_SEATED",
@@ -33,9 +25,10 @@
       "category": "FOOD_STATE",
       "scope": "EPISODE_LOCAL",
       "depends_on": [],
-      "dispatch_status": "RESOLVED_APPROVED",
-      "blocker": null,
-      "resolved_asset_id": "FOOD_EGG_RICE_INTACT_V1"
+      "dispatch_status": "BLOCKED_MEDIA_INTEGRITY_RECOVERY",
+      "blocker": "PRIOR_ASSET_RETIRED_CORRUPT_BYTES",
+      "resolved_asset_id": null,
+      "note": "Regenerate after media-integrity recovery; do not restore approval from stale metadata."
     },
     {
       "asset_id": "INTERACTION_BREAK_YOLK",
@@ -74,8 +67,8 @@
   "next_dispatchable_work": {
     "can_prepare_food_job": false,
     "can_dispatch_person_job": false,
-    "person_dispatch_blocker": "NEW_SESSION_REQUIRED_AFTER_TWO_IDENTICAL_HARD_CONTRACT_FAILURES",
-    "exact_next": "In a clean session, re-render only PERSON_CONTEXT_SEATED with selected Style 1 media and verify an actual alpha channel before visual QC."
+    "person_dispatch_blocker": "PERSON_STYLE_REF_1_BINARY_INVALIDATED",
+    "exact_next": "Recover and validate PERSON_STYLE_REF_1. No image authoring is authorized before the repository media-integrity gate is green."
   },
   "approval_flow": [
     "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
