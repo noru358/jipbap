@@ -5,16 +5,22 @@
   "foundation_assets": {
     "FOOD_EGG_RICE_INTACT": {
       "status": "READY_REGENERATE_NEW_ASSET",
-      "asset_id": "FOOD_EGG_RICE_INTACT_V1",
-      "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
-      "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
-      "width": 1312,
-      "height": 1199,
+      "asset_id": "FOOD_EGG_RICE_INTACT_V2",
+      "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v2.png",
+      "sha256": null,
+      "width": null,
+      "height": null,
       "channels": "RGBA",
-      "alpha_validation": "UNTRUSTED_UNTIL_REVALIDATED",
+      "alpha_validation": "PENDING_FRESH_OUTPUT",
       "approved_by": null,
-      "note": "Prior repository food raster is retired for corruption. Fresh generation only; retired bytes must not condition or repair the new asset.",
-      "next_action": "Generate a fresh intact egg-on-rice calibration asset under current media-integrity controls."
+      "note": "Fresh replacement candidate. V1 remains retired and immutable; do not bind, edit, repair from, or overwrite V1. V2 must pass hard media/style/meal-context QC before registry approval.",
+      "next_action": "Generate fresh V2 with real transparency and the locked intact fried-egg-on-rice semantics; then validate and register only on PASS.",
+      "retired_predecessor": {
+        "asset_id": "FOOD_EGG_RICE_INTACT_V1",
+        "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
+        "recorded_sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
+        "status": "RETIRED_CORRUPT_DO_NOT_BIND"
+      }
     },
     "PERSON_CONTEXT_SEATED": {
       "status": "APPROVED_MATERIALIZED_VALIDATED",
