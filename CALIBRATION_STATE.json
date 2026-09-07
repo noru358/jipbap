@@ -1,14 +1,28 @@
 {
   "version": "1.1",
   "person_style": {
-    "status": "PENDING",
-    "authority_ref": "assets/REFERENCE_MANIFEST.md#STYLE_REF_001",
+    "status": "IN_TEST",
+    "authority_ref": "assets/REFERENCE_MANIFEST.md#person-style-calibration-candidates",
     "selected_candidate": null,
+    "candidates": [
+      {
+        "candidate_id": "PERSON_STYLE_REF_1",
+        "sha256": "82ad0c13db1e0d3baab1ff3340c8654b54415cadcb92da76ee924da738970d51",
+        "pixel_validation_status": "PENDING"
+      },
+      {
+        "candidate_id": "PERSON_STYLE_REF_2",
+        "sha256": "6f7643f1eef0f1a5641fb0af60518e097d3caf926267c5c4557a3c156a7922d4",
+        "pixel_validation_status": "PENDING"
+      }
+    ],
     "approved_spec_sha256": null,
     "approved_artifact_sha256": null,
     "pixel_validation_status": "PENDING",
     "notes": [
-      "Actual PERSON reference media must be supplied when BODY fixture asset authoring begins."
+      "User explicitly requested equal-path evaluation of PERSON_STYLE_REF_1 and PERSON_STYLE_REF_2.",
+      "Both candidates are PERSON-domain only; incidental food/background pixels in REF_2 are excluded.",
+      "Final PERSON authority is selected only after comparable calibration outputs are reviewed."
     ]
   },
   "food_style": {
