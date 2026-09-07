@@ -34,7 +34,7 @@
       "food_state_id": null,
       "contact_role": null,
       "approved_by": "USER",
-      "approval_note": "Validation-branch candidate: exact user-approved attempt-8 blob is materialized at the production path without re-encoding. Do not use dependent assets until clean-checkout CI passes SHA-256, PNG decode, dimensions, and alpha extrema.",
+      "approval_note": "User-approved clean-session attempt 8. Exact Git blob 885ec49a6214f64a27d6568df22ea53bab3be847 is materialized at the production path without re-encoding and passed clean-checkout repository validation in workflow run 34151559327 (SHA-256, PNG signature/Pillow decode, 1212x1298 dimensions, RGBA alpha extrema 0-255).",
       "alpha_policy": "MIN_0_MAX_255",
       "source_authority": [
         "PERSON_STYLE_REF_1",
