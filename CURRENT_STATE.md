@@ -185,7 +185,7 @@ A >4-slide boundary test is required before board-first can claim cross-board co
 
 `PERSON_CONTEXT_SEATED_V1` is resolved: USER APPROVED, materialized at the production path, registered as APPROVED, and clean-checkout validated.
 
-The active missing foundation is `FOOD_EGG_RICE_INTACT_V1`. The prior food raster remains RETIRED because its repository bytes were corrupt. No S01 composition or dependent interaction authoring is authorized until a fresh FOOD foundation asset passes hard media/style/meal-context QC and is registered.
+The active missing foundation is a fresh replacement `FOOD_EGG_RICE_INTACT_V2`. The corrupt `FOOD_EGG_RICE_INTACT_V1` remains RETIRED and immutable. No S01 composition or dependent interaction authoring is authorized until a fresh FOOD foundation asset passes hard media/style/meal-context QC and is registered.
 
 ## PERSON materialization validation PASS
 
@@ -202,9 +202,9 @@ The active missing foundation is `FOOD_EGG_RICE_INTACT_V1`. The prior food raste
 
 ## Exact next action
 
-1. Generate a fresh `FOOD_EGG_RICE_INTACT` foundation asset under the locked BODY4 calibration fixture; the prior corrupt FOOD raster remains retired and must not be used as reference or repair input.
+1. Generate fresh `FOOD_EGG_RICE_INTACT_V2` under the locked BODY4 calibration fixture; retired corrupt `FOOD_EGG_RICE_INTACT_V1` must not be overwritten, referenced, or used as repair input.
 2. Run hard media QC plus FOOD style and meal-context QC.
-3. On PASS, register the new FOOD asset as approved.
+3. On PASS, register `FOOD_EGG_RICE_INTACT_V2` as approved.
 4. Deterministically compose S01 from the approved `PERSON_CONTEXT_SEATED_V1` + approved FOOD foundation asset.
 5. Present composed S01 for the user visual/identity gate.
 6. On S01 PASS, promote the PERSON appearance to the calibration identity anchor and continue the remaining Lane A DAG, then Lane B board-first comparison.
