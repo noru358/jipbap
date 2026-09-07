@@ -42,7 +42,18 @@
         "pillow_verify": "PASS",
         "full_pixel_decode": "PASS",
         "exact_expected_sha_match": true
-      }
+      },
+      "uploaded_repository_candidate": {
+        "commit": "ee65b435a35533f3821c5c1f7f6e4803847e14a3",
+        "actual_sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
+        "png_signature": "PASS",
+        "pillow_verify": "PASS",
+        "full_pixel_decode": "PASS",
+        "dimensions": "PASS",
+        "byte_sha_match": false,
+        "pixel_identity_status": "PENDING_CI"
+      },
+      "expected_pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d"
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
@@ -82,7 +93,7 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "Materialize the session-supplied exact original PERSON_STYLE_REF_1 bytes at assets/references/PERSON_STYLE_REF_1.png, then run the clean-checkout repository validator. Do not render before PASS.",
+  "exact_next_action": "Run clean-checkout CI with decoded-pixel identity bound to the original Style 1 source. If pixel identity matches, rebind the preserved Style 1 approval to the uploaded repository byte SHA; otherwise request the exact original file again. Do not render before PASS.",
   "verification_evidence": {
     "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
     "workflow_run_id": 34137819408,
