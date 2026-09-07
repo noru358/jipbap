@@ -16,9 +16,9 @@
       "depends_on": [
         "PERSON_STYLE_REF_1_MEDIA"
       ],
-      "dispatch_status": "READY_FRESH_RENDER_CONTEXT",
-      "blocker": null,
-      "note": "Style 1 reference authority is recovered and pixel-validated. Previous checkerboard attempts remain quarantined; author a fresh asset only in the current clean render context."
+      "dispatch_status": "BLOCKED_CLEAN_SESSION_STYLE_FIDELITY",
+      "blocker": "PERSON_STYLE_FIDELITY_DRIFT_AFTER_ALPHA_RESOLVED",
+      "note": "Real RGBA transparency is now reproducibly achievable, but repeated session outputs drift from PERSON_STYLE_REF_1 in face construction/drawing language. All such outputs are quarantined."
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT",
@@ -65,10 +65,10 @@
     }
   ],
   "next_dispatchable_work": {
-    "can_prepare_food_job": true,
-    "can_dispatch_person_job": true,
-    "person_dispatch_blocker": null,
-    "exact_next": "Prepare the same BODY4 fixture for two render lanes: A = repaired hybrid asset/composition, B = board-first. Keep storyboard/meal/style authority identical and compare actual pixels."
+    "can_prepare_food_job": false,
+    "can_dispatch_person_job": false,
+    "person_dispatch_blocker": "CLEAN_SESSION_REQUIRED_FOR_PERSON_STYLE_FIDELITY",
+    "exact_next": "In a clean session, regenerate PERSON_CONTEXT_SEATED from validated PERSON_STYLE_REF_1 only. Face construction/drawing language fidelity is the primary gate; preserve real RGBA alpha. Do not use rejected attempts as references. Only after PASS resume Lane A FOOD generation and S01 composition."
   },
   "approval_flow": [
     "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
