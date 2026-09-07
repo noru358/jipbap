@@ -28,6 +28,38 @@
       "width": 770,
       "height": 1024,
       "alpha_policy": "NONE"
+    },
+    {
+      "asset_id": "TARGET_LOOK_BOARD_REF_1",
+      "role": "PERSON_TARGET_LOOK_AUXILIARY",
+      "status": "USER_LOCKED_VALIDATION_PENDING",
+      "path": "assets/references/TARGET_LOOK_BOARD_REF_1.png",
+      "sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
+      "width": 770,
+      "height": 1024,
+      "alpha_policy": "NONE",
+      "provenance": {
+        "session_original_sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
+        "session_decoded_rgba_pixel_sha256": "dc8761e133a2c28000852bac38bfd96706bee54182f5bf7884ebfae8959cd516",
+        "repository_blob_sha": "5180d5b9784bcabce4828c5a31625ad28ede4aa9",
+        "repository_sha256_status": "PENDING_CLEAN_CHECKOUT_VALIDATION",
+        "relationship_to_primary_authority": "AUXILIARY_TARGET_LOOK_ANCHOR_DERIVED_FROM_PERSON_STYLE_REF_1"
+      },
+      "allowed_influence": [
+        "face construction",
+        "eye grammar",
+        "hair silhouette",
+        "linework/texture/color treatment",
+        "person-plus-food shared screen language"
+      ],
+      "excluded_influence": [
+        "text/copy",
+        "panel layout",
+        "shot/cut structure",
+        "menu or food-state semantics",
+        "camera/composition",
+        "meal-context entity selection"
+      ]
     }
   ]
 }
