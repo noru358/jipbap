@@ -4,7 +4,7 @@ Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
-Execution authorization: **PERSON_APPROVED_MATERIALIZE_THEN_FOOD**
+Execution authorization: **PERSON_APPROVED_FOOD_NEXT**
 
 ## Production state
 
@@ -149,7 +149,7 @@ The user's current explicit decision supersedes the prior internal rejection/han
 - attempts 1–7 and 9 remain quarantined;
 - no new PERSON generation is authorized while the approved attempt-8 bytes are recoverable.
 
-The approved PERSON is not yet an active production asset because its exact PNG bytes have not yet been materialized and validated at the production registry path.
+The approved PERSON is now an active production asset: its exact approved bytes are materialized at the production registry path and clean-checkout media validation has passed.
 
 ## BODY4 calibration
 
@@ -208,11 +208,10 @@ continuity anchors, or production assets.
 
 ## Exact next action
 
-1. Manual bridge only: place the exact user-approved attempt-8 PNG at `assets/production/person/PERSON_CONTEXT_SEATED_v1.png` without editing or re-encoding it.
-2. Run the repository media-integrity gate and require SHA-256 `7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e`, dimensions 1212×1298, RGBA alpha extrema 0–255.
-3. Promote `PERSON_CONTEXT_SEATED_V1` from `USER_APPROVED_PENDING_MATERIALIZATION` to `APPROVED`.
-4. Generate a fresh `FOOD_EGG_RICE_INTACT` foundation asset; the prior corrupt food raster remains retired.
-5. After food hard-QC/style/meal-context PASS, register it and deterministically compose S01 from the approved PERSON + FOOD assets.
-6. Present composed S01 for the user visual/identity gate.
-7. On S01 PASS, promote the PERSON appearance to the calibration identity anchor and continue the remaining Lane A DAG, then Lane B board-first comparison.
-8. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
+1. Generate a fresh `FOOD_EGG_RICE_INTACT` foundation asset under the locked BODY4 calibration fixture; the prior corrupt FOOD raster remains retired and must not be used as reference or repair input.
+2. Run hard media QC plus FOOD style and meal-context QC.
+3. On PASS, register the new FOOD asset as approved.
+4. Deterministically compose S01 from the approved `PERSON_CONTEXT_SEATED_V1` + approved FOOD foundation asset.
+5. Present composed S01 for the user visual/identity gate.
+6. On S01 PASS, promote the PERSON appearance to the calibration identity anchor and continue the remaining Lane A DAG, then Lane B board-first comparison.
+7. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
