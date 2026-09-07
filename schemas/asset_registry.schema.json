@@ -59,7 +59,8 @@
             "enum": [
               "APPROVED",
               "REJECTED",
-              "RETIRED"
+              "RETIRED",
+              "INVALIDATED_MEDIA_INTEGRITY"
             ]
           },
           "path": {
