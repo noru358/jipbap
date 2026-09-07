@@ -27,6 +27,7 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - repository path: assets/references/PERSON_STYLE_REF_1.png
 - repository blob SHA: 369aeed50e607319a62371eb79658daa636f12c3
 - repository binary status: MATERIALIZED_BINARY_INVALIDATED
+- confirmed corrupt repository SHA-256: 0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf
 - selection status: SELECTED_USER_LOCKED_DECISION_BINARY_INVALIDATED
 
 ### PERSON_STYLE_REF_2
@@ -53,6 +54,7 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - SHA-256: acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b
 - repository blob SHA: 98976d7b28ff061b95c216652df59e95073bbe42
 - status: USER_SELECTED_DECISION_BINARY_INVALIDATED
+- confirmed corrupt repository SHA-256: 35b63461b6e15f258ae61455e89f288b12acc9d51e86dc6894b6788037c2fdae
 - note: User clarified that this S01–S04 sheet was generated from PERSON_STYLE_REF_1 and selected Style 1 as the final PERSON drawing-language direction.
 - production rule: selection evidence and style reference only; this collage is not a production pose asset and must not enter the production registry.
 
