@@ -122,9 +122,9 @@ Raw assets do not each require a user click. AUTHORIZED_OPERATOR may bounded-reg
 
 **HANDOFF TO A CLEAN SESSION BEFORE THE NEXT PERSON RENDER.**
 
-Verified repository heads at handoff:
-- jipbap: pending this commit
-- AutoPipeline: parent will be repinned after this commit
+Repository verification rule at handoff:
+- read this file from current `jipbap/main`;
+- verify `AutoPipeline/main` pins its `jipbap` gitlink to that same current commit before rendering.
 
 Completed:
 - Style 1 source and selected S01–S04 evidence are materialized and USER_LOCKED.
