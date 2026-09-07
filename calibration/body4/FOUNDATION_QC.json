@@ -13,11 +13,11 @@
       "channels": "RGBA",
       "alpha_validation": "UNTRUSTED_UNTIL_REVALIDATED",
       "approved_by": null,
-      "note": "Corrupt repository bytes retired; prior approval is not recoverable from Git history.",
+      "note": "Prior repository food raster is retired for corruption. Fresh generation only; retired bytes must not condition or repair the new asset.",
       "next_action": "Generate a fresh intact egg-on-rice calibration asset under current media-integrity controls."
     },
     "PERSON_CONTEXT_SEATED": {
-      "status": "USER_APPROVED_PENDING_REPOSITORY_MATERIALIZATION",
+      "status": "APPROVED_MATERIALIZED_VALIDATED",
       "attempts": [
         {
           "attempt": 1,
@@ -134,7 +134,7 @@
             255
           ],
           "note": "User explicitly approved this clean-session output. This approval overrides the prior internal style-fidelity rejection. Hard media QC already passed: RGBA with alpha extrema 0-255.",
-          "status": "USER_APPROVED_PENDING_REPOSITORY_MATERIALIZATION",
+          "status": "USER_APPROVED_MATERIALIZED_VALIDATED",
           "approved_by": "USER",
           "approval_scope": "LANE_A_FOUNDATION_PERSON_CONTEXT_SEATED"
         },
@@ -156,11 +156,30 @@
         }
       ],
       "quarantine_rule": "Attempts 1-7 and 9 are rejected/quarantined. Attempt 8 is the sole user-approved PERSON_CONTEXT_SEATED candidate.",
-      "next_action": "Materialize the exact approved attempt-8 PNG bytes into the production asset path, run full media-integrity validation, then mark/register PERSON_CONTEXT_SEATED as APPROVED. After that, generate fresh FOOD_EGG_RICE_INTACT and compose S01.",
+      "next_action": "Generate fresh FOOD_EGG_RICE_INTACT. After hard media/style/meal-context QC PASS, register the FOOD asset and compose S01 from the approved PERSON + FOOD assets.",
       "upstream_reference_integrity": "PASS_STYLE1_AND_TARGET_LOOK",
       "alpha_reliability_observation": "Attempts 3-9 produced real RGBA transparency with alpha extrema 0-255. Active blocker remains PERSON face/drawing-language fidelity, not alpha.",
       "selected_attempt": 8,
-      "selected_sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e"
+      "selected_sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+      "materialization_validation": {
+        "path": "assets/production/person/PERSON_CONTEXT_SEATED_v1.png",
+        "sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+        "repository_blob_sha": "885ec49a6214f64a27d6568df22ea53bab3be847",
+        "dimensions": [
+          1212,
+          1298
+        ],
+        "alpha_policy": "MIN_0_MAX_255",
+        "png_signature": "PASS",
+        "pillow_verify": "PASS",
+        "full_pixel_decode": "PASS",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "evidence_workflow_run_id": 34151559327,
+        "checked_commit": "ab4fcb35f51a3b5eec1a39e655eed38e13991a29"
+      }
     }
   }
 }
