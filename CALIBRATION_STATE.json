@@ -1,7 +1,7 @@
 {
   "version": "1.1",
   "person_style": {
-    "status": "USER_LOCKED",
+    "status": "USER_SELECTED_BINARY_INVALIDATED",
     "authority_ref": "assets/REFERENCE_MANIFEST.md#person-style-calibration-candidates",
     "selected_candidate": "PERSON_STYLE_REF_1",
     "candidates": [
@@ -18,12 +18,12 @@
     ],
     "approved_spec_sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
     "approved_artifact_sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
-    "pixel_validation_status": "PASS",
+    "pixel_validation_status": "FAIL_CLOSED_MEDIA_INTEGRITY",
     "notes": [
-      "User selected PERSON_STYLE_REF_1 as the final PERSON drawing-language direction.",
-      "The actual source reference is materialized at assets/references/PERSON_STYLE_REF_1.png.",
-      "The selected S01-S04 calibration evidence is materialized under calibration/person_style and is not a production pose asset.",
-      "PERSON_STYLE_REF_2 remains calibration evidence only and must not enter production."
+      "User selection of PERSON_STYLE_REF_1 remains the creative decision.",
+      "The repository binary lock is suspended until the file passes SHA-256, PNG signature, Pillow verify, full Image.load(), and recorded-dimension checks.",
+      "PERSON_CONTEXT_SEATED_STYLE1_SELECTED remains optional selection evidence; if exact bytes cannot be recovered it may be retired without changing the Style 1 selection decision.",
+      "No PERSON-conditioned render may dispatch while the selected style binary is invalidated."
     ]
   },
   "food_style": {
@@ -63,5 +63,5 @@
       "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "PERSON_AND_FOOD_FOUNDATION_AUTHORING"
+  "next_action": "MEDIA_INTEGRITY_RECOVERY"
 }
