@@ -70,6 +70,28 @@ S01에서 반복 인물을 만들기 전에, PERSON_STYLE_AUTHORITY와 실제 �
 
 S01이 예쁘더라도 PERSON style fidelity가 낮으면 내부적으로 PASS 추천하지 않는다.
 
+## 1.3 Auxiliary target-look anchor
+
+`TARGET_LOOK_BOARD_REF_1` is a **subordinate core target-look anchor** for the locked `PERSON_STYLE_REF_1` direction.
+It does not become a second source style authority and does not supersede `PERSON_STYLE_REF_1`.
+
+Allowed influence is intentionally narrow:
+- face construction and facial proportions;
+- eye grammar;
+- hair silhouette;
+- line / texture / color treatment;
+- the shared screen language when PERSON and FOOD coexist in one image.
+
+Everything else visible in the board is incidental and non-authoritative. In particular, do not inherit:
+- embedded text/copy;
+- panel/grid layout;
+- shot or cut structure;
+- depicted menu or food-state sequence;
+- camera/composition;
+- meal-context entity selection.
+
+For PERSON authoring during this calibration, use `PERSON_STYLE_REF_1 + TARGET_LOOK_BOARD_REF_1` as a hierarchical pair: the first defines source style authority; the second narrows the desired target look within the allowed domains. A conflict is resolved in favor of `PERSON_STYLE_REF_1` plus the explicit current asset contract.
+
 ## 2. Reference-role isolation
 
 모든 이미지 reference는 역할을 가진다.
