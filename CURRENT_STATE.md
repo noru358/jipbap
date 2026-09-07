@@ -87,6 +87,22 @@ The following prior binary approvals are suspended until that gate passes:
 No invalidated or quarantined raster may be used as renderer conditioning, continuity evidence,
 repair input, registry asset, or compositor input.
 
+## Session-supplied exact source recovered
+
+The user supplied the original Style 1 source in the current ChatGPT session.
+
+Local full-byte validation of the supplied file:
+- dimensions: `1448 × 483`
+- format/mode: `PNG / RGBA`
+- PNG signature at byte 0: **PASS**
+- Pillow `Image.verify()`: **PASS**
+- full `Image.load()`: **PASS**
+- SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
+- result: **EXACT MATCH to the pre-existing PERSON_STYLE_REF_1 authority identity**
+
+Therefore no creative re-selection and no SHA rebinding are required. Only repository byte
+materialization remains.
+
 ## BODY4 calibration
 
 The approved semantic fixture remains valid:
