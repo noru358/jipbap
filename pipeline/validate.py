@@ -24,6 +24,7 @@ class ImageExpectation:
     width: int
     height: int
     alpha_policy: str = "NONE"
+    pixel_sha256: str | None = None
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -103,6 +104,15 @@ def inspect_image(root: Path, expected: ImageExpectation) -> list[str]:
                     f"{expected.width}x{expected.height}, actual {actual_size[0]}x{actual_size[1]}"
                 )
 
+            if expected.pixel_sha256 is not None:
+                rgba = image.convert("RGBA")
+                actual_pixel_sha = hashlib.sha256(rgba.tobytes()).hexdigest()
+                if actual_pixel_sha != expected.pixel_sha256:
+                    errors.append(
+                        f"{expected.asset_id}: decoded RGBA pixel SHA-256 mismatch: "
+                        f"expected {expected.pixel_sha256}, actual {actual_pixel_sha}"
+                    )
+
             if expected.alpha_policy != "NONE":
                 if "A" not in bands:
                     errors.append(
@@ -141,6 +151,7 @@ def _production_expectations(root: Path) -> list[ImageExpectation]:
                 width=int(item["width"]),
                 height=int(item["height"]),
                 alpha_policy=str(item.get("alpha_policy", "NONE")),
+                pixel_sha256=str(item["pixel_sha256"]) if item.get("pixel_sha256") else None,
             )
         )
     return output
