@@ -4,14 +4,14 @@ Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
-Execution authorization: **CLEAN_SESSION_HANDOFF_PERSON_STYLE_FIDELITY**
+Execution authorization: **CLEAN_SESSION_PERSON_REGEN_WITH_TARGET_LOOK**
 
 ## Production state
 
 Active episode: NONE
 Next production episode: 001 only after calibration.
 
-Media-integrity recovery for PERSON_STYLE_REF_1 is resolved. Rendering is authorized only for the approved BODY4 architecture-calibration comparison.
+Media-integrity recovery for PERSON_STYLE_REF_1 and TARGET_LOOK_BOARD_REF_1 is resolved. Rendering remains limited to the approved BODY4 architecture-calibration comparison.
 
 ## Parent/child authority
 
@@ -114,6 +114,16 @@ materialization remains.
 - Active failure: PERSON_STYLE_FIDELITY / FACE_CONSTRUCTION_DRIFT.
 - User decision: move to a clean session before further PERSON generation.
 
+## Target-look anchor registration
+
+- Primary source style authority remains **PERSON_STYLE_REF_1 / USER_LOCKED**.
+- Auxiliary core target-look anchor: **TARGET_LOOK_BOARD_REF_1 / USER_LOCKED_VALIDATED**.
+- Repository SHA-256: `3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6`.
+- Allowed domains only: face construction, eye grammar, hair silhouette, line/texture/color, person+food shared screen language.
+- Explicitly non-authoritative: embedded text, panel/grid layout, shot/cut structure, depicted menu/food-state semantics, camera/composition, meal-context entity selection.
+- The source style authority is not replaced or weakened by the auxiliary board.
+- All failed PERSON candidates from the previous session remain quarantined and must not be bound.
+
 ## BODY4 calibration
 
 The approved semantic fixture remains valid:
@@ -162,15 +172,11 @@ continuity anchors, or production assets.
 
 ## Exact next action
 
-1. **Start from a clean session.**
-2. Canonical boot latest `AutoPipeline/main` and `jipbap/main`; verify parent pin and run/read the current integrity authority before rendering.
-3. Resume only `PERSON_CONTEXT_SEATED` for Lane A.
-4. Bind the validated `PERSON_STYLE_REF_1` actual media. Do **not** bind any rejected PERSON output from this session.
-5. Primary visual gate is now **PERSON face-construction / drawing-language fidelity**, not transparency:
-   - preserve the reference's facial proportions, eye grammar, face width/jaw, hair silhouette and restrained expression construction;
-   - do not merely copy its muted palette/texture onto a different anime/chibi face;
-   - avoid generic polished-anime beautification.
-6. Preserve the now-proven real RGBA transparency contract: alpha 0–255, no checkerboard/chroma pixels.
-7. Only when PERSON passes both hard media QC and Style 1 fidelity may it be registered as the Lane A foundation asset.
-8. Then continue Lane A with fresh `FOOD_EGG_RICE_INTACT` → compose S01 → user visual/identity gate → remaining Lane A DAG → Lane B board-first comparison.
-9. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
+1. Advance `AutoPipeline/main` to pin the current validated `jipbap/main` commit.
+2. Re-verify parent/child pin parity plus `INTEGRITY_STATE.json`, `assets/reference_registry.json`, and `calibration/body4/RENDER_AB_PLAN.json`.
+3. Resume only `PERSON_CONTEXT_SEATED` for Lane A in this clean session.
+4. Bind validated `PERSON_STYLE_REF_1` as the **primary source style authority** and validated `TARGET_LOOK_BOARD_REF_1` only as the **auxiliary target-look anchor**. Bind none of the rejected PERSON attempts.
+5. Primary visual gate: face construction / drawing-language fidelity to the hierarchical reference pair; preserve the proven real RGBA transparency contract (alpha 0–255, no checkerboard/chroma pixels).
+6. Only after hard media QC + style fidelity PASS may PERSON be registered as the Lane A foundation asset.
+7. Then continue Lane A with fresh `FOOD_EGG_RICE_INTACT` → compose S01 → user visual/identity gate → remaining Lane A DAG → Lane B board-first comparison.
+8. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
