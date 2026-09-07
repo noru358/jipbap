@@ -9,6 +9,30 @@ Default visual architecture: **COMPOSITION_FIRST_HYBRID_FOOD**.
 
 Full-frame stochastic generation is exception-only.
 
+## 0.1 Executable media-integrity preflight
+
+A path, recorded hash, successful `Image.open()` header read, or visual thumbnail is not proof that
+an image is a valid production/reference asset.
+
+Before any raster may be used as reference media, registered as APPROVED, promoted to USER_LOCKED,
+or supplied to COMPOSITION, the child executable gate must pass:
+
+```bash
+python -m pipeline.cli validate
+```
+
+For tracked PNG media the gate verifies:
+- exact SHA-256 against the bound authority;
+- PNG signature at byte 0;
+- `Pillow Image.verify()`;
+- a second open plus full `Image.load()` pixel decode;
+- recorded dimensions;
+- declared alpha policy where composition requires transparency.
+
+Any failure invalidates only the affected binary and its dependent approvals. Creative decisions such
+as "Style 1 was selected" remain preserved unless the user changes them, but no invalid binary may
+condition a renderer or enter the compositor.
+
 ## 1. What stays stable vs what may be generated
 
 ### Reuse-first
