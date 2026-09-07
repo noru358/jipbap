@@ -116,6 +116,13 @@
           },
           "approval_note": {
             "type": "string"
+          },
+          "alpha_policy": {
+            "enum": [
+              "NONE",
+              "CHANNEL",
+              "MIN_0_MAX_255"
+            ]
           }
         }
       }
