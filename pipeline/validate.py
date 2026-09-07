@@ -131,7 +131,7 @@ def _production_expectations(root: Path) -> list[ImageExpectation]:
         raise ValidationError("unsupported production registry schema")
     output: list[ImageExpectation] = []
     for item in registry.get("assets", []):
-        if item.get("status") != "APPROVED":
+        if item.get("status") not in {"APPROVED", "INVALIDATED_MEDIA_INTEGRITY"}:
             continue
         output.append(
             ImageExpectation(
