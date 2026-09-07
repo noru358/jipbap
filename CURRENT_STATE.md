@@ -183,28 +183,22 @@ A >4-slide boundary test is required before board-first can claim cross-board co
 
 ## Current blocker
 
-The media-integrity and real-alpha problems are no longer the active blocker.
+`PERSON_CONTEXT_SEATED_V1` is resolved: USER APPROVED, materialized at the production path, registered as APPROVED, and clean-checkout validated.
 
-In this session, multiple fresh `PERSON_CONTEXT_SEATED` outputs successfully produced real RGBA transparency
-(alpha extrema 0–255), but the user rejected them because the PERSON drawing language/face construction drifted
-from `PERSON_STYLE_REF_1`.
+The active missing foundation is `FOOD_EGG_RICE_INTACT_V1`. The prior food raster remains RETIRED because its repository bytes were corrupt. No S01 composition or dependent interaction authoring is authorized until a fresh FOOD foundation asset passes hard media/style/meal-context QC and is registered.
 
-The user specifically judged:
-- color/texture became close or acceptable;
-- the person still looked different from the desired reference;
-- therefore none of these outputs may be registered or reused.
+## PERSON materialization validation PASS
 
-All rejected PERSON outputs from this session are quarantined. They are not references, edit targets,
-continuity anchors, or production assets.
-
-## Runtime binary handoff blocker
-
-- User approval for PERSON attempt 8 is durable and recorded.
-- The exact approved PNG exists in the current ChatGPT image runtime and passed local hard media QC.
-- The currently available GitHub connector can write text/Git objects but has no direct file-reference bridge from this image runtime into a repository binary blob.
-- Therefore the approved PNG cannot be truthfully declared materialized in GitHub from this chat runtime.
-- FAIL-CLOSED consequence: do not promote the PERSON registry entry to `APPROVED`, do not generate dependent Lane A interaction assets, and do not compose S01 until the exact approved PNG is present at the production path and validates.
-- Required manual bridge: place the approved first image at `assets/production/person/PERSON_CONTEXT_SEATED_v1.png` without editing/re-encoding it.
+- Production path: `assets/production/person/PERSON_CONTEXT_SEATED_v1.png`.
+- Exact approved SHA-256: `7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e`.
+- Git blob reused without re-encoding: `885ec49a6214f64a27d6568df22ea53bab3be847`.
+- Dimensions: `1212 × 1298`.
+- Alpha policy: RGBA extrema `0–255`.
+- Clean-checkout validation workflow: `34151559327` on commit `ab4fcb35f51a3b5eec1a39e655eed38e13991a29`.
+- Unit tests: **PASS**.
+- Repository media validator (`python -m pipeline.cli validate`): **PASS**.
+- Registry status: **APPROVED**.
+- Attempts 1–7 and 9 remain quarantined and are not valid references, edit targets, continuity anchors, or production assets.
 
 ## Exact next action
 
