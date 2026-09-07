@@ -4,7 +4,7 @@
   "updated_at": "2026-09-07",
   "foundation_assets": {
     "FOOD_EGG_RICE_INTACT": {
-      "status": "RETIRED_CORRUPT_BYTES",
+      "status": "READY_REGENERATE_NEW_ASSET",
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
       "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
       "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
@@ -14,10 +14,10 @@
       "alpha_validation": "UNTRUSTED_UNTIL_REVALIDATED",
       "approved_by": null,
       "note": "Corrupt repository bytes retired; prior approval is not recoverable from Git history.",
-      "next_action": "Regenerate only after PERSON style source/media integrity recovery permits BODY4 calibration to resume."
+      "next_action": "Generate a fresh intact egg-on-rice calibration asset under current media-integrity controls."
     },
     "PERSON_CONTEXT_SEATED": {
-      "status": "BLOCKED_UPSTREAM_REFERENCE_INTEGRITY",
+      "status": "READY_FRESH_RENDER_CONTEXT",
       "attempts": [
         {
           "attempt": 1,
@@ -44,7 +44,8 @@
         }
       ],
       "quarantine_rule": "Do not register, edit or reuse either failed image as a reference.",
-      "next_action": "Do not rerender. Recover and validate PERSON_STYLE_REF_1 bytes first."
+      "next_action": "Generate a fresh PERSON_CONTEXT_SEATED only for Lane A; previous two checkerboard/RGB outputs remain quarantined.",
+      "upstream_reference_integrity": "PASS_STYLE1_REBOUND"
     }
   }
 }
