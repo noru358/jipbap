@@ -14,7 +14,7 @@
     {
       "asset_id": "PERSON_CONTEXT_SEATED_STYLE1_SELECTED",
       "role": "PERSON_STYLE_SELECTION_EVIDENCE",
-      "status": "USER_SELECTION_PRESERVED_BINARY_INVALIDATED",
+      "status": "RETIRED_CORRUPT_OPTIONAL_EVIDENCE",
       "path": "calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png",
       "sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
       "width": 770,
