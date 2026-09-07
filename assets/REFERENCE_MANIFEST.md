@@ -1,9 +1,8 @@
 # REFERENCE_MANIFEST
 
-> Integrity notice: user selection decisions are preserved, but the currently materialized
-> PERSON_STYLE_REF_1 and selected calibration-evidence binaries are not executable authority
-> until they pass `python -m pipeline.cli validate`. Machine-readable byte identity lives in
-> `assets/reference_registry.json`; recovery state lives in `INTEGRITY_STATE.json`.
+> Media integrity is executable authority. PERSON_STYLE_REF_1 is currently materialized and
+> validated by clean-checkout CI. Machine-readable byte and decoded-pixel identities live in
+> `assets/reference_registry.json`; historical recovery evidence lives in `INTEGRITY_STATE.json`.
 
 
 Updated: 2026-09-07
@@ -23,12 +22,15 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - allowed_influence: face construction, eye grammar, linework, flat/local color, hair simplification, expression grammar, person visual density
 - excluded_influence: FOOD style pixels, BACKGROUND/LOCATION design, camera/composition, cover/lettering
 - dimensions: 1448 × 483
-- SHA-256: 6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614
+- current repository byte SHA-256: 6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278
+- decoded RGBA pixel SHA-256: a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d
+- original user-supplied source byte SHA-256: 6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614
 - repository path: assets/references/PERSON_STYLE_REF_1.png
-- repository blob SHA: 369aeed50e607319a62371eb79658daa636f12c3
-- repository binary status: MATERIALIZED_BINARY_INVALIDATED
-- confirmed corrupt repository SHA-256: 0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf
-- selection status: SELECTED_USER_LOCKED_DECISION_BINARY_INVALIDATED
+- repository blob SHA: 68bbfc1d0edebfa4c1c4ac2601c92914c9f49fa4
+- repository binary status: MATERIALIZED_VALIDATED
+- prior corrupt repository SHA-256: 0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf
+- selection status: SELECTED_USER_LOCKED
+- recovery note: GitHub-uploaded PNG has different container bytes but identical decoded RGBA pixels to the recovered original; current repository bytes are the executable authority.
 
 ### PERSON_STYLE_REF_2
 
@@ -87,7 +89,7 @@ Session/chat availability is runtime state and MUST NOT be persisted as if it we
 Before every reference-conditioned render execution:
 0. run the repository media-integrity gate and require PASS for every bound reference;
 1. verify that the actual required image binary is available to the renderer in the current execution context;
-2. verify its SHA-256 against the candidate identity above when bytes are accessible;
+2. verify its current repository byte SHA-256 and decoded-pixel identity against the machine registry;
 3. bind the actual image media through the parent media-input contract / renderer media-input surface;
 4. if unavailable or mismatched, FAIL-CLOSED for that candidate.
 
