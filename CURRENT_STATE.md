@@ -4,7 +4,7 @@ Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
-Execution authorization: **CLEAN_SESSION_HANDOFF_AFTER_REPEAT_PERSON_STYLE_FAILURE**
+Execution authorization: **PERSON_APPROVED_MATERIALIZE_THEN_FOOD**
 
 ## Production state
 
@@ -137,6 +137,20 @@ materialization remains.
 - Neither output is approved, registered, or reusable. Attempts 1-9 are quarantined.
 - Under AutoPipeline continuity policy, two fresh failures of the same PERSON style-fidelity contract in one render context trigger a clean-session handoff.
 
+## User decision override — PERSON attempt 8
+
+The user's current explicit decision supersedes the prior internal rejection/handoff diagnosis:
+
+- clean-session PERSON attempt 8: **USER APPROVED**;
+- clean-session PERSON attempt 9: **USER REJECTED / QUARANTINED**;
+- attempt 8 SHA-256: `7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e`;
+- attempt 8 hard media QC: RGBA, alpha extrema 0–255;
+- attempt 8 is the sole selected `PERSON_CONTEXT_SEATED` candidate;
+- attempts 1–7 and 9 remain quarantined;
+- no new PERSON generation is authorized while the approved attempt-8 bytes are recoverable.
+
+The approved PERSON is not yet an active production asset because its exact PNG bytes have not yet been materialized and validated at the production registry path.
+
 ## BODY4 calibration
 
 The approved semantic fixture remains valid:
@@ -185,12 +199,11 @@ continuity anchors, or production assets.
 
 ## Exact next action
 
-1. Commit this handoff state, then advance `AutoPipeline/main` to pin the resulting `jipbap/main` commit.
-2. Start a **new clean session** and canonical-boot latest `AutoPipeline/main` + `jipbap/main`.
-3. Verify parent/child pin parity plus `INTEGRITY_STATE.json`, `assets/reference_registry.json`, and `calibration/body4/RENDER_AB_PLAN.json`.
-4. Resume only `PERSON_CONTEXT_SEATED`.
-5. Bind validated `PERSON_STYLE_REF_1` as primary source style authority and validated `TARGET_LOOK_BOARD_REF_1` only as auxiliary target-look anchor.
-6. Do **not** bind, edit, repair, or otherwise reuse PERSON attempts 1-9.
-7. Preserve real RGBA transparency; primary visual gate remains face construction / drawing-language fidelity.
-8. Only after PERSON passes may Lane A continue to fresh `FOOD_EGG_RICE_INTACT` → S01 composition → user visual/identity gate.
-9. Architecture choice remains **DEFERRED**.
+1. Materialize the exact user-approved attempt-8 PNG as `assets/production/person/PERSON_CONTEXT_SEATED_v1.png` without changing its bytes.
+2. Run the repository media-integrity gate and require SHA-256 `7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e`, dimensions 1212×1298, RGBA alpha extrema 0–255.
+3. Promote `PERSON_CONTEXT_SEATED_V1` from `USER_APPROVED_PENDING_MATERIALIZATION` to `APPROVED`.
+4. Generate a fresh `FOOD_EGG_RICE_INTACT` foundation asset; the prior corrupt food raster remains retired.
+5. After food hard-QC/style/meal-context PASS, register it and deterministically compose S01 from the approved PERSON + FOOD assets.
+6. Present composed S01 for the user visual/identity gate.
+7. On S01 PASS, promote the PERSON appearance to the calibration identity anchor and continue the remaining Lane A DAG, then Lane B board-first comparison.
+8. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
