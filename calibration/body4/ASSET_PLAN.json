@@ -14,11 +14,11 @@
       "category": "PERSON_POSE",
       "scope": "EPISODE_LOCAL",
       "depends_on": [
-        "STYLE_REF_001_MEDIA"
+        "PERSON_STYLE_REF_1_MEDIA"
       ],
-      "dispatch_status": "CALIBRATION_BRANCH_READY_CURRENT_SESSION",
+      "dispatch_status": "READY_AFTER_JOB_COMPILE",
       "blocker": null,
-      "note": "Resolved temporarily by two equal-path calibration candidate jobs using currently supplied actual media; later sessions must reverify media."
+      "note": "STYLE_1 was user-selected. Source reference and selection evidence are materialized; compile one isolated PERSON foundation asset with no food, tableware, text or collage."
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT",
@@ -65,7 +65,8 @@
   "next_dispatchable_work": {
     "can_prepare_food_job": true,
     "can_dispatch_person_job": true,
-    "person_dispatch_blocker": null
+    "person_dispatch_blocker": null,
+    "exact_next": "Compile and author PERSON_CONTEXT_SEATED and FOOD_EGG_RICE_INTACT as separate foundation assets, run QC, then bounded-register only passing production assets."
   },
   "approval_flow": [
     "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
@@ -77,21 +78,10 @@
   "full_frame_exception_assessment": "UNASSESSED",
   "person_style_comparison": {
     "plan_ref": "calibration/person_style/COMPARE_PLAN.json",
-    "production_requirement": "PERSON_CONTEXT_SEATED",
-    "candidate_jobs": [
-      {
-        "candidate_asset_id": "PERSON_CONTEXT_SEATED_STYLE1_CAL",
-        "reference_id": "PERSON_STYLE_REF_1",
-        "status": "READY_CURRENT_SESSION",
-        "promotion": "ONLY_IF_USER_SELECTS_STYLE_1"
-      },
-      {
-        "candidate_asset_id": "PERSON_CONTEXT_SEATED_STYLE2_CAL",
-        "reference_id": "PERSON_STYLE_REF_2",
-        "status": "READY_CURRENT_SESSION",
-        "promotion": "ONLY_IF_USER_SELECTS_STYLE_2"
-      }
-    ],
-    "rule": "Do not place both candidate assets in production registry. Selection precedes production promotion."
+    "status": "USER_SELECTED_STYLE_1",
+    "selected_candidate_asset_id": "PERSON_CONTEXT_SEATED_STYLE1_CAL",
+    "selected_reference_id": "PERSON_STYLE_REF_1",
+    "selection_evidence": "calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png",
+    "production_rule": "Use STYLE_1 for PERSON authoring. The selected collage is calibration evidence, not a production registry asset. STYLE_2 is excluded from production."
   }
 }

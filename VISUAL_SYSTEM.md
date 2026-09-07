@@ -22,7 +22,7 @@ accepted PERSON pixel을 FOOD variation 때문에 다시 샘플링하는 것은 
 시각적 최상위 권위는 실제 승인 이미지 레퍼런스다.
 
 현재 기준:
-- intended binary: assets/references/STYLE_REF_001.jpg
+- intended binary: assets/references/PERSON_STYLE_REF_1.png
 - integrity/status authority: assets/REFERENCE_MANIFEST.md
 
 reference path/hash만으로 media binding을 간주하지 않는다.
@@ -38,7 +38,7 @@ reference path/hash만으로 media binding을 간주하지 않는다.
 - TYPE / GRAPHIC_COMPOSITION
 - 또는 그 하위 범위
 
-현재 사용자가 제공한 `STYLE_REF_001`은 **PERSON 스타일 레퍼런스**다.
+사용자가 최종 선택한 `PERSON_STYLE_REF_1`은 **USER_LOCKED PERSON 스타일 레퍼런스**다. 실제 바이너리와 무결성 정보는 `assets/REFERENCE_MANIFEST.md`를 따른다.
 사람의 얼굴 구조, 눈 문법, 선, 채색, 헤어 단순화에는 권위가 있지만
 음식 렌더링, 집 배경, 카메라, 표지 디자인을 직접 보여주지 않으므로 그 영역의 픽셀 스타일 권위로 간주하지 않는다.
 

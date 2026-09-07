@@ -16,10 +16,12 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - coverage_scope: PERSON only
 - allowed_influence: face construction, eye grammar, linework, flat/local color, hair simplification, expression grammar, person visual density
 - excluded_influence: FOOD style pixels, BACKGROUND/LOCATION design, camera/composition, cover/lettering
-- dimensions: 1448 × 1086
-- SHA-256: 82ad0c13db1e0d3baab1ff3340c8654b54415cadcb92da76ee924da738970d51
-- repository binary status: RUNTIME_ONLY_NOT_MATERIALIZED
-- selection status: IN_TEST
+- dimensions: 1448 × 483
+- SHA-256: 6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614
+- repository path: assets/references/PERSON_STYLE_REF_1.png
+- repository blob SHA: 369aeed50e607319a62371eb79658daa636f12c3
+- repository binary status: MATERIALIZED
+- selection status: SELECTED_USER_LOCKED
 
 ### PERSON_STYLE_REF_2
 
@@ -31,8 +33,22 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - dimensions: 1122 × 1402
 - SHA-256: 6f7643f1eef0f1a5641fb0af60518e097d3caf926267c5c4557a3c156a7922d4
 - repository binary status: RUNTIME_ONLY_NOT_MATERIALIZED
-- selection status: IN_TEST
+- selection status: NOT_SELECTED_CALIBRATION_EVIDENCE_ONLY
 - domain firewall note: the visible food/table/kitchen content in this reference is incidental and MUST NOT become FOOD, BACKGROUND, meal-layout, camera or composition authority.
+
+## Selected calibration evidence
+
+### PERSON_CONTEXT_SEATED_STYLE1_SELECTED
+
+- role: PERSON_STYLE_SELECTION_EVIDENCE
+- source reference: PERSON_STYLE_REF_1
+- repository path: calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png
+- dimensions: 770 × 1024
+- SHA-256: acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b
+- repository blob SHA: 98976d7b28ff061b95c216652df59e95073bbe42
+- status: USER_SELECTED
+- note: User clarified that this S01–S04 sheet was generated from PERSON_STYLE_REF_1 and selected Style 1 as the final PERSON drawing-language direction.
+- production rule: selection evidence and style reference only; this collage is not a production pose asset and must not enter the production registry.
 
 ## Comparison rule
 
@@ -46,7 +62,7 @@ Evaluation dimensions:
 - ability to remain coherent beside the independently authored food asset;
 - identity/style stability when reused as the anchor for later interaction assets.
 
-No candidate becomes final PERSON style authority until the user selects it after side-by-side calibration evidence.
+Selection is complete: the user selected PERSON_STYLE_REF_1 after reviewing calibration evidence. PERSON_STYLE_REF_2 remains non-production calibration evidence only.
 
 ## Active episode-local anchors
 

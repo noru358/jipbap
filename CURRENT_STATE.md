@@ -12,7 +12,7 @@ Execution authorization: **ASSET_AND_TEMPLATE_CALIBRATION_ONLY**
 Active episode: NONE
 Next production episode: 001 after calibration
 
-The prior E001/evaluation execution package has been removed from the working tree. Git history is the archive; no old raster/state file is current production authority.
+The prior E001/evaluation execution package remains retired. Git history is archive only; no retired raster/state file is current production authority.
 
 ## Canonical rendering decision
 
@@ -27,12 +27,15 @@ Domain routing:
 - BACKGROUND: reuse plates/components where practical.
 - full-frame generation: explicit exception only, assessed after composition is attempted.
 
-Authority:
+## Canonical authority
+
 - CALIBRATION_STATE.json
 - calibration/COMPOSITION_CANDIDATES.md
 - calibration/locks/COVER_SPEC_V1.json
 - calibration/locks/LETTERING_SPEC_V1.json
 - calibration/body4/FIXTURE.json
+- calibration/body4/ASSET_PLAN.json
+- calibration/person_style/COMPARE_PLAN.json
 - CONTENT_SYSTEM.md
 - VOICE_SYSTEM.md
 - VISUAL_SYSTEM.md
@@ -46,23 +49,34 @@ Authority:
 
 ## Registry state
 
-`assets/production/registry.json` currently contains **0 approved production assets**.
+`assets/production/registry.json` contains **0 approved production assets**.
 
-Calibration placeholder fixtures are stored separately under `calibration/fixtures` and must never be inserted into the production registry.
+Calibration references/evidence are stored outside the production registry and must not be registered as production pose assets.
 
-STYLE_REF_001 remains PERSON authoring authority metadata, not a production pose asset.
+## PERSON style lock
+
+Status: **USER_LOCKED**
+Selected authority: **PERSON_STYLE_REF_1**
+
+Materialized source:
+- path: `assets/references/PERSON_STYLE_REF_1.png`
+- dimensions: 1448 × 483
+- SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
+
+Materialized selection evidence:
+- path: `calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png`
+- dimensions: 770 × 1024
+- SHA-256: `acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b`
+
+The user clarified that the S01–S04 evidence sheet was generated from the original Style 1 source and selected Style 1 as final. Style 2 remains non-production calibration evidence only.
+
+The evidence sheet is a collage/reference artifact, not `PERSON_CONTEXT_SEATED` and not a production registry asset.
 
 ## Template lock state
 
-COVER and LETTERING use:
-
-`IN_TEST → SPEC_LOCKED → USER_LOCKED`
-
-Current:
 - COVER: **SPEC_LOCKED C — FOOD_FIRST_POSTER**
 - LETTERING: **SPEC_LOCKED A — DIRECT_EDITORIAL**
-- both approved_spec_sha256 values were reverified against the actual lock files;
-- placeholder pixels/fonts have no production authority;
+- placeholder pixels/fonts have no production authority.
 - USER_LOCKED remains pending real-pixel validation after the BODY pilot.
 
 ## BODY4 fixture state
@@ -70,21 +84,15 @@ Current:
 Fixture: `JIPBAP_HYBRID_BODY4_V2`
 Status: **APPROVED**
 
-Temporal model:
-- one still panel = one exact keyframe;
-- state changes between panels = ordered bridge steps;
-- an omitted micro-action must still be explicit in bridge data;
-- omission is allowed only when causal order remains unambiguous and the omitted action does not deserve its own panel.
-
 Planned BODY sequence:
 1. S01 — intact fried egg already on rice; person secondary.
 2. S02 — spoon/yolk breaking contact is visibly in progress.
 3. S03 — coated rice has been scooped; spoon is immediately before the mouth; **no mouth contact yet**.
 4. S04 — ingestion occurred between panels; unchanged partial-bowl residue is shown.
 
-This resolves the previous ambiguity: S03 is explicitly **after scoop / before mouth contact**.
+S03 is explicitly **after scoop / before mouth contact**.
 
-Stable required asset gaps:
+Required production asset gaps:
 1. PERSON_CONTEXT_SEATED
 2. FOOD_EGG_RICE_INTACT
 3. INTERACTION_BREAK_YOLK
@@ -93,50 +101,33 @@ Stable required asset gaps:
 
 `FOOD_EGG_RICE_RESIDUE` is intentionally reused unchanged in S03 and S04 to prove approved-pixel reuse.
 
-## Asset dependency order
+## Dispatch state
 
-1. Materialize/bind actual STYLE_REF_001 media.
-2. Author foundation PERSON + intact FOOD.
-3. After QC, AUTHORIZED_OPERATOR may hash-register them for bounded pilot use.
-4. Compose S01 and obtain explicit USER visual pass.
-5. Only after S01 pass may its person appearance serve as the identity anchor for dependent interaction assets.
-6. Author remaining dependent assets in DAG order.
-7. Compose BODY4 and run sequence QC.
+- PERSON_CONTEXT_SEATED: **READY_AFTER_JOB_COMPILE**, bound to selected/materialized Style 1 authority.
+- FOOD_EGG_RICE_INTACT: **READY_AFTER_JOB_COMPILE**, independent from PERSON style.
+- INTERACTION_BREAK_YOLK: waiting on PERSON_CONTEXT_SEATED + FOOD_EGG_RICE_INTACT.
+- FOOD_EGG_RICE_RESIDUE: waiting on intact food + yolk-break interaction.
+- INTERACTION_BITE_APPROACH: waiting on PERSON_CONTEXT_SEATED + residue.
 
-Raw assets do not each require a separate user click. USER approval is reserved for named gates/locks; operator approval may carry bounded pilot assets between those gates.
-
-## Asset resolution result
-
-`calibration/body4/ASSET_PLAN.json` is current.
-
-Registry matches: 0.
-Resolved ASSET_GAP count: 5.
-
-Dispatch state:
-- FOOD_EGG_RICE_INTACT: may be compiled independently from current text/meal authorities.
-- PERSON_CONTEXT_SEATED: split into **two calibration candidates** under `calibration/person_style/COMPARE_PLAN.json`; both actual reference binaries are supplied and hash-verified in the current chat runtime.
-- candidate outputs remain calibration-only until user style selection; do not register both into production.
-- all later interaction/residue assets wait on the selected PERSON foundation and their declared dependencies.
+Raw assets do not each require a user click. AUTHORIZED_OPERATOR may bounded-register QC-passed foundation assets. USER approval is reserved for the composed S01 visual/identity anchor and named locks.
 
 ## Remaining blockers
 
-1. PERSON style candidate comparison is not yet rendered/selected.
-2. Candidate binaries are runtime-only, not Git-materialized; a later session must reverify/re-supply them if selection is unfinished.
-3. Production registry still has 0 approved assets because no final PERSON style has been selected and no real pilot asset has passed bounded registration.
-4. Full-frame exception need is UNASSESSED until stable assets are composed.
-5. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
+1. PERSON_CONTEXT_SEATED and FOOD_EGG_RICE_INTACT production assets have not yet been authored/QC-passed.
+2. Production registry remains empty until real foundation assets pass QC.
+3. Full-frame exception need is UNASSESSED until stable assets are composed.
+4. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
 
 ## Exact next action
 
-Run the equal-path PERSON style comparison from `calibration/person_style/COMPARE_PLAN.json`.
+Enter **PERSON_AND_FOOD_FOUNDATION_AUTHORING**.
 
-1. Generate `PERSON_CONTEXT_SEATED_STYLE1_CAL` using only PERSON_STYLE_REF_1 as visual style media.
-2. Generate `PERSON_CONTEXT_SEATED_STYLE2_CAL` using only PERSON_STYLE_REF_2 as visual style media.
-3. Apply the same semantic target contract and QC rubric to both.
-4. User selects the better PERSON style.
-5. Only the selected candidate may be promoted toward `PERSON_CONTEXT_SEATED`; the other remains calibration evidence.
-6. Then continue the BODY4 dependency DAG and compose the S01 visual anchor.
+1. Compile and author one isolated `PERSON_CONTEXT_SEATED` asset using the selected Style 1 source/evidence only for the PERSON domain.
+2. Independently compile and author `FOOD_EGG_RICE_INTACT` from FOOD/meal authorities.
+3. Run hard-contract and visual QC on both.
+4. Bounded-register only passing production assets.
+5. Deterministically compose S01.
+6. Present S01 for the explicit user visual/identity anchor gate.
+7. After S01 PASS, author dependent BODY4 interaction assets in DAG order.
 
-The common FOOD foundation remains independent from the PERSON style comparison.
-
-Do not let STYLE_REF_2's visible kitchen/food/background pixels become FOOD/BACKGROUND/composition authority.
+Do not start a fresh publishable 001 until the hybrid BODY pilot and real-pixel template validation pass.

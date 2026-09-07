@@ -1,28 +1,29 @@
 {
   "version": "1.1",
   "person_style": {
-    "status": "IN_TEST",
+    "status": "USER_LOCKED",
     "authority_ref": "assets/REFERENCE_MANIFEST.md#person-style-calibration-candidates",
-    "selected_candidate": null,
+    "selected_candidate": "PERSON_STYLE_REF_1",
     "candidates": [
       {
         "candidate_id": "PERSON_STYLE_REF_1",
-        "sha256": "82ad0c13db1e0d3baab1ff3340c8654b54415cadcb92da76ee924da738970d51",
-        "pixel_validation_status": "PENDING"
+        "sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+        "pixel_validation_status": "PASS_MATERIALIZED"
       },
       {
         "candidate_id": "PERSON_STYLE_REF_2",
         "sha256": "6f7643f1eef0f1a5641fb0af60518e097d3caf926267c5c4557a3c156a7922d4",
-        "pixel_validation_status": "PENDING"
+        "pixel_validation_status": "NOT_SELECTED"
       }
     ],
-    "approved_spec_sha256": null,
-    "approved_artifact_sha256": null,
-    "pixel_validation_status": "PENDING",
+    "approved_spec_sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+    "approved_artifact_sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
+    "pixel_validation_status": "PASS",
     "notes": [
-      "User explicitly requested equal-path evaluation of PERSON_STYLE_REF_1 and PERSON_STYLE_REF_2.",
-      "Both candidates are PERSON-domain only; incidental food/background pixels in REF_2 are excluded.",
-      "Final PERSON authority is selected only after comparable calibration outputs are reviewed."
+      "User selected PERSON_STYLE_REF_1 as the final PERSON drawing-language direction.",
+      "The actual source reference is materialized at assets/references/PERSON_STYLE_REF_1.png.",
+      "The selected S01-S04 calibration evidence is materialized under calibration/person_style and is not a production pose asset.",
+      "PERSON_STYLE_REF_2 remains calibration evidence only and must not enter production."
     ]
   },
   "food_style": {
@@ -62,5 +63,5 @@
       "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "BODY_FIXTURE_ASSET_AUTHORING"
+  "next_action": "PERSON_AND_FOOD_FOUNDATION_AUTHORING"
 }
