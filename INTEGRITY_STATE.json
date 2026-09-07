@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "BLOCKED_REUPLOAD_REQUIRED",
+  "status": "CONFIRMED_CORRUPTION_REUPLOAD_REQUIRED",
   "scope": "MEDIA_BYTE_INTEGRITY",
   "validator": {
     "command": "python -m pipeline.cli validate",
@@ -19,25 +19,46 @@
       "asset_id": "PERSON_STYLE_REF_1",
       "path": "assets/references/PERSON_STYLE_REF_1.png",
       "expected_sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
-      "expected_dimensions": [1448, 483],
+      "expected_dimensions": [
+        1448,
+        483
+      ],
       "required_for_resume": true,
-      "recovery_policy": "Prefer exact original bytes. If exact bytes are unavailable, materialize a fresh user-resupplied source, validate it fully, compute a new SHA-256, and explicitly rebind the preserved Style 1 selection to the new immutable bytes."
+      "recovery_policy": "Prefer exact original bytes. If exact bytes are unavailable, materialize a fresh user-resupplied source, validate it fully, compute a new SHA-256, and explicitly rebind the preserved Style 1 selection to the new immutable bytes.",
+      "actual_sha256_confirmed": "0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf",
+      "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
+      "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
+      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE"
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
       "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
       "expected_sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
-      "expected_dimensions": [1312, 1199],
+      "expected_dimensions": [
+        1312,
+        1199
+      ],
       "required_for_resume": false,
-      "recovery_policy": "Restore exact approved bytes if available; otherwise retire this calibration asset and regenerate after the integrity gate is green."
+      "recovery_policy": "Restore exact approved bytes if available; otherwise retire this calibration asset and regenerate after the integrity gate is green.",
+      "actual_sha256_confirmed": "9a52ef63cb408f17e12b94482a8d9f37049bb8f3daee70702ce745a9acfd5e68",
+      "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
+      "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
+      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE"
     },
     {
       "asset_id": "PERSON_CONTEXT_SEATED_STYLE1_SELECTED",
       "path": "calibration/person_style/PERSON_CONTEXT_SEATED_STYLE1_SELECTED.png",
       "expected_sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
-      "expected_dimensions": [770, 1024],
+      "expected_dimensions": [
+        770,
+        1024
+      ],
       "required_for_resume": false,
-      "recovery_policy": "Recover if convenient; otherwise retire the raster evidence while preserving the already-recorded user selection of Style 1."
+      "recovery_policy": "Recover if convenient; otherwise retire the raster evidence while preserving the already-recorded user selection of Style 1.",
+      "actual_sha256_confirmed": "35b63461b6e15f258ae61455e89f288b12acc9d51e86dc6894b6788037c2fdae",
+      "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
+      "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
+      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE"
     }
   ],
   "render_architecture_decision": {
@@ -45,5 +66,12 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "Do not render. Recover PERSON_STYLE_REF_1 first, then run the integrity validator. Restore or retire/regenerate the other two invalidated rasters as specified. Only after repository validation is green may BODY4 rendering resume."
+  "exact_next_action": "Do not render. Recover PERSON_STYLE_REF_1 first, then run the integrity validator. Restore or retire/regenerate the other two invalidated rasters as specified. Only after repository validation is green may BODY4 rendering resume.",
+  "verification_evidence": {
+    "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
+    "workflow_run_id": 34137819408,
+    "checked_commit": "d81a8be607417b37cb7a27ea729b1cfbb7261100",
+    "synthetic_regression_tests": "PASS_4_OF_4",
+    "repository_validation": "FAIL_AS_EXPECTED"
+  }
 }
