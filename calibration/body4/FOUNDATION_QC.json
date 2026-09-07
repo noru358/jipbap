@@ -4,7 +4,7 @@
   "updated_at": "2026-09-07",
   "foundation_assets": {
     "FOOD_EGG_RICE_INTACT": {
-      "status": "INVALIDATED_MEDIA_INTEGRITY",
+      "status": "RETIRED_CORRUPT_BYTES",
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
       "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
       "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
@@ -13,7 +13,8 @@
       "channels": "RGBA",
       "alpha_validation": "UNTRUSTED_UNTIL_REVALIDATED",
       "approved_by": null,
-      "note": "Prior QC evidence is not executable authority until repository bytes pass the new fail-closed media integrity gate."
+      "note": "Corrupt repository bytes retired; prior approval is not recoverable from Git history.",
+      "next_action": "Regenerate only after PERSON style source/media integrity recovery permits BODY4 calibration to resume."
     },
     "PERSON_CONTEXT_SEATED": {
       "status": "BLOCKED_UPSTREAM_REFERENCE_INTEGRITY",
