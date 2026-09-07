@@ -23,7 +23,7 @@
       "asset_id": "PERSON_CONTEXT_SEATED_V1",
       "category": "PERSON_POSE",
       "scope": "EPISODE_LOCAL",
-      "status": "USER_APPROVED_PENDING_MATERIALIZATION",
+      "status": "APPROVED",
       "path": "assets/production/person/PERSON_CONTEXT_SEATED_v1.png",
       "sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
       "width": 1212,
@@ -34,7 +34,7 @@
       "food_state_id": null,
       "contact_role": null,
       "approved_by": "USER",
-      "approval_note": "User explicitly approved clean-session attempt 8. Exact approved bytes must be materialized and full-decode validated before status may become APPROVED or before dependent composition/interaction authoring.",
+      "approval_note": "Validation-branch candidate: exact user-approved attempt-8 blob is materialized at the production path without re-encoding. Do not use dependent assets until clean-checkout CI passes SHA-256, PNG decode, dimensions, and alpha extrema.",
       "alpha_policy": "MIN_0_MAX_255",
       "source_authority": [
         "PERSON_STYLE_REF_1",
