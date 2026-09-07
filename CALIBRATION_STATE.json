@@ -1,14 +1,15 @@
 {
   "version": "1.1",
   "person_style": {
-    "status": "USER_SELECTED_BINARY_INVALIDATED",
+    "status": "USER_LOCKED",
     "authority_ref": "assets/REFERENCE_MANIFEST.md#person-style-calibration-candidates",
     "selected_candidate": "PERSON_STYLE_REF_1",
     "candidates": [
       {
         "candidate_id": "PERSON_STYLE_REF_1",
-        "sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
-        "pixel_validation_status": "PASS_MATERIALIZED"
+        "sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
+        "pixel_validation_status": "PASS_FULL_DECODE_PIXEL_EQUIVALENT",
+        "pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d"
       },
       {
         "candidate_id": "PERSON_STYLE_REF_2",
@@ -16,14 +17,16 @@
         "pixel_validation_status": "NOT_SELECTED"
       }
     ],
-    "approved_spec_sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+    "approved_spec_sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
     "approved_artifact_sha256": null,
-    "pixel_validation_status": "FAIL_CLOSED_MEDIA_INTEGRITY",
+    "pixel_validation_status": "PASS",
     "notes": [
       "User selection of PERSON_STYLE_REF_1 remains the creative decision.",
-      "The selected Style 1 source binary is invalidated and must be recovered/rebound before PERSON-conditioned rendering.",
-      "The corrupt S01-S04 selection-evidence raster has been retired; its loss does not undo the user's recorded Style 1 choice.",
-      "No PERSON-conditioned render may dispatch while the selected style source binary is invalidated."
+      "Current repository bytes are a losslessly re-encoded PNG of the user-supplied exact source: byte SHA changed, decoded RGBA pixel SHA is identical.",
+      "Current repository byte SHA-256: 6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278.",
+      "Decoded RGBA pixel SHA-256: a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d.",
+      "Original session-source byte SHA-256 retained as provenance: 6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614.",
+      "The corrupt S01-S04 selection-evidence raster remains retired and is not required for production."
     ]
   },
   "food_style": {
@@ -63,5 +66,5 @@
       "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "MEDIA_INTEGRITY_RECOVERY"
+  "next_action": "BODY4_RENDER_PATH_A_B_CALIBRATION"
 }
