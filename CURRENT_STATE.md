@@ -4,7 +4,7 @@ Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
-Execution authorization: **CLEAN_SESSION_PERSON_REGEN_WITH_TARGET_LOOK**
+Execution authorization: **CLEAN_SESSION_HANDOFF_AFTER_REPEAT_PERSON_STYLE_FAILURE**
 
 ## Production state
 
@@ -124,6 +124,19 @@ materialization remains.
 - The source style authority is not replaced or weakened by the auxiliary board.
 - All failed PERSON candidates from the previous session remain quarantined and must not be bound.
 
+## Clean-session regeneration result (attempts 8-9)
+
+- Both fresh outputs used only the validated hierarchical reference pair:
+  - primary: `PERSON_STYLE_REF_1`;
+  - auxiliary: `TARGET_LOOK_BOARD_REF_1`.
+- Neither fresh output used any prior failed PERSON image as reference/edit target/conditioning input.
+- Hard media QC: **PASS** for both; real RGBA alpha extrema 0–255.
+- Attempt 8 SHA-256: `7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e`.
+- Attempt 9 SHA-256: `6bc319d2c385186121d14287bb2dc11f8a1f1c59a4655ffe54fd54779a46c0f4`.
+- Internal visual QC: **FAIL** for PERSON_STYLE_FIDELITY / FACE_CONSTRUCTION_DRIFT; attempt 9 also shows eye-grammar drift.
+- Neither output is approved, registered, or reusable. Attempts 1-9 are quarantined.
+- Under AutoPipeline continuity policy, two fresh failures of the same PERSON style-fidelity contract in one render context trigger a clean-session handoff.
+
 ## BODY4 calibration
 
 The approved semantic fixture remains valid:
@@ -172,11 +185,12 @@ continuity anchors, or production assets.
 
 ## Exact next action
 
-1. Advance `AutoPipeline/main` to pin the current validated `jipbap/main` commit.
-2. Re-verify parent/child pin parity plus `INTEGRITY_STATE.json`, `assets/reference_registry.json`, and `calibration/body4/RENDER_AB_PLAN.json`.
-3. Resume only `PERSON_CONTEXT_SEATED` for Lane A in this clean session.
-4. Bind validated `PERSON_STYLE_REF_1` as the **primary source style authority** and validated `TARGET_LOOK_BOARD_REF_1` only as the **auxiliary target-look anchor**. Bind none of the rejected PERSON attempts.
-5. Primary visual gate: face construction / drawing-language fidelity to the hierarchical reference pair; preserve the proven real RGBA transparency contract (alpha 0–255, no checkerboard/chroma pixels).
-6. Only after hard media QC + style fidelity PASS may PERSON be registered as the Lane A foundation asset.
-7. Then continue Lane A with fresh `FOOD_EGG_RICE_INTACT` → compose S01 → user visual/identity gate → remaining Lane A DAG → Lane B board-first comparison.
-8. Architecture choice remains **DEFERRED** until both lanes have comparable valid pixels.
+1. Commit this handoff state, then advance `AutoPipeline/main` to pin the resulting `jipbap/main` commit.
+2. Start a **new clean session** and canonical-boot latest `AutoPipeline/main` + `jipbap/main`.
+3. Verify parent/child pin parity plus `INTEGRITY_STATE.json`, `assets/reference_registry.json`, and `calibration/body4/RENDER_AB_PLAN.json`.
+4. Resume only `PERSON_CONTEXT_SEATED`.
+5. Bind validated `PERSON_STYLE_REF_1` as primary source style authority and validated `TARGET_LOOK_BOARD_REF_1` only as auxiliary target-look anchor.
+6. Do **not** bind, edit, repair, or otherwise reuse PERSON attempts 1-9.
+7. Preserve real RGBA transparency; primary visual gate remains face construction / drawing-language fidelity.
+8. Only after PERSON passes may Lane A continue to fresh `FOOD_EGG_RICE_INTACT` → S01 composition → user visual/identity gate.
+9. Architecture choice remains **DEFERRED**.
