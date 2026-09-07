@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "CONFIRMED_CORRUPTION_REUPLOAD_REQUIRED",
+  "status": "SOURCE_RECOVERED_REPOSITORY_MATERIALIZATION_PENDING",
   "scope": "MEDIA_BYTE_INTEGRITY",
   "validator": {
     "command": "python -m pipeline.cli validate",
@@ -29,7 +29,20 @@
       "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
       "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
       "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE",
-      "recovery_status": "USER_SOURCE_REQUIRED"
+      "recovery_status": "SESSION_EXACT_ORIGINAL_VERIFIED_MATERIALIZATION_PENDING",
+      "session_source_validation": {
+        "sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+        "dimensions": [
+          1448,
+          483
+        ],
+        "format": "PNG",
+        "mode": "RGBA",
+        "png_signature": "PASS",
+        "pillow_verify": "PASS",
+        "full_pixel_decode": "PASS",
+        "exact_expected_sha_match": true
+      }
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
@@ -69,7 +82,7 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "Recover PERSON_STYLE_REF_1 only. After it is materialized and rebound to validated immutable bytes, run the integrity validator. The corrupt food asset will be regenerated later and the corrupt selection-evidence raster is retired.",
+  "exact_next_action": "Materialize the session-supplied exact original PERSON_STYLE_REF_1 bytes at assets/references/PERSON_STYLE_REF_1.png, then run the clean-checkout repository validator. Do not render before PASS.",
   "verification_evidence": {
     "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
     "workflow_run_id": 34137819408,
