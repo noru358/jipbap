@@ -59,6 +59,29 @@ class MediaIntegrityTests(unittest.TestCase):
                 errors,
             )
 
+    def test_pixel_hash_detects_visual_byte_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path, digest = self._valid_rgba(root)
+            with Image.open(path) as image:
+                image.load()
+                pixel_digest = hashlib.sha256(image.convert("RGBA").tobytes()).hexdigest()
+            errors = inspect_image(
+                root,
+                ImageExpectation(
+                    "PIXEL_OK", "asset.png", digest, 16, 20, "MIN_0_MAX_255", pixel_digest
+                ),
+            )
+            self.assertEqual(errors, [])
+
+            errors = inspect_image(
+                root,
+                ImageExpectation(
+                    "PIXEL_BAD", "asset.png", digest, 16, 20, "MIN_0_MAX_255", "0" * 64
+                ),
+            )
+            self.assertTrue(any("pixel sha-256 mismatch" in error.lower() for error in errors), errors)
+
     def test_sha_mismatch_is_reported(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
