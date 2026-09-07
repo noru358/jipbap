@@ -5,7 +5,7 @@
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
       "category": "FOOD_STATE",
       "scope": "EPISODE_LOCAL",
-      "status": "INVALIDATED_MEDIA_INTEGRITY",
+      "status": "RETIRED",
       "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
       "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
       "width": 1312,
@@ -16,7 +16,7 @@
       "food_state_id": "EGG_ON_RICE_YOLK_INTACT",
       "contact_role": null,
       "approved_by": "AUTHORIZED_OPERATOR",
-      "approval_note": "Prior bounded approval is suspended. Repository bytes must match the recorded SHA-256, fully decode as PNG, match recorded dimensions, and satisfy alpha_policy before approval can be reinstated.",
+      "approval_note": "Retired because repository bytes are corrupt and no valid historical blob exists. Regenerate this calibration food asset after the media-integrity gate is green.",
       "alpha_policy": "MIN_0_MAX_255"
     }
   ]
