@@ -13,8 +13,9 @@
   },
   "registry_snapshot": {
     "path": "assets/production/registry.json",
-    "approved_asset_count": 0,
-    "sha256": "5d7572aea12757f02e262b10a65d217103152bd1e6ffe835a2347c2fceb251a1"
+    "approved_asset_count": 1,
+    "sha256": null,
+    "captured_for": "CURRENT_BODY4_ASSET_RESOLUTION"
   },
   "menu_moment": {
     "route": "PURE_SENSORY",
@@ -425,9 +426,10 @@
     "final_template_pixel_gate": "USER"
   },
   "asset_resolution_result": {
-    "registry_matches": [],
+    "registry_matches": [
+      "PERSON_CONTEXT_SEATED"
+    ],
     "asset_gaps": [
-      "PERSON_CONTEXT_SEATED",
       "FOOD_EGG_RICE_INTACT",
       "INTERACTION_BREAK_YOLK",
       "FOOD_EGG_RICE_RESIDUE",
