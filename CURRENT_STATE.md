@@ -49,7 +49,7 @@ Domain routing:
 
 ## Registry state
 
-`assets/production/registry.json` contains **0 approved production assets**.
+`assets/production/registry.json` contains **1 approved production asset**: `FOOD_EGG_RICE_INTACT_V1`.
 
 Calibration references/evidence are stored outside the production registry and must not be registered as production pose assets.
 
@@ -103,8 +103,8 @@ Required production asset gaps:
 
 ## Dispatch state
 
-- PERSON_CONTEXT_SEATED: **READY_AFTER_JOB_COMPILE**, bound to selected/materialized Style 1 authority.
-- FOOD_EGG_RICE_INTACT: **READY_AFTER_JOB_COMPILE**, independent from PERSON style.
+- PERSON_CONTEXT_SEATED: **FAIL-CLOSED / NEW SESSION REQUIRED**. Two current-context attempts baked checkerboard pixels into RGB instead of producing alpha; both are quarantined.
+- FOOD_EGG_RICE_INTACT: **RESOLVED / APPROVED** as `FOOD_EGG_RICE_INTACT_V1`.
 - INTERACTION_BREAK_YOLK: waiting on PERSON_CONTEXT_SEATED + FOOD_EGG_RICE_INTACT.
 - FOOD_EGG_RICE_RESIDUE: waiting on intact food + yolk-break interaction.
 - INTERACTION_BITE_APPROACH: waiting on PERSON_CONTEXT_SEATED + residue.
@@ -113,21 +113,34 @@ Raw assets do not each require a user click. AUTHORIZED_OPERATOR may bounded-reg
 
 ## Remaining blockers
 
-1. PERSON_CONTEXT_SEATED and FOOD_EGG_RICE_INTACT production assets have not yet been authored/QC-passed.
-2. Production registry remains empty until real foundation assets pass QC.
+1. PERSON_CONTEXT_SEATED has no passing production asset; two no-alpha outputs are quarantined.
+2. S01 composition waits on a passing PERSON_CONTEXT_SEATED asset.
 3. Full-frame exception need is UNASSESSED until stable assets are composed.
 4. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
 
 ## Exact next action
 
-Enter **PERSON_AND_FOOD_FOUNDATION_AUTHORING**.
+**HANDOFF TO A CLEAN SESSION BEFORE THE NEXT PERSON RENDER.**
 
-1. Compile and author one isolated `PERSON_CONTEXT_SEATED` asset using the selected Style 1 source/evidence only for the PERSON domain.
-2. Independently compile and author `FOOD_EGG_RICE_INTACT` from FOOD/meal authorities.
-3. Run hard-contract and visual QC on both.
-4. Bounded-register only passing production assets.
-5. Deterministically compose S01.
-6. Present S01 for the explicit user visual/identity anchor gate.
-7. After S01 PASS, author dependent BODY4 interaction assets in DAG order.
+Verified repository heads at handoff:
+- jipbap: pending this commit
+- AutoPipeline: parent will be repinned after this commit
 
-Do not start a fresh publishable 001 until the hybrid BODY pilot and real-pixel template validation pass.
+Completed:
+- Style 1 source and selected S01–S04 evidence are materialized and USER_LOCKED.
+- `FOOD_EGG_RICE_INTACT_V1` passed QC and is registered for bounded calibration use.
+
+Quarantined outputs:
+- PERSON attempt 1: `9086ae4bfc8bab2e119604395c071ae83f3d8e7fb5bf59721693e5dd00e12b4c` — RGB, baked checkerboard, pose/expression drift.
+- PERSON attempt 2: `aa9be0b19ac230d5044e6a23289d827f4412da10250a7a92e27a492ec6b7eade` — RGB, baked checkerboard.
+- Neither may be edited, referenced or registered.
+
+Next single action in a clean session:
+1. Restore Git heads and read this file.
+2. Dispatch **only** `PERSON_CONTEXT_SEATED` with the selected Style 1 source/evidence.
+3. Require a real RGBA alpha channel; do not depict a checkerboard pattern.
+4. Inspect channels/alpha before subjective visual QC.
+5. If PASS, bounded-register the PERSON asset and deterministically compose S01 using `FOOD_EGG_RICE_INTACT_V1`.
+6. Present composed S01 for the explicit user visual/identity anchor gate.
+
+Do not start publishable episode 001 yet.

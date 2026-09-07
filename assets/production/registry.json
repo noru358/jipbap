@@ -1,4 +1,22 @@
 {
   "schema_version": "1.0",
-  "assets": []
+  "assets": [
+    {
+      "asset_id": "FOOD_EGG_RICE_INTACT_V1",
+      "category": "FOOD_STATE",
+      "scope": "EPISODE_LOCAL",
+      "status": "APPROVED",
+      "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
+      "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
+      "width": 1312,
+      "height": 1199,
+      "subject_id": null,
+      "episode_id": "CALIBRATION_BODY4",
+      "menu_id": "FRIED_EGG_ON_RICE",
+      "food_state_id": "EGG_ON_RICE_YOLK_INTACT",
+      "contact_role": null,
+      "approved_by": "AUTHORIZED_OPERATOR",
+      "approval_note": "Attempt 2 passed hard contract and visual QC: actual alpha channel, isolated bowl, fried egg already on rice, intact yolk, simplified non-photorealistic rendering, no extra meal entities or text."
+    }
+  ]
 }

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "fixture_id": "JIPBAP_HYBRID_BODY4_V2",
+  "updated_at": "2026-09-07",
+  "foundation_assets": {
+    "FOOD_EGG_RICE_INTACT": {
+      "status": "APPROVED",
+      "asset_id": "FOOD_EGG_RICE_INTACT_V1",
+      "path": "assets/production/food/FOOD_EGG_RICE_INTACT_v1.png",
+      "sha256": "20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61",
+      "width": 1312,
+      "height": 1199,
+      "channels": "RGBA",
+      "alpha_validation": "PASS_MIN_0_MAX_255",
+      "approved_by": "AUTHORIZED_OPERATOR"
+    },
+    "PERSON_CONTEXT_SEATED": {
+      "status": "FAIL_CLOSED_NEW_SESSION_REQUIRED",
+      "attempts": [
+        {
+          "attempt": 1,
+          "sha256": "9086ae4bfc8bab2e119604395c071ae83f3d8e7fb5bf59721693e5dd00e12b4c",
+          "width": 1222,
+          "height": 1287,
+          "channels": "RGB",
+          "failure": [
+            "NO_ALPHA_CHANNEL",
+            "CHECKERBOARD_BAKED_INTO_PIXELS",
+            "SEMANTIC_POSE_EXPRESSION_DRIFT"
+          ]
+        },
+        {
+          "attempt": 2,
+          "sha256": "aa9be0b19ac230d5044e6a23289d827f4412da10250a7a92e27a492ec6b7eade",
+          "width": 1205,
+          "height": 1305,
+          "channels": "RGB",
+          "failure": [
+            "NO_ALPHA_CHANNEL",
+            "CHECKERBOARD_BAKED_INTO_PIXELS"
+          ]
+        }
+      ],
+      "quarantine_rule": "Do not register, edit or reuse either failed image as a reference.",
+      "next_action": "Clean-session generation of PERSON_CONTEXT_SEATED only; verify actual alpha before visual QC."
+    }
+  }
+}
