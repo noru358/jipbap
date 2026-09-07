@@ -114,31 +114,29 @@ Resolved ASSET_GAP count: 5.
 
 Dispatch state:
 - FOOD_EGG_RICE_INTACT: may be compiled independently from current text/meal authorities.
-- PERSON_CONTEXT_SEATED: **BLOCKED** until actual STYLE_REF_001 image bytes are materialized or explicitly supplied and SHA-256 verified.
-- all later interaction/residue assets wait on their declared dependencies.
+- PERSON_CONTEXT_SEATED: split into **two calibration candidates** under `calibration/person_style/COMPARE_PLAN.json`; both actual reference binaries are supplied and hash-verified in the current chat runtime.
+- candidate outputs remain calibration-only until user style selection; do not register both into production.
+- all later interaction/residue assets wait on the selected PERSON foundation and their declared dependencies.
 
 ## Remaining blockers
 
-1. STYLE_REF_001 actual image bytes are not materialized/verified in the current runtime for PERSON authoring.
-2. Production registry still has 0 approved assets because no real pilot asset has passed authoring/QC yet.
-3. Full-frame exception need is UNASSESSED until stable assets are composed.
-4. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
+1. PERSON style candidate comparison is not yet rendered/selected.
+2. Candidate binaries are runtime-only, not Git-materialized; a later session must reverify/re-supply them if selection is unfinished.
+3. Production registry still has 0 approved assets because no final PERSON style has been selected and no real pilot asset has passed bounded registration.
+4. Full-frame exception need is UNASSESSED until stable assets are composed.
+5. Real-pixel COVER/LETTERING validation requires approved BODY pilot artwork and production font bytes.
 
 ## Exact next action
 
-Asset resolution is complete. The pilot is now in **BODY_FIXTURE_ASSET_AUTHORING**.
+Run the equal-path PERSON style comparison from `calibration/person_style/COMPARE_PLAN.json`.
 
-Fail-closed PERSON path:
-1. obtain the actual STYLE_REF_001 bytes;
-2. verify dimensions/hash against `assets/REFERENCE_MANIFEST.md`;
-3. bind the image through the parent media-input contract;
-4. only then dispatch PERSON_CONTEXT_SEATED.
+1. Generate `PERSON_CONTEXT_SEATED_STYLE1_CAL` using only PERSON_STYLE_REF_1 as visual style media.
+2. Generate `PERSON_CONTEXT_SEATED_STYLE2_CAL` using only PERSON_STYLE_REF_2 as visual style media.
+3. Apply the same semantic target contract and QC rubric to both.
+4. User selects the better PERSON style.
+5. Only the selected candidate may be promoted toward `PERSON_CONTEXT_SEATED`; the other remains calibration evidence.
+6. Then continue the BODY4 dependency DAG and compose the S01 visual anchor.
 
-The independent FOOD_EGG_RICE_INTACT job may be prepared separately, but no PERSON-conditioned render may proceed from prose/path/hash alone.
+The common FOOD foundation remains independent from the PERSON style comparison.
 
-After foundation assets pass QC and bounded operator registration:
-- compose S01;
-- present S01 to the user as the visual/identity anchor gate;
-- only after S01 PASS author dependent interaction assets in DAG order.
-
-Do not start a fresh publishable 001 until the hybrid pilot and real-pixel template validation both pass.
+Do not let STYLE_REF_2's visible kitchen/food/background pixels become FOOD/BACKGROUND/composition authority.
