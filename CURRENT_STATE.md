@@ -197,9 +197,18 @@ The user specifically judged:
 All rejected PERSON outputs from this session are quarantined. They are not references, edit targets,
 continuity anchors, or production assets.
 
+## Runtime binary handoff blocker
+
+- User approval for PERSON attempt 8 is durable and recorded.
+- The exact approved PNG exists in the current ChatGPT image runtime and passed local hard media QC.
+- The currently available GitHub connector can write text/Git objects but has no direct file-reference bridge from this image runtime into a repository binary blob.
+- Therefore the approved PNG cannot be truthfully declared materialized in GitHub from this chat runtime.
+- FAIL-CLOSED consequence: do not promote the PERSON registry entry to `APPROVED`, do not generate dependent Lane A interaction assets, and do not compose S01 until the exact approved PNG is present at the production path and validates.
+- Required manual bridge: place the approved first image at `assets/production/person/PERSON_CONTEXT_SEATED_v1.png` without editing/re-encoding it.
+
 ## Exact next action
 
-1. Materialize the exact user-approved attempt-8 PNG as `assets/production/person/PERSON_CONTEXT_SEATED_v1.png` without changing its bytes.
+1. Manual bridge only: place the exact user-approved attempt-8 PNG at `assets/production/person/PERSON_CONTEXT_SEATED_v1.png` without editing or re-encoding it.
 2. Run the repository media-integrity gate and require SHA-256 `7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e`, dimensions 1212×1298, RGBA alpha extrema 0–255.
 3. Promote `PERSON_CONTEXT_SEATED_V1` from `USER_APPROVED_PENDING_MATERIALIZATION` to `APPROVED`.
 4. Generate a fresh `FOOD_EGG_RICE_INTACT` foundation asset; the prior corrupt food raster remains retired.
