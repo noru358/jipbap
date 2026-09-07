@@ -5,7 +5,7 @@
 > `assets/reference_registry.json`; historical recovery evidence lives in `INTEGRITY_STATE.json`.
 
 
-Updated: 2026-09-07
+Updated: 2026-09-08
 
 This manifest records project-level visual reference identities and integrity metadata.
 Episode-local anchors belong only to an active episode package and must not survive an episode reset in this project-level manifest.
@@ -31,6 +31,25 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - prior corrupt repository SHA-256: 0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf
 - selection status: SELECTED_USER_LOCKED
 - recovery note: GitHub-uploaded PNG has different container bytes but identical decoded RGBA pixels to the recovered original; current repository bytes are the executable authority.
+
+### TARGET_LOOK_BOARD_REF_1
+
+- user label: PERSON_STYLE_REF_1 보조 핵심 레퍼 / target-look anchor
+- role: PERSON_TARGET_LOOK_AUXILIARY
+- source style authority: PERSON_STYLE_REF_1 (unchanged primary authority)
+- coverage_scope: auxiliary target-look guidance only
+- allowed_influence: face construction, eye grammar, hair silhouette, line/texture/color treatment, and the shared person+food screen language
+- excluded_influence: text/copy, panel layout, shot/cut structure, menu/food-state semantics, camera/composition, and meal-context entity selection
+- dimensions: 770 × 1024
+- current repository byte SHA-256: 3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6
+- original session-carrier SHA-256: acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b
+- original session-carrier decoded RGBA pixel SHA-256: dc8761e133a2c28000852bac38bfd96706bee54182f5bf7884ebfae8959cd516
+- repository path: assets/references/TARGET_LOOK_BOARD_REF_1.png
+- repository blob SHA: 5180d5b9784bcabce4828c5a31625ad28ede4aa9
+- repository binary status: MATERIALIZED_VALIDATED_FULL_DECODE
+- lock status: USER_LOCKED_AUXILIARY
+- validation note: clean-checkout CI reported only the provisional byte-hash mismatch, confirming PNG signature, full Pillow decode, and 770×1024 dimensions; the registry was rebound to the actual repository SHA-256 above.
+- authority rule: this board narrows the desired target look; it does **not** replace or supersede PERSON_STYLE_REF_1 and its visible captions/panel grid/menu are non-authoritative incidental content.
 
 ### PERSON_STYLE_REF_2
 
