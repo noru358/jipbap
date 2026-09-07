@@ -18,6 +18,28 @@
       "approved_by": "AUTHORIZED_OPERATOR",
       "approval_note": "Retired because repository bytes are corrupt and no valid historical blob exists. Regenerate this calibration food asset after the media-integrity gate is green.",
       "alpha_policy": "MIN_0_MAX_255"
+    },
+    {
+      "asset_id": "PERSON_CONTEXT_SEATED_V1",
+      "category": "PERSON_POSE",
+      "scope": "EPISODE_LOCAL",
+      "status": "USER_APPROVED_PENDING_MATERIALIZATION",
+      "path": "assets/production/person/PERSON_CONTEXT_SEATED_v1.png",
+      "sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+      "width": 1212,
+      "height": 1298,
+      "subject_id": "CALIBRATION_PROXY_EATER",
+      "episode_id": "CALIBRATION_BODY4",
+      "menu_id": null,
+      "food_state_id": null,
+      "contact_role": null,
+      "approved_by": "USER",
+      "approval_note": "User explicitly approved clean-session attempt 8. Exact approved bytes must be materialized and full-decode validated before status may become APPROVED or before dependent composition/interaction authoring.",
+      "alpha_policy": "MIN_0_MAX_255",
+      "source_authority": [
+        "PERSON_STYLE_REF_1",
+        "TARGET_LOOK_BOARD_REF_1"
+      ]
     }
   ]
 }
