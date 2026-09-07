@@ -17,7 +17,7 @@
       "next_action": "Generate a fresh intact egg-on-rice calibration asset under current media-integrity controls."
     },
     "PERSON_CONTEXT_SEATED": {
-      "status": "BLOCKED_CLEAN_SESSION_STYLE_FIDELITY",
+      "status": "READY_CLEAN_SESSION_PERSON_REGEN",
       "attempts": [
         {
           "attempt": 1,
@@ -125,8 +125,8 @@
         }
       ],
       "quarantine_rule": "Attempts 1-7 are rejected calibration outputs. Do not register, edit, reference, or condition future generation on them.",
-      "next_action": "Move to a clean session. Regenerate PERSON_CONTEXT_SEATED from validated PERSON_STYLE_REF_1 only, prioritizing face-construction/drawing-language fidelity. Preserve real alpha. Do not use any rejected session output as reference.",
-      "upstream_reference_integrity": "PASS_STYLE1_REBOUND",
+      "next_action": "Regenerate in a clean session using validated PERSON_STYLE_REF_1 as primary style authority plus validated TARGET_LOOK_BOARD_REF_1 as auxiliary target-look anchor. Prioritize face construction/drawing-language fidelity, preserve real RGBA alpha, and bind no rejected attempts.",
+      "upstream_reference_integrity": "PASS_STYLE1_AND_TARGET_LOOK",
       "alpha_reliability_observation": "Attempts 3-7 produced real RGBA transparency with alpha extrema 0-255. Current blocker is PERSON style/face fidelity, not alpha materialization."
     }
   }
