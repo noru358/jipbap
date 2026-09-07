@@ -16,8 +16,9 @@
       "depends_on": [
         "STYLE_REF_001_MEDIA"
       ],
-      "dispatch_status": "BLOCKED",
-      "blocker": "STYLE_REF_001 actual bytes are not materialized/verified in the current runtime"
+      "dispatch_status": "CALIBRATION_BRANCH_READY_CURRENT_SESSION",
+      "blocker": null,
+      "note": "Resolved temporarily by two equal-path calibration candidate jobs using currently supplied actual media; later sessions must reverify media."
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT",
@@ -63,8 +64,8 @@
   ],
   "next_dispatchable_work": {
     "can_prepare_food_job": true,
-    "can_dispatch_person_job": false,
-    "person_dispatch_blocker": "STYLE_REF_001_MEDIA_UNAVAILABLE_OR_UNVERIFIED"
+    "can_dispatch_person_job": true,
+    "person_dispatch_blocker": null
   },
   "approval_flow": [
     "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
@@ -73,5 +74,24 @@
     "dependent interaction assets bind that user-validated identity anchor",
     "no per-asset user gate unless a new lock-worthy decision appears"
   ],
-  "full_frame_exception_assessment": "UNASSESSED"
+  "full_frame_exception_assessment": "UNASSESSED",
+  "person_style_comparison": {
+    "plan_ref": "calibration/person_style/COMPARE_PLAN.json",
+    "production_requirement": "PERSON_CONTEXT_SEATED",
+    "candidate_jobs": [
+      {
+        "candidate_asset_id": "PERSON_CONTEXT_SEATED_STYLE1_CAL",
+        "reference_id": "PERSON_STYLE_REF_1",
+        "status": "READY_CURRENT_SESSION",
+        "promotion": "ONLY_IF_USER_SELECTS_STYLE_1"
+      },
+      {
+        "candidate_asset_id": "PERSON_CONTEXT_SEATED_STYLE2_CAL",
+        "reference_id": "PERSON_STYLE_REF_2",
+        "status": "READY_CURRENT_SESSION",
+        "promotion": "ONLY_IF_USER_SELECTS_STYLE_2"
+      }
+    ],
+    "rule": "Do not place both candidate assets in production registry. Selection precedes production promotion."
+  }
 }
