@@ -26,7 +26,8 @@
       "Current repository byte SHA-256: 6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278.",
       "Decoded RGBA pixel SHA-256: a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d.",
       "Original session-source byte SHA-256 retained as provenance: 6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614.",
-      "The corrupt S01-S04 selection-evidence raster remains retired and is not required for production."
+      "The corrupt S01-S04 selection-evidence raster remains retired and is not required for production.",
+      "Production PERSON_CONTEXT_SEATED_V1 is separately USER-approved, materialized, and clean-checkout validated; this does not replace the PERSON_STYLE_REF_1 style-authority lock."
     ]
   },
   "food_style": {
@@ -66,7 +67,7 @@
       "USER_LOCKED still requires hash-bound production font + real pilot artwork pixel validation."
     ]
   },
-  "next_action": "PERSON_CONTEXT_SEATED_CLEAN_SESSION_WITH_HIERARCHICAL_REFERENCES",
+  "next_action": "FOOD_EGG_RICE_INTACT_REGENERATE_AND_QC",
   "target_look_anchor": {
     "status": "USER_LOCKED_VALIDATED",
     "asset_id": "TARGET_LOOK_BOARD_REF_1",
