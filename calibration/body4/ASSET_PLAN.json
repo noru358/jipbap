@@ -4,24 +4,21 @@
   "resolution_status": "COMPLETE",
   "production_registry": {
     "path": "assets/production/registry.json",
-    "approved_asset_count": 0,
+    "approved_asset_count": 1,
     "sha256": null
   },
-  "registry_matches": [],
-  "asset_gaps": [
+  "registry_matches": [
     {
-      "asset_id": "PERSON_CONTEXT_SEATED",
+      "requirement_id": "PERSON_CONTEXT_SEATED",
+      "resolved_asset_id": "PERSON_CONTEXT_SEATED_V1",
       "category": "PERSON_POSE",
-      "scope": "EPISODE_LOCAL",
-      "depends_on": [
-        "PERSON_STYLE_REF_1_MEDIA",
-        "TARGET_LOOK_BOARD_REF_1_MEDIA"
-      ],
-      "dispatch_status": "USER_APPROVED_PENDING_MATERIALIZATION",
-      "blocker": "APPROVED_PERSON_BYTES_NOT_YET_MATERIALIZED_IN_REPOSITORY",
-      "note": "User approved attempt 8; attempt 9 is rejected. Do not regenerate PERSON unless the approved bytes cannot be recovered. Exact attempt-8 bytes must be materialized and validated first.",
-      "resolved_asset_id": "PERSON_CONTEXT_SEATED_V1"
-    },
+      "status": "APPROVED",
+      "path": "assets/production/person/PERSON_CONTEXT_SEATED_v1.png",
+      "sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+      "validation_evidence_workflow_run_id": 34151559327
+    }
+  ],
+  "asset_gaps": [
     {
       "asset_id": "FOOD_EGG_RICE_INTACT",
       "category": "FOOD_STATE",
@@ -30,7 +27,7 @@
       "dispatch_status": "READY_REGENERATE_FOR_CALIBRATION",
       "blocker": null,
       "resolved_asset_id": null,
-      "note": "Prior corrupt food asset is retired. Regenerate as a new calibration asset under the integrity gate."
+      "note": "Prior corrupt FOOD raster remains retired. Generate a fresh foundation asset; do not use the retired raster as reference or repair input."
     },
     {
       "asset_id": "INTERACTION_BREAK_YOLK",
@@ -67,10 +64,10 @@
     }
   ],
   "next_dispatchable_work": {
-    "can_prepare_food_job": false,
+    "can_prepare_food_job": true,
     "can_dispatch_person_job": false,
-    "person_dispatch_blocker": "NONE_PERSON_APPROVED",
-    "exact_next": "Materialize and validate the exact user-approved PERSON_CONTEXT_SEATED_V1 bytes. Then generate fresh FOOD_EGG_RICE_INTACT, register it after QC, and compose S01 for the user visual/identity gate."
+    "person_dispatch_blocker": "NONE_PERSON_ALREADY_APPROVED",
+    "exact_next": "Generate fresh FOOD_EGG_RICE_INTACT under the locked BODY4 fixture. After hard media/style/meal-context QC PASS, register it and deterministically compose S01 from approved PERSON_CONTEXT_SEATED_V1 + approved FOOD."
   },
   "approval_flow": [
     "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
