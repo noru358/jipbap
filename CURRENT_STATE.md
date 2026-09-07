@@ -36,6 +36,24 @@ Canonical current authority:
 - FOOD_STATE_SYSTEM.md
 - MEAL_CONTEXT_SYSTEM.md
 
+## Confirmed clean-checkout evidence
+
+GitHub Actions run `34137819408` checked out commit
+`d81a8be607417b37cb7a27ea729b1cfbb7261100` from remote `main`.
+
+The four synthetic validator regression tests passed. Repository validation then failed on the
+actual checked-out bytes:
+
+- `FOOD_EGG_RICE_INTACT_V1`: actual SHA-256
+  `9a52ef63cb408f17e12b94482a8d9f37049bb8f3daee70702ce745a9acfd5e68`;
+- `PERSON_STYLE_REF_1`: actual SHA-256
+  `0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf`;
+- `PERSON_CONTEXT_SEATED_STYLE1_SELECTED`: actual SHA-256
+  `35b63461b6e15f258ae61455e89f288b12acc9d51e86dc6894b6788037c2fdae`.
+
+All three have non-PNG bytes `59aae78a782daee9` at byte 0 and fail both Pillow verify and
+full pixel decode. This is confirmed repository corruption, not a chat-preview ambiguity.
+
 ## Media-integrity incident
 
 The repository now has an executable fail-closed validator:
