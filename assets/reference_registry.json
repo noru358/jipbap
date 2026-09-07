@@ -32,9 +32,9 @@
     {
       "asset_id": "TARGET_LOOK_BOARD_REF_1",
       "role": "PERSON_TARGET_LOOK_AUXILIARY",
-      "status": "USER_LOCKED_VALIDATION_PENDING",
+      "status": "USER_LOCKED_VALIDATED",
       "path": "assets/references/TARGET_LOOK_BOARD_REF_1.png",
-      "sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
+      "sha256": "3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6",
       "width": 770,
       "height": 1024,
       "alpha_policy": "NONE",
@@ -42,8 +42,10 @@
         "session_original_sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
         "session_decoded_rgba_pixel_sha256": "dc8761e133a2c28000852bac38bfd96706bee54182f5bf7884ebfae8959cd516",
         "repository_blob_sha": "5180d5b9784bcabce4828c5a31625ad28ede4aa9",
-        "repository_sha256_status": "PENDING_CLEAN_CHECKOUT_VALIDATION",
-        "relationship_to_primary_authority": "AUXILIARY_TARGET_LOOK_ANCHOR_DERIVED_FROM_PERSON_STYLE_REF_1"
+        "repository_sha256_status": "PASS_CLEAN_CHECKOUT_FULL_DECODE",
+        "relationship_to_primary_authority": "AUXILIARY_TARGET_LOOK_ANCHOR_DERIVED_FROM_PERSON_STYLE_REF_1",
+        "repository_sha256": "3eb4565cb80f901417ea730970dfb8a731614cce58a239b599445e54018838e6",
+        "session_to_repository_container_identity": "NOT_ASSUMED; repository bytes independently full-decode validated"
       },
       "allowed_influence": [
         "face construction",
