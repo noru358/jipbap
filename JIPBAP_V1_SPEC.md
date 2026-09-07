@@ -153,7 +153,20 @@ S01=intro, S02=prep, S03=break, S04=bite, etc.
 
 If a menu/moment cannot support six publishable visual beats without procedural filler, choose a stronger moment or use sensory/reaction/detail beats. Do not make BODY count variable in V1.
 
-## 5. Physical and semantic continuity
+## 5. Voice / copy boundary
+
+Frozen copy grammar:
+- short, conversational Korean rather than literary exposition
+- sensation is described through the immediate eating moment, not generic praise
+- silent BODY panels are allowed when the image carries the beat
+- do not force a `잘 먹었다`, lesson, punchline or emotional conclusion
+- inner thought, speech and narration are separate editable layers
+- copy must not explain what the image already makes obvious
+- food/appetite remains the subject; character backstory does not expand unless it directly strengthens the meal moment
+
+Exact wording, line count and whether a panel is silent remain fluid.
+
+## 6. Physical and semantic continuity
 
 Board planning must define only what is necessary to avoid impossible states:
 - current food state
@@ -168,9 +181,9 @@ For eating interactions:
 - bridge actions may occur between panels, but before/after states must be compatible.
 - cultural meal details follow the current episode context; no global Korean table-setting pose is hardcoded.
 
-## 6. QC: hard fail vs soft score
+## 7. QC: hard fail vs soft score
 
-### 6.1 Hard FAIL only
+### 7.1 Hard FAIL only
 Reject/retry a master board only for publish-blocking defects:
 1. not exactly six extractable cells, or severe panel bleed/geometry failure
 2. unintended generated text
@@ -179,7 +192,7 @@ Reject/retry a master board only for publish-blocking defects:
 5. food-state/action contradiction that changes the story or makes the eating sequence impossible
 6. wrong core menu/entity or major meal-context substitution
 
-### 6.2 Soft quality score
+### 7.2 Soft quality score
 The following are normally score/repair observations, not automatic hard failure:
 - a mildly repetitive camera
 - slightly imperfect utensil placement
@@ -192,7 +205,7 @@ The following are normally score/repair observations, not automatic hard failure
 One isolated defect does not create a new permanent hard gate.
 A new hard gate requires repeated publish-blocking evidence across episodes, or a true media-integrity/corruption class failure.
 
-## 7. Runtime flow
+## 8. Runtime flow
 
 `PLAN → BOARD → ASSEMBLY → FINAL → DONE`
 
@@ -226,7 +239,7 @@ No S01 identity-anchor gate.
 ### DONE
 - export final carousel and record lightweight metrics
 
-## 8. Reference and media integrity
+## 9. Reference and media integrity
 
 Reference binaries remain valuable, but validation is not a per-run ritual.
 
@@ -240,7 +253,7 @@ A previously validated unchanged reference does not require repeated media-integ
 
 Rejected generated boards are not references.
 
-## 9. Legacy demotion
+## 10. Legacy demotion
 
 The following are historical/debugging references and are NOT runtime production authority under V1:
 - COMPOSITION_FIRST_HYBRID_FOOD
@@ -259,7 +272,7 @@ They must not override this spec.
 
 Shared deterministic code may still be reused. Its version belongs in implementation receipts, not in the creative authority chain.
 
-## 10. Runtime authority
+## 11. Runtime authority
 
 Normal boot reads:
 1. `CURRENT_STATE.md`
