@@ -28,7 +28,8 @@
       "actual_sha256_confirmed": "0f7494746f5cfd9d42b5133e9ffaae7cf63dff96f5ee97773bf114f867b0ccaf",
       "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
       "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
-      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE"
+      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE",
+      "recovery_status": "USER_SOURCE_REQUIRED"
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
@@ -43,7 +44,8 @@
       "actual_sha256_confirmed": "9a52ef63cb408f17e12b94482a8d9f37049bb8f3daee70702ce745a9acfd5e68",
       "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
       "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
-      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE"
+      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE",
+      "recovery_status": "RETIRED_REGENERATE_LATER"
     },
     {
       "asset_id": "PERSON_CONTEXT_SEATED_STYLE1_SELECTED",
@@ -58,7 +60,8 @@
       "actual_sha256_confirmed": "35b63461b6e15f258ae61455e89f288b12acc9d51e86dc6894b6788037c2fdae",
       "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
       "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
-      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE"
+      "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE",
+      "recovery_status": "RETIRED_OPTIONAL_EVIDENCE"
     }
   ],
   "render_architecture_decision": {
@@ -66,7 +69,7 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "Do not render. Recover PERSON_STYLE_REF_1 first, then run the integrity validator. Restore or retire/regenerate the other two invalidated rasters as specified. Only after repository validation is green may BODY4 rendering resume.",
+  "exact_next_action": "Recover PERSON_STYLE_REF_1 only. After it is materialized and rebound to validated immutable bytes, run the integrity validator. The corrupt food asset will be regenerated later and the corrupt selection-evidence raster is retired.",
   "verification_evidence": {
     "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
     "workflow_run_id": 34137819408,
