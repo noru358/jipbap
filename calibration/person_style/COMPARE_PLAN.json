@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "comparison_id": "JIPBAP_PERSON_STYLE_AB_V1",
+  "status": "READY_TO_RENDER",
+  "purpose": "Choose final PERSON drawing-language authority before BODY4 dependent interaction authoring.",
+  "candidates": [
+    {
+      "candidate_id": "STYLE_1",
+      "reference_id": "PERSON_STYLE_REF_1",
+      "reference_sha256": "82ad0c13db1e0d3baab1ff3340c8654b54415cadcb92da76ee924da738970d51"
+    },
+    {
+      "candidate_id": "STYLE_2",
+      "reference_id": "PERSON_STYLE_REF_2",
+      "reference_sha256": "6f7643f1eef0f1a5641fb0af60518e097d3caf926267c5c4557a3c156a7922d4"
+    }
+  ],
+  "shared_target_contract": {
+    "asset_role": "PERSON_CONTEXT_SEATED_CALIBRATION",
+    "production_status": "CALIBRATION_ONLY_UNTIL_SELECTION",
+    "subject": {
+      "identity": "new proxy-eater candidate; do not copy a named/specific reference character",
+      "apparent_age": "young adult",
+      "presentation": "Korean woman",
+      "hair": "shoulder-length medium-brown softly wavy hair",
+      "clothing": "simple oatmeal/cream cardigan over plain white top"
+    },
+    "pose": {
+      "framing": "seated upper body, crop-flexible",
+      "orientation": "mostly front with slight natural three-quarter turn",
+      "gaze": "downward attention toward an implied bowl zone below frame center",
+      "hands": "relaxed and visible where natural; no utensil/food contact",
+      "expression": "quiet anticipation / mild interest, not exaggerated"
+    },
+    "rendering": {
+      "background": "transparent or clean isolated background suitable for deterministic composition",
+      "food": "none",
+      "tableware": "none",
+      "text": "none",
+      "collage": "forbidden",
+      "one_asset_per_output": true
+    },
+    "forbidden_drift": [
+      "generic glossy anime beautification",
+      "3D or semi-realistic rendering",
+      "cinematic lighting",
+      "reference-specific camera/background copying",
+      "STYLE_2 kitchen/food becoming authority",
+      "extra food/utensils/props"
+    ]
+  },
+  "evaluation_rubric": [
+    "PERSON style fidelity to its own supplied reference",
+    "line/fill/face/eye grammar consistency",
+    "absence of generic GPT/anime beautification drift",
+    "usable seated anatomy and crop flexibility",
+    "suitability for later interaction assets without identity collapse"
+  ],
+  "selection_rule": "User selects STYLE_1 or STYLE_2 after comparable outputs. Non-selected candidate is calibration evidence only and must not enter production registry.",
+  "runtime_note": "Both actual uploaded binaries are available in the current chat runtime for this dispatch. This availability is non-durable and must be reverified after session handoff."
+}
