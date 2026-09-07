@@ -17,7 +17,7 @@
       "next_action": "Generate a fresh intact egg-on-rice calibration asset under current media-integrity controls."
     },
     "PERSON_CONTEXT_SEATED": {
-      "status": "READY_CLEAN_SESSION_PERSON_REGEN",
+      "status": "BLOCKED_NEW_SESSION_AFTER_REPEAT_STYLE_FAILURE",
       "attempts": [
         {
           "attempt": 1,
@@ -122,12 +122,46 @@
             "FACE_CONSTRUCTION_DRIFT"
           ],
           "note": "Final in-session retry still failed to match the desired PERSON_STYLE_REF_1 drawing language."
+        },
+        {
+          "attempt": 8,
+          "sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+          "width": 1212,
+          "height": 1298,
+          "channels": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "failure": [
+            "PERSON_STYLE_FIDELITY_FAIL",
+            "GENERIC_POLISHED_ANIME_DRIFT",
+            "FACE_CONSTRUCTION_DRIFT"
+          ],
+          "note": "Clean-session output passed real-alpha hard QC but remained too polished/chibi in face construction relative to the validated hierarchical reference pair. Not registered or reused."
+        },
+        {
+          "attempt": 9,
+          "sha256": "6bc319d2c385186121d14287bb2dc11f8a1f1c59a4655ffe54fd54779a46c0f4",
+          "width": 1203,
+          "height": 1307,
+          "channels": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "failure": [
+            "PERSON_STYLE_FIDELITY_FAIL",
+            "FACE_CONSTRUCTION_DRIFT",
+            "EYE_GRAMMAR_DRIFT"
+          ],
+          "note": "Second clean-session output passed real-alpha hard QC but still diverged in eye/face construction from TARGET_LOOK_BOARD_REF_1 and PERSON_STYLE_REF_1. Not registered or reused."
         }
       ],
-      "quarantine_rule": "Attempts 1-7 are rejected calibration outputs. Do not register, edit, reference, or condition future generation on them.",
-      "next_action": "Regenerate in a clean session using validated PERSON_STYLE_REF_1 as primary style authority plus validated TARGET_LOOK_BOARD_REF_1 as auxiliary target-look anchor. Prioritize face construction/drawing-language fidelity, preserve real RGBA alpha, and bind no rejected attempts.",
+      "quarantine_rule": "Attempts 1-9 are rejected calibration outputs. Do not register, edit, reference, condition generation on, or use as continuity/compositor inputs.",
+      "next_action": "Context contamination threshold reached after two fresh PERSON style-fidelity failures in this clean render context. Checkpoint and hand off to a new session; bind only validated PERSON_STYLE_REF_1 + TARGET_LOOK_BOARD_REF_1 and never attempts 1-9.",
       "upstream_reference_integrity": "PASS_STYLE1_AND_TARGET_LOOK",
-      "alpha_reliability_observation": "Attempts 3-7 produced real RGBA transparency with alpha extrema 0-255. Current blocker is PERSON style/face fidelity, not alpha materialization."
+      "alpha_reliability_observation": "Attempts 3-9 produced real RGBA transparency with alpha extrema 0-255. Active blocker remains PERSON face/drawing-language fidelity, not alpha."
     }
   }
 }
