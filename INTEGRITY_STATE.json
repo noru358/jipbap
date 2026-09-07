@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "RESOLVED_STYLE1_AND_TARGET_LOOK_VALIDATED",
+  "status": "RESOLVED_PERSON_MATERIALIZED_VALIDATED_FOOD_PENDING",
   "scope": "MEDIA_BYTE_INTEGRITY",
   "validator": {
     "command": "python -m pipeline.cli validate",
@@ -128,6 +128,31 @@
         "evidence_workflow_run_id": 34149050598,
         "evidence_note": "Probe failed only on provisional SHA-256, revealing the actual repository hash; no signature/decode/dimension errors were reported."
       }
+    },
+    {
+      "asset_id": "PERSON_CONTEXT_SEATED_V1",
+      "path": "assets/production/person/PERSON_CONTEXT_SEATED_v1.png",
+      "expected_sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+      "expected_dimensions": [
+        1212,
+        1298
+      ],
+      "alpha_policy": "MIN_0_MAX_255",
+      "required_for_resume": true,
+      "recovery_policy": "Use the exact user-approved attempt-8 bytes only. The validated production blob is authoritative; rejected PERSON attempts remain quarantined.",
+      "recovery_status": "USER_APPROVED_MATERIALIZED_VALIDATED",
+      "repository_validation": {
+        "sha256": "7c64dcfec9938c375dc6e4cea47424c8fb2e4c550fdd86f865eb49d397338f7e",
+        "repository_blob_sha": "885ec49a6214f64a27d6568df22ea53bab3be847",
+        "png_signature": "PASS",
+        "pillow_verify": "PASS",
+        "full_pixel_decode": "PASS",
+        "dimensions": "PASS_1212x1298",
+        "alpha_extrema": "PASS_0_255",
+        "evidence_workflow_run_id": 34151559327,
+        "checked_commit": "ab4fcb35f51a3b5eec1a39e655eed38e13991a29",
+        "evidence_note": "Validation branch used the same Git blob at the production path; clean-checkout unit tests and repository media validator both passed."
+      }
     }
   ],
   "render_architecture_decision": {
@@ -135,12 +160,13 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "After parent/child pin parity is restored, resume clean-session PERSON_CONTEXT_SEATED with validated PERSON_STYLE_REF_1 as primary source style authority plus validated TARGET_LOOK_BOARD_REF_1 as auxiliary target-look anchor. Bind no rejected PERSON outputs.",
+  "exact_next_action": "Generate a fresh FOOD_EGG_RICE_INTACT foundation asset under the current BODY4 calibration authority. Keep the retired corrupt food raster excluded. Do not compose S01 until the new FOOD asset passes hard media/style/meal-context QC and is registered.",
   "verification_evidence": {
     "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
-    "workflow_run_id": 34137819408,
-    "checked_commit": "d81a8be607417b37cb7a27ea729b1cfbb7261100",
-    "synthetic_regression_tests": "PASS_4_OF_4",
-    "repository_validation": "FAIL_AS_EXPECTED"
+    "workflow_run_id": 34151559327,
+    "checked_commit": "ab4fcb35f51a3b5eec1a39e655eed38e13991a29",
+    "synthetic_regression_tests": "PASS",
+    "repository_validation": "PASS",
+    "validated_asset": "PERSON_CONTEXT_SEATED_V1"
   }
 }
