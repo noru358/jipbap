@@ -4,15 +4,14 @@ Updated: 2026-09-08
 Project: jipbap
 Operating mode: MANUAL_VALIDATION
 Architecture under test: COMPOSITION_FIRST_HYBRID_FOOD
-Execution authorization: **MEDIA_INTEGRITY_RECOVERY_ONLY**
+Execution authorization: **BODY4_A_B_CALIBRATION**
 
 ## Production state
 
 Active episode: NONE
 Next production episode: 001 only after calibration.
 
-All rendering is suspended. The previous exact-next-action to rerender
-`PERSON_CONTEXT_SEATED` is superseded by media-integrity recovery.
+Media-integrity recovery for PERSON_STYLE_REF_1 is resolved. Rendering is authorized only for the approved BODY4 architecture-calibration comparison.
 
 ## Parent/child authority
 
@@ -69,9 +68,11 @@ It checks recorded SHA-256, PNG signature at byte 0, Pillow verify, full pixel d
 The following prior binary approvals are suspended until that gate passes:
 
 1. `PERSON_STYLE_REF_1`
-   - creative selection decision: **PRESERVED**
-   - repository binary authority: **INVALIDATED**
-   - expected SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
+   - creative selection decision: **USER_LOCKED**
+   - repository binary authority: **VALIDATED**
+   - current repository SHA-256: `6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278`
+   - decoded RGBA pixel SHA-256: `a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d`
+   - recovered original source SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
 
 2. `FOOD_EGG_RICE_INTACT_V1`
    - prior operator approval: **VOID FOR CURRENT BYTES**
@@ -135,11 +136,10 @@ A >4-slide boundary test is required before board-first can claim cross-board co
 
 ## Exact next action
 
-1. **Do not render anything.**
-2. Recover `PERSON_STYLE_REF_1` first.
-   - Prefer the exact original bytes matching the recorded SHA-256.
-   - If exact bytes are unavailable, re-supply the intended Style 1 source, fully validate the newly materialized bytes, compute a new SHA-256, and explicitly rebind the preserved Style 1 selection to them.
-3. For `FOOD_EGG_RICE_INTACT_V1`, either restore exact bytes or retire it and regenerate after the gate is green.
-4. `PERSON_CONTEXT_SEATED_STYLE1_SELECTED` may be restored if convenient; otherwise retire this raster evidence while preserving the Style 1 selection decision.
-5. Run `python -m pipeline.cli validate`.
-6. Only after PASS may BODY4 rendering/A-B comparison resume.
+1. Run `python -m pipeline.cli validate` on the rebound Style 1 authority and require clean-checkout PASS.
+2. Using the same approved `JIPBAP_HYBRID_BODY4_V2` semantics and Style 1 authority, execute two calibration lanes:
+   - **Lane A — HYBRID_ASSET_COMPOSITION**: regenerate only the missing PERSON/FOOD/interaction assets, use interaction composites/full-frame only where separability requires it, then compose the BODY4 sequence.
+   - **Lane B — BOARD_FIRST**: generate the same four text-free BODY shots as one master board, split deterministically into separate 4:5 slides, and preserve the same semantic contracts.
+3. Do not change story, food-state transitions, meal context, PERSON style, or copy between lanes.
+4. Compare actual pixels for S02 contact geometry, S03 hand/spoon/mouth geometry, food texture retention, food-state continuity, PERSON/style continuity, retries, and reuse cost.
+5. Do not select a default render architecture until both lanes have comparable valid outputs.
