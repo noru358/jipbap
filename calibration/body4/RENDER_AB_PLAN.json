@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "fixture_id": "JIPBAP_HYBRID_BODY4_V2",
+  "comparison_id": "BODY4_RENDER_ARCH_A_B_V1",
+  "status": "DISPATCH_READY",
+  "shared_authority": {
+    "person_style_reference": {
+      "asset_id": "PERSON_STYLE_REF_1",
+      "path": "assets/references/PERSON_STYLE_REF_1.png",
+      "repository_sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
+      "decoded_rgba_pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d",
+      "status": "USER_LOCKED_VALIDATED"
+    },
+    "fixture": "calibration/body4/FIXTURE.json",
+    "story_semantics_locked": true,
+    "meal_context_locked": true,
+    "food_state_transitions_locked": true,
+    "copy_is_not_rendered_during_art_comparison": true
+  },
+  "fairness_rule": "The two lanes must depict the same four semantic keyframes. A lane may change only rendering architecture, not story meaning, food state, meal context, PERSON drawing language, or the physical action contract.",
+  "lane_a": {
+    "id": "HYBRID_ASSET_COMPOSITION",
+    "status": "READY",
+    "foundation_order": [
+      "PERSON_CONTEXT_SEATED",
+      "FOOD_EGG_RICE_INTACT",
+      "INTERACTION_BREAK_YOLK",
+      "FOOD_EGG_RICE_RESIDUE",
+      "INTERACTION_BITE_APPROACH"
+    ],
+    "rules": [
+      "Use real transparent-background output capability for assets that require composition flexibility.",
+      "A checkerboard or chroma-colored background painted into RGB pixels is a hard failure.",
+      "Use INTERACTION_COMPOSITE when contact geometry is inseparable at asset level.",
+      "Use full-frame exception only when a compound interaction asset plus composition cannot preserve the shot.",
+      "Do not reuse either of the two previously quarantined PERSON attempts."
+    ]
+  },
+  "lane_b": {
+    "id": "BOARD_FIRST",
+    "status": "READY",
+    "board_layout": "2x2_SINGLE_MASTER_FOR_BODY4",
+    "text_free": true,
+    "rules": [
+      "All four BODY states are generated in one master-board event.",
+      "No labels, speech bubbles, captions, UI, panel numbers, or meaning-bearing text may be baked into the artwork.",
+      "Cells are split deterministically after import.",
+      "Native board and cell dimensions must be recorded before any upscale.",
+      "Food-detail assessment must use both native extracted cell pixels and final delivery-size pixels."
+    ]
+  },
+  "evaluation": {
+    "primary": [
+      "S02_CONTACT_GEOMETRY",
+      "S03_HAND_SPOON_MOUTH_GEOMETRY",
+      "FOOD_TEXTURE_NATIVE_AND_UPSCALED",
+      "FOOD_STATE_CONTINUITY",
+      "PERSON_STYLE_CONTINUITY"
+    ],
+    "operational": [
+      "GENERATION_CALLS",
+      "RETRIES",
+      "MANUAL_IMPORT_STEPS",
+      "REUSABLE_ASSET_YIELD"
+    ],
+    "board_boundary_followup_required": true,
+    "board_boundary_fixture_requirement": "If board-first remains competitive after BODY4, run one >4 BODY-slide fixture before selecting it as default."
+  },
+  "decision_status": "DEFERRED_UNTIL_COMPARABLE_VALID_PIXELS"
+}
