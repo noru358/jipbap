@@ -74,14 +74,14 @@ The following prior binary approvals are suspended until that gate passes:
    - expected SHA-256: `6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614`
 
 2. `FOOD_EGG_RICE_INTACT_V1`
-   - prior operator approval: **SUSPENDED**
-   - registry status: **INVALIDATED_MEDIA_INTEGRITY**
+   - prior operator approval: **VOID FOR CURRENT BYTES**
+   - registry status: **RETIRED**
    - expected SHA-256: `20ed37d273a5ece4e14c602394d648e97db332eb4af39199be4436bd24d9ec61`
    - alpha policy: `MIN_0_MAX_255`
 
 3. `PERSON_CONTEXT_SEATED_STYLE1_SELECTED`
    - Style 1 selection decision: **PRESERVED**
-   - raster evidence authority: **INVALIDATED / OPTIONAL TO RECOVER**
+   - raster evidence authority: **RETIRED_CORRUPT_OPTIONAL_EVIDENCE**
    - expected SHA-256: `acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b`
 
 No invalidated or quarantined raster may be used as renderer conditioning, continuity evidence,
