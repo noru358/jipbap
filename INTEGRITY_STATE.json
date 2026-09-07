@@ -103,7 +103,7 @@
         1024
       ],
       "required_for_resume": true,
-      "recovery_policy": "Use the committed repository bytes only after clean-checkout full-decode validation. Preserve PERSON_STYLE_REF_1 as the primary source style authority; this board is auxiliary target-look guidance only.",
+      "recovery_policy": "Use committed repository bytes only after clean-checkout full-decode validation. PERSON_STYLE_REF_1 remains primary source style authority; this board is auxiliary target-look guidance only.",
       "recovery_status": "USER_LOCKED_VALIDATED",
       "session_source_validation": {
         "sha256": "acf18912952e977ba5c1c52f97f0b5b38759a680ee8bf4ff04b65621abfb103b",
@@ -126,7 +126,7 @@
         "full_pixel_decode": "PASS",
         "dimensions": "PASS",
         "evidence_workflow_run_id": 34149050598,
-        "evidence_note": "First registry probe failed only on provisional SHA-256, revealing the actual repository hash; no signature/decode/dimension errors were reported."
+        "evidence_note": "Probe failed only on provisional SHA-256, revealing the actual repository hash; no signature/decode/dimension errors were reported."
       }
     }
   ],
