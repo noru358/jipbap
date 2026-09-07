@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "SOURCE_RECOVERED_REPOSITORY_MATERIALIZATION_PENDING",
+  "status": "RESOLVED_STYLE1_VALIDATED",
   "scope": "MEDIA_BYTE_INTEGRITY",
   "validator": {
     "command": "python -m pipeline.cli validate",
@@ -18,7 +18,7 @@
     {
       "asset_id": "PERSON_STYLE_REF_1",
       "path": "assets/references/PERSON_STYLE_REF_1.png",
-      "expected_sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+      "expected_sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
       "expected_dimensions": [
         1448,
         483
@@ -29,7 +29,7 @@
       "png_signature_at_byte_0": "FAIL_59aae78a782daee9",
       "pillow_verify": "FAIL_UNIDENTIFIED_IMAGE",
       "full_pixel_decode": "FAIL_UNIDENTIFIED_IMAGE",
-      "recovery_status": "SESSION_EXACT_ORIGINAL_VERIFIED_MATERIALIZATION_PENDING",
+      "recovery_status": "RECOVERED_USER_LOCKED_VALIDATED",
       "session_source_validation": {
         "sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
         "dimensions": [
@@ -50,10 +50,17 @@
         "pillow_verify": "PASS",
         "full_pixel_decode": "PASS",
         "dimensions": "PASS",
-        "byte_sha_match": false,
-        "pixel_identity_status": "PENDING_CI"
+        "byte_sha_match": "REBOUND_TO_CURRENT_REPOSITORY_BYTES",
+        "pixel_identity_status": "PASS"
       },
-      "expected_pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d"
+      "expected_pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d",
+      "current_repository_sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
+      "pixel_equivalence_evidence": {
+        "original_session_sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
+        "current_repository_sha256": "6b954d0a3e0f86b135c36527082f7253ba0d2d3c79e6e23141651218cd77e278",
+        "decoded_rgba_pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d",
+        "result": "PIXEL_IDENTICAL_REENCODED_CONTAINER"
+      }
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT_V1",
@@ -93,7 +100,7 @@
     "reason": "Asset-first versus board-first comparison is not valid until both lanes use verified input bytes.",
     "next_after_integrity": "Run the same BODY4 egg-rice fixture through the repaired hybrid asset lane and a board-first comparison lane; compare S02 contact geometry, S03 mouth-approach geometry, food texture retention after board-cell expansion, continuity, retries, and reuse cost."
   },
-  "exact_next_action": "Run clean-checkout CI with decoded-pixel identity bound to the original Style 1 source. If pixel identity matches, rebind the preserved Style 1 approval to the uploaded repository byte SHA; otherwise request the exact original file again. Do not render before PASS.",
+  "exact_next_action": "Run the repository validator against the rebound Style 1 authority. On PASS, exit MEDIA_INTEGRITY_RECOVERY and start the BODY4 asset-first versus board-first calibration comparison.",
   "verification_evidence": {
     "source": "GITHUB_ACTIONS_CLEAN_CHECKOUT",
     "workflow_run_id": 34137819408,
