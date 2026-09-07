@@ -9,7 +9,9 @@
       "sha256": "6fce9fd274965b9a7a8825079c8862d08af82b74fc9c1b30d170d8dd75b01614",
       "width": 1448,
       "height": 483,
-      "alpha_policy": "NONE"
+      "alpha_policy": "NONE",
+      "pixel_sha256": "a8e7eca4f2d5396d1a4b62d7a27351ead7817056b6451632b14e0c78db880e0d",
+      "pixel_hash_basis": "RGBA_DECODED_BYTES_ROW_MAJOR"
     },
     {
       "asset_id": "PERSON_CONTEXT_SEATED_STYLE1_SELECTED",
