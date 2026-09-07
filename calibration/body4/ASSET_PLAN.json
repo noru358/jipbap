@@ -17,9 +17,9 @@
         "PERSON_STYLE_REF_1_MEDIA",
         "TARGET_LOOK_BOARD_REF_1_MEDIA"
       ],
-      "dispatch_status": "READY_CLEAN_SESSION_REGEN",
-      "blocker": null,
-      "note": "Primary style authority remains PERSON_STYLE_REF_1. TARGET_LOOK_BOARD_REF_1 is validated auxiliary target-look guidance only. Rejected PERSON attempts remain quarantined."
+      "dispatch_status": "BLOCKED_NEW_SESSION_AFTER_REPEAT_STYLE_FAILURE",
+      "blocker": "CONTEXT_CONTAMINATION_THRESHOLD_AFTER_TWO_STYLE_FIDELITY_FAILURES",
+      "note": "References are valid and alpha succeeds, but two fresh clean-session PERSON attempts still drifted in face/eye grammar. Attempts 1-9 are quarantined and must not condition future generation."
     },
     {
       "asset_id": "FOOD_EGG_RICE_INTACT",
@@ -67,9 +67,9 @@
   ],
   "next_dispatchable_work": {
     "can_prepare_food_job": false,
-    "can_dispatch_person_job": true,
-    "person_dispatch_blocker": null,
-    "exact_next": "In this clean session, regenerate PERSON_CONTEXT_SEATED with validated PERSON_STYLE_REF_1 primary + validated TARGET_LOOK_BOARD_REF_1 auxiliary. Face/drawing-language fidelity is primary; preserve real RGBA alpha; do not bind rejected attempts."
+    "can_dispatch_person_job": false,
+    "person_dispatch_blocker": "NEW_SESSION_REQUIRED_AFTER_REPEAT_STYLE_FIDELITY_FAILURE",
+    "exact_next": "Start a new clean session, canonical-boot latest AutoPipeline/main + jipbap/main, verify parent pin and integrity authority, then regenerate only PERSON_CONTEXT_SEATED using validated PERSON_STYLE_REF_1 primary + TARGET_LOOK_BOARD_REF_1 auxiliary. Do not bind attempts 1-9."
   },
   "approval_flow": [
     "AUTHORIZED_OPERATOR may register QC-passed foundation assets for bounded pilot use",
