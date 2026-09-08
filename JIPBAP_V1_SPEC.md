@@ -3,7 +3,7 @@
 Updated: 2026-09-09
 Status: FROZEN_FOR_V1
 Canonical visual architecture: SIX_PANEL_BOARD_FIRST
-Canonical finalization mode: PAGE_FINAL_RECOMPOSE
+Canonical finalization mode: APPROVED_ART_PIXEL_LOCK
 
 ## 0. Product contract
 
@@ -34,57 +34,50 @@ V1 최적화 목표:
 - panel boundary는 명확해야 하며 panel 간 bleed/collage 혼합을 허용하지 않는다.
 - board는 생성 컨테이너이지 최종 carousel layout authority가 아니다.
 
-### 1.3 Board-contract-first final-page assembly
+### 1.3 Approved-art pixel lock and deterministic final-page assembly
 
-After the BODY master board and distinct COVER hero pass `ART_BUNDLE_USER_GATE`, they become the episode's **approved visual/semantic anchor set**.
-
-The anchor set is strong authority for what the episode depicts, but it is **not an exact-pixel lock on the final 4:5 pages**.
+After the BODY master board and distinct COVER hero pass `ART_BUNDLE_USER_GATE`, the accepted artwork becomes **pixel-locked source authority** for the episode.
 
 Default sequence:
 1. approved BODY 2×3 board + approved distinct COVER hero
-2. `PAGE_FINAL_RECOMPOSE`: create final text-free 4:5 COVER + S01..S06 artwork from the approved anchor set
-3. internal contract QC on those seven final-page artworks
-4. lock the accepted final-page artwork bytes
-5. `PRESENTATION_MASTER_DRAFT`: compose final copy / bubble / title / SFX design on the locked final-page artwork
+2. `APPROVED_ART_PIXEL_LOCK`: record the accepted BODY/COVER source identity and hashes
+3. `DETERMINISTIC_PAGE_ASSEMBLY`: extract S01..S06 from the approved BODY using actual panel borders; use the approved COVER source directly
+4. place those locked sources into 4:5 pages using deterministic crop / scale / position only, with no stochastic redraw
+5. `PRESENTATION_MASTER_DRAFT`: add approved copy, bubbles, title, inner thought, narration and SFX on top of the locked artwork
 6. `FINAL_PUBLISH_GATE`
 7. `EDITABLE_RECONSTRUCTION`
 8. `PRESENTATION_PARITY_QC`
 9. deterministic SVG / PNG / editable package export
 
-The approved BOARD/COVER anchor contract fixes:
-- PERSON identity and drawing language;
-- FOOD identity and illustration language;
-- each scene's story event and role;
-- visible food-state progression;
-- key action/contact geometry required for the scene to make sense;
-- emotional beat;
-- approximate camera/composition intent when it is story-relevant;
-- continuity with adjacent scenes;
-- approved literal copy intent.
+The approval contract freezes the artwork itself, not merely its semantic meaning:
+- the approved BODY board bytes are the sole BODY artwork source;
+- S01..S06 must be exact deterministic crops of that approved board;
+- the approved COVER hero bytes are the sole COVER artwork source;
+- PERSON/FOOD appearance, pose, expression, background and local drawing details must not be stochastically reinterpreted after approval.
 
-The anchor contract does **not** freeze:
-- exact pixels;
-- exact local face/hand/object coordinates;
-- minor pose or expression refinements;
-- minor background-object placement;
-- 4:5 reframing/recomposition needed for a stronger single-page image;
-- small non-story detail changes that remain above the publishable quality floor.
+Allowed after artwork approval:
+- actual-border extraction;
+- non-stretched deterministic scaling;
+- crop-window adjustment;
+- position / frame adjustment;
+- deterministic background/padding treatment when a page cannot fill 4:5 without destructive cropping;
+- lettering, bubbles, title, narration, SFX and other presentation overlays.
 
-The governing rule is: **same comic / same scene contract, not necessarily the same pixels**.
+Not allowed after artwork approval:
+- `image_gen` or any other stochastic image-generation call that redraws BODY or COVER;
+- inpainting/outpainting, pose repair, expression repair, background regeneration or food redraw;
+- replacing an approved source with a visually similar recreation.
 
-`PAGE_FINAL_RECOMPOSE`:
-- normally runs in the same Chat/image-runtime session as the approved anchor set so the accepted BOARD/COVER pixels can remain directly available as anchors;
-- may recompose camera framing, pose micro-geometry, background spacing and local detail for the 4:5 page;
-- must preserve the approved scene event, key action, food state, PERSON identity, FOOD identity and continuity;
-- may regenerate only the affected final page when contract QC fails; it does not reopen the approved storyboard or anchor bundle;
-- produces text-free final-page artwork. Meaning-bearing copy remains a presentation-layer authority.
+If artwork itself needs revision, reopen only the affected BODY or COVER component at the existing `ART_BUNDLE_USER_GATE`, regenerate that component, and obtain approval again. A layout/lettering problem never authorizes artwork regeneration.
 
-Exact extraction remains a supported utility path, not the default finalization path:
-- use `JIPBAP_BOARD_EXTRACTION_V1` when an approved board cell is already strong as final artwork, the user explicitly prefers exact reuse, or deterministic recovery/debugging benefits from extraction;
-- when extraction is used, detect actual panel boundaries rather than assuming nominal 512px/equal-row coordinates;
-- extraction evidence does not become a mandatory gate for ordinary `PAGE_FINAL_RECOMPOSE` production.
+`JIPBAP_BOARD_EXTRACTION_V1` is therefore the normal BODY finalization path for approved boards:
+- detect actual panel boundaries rather than assuming nominal equal slicing;
+- record the approved board source hash, actual extraction boxes and each extracted-cell hash;
+- panel contamination, wrong source hash, stretch distortion or silent source substitution is a provenance/integrity failure.
 
-After internal contract QC passes, the **final 4:5 page artwork bytes** become the immutable artwork source for lettering/editor work. From that point onward, presentation-only changes must not stochastically redraw the accepted final-page artwork.
+For COVER, the approved hero source is reused exactly. The 4:5 page may alter only deterministic crop/scale/position around that source.
+
+The governing rule is: **approve art once, then preserve it; everything after approval is deterministic presentation work.**
 
 `PRESENTATION_MASTER_DRAFT` owns presentation intent:
 - bubble silhouette, tail feel, text placement, line breaks, typography character, title hierarchy, emphasis/decor rhythm;
@@ -92,15 +85,14 @@ After internal contract QC passes, the **final 4:5 page artwork bytes** become t
 - ToonDesk/editor primitives do not define the upstream aesthetic ceiling. If the editor cannot reproduce an accepted design, repair/extend scene capability rather than lowering the design to a generic preset.
 
 `PRESENTATION_PARITY_QC` checks:
-- approved final-page artwork source identity: exact;
+- approved BODY/COVER source identity: exact;
+- BODY cell extraction provenance: exact;
 - literal text: exact;
 - page count / page order: exact;
 - bubble silhouette family, tail direction/feel, line breaks, typography character, title hierarchy and relative placement: materially equivalent;
 - face/food/hand focal obstruction: no material regression;
 - antialiasing/font-rasterization differences that do not alter design meaning are allowed;
 - a tool-linked render that becomes materially more mechanical/boxy than the approved presentation target FAILS.
-
-BOARD/COVER pixel differences created during `PAGE_FINAL_RECOMPOSE` are **not** parity failures by themselves. A final page fails only when it materially violates the approved visual/semantic anchor contract or the publishable quality floor.
 
 Cover / lettering presentation defaults:Cover / lettering presentation defaults:
 
@@ -174,7 +166,7 @@ episode/
 ```
 
 Authority and derivation:
-- `artwork/*.png` contains the accepted text-free final 4:5 page artwork produced by `PAGE_FINAL_RECOMPOSE` or, when explicitly chosen, deterministic exact extraction/reuse. The approved BOARD/COVER remain anchor provenance, not necessarily the page pixels.
+- `artwork/*.png` contains the locked approved artwork sources used by the page scene: BODY pages are exact crops derived from the approved BODY board; COVER uses the approved COVER source. 4:5 fit/crop/position is scene metadata, not a stochastic artwork rewrite.
 - `presentation_master/*.png` contains the approved quality-first visual presentation targets. These are design-reference artifacts, not editable state and not authority for literal text spelling.
 - `composition/*.layout.json` is the final editable presentation authority and shared scene model; it must carry presentation-target provenance and pass parity against the approved presentation master.
 - current Chat mode consumes the same scene model through a deterministic renderer and still produces final PNG without any interactive editor.
@@ -231,8 +223,8 @@ Shared renderer/editor contract:
 - routine Chat production changes artwork framing through crop metadata and never stretches the accepted raster;
 - the interactive editor may explicitly unlock an artwork frame and move / resize / rotate the frame; this mutates scene geometry only and is recorded as a `CUSTOM_OVERRIDE`, not as a new scene format;
 - deterministic rerender updates SVG/PNG without BOARD regeneration;
-- once final 4:5 page artwork passes contract QC, those accepted page-art bytes remain byte-identical during ordinary presentation editing; explicit image replacement is an artwork-level override and must not be confused with anchor-contract-preserving page recomposition;
-- every accepted final artwork page carries `artwork_provenance` back to the approved anchor set plus the finalization method (`PAGE_FINAL_RECOMPOSE` or `EXACT_EXTRACTION_REUSE`). When exact extraction is used, provenance may additionally point to `JIPBAP_BOARD_EXTRACTION_V1` + box index. Crop/FIT metadata remains owned by the artwork object rather than duplicated into a second manifest;
+- after `ART_BUNDLE_USER_GATE`, approved BODY/COVER source identity is immutable during ordinary production; explicit image replacement is an artwork-level override and requires reopening the affected artwork approval;
+- BODY page `artwork_provenance` records `EXACT_EXTRACTION_REUSE`, the approved board hash, `JIPBAP_BOARD_EXTRACTION_V1` metadata and box index; COVER records `EXACT_ANCHOR_REUSE` and the approved COVER hash. Crop/FIT metadata remains owned by the artwork object rather than duplicated into a second manifest;
 - editor-originated `manual_overrides` are property-level metadata, not locks. Automatic layout/reconstruction preserves those properties by default while leaving unmodified properties editable and eligible for automatic updates;
 - a line-break-only edit is tracked separately from literal-copy editing. If upstream literal copy later changes, do not silently reuse stale line breaks or shrink text; keep the new copy, preserve unrelated manual geometry, and surface a reflow/manual-attention issue;
 - preview and PNG export share the same scene renderer. SVG is a deterministic derivative of the same geometry/text model, but external SVG rasterizers may differ in font metrics/antialiasing and this is not claimed as pixel identity;
@@ -297,13 +289,13 @@ Lock defaults:
 Artwork frame/crop interaction:
 - the active JIPBAP presentation shell owns the automatic first-pass artwork x/y/width/height;
 - routine Chat-mode assembly instantiates that geometry and leaves the frame locked;
-- the accepted raster here is the **final 4:5 page artwork** after `PAGE_FINAL_RECOMPOSE` contract QC, not necessarily a literal BOARD crop;
-- crop mode may pan and uniformly scale the accepted final-page raster inside the frame;
+- the accepted BODY raster here is an exact crop of the approved BODY board, and the accepted COVER raster is the exact approved COVER source;
+- crop mode may pan and uniformly scale the locked source raster inside the 4:5 frame;
 - default crop: centered, scale 1.0, zero offset;
 - stretching is disabled by default; crop pan/scale cannot expose empty frame area;
 - an explicit interactive-editor unlock may transform the frame without changing the underlying scene format;
 - crop edits and frame transforms mutate scene metadata only unless the user explicitly replaces the artwork source;
-- if exact extraction/reuse is selected, `JIPBAP_BOARD_EXTRACTION_V1` remains the single owner of source hash + actual panel boxes and the scene references it rather than duplicating those boxes;
+- for BODY, `JIPBAP_BOARD_EXTRACTION_V1` is the normal owner of approved source hash + actual panel boxes and the scene references it rather than duplicating those boxes;
 - the final artwork object's `crop` metadata is the single owner of final pan/scale/anchor. Downstream save/reopen/export reuses it.
 - final-crop review should be performed on the 4:5 page with optional `avoid_regions` visible so face/hand/food focal subjects can be checked after placement.
 
@@ -574,26 +566,25 @@ Reject/retry a master board only for publish-blocking defects:
 5. food-state/action contradiction that changes the story or makes the eating sequence impossible
 6. wrong core menu/entity or major meal-context substitution
 
-Reject/retry an individual `PAGE_FINAL_RECOMPOSE` page only for publish-blocking contract violations:
-1. wrong scene event / missing required action
-2. food-state continuity break that changes the sequence
-3. catastrophic PERSON identity or medium drift from the approved anchor set
-4. wrong core food/menu/entity
-5. obvious focal anatomy/contact failure
-6. composition change that makes the approved scene meaning materially different
-7. unintended generated meaning-bearing text in the text-free final artwork
+After `ART_BUNDLE_USER_GATE` approval, treat the following as hard provenance/integrity failures:
+1. any stochastic redraw/re-generation of approved BODY or COVER without reopening the artwork gate
+2. BODY extraction from a board whose hash is not the approved BODY hash
+3. COVER substitution whose source hash is not the approved COVER hash
+4. panel extraction contamination or wrong panel mapping
+5. aspect-ratio stretch/distortion of approved artwork
+6. silent artwork-source replacement during presentation/editor reconstruction
 
-Exact-pixel difference from the approved BOARD/COVER anchor is not a hard failure.
+These are not new aesthetic gates; they enforce the already-approved media identity.
 
 ### 7.2 Soft quality score
 The following are normally score/repair observations, not automatic hard failure:
-- mildly repetitive camera or framing
+- mildly repetitive camera or framing in the pre-approval master board
 - a board whose overall staging/emotional range feels flatter than ideal while remaining publishable
-- a reaction that could be modestly more expressive
+- a reaction that could be modestly more expressive before artwork approval
 - cover title/font/placement that could be better integrated with accepted artwork
 - standardized COVER title grammar / role hierarchy that needs deterministic reflow or wording compression
 - speech typography/container that feels too mechanically typeset or boxy relative to the artwork
-- a sensory line whose timing is slightly ahead of the depicted ingestion state and can be repaired by copy/layout/shot selection without changing the whole story
+- a sensory line whose timing is slightly ahead of the depicted ingestion state and can be repaired by copy/layout without changing artwork
 - FOOD that is slightly too glossy, micro-detailed or advertisement-like while remaining otherwise publishable
 - panel-to-panel FOOD abstraction/detail density that is less consistent than ideal
 - slightly imperfect utensil placement
@@ -603,8 +594,10 @@ The following are normally score/repair observations, not automatic hard failure
 - composition that could be more elegant
 - non-critical cultural nuance
 
-One isolated defect does not create a new permanent hard gate.
-A new hard gate requires repeated publish-blocking evidence across episodes, or a true media-integrity/corruption class failure.
+Once artwork is approved, soft artwork observations do not authorize redraw. They are accepted episode quality unless the user explicitly reopens the affected artwork component.
+
+One isolated defect does not create a new permanent aesthetic gate.
+A new aesthetic hard gate requires repeated publish-blocking evidence across episodes. Media/provenance integrity remains independently fail-closed.
 
 ## 8. Runtime / approval flow
 
@@ -613,9 +606,9 @@ Do not try to force PLAN → ART → FINAL into one assistant response.
 
 Canonical production flow:
 
-`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → PAGE_FINAL_RECOMPOSE → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
+`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
 
-`SIX_PANEL_BOARD_FIRST` remains the V1 BODY architecture. `INITIAL_ART_BUNDLE` is the image-authoring phase that produces the BODY master board and the separate COVER hero together before the artwork approval gate.
+`SIX_PANEL_BOARD_FIRST` remains the V1 BODY architecture. `INITIAL_ART_BUNDLE` is the only normal stochastic episode-art authoring phase.
 
 ### 8.1 BOOT + PLAN turn
 At the beginning of a production chat:
@@ -627,79 +620,54 @@ At the beginning of a production chat:
 - present storyboard, copy draft, expression/camera intent, overall visual rhythm and continuity for user review;
 - stop at `STORYBOARD_USER_GATE`.
 
-The storyboard gate remains permanent because it prevents image work from proceeding on an unwanted story/copy/cut plan.
-
 When the user approves the storyboard:
 - treat that same turn as the normal carrier-binding handoff;
 - prefer repository-direct validated `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` bytes;
-- only when repository-direct binding is unavailable, the user supplies the exact already-approved PERSON + FOOD carriers once as `SESSION_ONLY` runtime carriers;
-- the carrier attachment does not create a new reference, story, episode or state reset.
+- only when repository-direct binding is unavailable, use the exact already-approved PERSON + FOOD carriers as `SESSION_ONLY` runtime carriers;
+- carrier attachment does not create a new reference, story, episode or state reset.
 
-### 8.2 INITIAL_ART_BUNDLE — same image-authoring phase
-After storyboard approval and carrier binding, create the initial artwork bundle before asking for another approval.
+### 8.2 INITIAL_ART_BUNDLE
+After storyboard approval and carrier binding, create:
+1. one text-free BODY 2×3 master board containing S01..S06;
+2. one independently authored text-free COVER hero.
 
-The bundle contains two separate source artifacts:
-1. **BODY master board** — exactly one text-free 2×3 board containing S01..S06.
-2. **COVER hero** — exactly one independently authored, text-free cover-source artwork.
+COVER is not a BODY crop and does not consume a BODY cell. Camera, pose, expression and title-safe space remain episode-driven rather than slot-hardcoded.
 
-They are created in the same initial image-authoring phase, but they are **not one combined raster**:
-- COVER does not consume a BODY cell;
-- COVER is not a crop/reuse of a BODY cell;
-- COVER has its own source/provenance;
-- BODY still obeys the frozen six-cell board contract.
+Run V1 publish-blocking QC before showing the bundle. If only one component fails, repair/regenerate only that component.
 
-COVER is defined by role, not by a hardcoded relation to specific BODY slots:
-- it should function as the episode's cover/hero image and represent the episode's food/emotion/situation;
-- camera, framing, pose, expression, food placement and title-safe negative space remain story-driven;
-- do not encode any BODY-slot-specific camera/composition restriction as a permanent COVER rule;
-- similarity to a BODY composition is a soft quality consideration unless it causes an actual publish-blocking failure or source/provenance confusion.
-
-Run the existing V1 hard-fail logic on the BODY board. Apply the same publish-blocking standard to COVER for unintended generated text, wrong core menu/entity, catastrophic PERSON/style drift, or focal anatomy/contact failure.
-Do not create a new permanent gate from ordinary cover-composition preference.
-
-If only one bundle component fails or is rejected, regenerate/repair only that component unless the defect proves the shared style delivery itself is invalid.
-
-### 8.3 ART_BUNDLE_USER_GATE
-Show the BODY master board and the distinct COVER hero together for user review.
-
-This is the normal artwork approval gate.
-The user may approve, reject, or request changes to BODY, COVER, or both.
+### 8.3 ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK
+Show BODY and COVER together for artwork review.
 
 On approval:
-- lock the accepted BODY board and COVER hero as the episode's visual/semantic anchor set and record their provenance;
-- approval freezes scene meaning, PERSON/FOOD identity, food-state progression, key actions, emotional beats and story-relevant composition intent;
-- approval does **not** require exact anchor pixels to survive into final 4:5 page artwork;
-- proceed to `PAGE_FINAL_RECOMPOSE` using the approved anchors; framing/pose/background/detail may be refined only within the approved contract;
-- presentation-only feedback after final-page artwork lock never authorizes artwork regeneration.
+- record the exact approved BODY and COVER source identity/hash;
+- BODY and COVER pixels become immutable episode artwork authority;
+- do not call image generation for episode artwork again;
+- do not treat approval as a loose semantic anchor;
+- proceed immediately to deterministic extraction/assembly and lettering.
 
-Normal V1 user gates are therefore:
+Normal V1 user gates remain:
 1. storyboard approval;
 2. initial artwork bundle approval;
 3. final publish approval.
 
-This artwork gate replaces the old split “BOARD approval now / COVER later” operating pattern. It is not a slot template and does not freeze creative staging.
+If the user later asks to change the drawing itself, reopen only the affected BODY or COVER component of this existing artwork gate.
 
-### 8.4 PAGE_FINAL_RECOMPOSE + PRESENTATION MASTER + EDITABLE RECONSTRUCTION
-After `ART_BUNDLE_USER_GATE` approval:
+### 8.4 DETERMINISTIC_PAGE_ASSEMBLY + PRESENTATION MASTER + EDITABLE RECONSTRUCTION
+After artwork approval:
 
-**A. PAGE_FINAL_RECOMPOSE**
-- use the approved BODY board and COVER hero as the visual/semantic anchor set;
-- create text-free final 4:5 COVER + S01..S06 artwork;
-- prefer same-session continuation so the approved anchor pixels remain directly available to the image runtime;
-- allow 4:5 reframing and small pose/background/detail refinements, but preserve scene event, key action, PERSON identity, FOOD identity, food state and continuity;
-- run contract QC page by page;
-- regenerate only a failing final page, not the whole board/bundle, unless shared style delivery itself is invalid;
-- once all seven final-page artworks pass, lock those exact final-page bytes for presentation/editing.
-
-Deterministic extraction is optional:
-- if exact BOARD-cell reuse is preferable for a page, use actual-border extraction and fit without stretch;
-- do not require extraction merely to prove fidelity when `PAGE_FINAL_RECOMPOSE` already preserves the approved contract.
+**A. APPROVED_ART_PIXEL_LOCK / DETERMINISTIC_PAGE_ASSEMBLY**
+- BODY: run `JIPBAP_BOARD_EXTRACTION_V1` against the approved BODY source hash and extract S01..S06 using actual detected borders;
+- COVER: reuse the approved COVER source directly;
+- create 4:5 page scenes by deterministic crop / non-stretched scale / position only;
+- prefer preserving full focal content over forcing edge-to-edge fill; deterministic padding/background is allowed when necessary;
+- record source hash, extraction metadata/box and crop transform in page provenance;
+- no stochastic image operation is permitted.
 
 **B. PRESENTATION_MASTER_DRAFT**
-- compose the complete 7-page carousel on the locked final-page artwork with approved literal copy, natural bubble shapes/tails, line breaks, typography character, COVER title treatment, SFX and local spacing;
+- compose the complete 7-page carousel directly on those locked artwork sources with approved literal copy, natural bubble shapes/tails, line breaks, typography character, COVER title treatment, SFX and local spacing;
 - optimize visual quality first without constraining the design to current ToonDesk primitive/default limits;
 - preserve semantic distinction between speech / thought / narration / SFX without forcing one universal container style;
-- image-generated presentation sketches may be used as **DESIGN_REFERENCE_ONLY** for bubble/title/typography/layout ideas, but their redrawn artwork and generated literal text are not authority;
+- image-generated sketches may be used only for abstract lettering/design inspiration if they do not redraw or replace approved episode artwork;
 - inspect the complete carousel as a visual design object.
 
 At `FINAL_PUBLISH_GATE`:
@@ -708,47 +676,32 @@ At `FINAL_PUBLISH_GATE`:
 - store page-level presentation-target provenance/hash.
 
 After approval, do `EDITABLE_RECONSTRUCTION`:
-- use the locked final 4:5 artwork bytes, not a new stochastic reinterpretation;
+- use the same locked BODY-cell/COVER source bytes and deterministic crop transforms;
 - reconstruct bubble / text / SFX / title / decoration as editable scene objects;
 - inherit geometry/style from the approved presentation master rather than re-applying generic shell defaults;
 - shell presets may fill unspecified details only.
 
 Then run `PRESENTATION_PARITY_QC`:
-- compare editor-rendered pages against the approved presentation targets;
-- require exact final-page artwork source identity and exact literal copy;
+- require exact approved artwork-source identity and exact literal copy;
+- verify extraction/crop provenance for BODY;
 - if materially equivalent, persist composition/SVG/PNG/package and finish without another routine user gate;
 - if the editor render visibly degrades the approved design, repair the scene or extend ToonDesk capability and rerun parity;
-- only return to the user when a material mismatch cannot be resolved without changing approved intent/final artwork.
+- only return to the user when a material mismatch cannot be resolved without changing approved intent/artwork.
 
-The final editable layout package remains presentation authority after reconstruction.
-A lettering/layout-only defect never authorizes final artwork regeneration.
+A lettering/layout-only defect never authorizes artwork regeneration.
 
-### 8.5 When to start a new chat / anchor continuity
-Normal production prefers **same-session continuation** from storyboard through `PAGE_FINAL_RECOMPOSE` and final publish.
+### 8.5 Session / handoff continuity
+Before `ART_BUNDLE_USER_GATE`, renderer STYLE/FOOD carriers are needed only while stochastic artwork generation remains possible.
 
-A new chat is optional, not a standard gate. Start one only when:
-- the conversation approaches a product/context limit;
-- actual image-runtime contamination is observed;
-- repeated outputs stay locked to stale semantic content despite corrected instructions;
-- artifact/approval identity becomes uncertain;
-- the user explicitly requests a handoff.
+After `ART_BUNDLE_USER_GATE` approval, renderer carriers are no longer relevant to ordinary production because no further artwork generation is permitted.
 
-Before handoff, save current stage and exact next action in `CURRENT_STATE.md`.
+If a new chat is required after artwork approval:
+- recover the exact approved BODY/COVER bytes from repository/materialized artifacts when available;
+- otherwise the user may re-supply those identical approved files as `SESSION_ONLY` production-art carriers;
+- reattachment is transport only and never authorizes redraw or re-approval;
+- if exact approved bytes cannot be recovered, stop fail-closed rather than recreating them from prose/hash.
 
-If resumed before `ART_BUNDLE_USER_GATE`, bind the approved renderer STYLE/FOOD carriers once as usual.
-
-If resumed after anchor approval but before `PAGE_FINAL_RECOMPOSE` finishes:
-- the image runtime needs the approved BODY/COVER **anchor pixels**, not merely hashes or prose;
-- first attempt repository-direct validated-byte binding when the runtime supports it;
-- if direct binding is unavailable, ask the user to re-supply the exact approved BODY board + COVER hero as `SESSION_ONLY` production-anchor carriers;
-- those attachments do not create new references, new artwork authority, a new episode, or a state reset;
-- do not redraw an unavailable anchor from its hash/description.
-
-If resumed after final 4:5 page artwork has been accepted/locked:
-- prefer materialized final-page bytes for presentation/editing;
-- if exact final-page bytes cannot be recovered in the new runtime, re-supply those accepted pages as `SESSION_ONLY` production-art carriers rather than regenerating them.
-
-Renderer STYLE/FOOD carriers are required only when stochastic artwork generation is still needed. They are not required for pure lettering/editor/parity work once final-page artwork bytes are available.
+Before any handoff, save current stage and exact next action in `CURRENT_STATE.md`.
 
 ## 9. Creative references vs renderer carrier## 9. Creative references vs renderer carrier
 
@@ -813,17 +766,17 @@ This separation prevents raw-reference semantic content from sharing the same im
 For normal episode production after both projections are USER_LOCKED:
 1. start the chat with no image attachment and reach storyboard approval;
 2. in the storyboard-approval turn, bind `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` once, preferring repository-direct validated bytes and using identical `SESSION_ONLY` carriers only when direct binding is unavailable;
-3. generate `INITIAL_ART_BUNDLE`: one text-free BODY 2×3 master board plus one separate text-free COVER hero in the same initial image-authoring phase;
+3. generate `INITIAL_ART_BUNDLE`: one text-free BODY 2×3 master board plus one separate text-free COVER hero;
 4. present both at `ART_BUNDLE_USER_GATE`;
-5. after approval, keep the same session by default and run `PAGE_FINAL_RECOMPOSE` from the approved anchor set;
-6. after final-page contract QC, lock the accepted 4:5 artwork bytes and continue presentation master → final publish gate → editable reconstruction.
+5. after approval, pixel-lock the accepted BODY/COVER and stop stochastic episode-art generation;
+6. use exact BODY extraction + exact COVER reuse for deterministic 4:5 presentation assembly, then presentation master → final publish gate → editable reconstruction.
 
 The STYLE/FOOD attachment does not reset episode/state/story and does not create a new reference.
-It is a `SESSION_ONLY` pixel carrier for the already locked runtime style projection.
+It is needed only for the stochastic `INITIAL_ART_BUNDLE` phase.
 
-The approved BODY/COVER used during `PAGE_FINAL_RECOMPOSE` are **production anchors**. In a forced new-chat handoff, identical BODY/COVER images may be reattached as `SESSION_ONLY` production-anchor carriers when repository-direct byte binding is unavailable.
+After artwork approval, the approved BODY/COVER are **locked production art**, not renderer anchors for another generation pass.
 
-COVER role is episode-level and fluid. Do not turn current-episode observations about any specific BODY slot into permanent COVER rules.
+COVER role remains episode-level and fluid before approval. After approval, its selected pixels are fixed.
 
 ### 9.5 Reference/media integrity
 Reference or carrier byte validation is not a per-run ritual.
