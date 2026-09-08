@@ -78,10 +78,11 @@ Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
 - `ART_BUNDLE_USER_GATE` replaces the prior split BOARD-now/COVER-later approval pattern for new episodes.
 - COVER remains role-based and fluid; no BODY-slot-specific camera/composition rule is permanent.
-- Approved BODY/COVER source pixels are immutable downstream unless the user explicitly reopens artwork.
-- JIPBAP planning/copy guidance now co-designs image + lettering space without putting text into the BOARD.
-- `JIPBAP_BOARD_EXTRACTION_V1` remains the single extraction record and now maps each S01..S06 output to the detected box + output SHA-256.
-- BODY scene provenance references that extraction record/box index; final 4:5 FIT stays owned by the artwork object's `crop`.
+- Approved BODY/COVER form the visual/semantic anchor set; their exact pixels are not the default final-page authority.
+- Final 4:5 artwork produced by `PAGE_FINAL_RECOMPOSE` becomes byte-locked only after internal contract QC passes.
+- JIPBAP planning/copy guidance co-designs image + lettering space while keeping anchor BOARD/COVER generation text-free.
+- `JIPBAP_BOARD_EXTRACTION_V1` remains supported for optional exact reuse/debugging and records actual panel boxes + output hashes when that path is selected.
+- Final artwork provenance records the approved anchor set plus finalization method; extraction box provenance is added only for exact-reuse pages.
 - ToonDesk 0.3.3 preserves manual edits at property scope during same-ID layout reconstruction; no whole-object lock system was added.
 - preferred/resolved font family + weight + substitution are persisted/surfaced; preview + PNG continue to share the same Canvas scene renderer.
 - curved-tail, organic-bubble, horizontal-flip, guides/alignment and generic page/frame editing remain existing capabilities and were not reimplemented.
@@ -512,7 +513,7 @@ Structural changes applied:
 - run receipt: `episodes/V1_E004/RUN_RECEIPT.md`
 - later deterministic BOARD-derived candidate: preserved for feedback at `episodes/V1_E004/review_candidates/DETERMINISTIC_GATE_20260909.md`
 - known FOOD-realism / cross-domain coherence issues remain accepted soft-quality feedback for future episodes
-- the E004 page-level stochastic final selection is an explicit one-episode override and does not change the normal V1 deterministic approval-identity path
+- the E004 page-level stochastic final selection was an explicit one-episode override under the then-current deterministic approval-identity path; that historical path was later superseded by the 2026-09-09 `PAGE_FINAL_RECOMPOSE` architecture
 ## V1_E004 post-publish structural feedback
 
 - published V1_E004 artifact remains CLOSED and unchanged.
