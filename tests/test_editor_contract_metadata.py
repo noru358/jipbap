@@ -21,41 +21,50 @@ class EditorContractMetadataTests(unittest.TestCase):
         self.assertIn("layout_attention", obj)
         self.assertIn("padding", obj)
 
-    def test_page_artwork_provenance_supports_recompose_and_optional_extraction(self):
+    def test_page_artwork_provenance_enforces_locked_source_derivation(self):
         page = self.schema["properties"]["page"]["properties"]
         prov = page["artwork_provenance"]["properties"]
         self.assertIn("finalization_method", prov)
-        self.assertIn("anchor_refs", prov)
-        self.assertIn("anchor_sha256s", prov)
-        self.assertIn("contract_qc_passed", prov)
-        self.assertIn("extraction_metadata_ref", prov)
-        self.assertIn("extraction_box_index", prov)
-        self.assertIn("source_sha256", prov)
+        self.assertIn("approved_source_sha256", prov)
+        self.assertIn("source_identity_locked", prov)
+        self.assertIn("stochastic_regeneration_allowed", prov)
+        self.assertIn("EXACT_EXTRACTION_REUSE", prov["finalization_method"]["enum"])
+        # Historical packages remain readable, but new production must not use this mode.
         self.assertIn("PAGE_FINAL_RECOMPOSE", prov["finalization_method"]["enum"])
 
         finalization = self.shell["artwork_finalization"]
-        self.assertEqual(finalization["mode"], "PAGE_FINAL_RECOMPOSE")
-        self.assertTrue(finalization["same_session_preferred"])
-        self.assertFalse(finalization["exact_pixel_anchor_preservation_required"])
-        self.assertFalse(finalization["exact_extraction_default"])
-        self.assertTrue(finalization["exact_extraction_supported"])
-        self.assertTrue(finalization["final_page_artwork_lock_after_contract_qc"])
+        self.assertEqual(finalization["mode"], "APPROVED_ART_PIXEL_LOCK")
+        self.assertEqual(finalization["page_assembly"], "DETERMINISTIC_PAGE_ASSEMBLY")
+        self.assertTrue(finalization["approved_source_identity_required"])
+        self.assertFalse(finalization["stochastic_regeneration_after_approval_allowed"])
+        self.assertEqual(finalization["body_finalization_method"], "EXACT_EXTRACTION_REUSE")
+        self.assertEqual(finalization["cover_finalization_method"], "EXACT_ANCHOR_REUSE")
+        self.assertTrue(finalization["actual_border_detection_required_for_body"])
+        self.assertFalse(finalization["allow_stretch"])
 
         policy = self.shell["body"]["artwork_source_policy"]
-        self.assertEqual(policy["mode"], "accepted_final_page_artwork")
-        self.assertEqual(policy["anchor_mode"], "approved_board_visual_semantic_contract")
-        self.assertEqual(policy["finalization_method"], "PAGE_FINAL_RECOMPOSE")
-        self.assertTrue(policy["exact_extraction_reuse_supported"])
-        self.assertTrue(policy["extraction_metadata_reuse_when_selected"])
-        self.assertTrue(policy["replacement_requires_explicit_override"])
+        self.assertEqual(policy["mode"], "approved_board_cell_exact_derivative")
+        self.assertEqual(policy["anchor_mode"], "approved_board_pixel_lock")
+        self.assertEqual(policy["finalization_method"], "EXACT_EXTRACTION_REUSE")
+        self.assertTrue(policy["exact_extraction_required"])
+        self.assertTrue(policy["extraction_metadata_required"])
+        self.assertFalse(policy["stochastic_regeneration_allowed"])
+        self.assertTrue(policy["replacement_requires_reopened_art_gate"])
 
-    def test_cover_uses_distinct_anchor_contract_then_final_page_artwork(self):
+    def test_cover_uses_exact_approved_source_after_art_gate(self):
         policy = self.shell["cover"]["artwork_source_policy"]
-        self.assertEqual(policy["mode"], "accepted_final_cover_artwork")
-        self.assertEqual(policy["anchor_mode"], "approved_distinct_cover_visual_semantic_contract")
-        self.assertEqual(policy["finalization_method"], "PAGE_FINAL_RECOMPOSE")
+        self.assertEqual(policy["mode"], "approved_cover_exact_source")
+        self.assertEqual(policy["anchor_mode"], "approved_cover_pixel_lock")
+        self.assertEqual(policy["finalization_method"], "EXACT_ANCHOR_REUSE")
         self.assertFalse(policy["automatic_body_reuse"])
-        self.assertTrue(policy["replacement_requires_explicit_override"])
+        self.assertTrue(policy["body_reuse_requires_explicit_selection_before_approval"])
+        self.assertFalse(policy["stochastic_regeneration_allowed"])
+        self.assertTrue(policy["replacement_requires_reopened_art_gate"])
+
+        design = self.shell["presentation_design"]
+        self.assertTrue(design["accepted_artwork_identity_preserved_in_final_reconstruction"])
+        self.assertFalse(design["stochastic_artwork_generation_after_art_bundle_approval"])
+        self.assertFalse(design["presentation_only_feedback_can_regenerate_artwork"])
 
     def test_manual_edit_policy_is_non_destructive(self):
         policy = self.shell["editor_defaults"]["manual_edit_policy"]
