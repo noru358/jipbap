@@ -1,5 +1,6 @@
 {
   "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "template_id": "JIPBAP_PRESENTATION_SHELL_V1",
   "page": {
     "width": 1080,
     "height": 1350,
@@ -7,36 +8,32 @@
   },
   "objects": [
     {
-      "id": "cover_tag_bg",
+      "id": "cover_menu_tag_bg",
       "type": "shape",
       "shape": "rounded_rect",
-      "x": 64,
-      "y": 68,
-      "width": 263,
-      "height": 64,
-      "radius": 28,
+      "x": 60,
+      "y": 48,
+      "width": 260,
+      "height": 60,
+      "radius": 25,
       "fill": "#e0562b",
       "z": 10
     },
     {
-      "id": "cover_tag_text",
+      "id": "cover_menu_tag",
       "type": "text",
       "role": "menu_tag",
       "text": "김치볶음밥",
-      "x": 91,
-      "y": 83,
-      "width": 220,
-      "height": 40,
+      "x": 88,
+      "y": 61,
+      "width": 210,
+      "height": 38,
       "font": {
         "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
         "weight": 700,
-        "size": 32
+        "size": 31
       },
       "fill": "#ffffff",
-      "align": "left",
       "rotation": 0,
       "z": 11
     },
@@ -45,20 +42,16 @@
       "type": "text",
       "role": "title",
       "text": "노른자 터지면",
-      "x": 66,
-      "y": 176,
-      "width": 850,
-      "height": 100,
+      "x": 60,
+      "y": 132,
+      "width": 900,
+      "height": 90,
       "font": {
         "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
         "weight": 700,
-        "size": 88
+        "size": 82
       },
       "fill": "#221f1d",
-      "align": "left",
       "rotation": 0,
       "z": 20
     },
@@ -67,110 +60,30 @@
       "type": "text",
       "role": "title",
       "text": "게임 끝",
-      "x": 64,
-      "y": 270,
+      "x": 60,
+      "y": 214,
       "width": 600,
-      "height": 145,
+      "height": 120,
       "font": {
         "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
         "weight": 700,
-        "size": 126
+        "size": 112
       },
       "fill": "#e0562b",
-      "align": "left",
       "rotation": 0,
       "z": 20
-    },
-    {
-      "id": "cover_deck",
-      "type": "text",
-      "role": "deck",
-      "text": "노른자 하나에 맛이 확 달라진다",
-      "x": 70,
-      "y": 414,
-      "width": 850,
-      "height": 50,
-      "font": {
-        "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
-        "weight": 400,
-        "size": 36
-      },
-      "fill": "#524b46",
-      "align": "left",
-      "rotation": 0,
-      "z": 20
-    },
-    {
-      "id": "cover_accent",
-      "type": "shape",
-      "shape": "rounded_rect",
-      "x": 70,
-      "y": 472,
-      "width": 385,
-      "height": 12,
-      "radius": 6,
-      "fill": "#f5b136",
-      "z": 9
     },
     {
       "id": "cover_art",
       "type": "artwork",
       "source": "../artwork/S04.png",
-      "x": 88,
-      "y": 525,
-      "width": 940,
-      "height": 775,
-      "crop": {
-        "mode": "fit"
-      },
-      "corner_radius": 36,
-      "border": {
-        "width": 5,
-        "color": "#221f1d"
-      },
-      "z": 5
-    },
-    {
-      "id": "cover_series_bg",
-      "type": "shape",
-      "shape": "rounded_rect",
-      "x": 862,
-      "y": 1265,
-      "width": 155,
-      "height": 53,
-      "radius": 20,
-      "fill": "#ffffff",
-      "stroke": "#221f1d",
-      "stroke_width": 3,
-      "z": 10
-    },
-    {
-      "id": "cover_series_text",
-      "type": "text",
-      "role": "series_mark",
-      "text": "집밥",
-      "x": 904,
-      "y": 1276,
-      "width": 100,
-      "height": 35,
-      "font": {
-        "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
-        "weight": 700,
-        "size": 28
-      },
-      "fill": "#221f1d",
-      "align": "left",
-      "rotation": 0,
-      "z": 11
+      "x": 60,
+      "y": 330,
+      "width": 960,
+      "height": 960,
+      "fit": "contain_1to1",
+      "allow_stretch": false,
+      "z": 1
     }
   ]
 }
