@@ -27,6 +27,7 @@ Stage: INITIAL_ART_BUNDLE_COVER_PENDING_MIGRATION
 - approved BOARD generation id: `92d89711-72ad-4286-8868-443c64123885`
 - approved BOARD SHA-256: `86229c6426192a102cd104926e662dfdf307e368993064b58641140c4048f6e0`
 - approved BOARD dimensions: 1024 × 1536
+- approved BOARD repository binary materialization: NOT_CONFIRMED; exact accepted pixels must be recovered/re-supplied for any new-chat downstream extraction, never redrawn from hash/prose
 - distinct COVER hero: NOT_STARTED
 - ART_BUNDLE_USER_GATE: PENDING
 - FINAL_PUBLISH_GATE: NOT_STARTED
@@ -49,10 +50,11 @@ V1_E006 migration:
 
 Exact next action for episode production:
 1. Complete the missing COVER component of V1_E006 `INITIAL_ART_BUNDLE` without regenerating the approved BODY.
-2. Use the approved PERSON/FOOD renderer carriers only as style-delivery inputs; if repository-direct bytes are unavailable, bind the exact approved SESSION_ONLY carriers.
-3. Generate one independent text-free COVER hero using episode-level cover intent with free camera/composition/pose/expression; do not encode any BODY-slot-specific rule.
-4. Present the locked BODY + new COVER together at `ART_BUNDLE_USER_GATE`.
-5. After approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
+2. If a clean/new chat is required, carry the exact approved BODY pixels forward as a SESSION_ONLY production-art carrier (or recover materialized episode bytes); the stored hash/generation id is not a redraw instruction.
+3. Use the approved PERSON/FOOD renderer carriers only as style-delivery inputs; if repository-direct bytes are unavailable, bind the exact approved SESSION_ONLY carriers.
+4. Generate one independent text-free COVER hero using episode-level cover intent with free camera/composition/pose/expression; do not encode any BODY-slot-specific rule.
+5. Present the locked BODY + new COVER together at `ART_BUNDLE_USER_GATE`.
+6. After approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
 
 Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
