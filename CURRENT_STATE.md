@@ -4,6 +4,7 @@ Updated: 2026-09-09
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
+Artwork finalization: PAGE_FINAL_RECOMPOSE
 Presentation architecture: PRESENTATION_MASTER_FIRST
 Editable scene package: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1
@@ -13,21 +14,21 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: EXTRACT_FIT
+Stage: PAGE_FINAL_RECOMPOSE
 
-## Boot snapshot — V1_E006 artwork approved; presentation redraw rejected by QC
+## Boot snapshot — V1_E006 migrated to board-contract finalization
 
 - Active episode: `V1_E006`
-- Current stage: `EXTRACT_FIT`
+- Current stage: `PAGE_FINAL_RECOMPOSE`
 - Food: 두부조림
 - STORYBOARD_USER_GATE: APPROVED
 - PERSON renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
 - FOOD renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
-- BODY master BOARD: APPROVED_AND_LOCKED
+- BODY master BOARD: APPROVED_ANCHOR_LOCKED
 - approved BODY generation id: `54838e01-8a57-41ad-8ab2-e3b2517cec0e`
 - approved BODY session SHA-256: `10fa1ed93513497a3372e43f50416ab57710a83fb2e27ef70efe6cc753e0341d`
 - approved BODY dimensions: 1024 × 1536
-- distinct COVER hero: APPROVED_AND_LOCKED
+- distinct COVER hero: APPROVED_ANCHOR_LOCKED
 - approved COVER generation id: `100db926-2200-4ecf-8db7-9b8a6cb01639`
 - approved COVER session SHA-256: `fd7cc633fdf13e2c50d505f884390b7474ace94ce8d11933e75d69a059aee284`
 - approved COVER dimensions: 1122 × 1402
@@ -36,59 +37,42 @@ Stage: EXTRACT_FIT
 - Plan: `episodes/V1_E006/PLAN.md`
 - V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` unchanged.
 
-V1_E006 explicit reset on 2026-09-09:
-- user ordered the in-progress E006 iteration discarded and replaced with a new E006 plan;
-- all previous E006 storyboard approvals, BODY approvals, generation ids/hashes, COVER attempts and migration actions are revoked as runtime authority;
-- those prior artifacts remain only in Git history for provenance and must not be reused as production artwork, reference, carrier, storyboard authority or approval identity;
-- the restarted episode keeps the same episode number and food topic: 두부조림;
-- required story anchors: S01 is a rainy-day 먹자골목 moment where the protagonist catches the smell of 두부조림; a later scene must show tofu being actively crushed into rice and mixed, not an already-finished mixed-rice state.
+## Architecture revision — board contract, not pixel lock
+
+V1 finalization was revised on 2026-09-09 after repeated production evidence showed that exact BOARD/COVER pixel preservation created more complexity and poorer 4:5 presentation without being necessary for the product goal.
+
+Canonical rule now:
+- `SIX_PANEL_BOARD_FIRST` remains the BODY authoring architecture.
+- The approved BODY board + COVER hero are the episode's **visual/semantic anchor set**.
+- Their approval locks PERSON/FOOD identity, scene events, food-state progression, key actions, emotional beats, story-relevant composition intent and continuity.
+- Their exact pixels are **not** required to survive into final 4:5 pages.
+- `PAGE_FINAL_RECOMPOSE` may reframe/recompose each page for stronger 4:5 readability while preserving the approved contract.
+- Exact extraction remains an optional reuse/debug utility, not the ordinary finalization gate.
+- After recomposed 4:5 page artwork passes internal contract QC, those final-page artwork bytes become locked for presentation/editor work.
+
+Session policy:
+- same-session continuation is the default through `PAGE_FINAL_RECOMPOSE` so approved anchor pixels remain available to the image runtime;
+- a new chat is exceptional, not a standard production step;
+- if a new chat is unavoidable before recomposition and repository-direct image binding is unavailable, the user may re-supply the same approved BODY + COVER as `SESSION_ONLY` production-anchor carriers;
+- such reattachment is transport only: no new reference, no new episode, no reset, no re-approval.
+
+Previous E006 lettered image-generation sets:
+- first set: user-named `초안`, DESIGN_REFERENCE_ONLY;
+- second set: `PRESENTATION_DRAFT_V2`, DESIGN_REFERENCE_ONLY;
+- they are not failures merely because their pixels differ from the approved anchors;
+- they are not final candidates because they predate the explicit `PAGE_FINAL_RECOMPOSE → contract QC → page-art lock → presentation` sequence and S05 still under-expressed the required crushing contact.
 
 Exact next action for episode production:
-1. Keep the approved BODY and COVER exact source pixels locked.
-2. Discard the seven post-approval image-generation pages as `REJECTED_NON_CANONICAL_PRESENTATION_ATTEMPT`; they stochastically redrew approved artwork and cannot be publish authority.
-3. Run actual border-based extraction on the approved BODY board; do not nominally split or redraw panels.
-4. FIT the six exact extracted BODY cells and exact approved COVER into 4:5 pages without stretching.
-5. Build a quality-first `PRESENTATION_MASTER_DRAFT` by adding title/copy/bubbles/SFX as presentation overlays on the locked artwork, not by image-model redraw.
-6. Preserve the approved literal copy strings. In particular S05 must remain the in-progress crush/mix moment; do not substitute a finished mixed-rice state.
-7. Show the corrected seven-page presentation master at `FINAL_PUBLISH_GATE`.
-
-## V1_E006 presentation draft v2 QC
-
-User naming:
-- the first seven-page lettered image-generation set is treated as the initial `초안`.
-- the subsequent seven-page set is `PRESENTATION_DRAFT_V2` for review only.
-
-V2 visual QC:
-- COVER title hierarchy / placement: GOOD; title does not materially cover face or primary food focal area.
-- S01 rainy-alley hook: GOOD.
-- S02 food reveal: GOOD, though staging drifts from the approved BODY cell.
-- S03 ingestion timing/contact: GOOD.
-- S04 large intact tofu-on-rice setup: GOOD.
-- S05 in-progress mix state: IMPROVED versus initial draft; white rice, sauce-stained rice, crumbled tofu and larger tofu pieces coexist. However the visible spoon-to-large-tofu crushing contact is still less explicit than the approved signature-action intent.
-- S06 final spoonful payoff: GOOD.
-- Literal generated Korean copy: visually appears correct in this draft.
-- Bubble system: readable but overly repetitive cloud-like thought containers; soft quality issue.
-- Food remains somewhat glossy/advertising-like relative to the simplified person drawing language; soft quality issue already known.
-
-Pipeline QC: FAIL.
-Reason:
-- active canonical stage was `EXTRACT_FIT`;
-- exact next action required actual border-based extraction of the approved BODY raster, 4:5 FIT of those exact pixels, then presentation overlays;
-- instead, V2 was produced with page-level stochastic image generation using the approved BOARD/COVER as references;
-- therefore approved artwork pixels, framing, background, pose and local food geometry changed again;
-- no actual `JIPBAP_BOARD_EXTRACTION_V1` extraction record was produced;
-- these V2 pages are not canonical artwork/FIT outputs and cannot advance the state machine.
-
-Root cause:
-- execution-path error in this chat, not a limitation of the approved assets or extraction architecture.
-- the exact approved BODY and COVER bytes are available in-session, so deterministic extraction/FIT was technically possible.
-- presentation-master generation was incorrectly treated as permission to redraw page artwork, despite the E006 exact-next-action explicitly requiring overlays on locked pixels.
-
-Disposition:
-- mark `PRESENTATION_DRAFT_V2` as `REJECTED_NON_CANONICAL_FOR_PIPELINE`.
-- keep approved BODY/COVER locked and unchanged.
-- remain at `EXTRACT_FIT`.
-- next execution must use deterministic extraction/FIT tooling only; no image-generation call is authorized unless the user explicitly reopens artwork.
+1. Use the approved E006 BODY board and COVER hero as the visual/semantic anchor set.
+2. Stay in the current image-runtime session by default.
+3. Run `PAGE_FINAL_RECOMPOSE` to create text-free 4:5 COVER + S01..S06 artwork.
+4. Preserve PERSON/FOOD identity, scene event, food-state continuity, emotional beat and approved composition intent while allowing 4:5 reframing and small pose/background/detail refinements.
+5. S05 contract is mandatory for this episode: the spoon visibly presses/crushes a still-large tofu piece while larger tofu, newly crumbled tofu, white rice and sauce-stained rice coexist.
+6. Internally QC every final page; regenerate only a failing page.
+7. Lock passing final-page artwork bytes.
+8. Build the quality-first `PRESENTATION_MASTER_DRAFT` on those locked page-art bytes using approved literal copy.
+9. Show the complete seven-page presentation master at `FINAL_PUBLISH_GATE`.
+10. If handoff becomes unavoidable before recomposition completes, try repository-direct anchor binding first; if unavailable, request the same approved BODY + COVER as `SESSION_ONLY` production-anchor carriers.
 
 Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
