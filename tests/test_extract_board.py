@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import unittest
+
 from PIL import Image, ImageDraw
 
 from pipeline.extract_board import detect_panel_interiors
@@ -30,23 +32,33 @@ def _synthetic_board() -> Image.Image:
     for y0, y1 in y_ranges:
         for x0, x1 in x_ranges:
             d.rectangle((x0, y0, x1, y1), fill=colors[i])
-            d.ellipse((x0 + 40, y0 + 40, min(x1, x0 + 220), min(y1, y0 + 220)), fill="#222222")
+            d.ellipse(
+                (x0 + 40, y0 + 40, min(x1, x0 + 220), min(y1, y0 + 220)),
+                fill="#222222",
+            )
             i += 1
     return image
 
 
-def test_detects_actual_non_equal_panel_boundaries() -> None:
-    result = detect_panel_interiors(_synthetic_board(), inset=1)
+class BoardExtractionTests(unittest.TestCase):
+    def test_detects_actual_non_equal_panel_boundaries(self) -> None:
+        result = detect_panel_interiors(_synthetic_board(), inset=1)
 
-    assert len(result.boxes) == 6
-    assert result.x_interiors[0][1] < 512
-    assert result.x_interiors[1][0] > 512
+        self.assertEqual(len(result.boxes), 6)
+        self.assertLess(result.x_interiors[0][1], 512)
+        self.assertGreater(result.x_interiors[1][0], 512)
 
-    # The second row begins near the actual ~509 border, not nominal 512.
-    assert 509 <= result.y_interiors[1][0] <= 511
-    # The third row begins near ~958, not nominal 1024.
-    assert 958 <= result.y_interiors[2][0] <= 960
+        # The second row begins near the actual ~509 border, not nominal 512.
+        self.assertGreaterEqual(result.y_interiors[1][0], 509)
+        self.assertLessEqual(result.y_interiors[1][0], 511)
+        # The third row begins near ~958, not nominal 1024.
+        self.assertGreaterEqual(result.y_interiors[2][0], 958)
+        self.assertLessEqual(result.y_interiors[2][0], 960)
 
-    for x0, y0, x1, y1 in result.boxes:
-        assert x1 > x0
-        assert y1 > y0
+        for x0, y0, x1, y1 in result.boxes:
+            self.assertGreater(x1, x0)
+            self.assertGreater(y1, y0)
+
+
+if __name__ == "__main__":
+    unittest.main()
