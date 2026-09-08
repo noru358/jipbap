@@ -44,6 +44,49 @@
             "cover",
             "body"
           ]
+        },
+        "placement_guides": {
+          "type": "array",
+          "description": "Optional soft placement hints for lettering; never a BOARD hard gate.",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "avoid_regions": {
+          "type": "array",
+          "description": "Optional focal regions such as face_primary, food_primary, hand_action.",
+          "items": {
+            "type": "object",
+            "required": [
+              "x",
+              "y",
+              "width",
+              "height",
+              "role"
+            ],
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              },
+              "role": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": true
+          }
         }
       },
       "additionalProperties": true
@@ -181,6 +224,36 @@
               },
               "editable": {
                 "type": "boolean"
+              }
+            },
+            "additionalProperties": true
+          },
+          "font": {
+            "type": "object",
+            "properties": {
+              "family_intent": {
+                "type": "string"
+              },
+              "preferred_family": {
+                "type": "string"
+              },
+              "fallback_families": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "resolved_family": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "weight": {
+                "type": [
+                  "number",
+                  "string"
+                ]
               }
             },
             "additionalProperties": true
