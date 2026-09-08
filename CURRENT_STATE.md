@@ -6,7 +6,7 @@ Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
-Presentation shell: JIPBAP_PRESENTATION_SHELL_V1
+Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
 Status: DONE
 
 ## Active production state
@@ -45,31 +45,23 @@ Renderer-safe production carrier:
 
 The carrier is style-delivery authority only and does not own menu, staging, camera, layout, story or copy.
 
-## V1 frozen presentation shell
+## Presentation shell versioning
 
-Template:
-- templates/JIPBAP_PRESENTATION_SHELL_V1.json
+Completed episode provenance:
+- V1_E001 / V1_E002 remain on `JIPBAP_PRESENTATION_SHELL_V1`.
+- Do not mutate their layout solely because the project default changed.
 
-BODY:
+Default for new episodes:
+- template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
 - canvas: 1080 × 1350
-- artwork frame: x=40, y=175, 1000 × 1000
-- frame is fixed across S01–S06
-- no artwork stretch/aspect distortion
-- no publish page numbers/internal episode markers
+- COVER: title/header x=60,y=40,w=960,h=240 + hero x=40,y=310,w=1000,h=1000
+- BODY: artwork x=40,y=40,w=1000,h=1000 + lower meta x=60,y=1080,w=960,h=230
+- speech / SFX default inside artwork
+- inner thought / narration default inside meta
+- artwork starts locked in automatic Chat production
+- explicit editor unlock / frame transform / page-structure change is allowed and classified as `CUSTOM_OVERRIDE`, not corruption
 
-COVER:
-- title safe region: x=60..1020, y=50..300
-- hero frame: x=60, y=330, 960 × 960
-- default grammar: menu tag + dominant title + hero artwork
-- subtitle/deck omitted by default
-- no hero artwork squeezing/stretching to fit copy
-
-Lettering semantics:
-- speech: white bubble + dark outline + tail
-- inner thought: tail-free warm off-white thought box + muted outline
-- SFX: independent editable text/SFX object
-
-The shell freezes presentation geometry only. Story staging/camera/pose/expression remain fluid inside BOARD generation.
+The presentation shell is a project default profile. The editor engine may expose broader capabilities without changing JIPBAP's automatic production defaults.
 
 ## Editor architecture checkpoint
 
@@ -86,16 +78,18 @@ Resolved and frozen in this design pass:
 - shared four-layer scene stack: background → artwork → lettering → overlay
 - COVER hierarchy: fixed top-level layers with menu-tag/title lettering groups
 - BODY hierarchy: fixed top-level layers with fluid speech/thought/narration/SFX instance groups
-- background and artwork-frame lock defaults
-- crop-only artwork interaction with no frame drift/stretch
+- background and artwork-frame lock defaults for automatic production
+- editor capability remains broader: explicit unlock may move/resize/rotate artwork frames and is recorded as CUSTOM_OVERRIDE
+- crop editing remains available without changing source artwork bytes
 - semantic typography-role presets
-- free BODY text placement with preferred top/bottom bands rather than fixed copy slots
+- V2 BODY semantic placement defaults: speech/SFX inside artwork; inner-thought/narration in lower meta region
+- page add/delete/duplicate/type-change remain editor capabilities rather than being deleted for JIPBAP
 - flat objects[] retained for Chat renderer compatibility; groups[] carries future editor semantics
 
 Schema:
 - schemas/editor_scene_model_v1.schema.json
 
-The geometry of JIPBAP_PRESENTATION_SHELL_V1 remains unchanged.
+JIPBAP_PRESENTATION_SHELL_V1 remains unchanged for completed episodes. New automatic episodes instantiate JIPBAP_PRESENTATION_SHELL_V2.
 
 ## V1_E002 approval state
 
@@ -149,10 +143,17 @@ V1_CAL_001:
 - prior calibration provenance only
 - rejected boards remain non-reference material
 
+## Generic editor boundary
+
+- ToonDesk is treated as a separate generic editor/renderer capability surface, not JIPBAP canonical authority.
+- JIPBAP owns its project profile/default shell; the generic engine consumes it.
+- ToonDesk transport/session wrappers, if used, are non-authoritative. `composition/*.layout.json` remains the JIPBAP presentation authority.
+- Automatic Chat production does not invent per-episode custom overrides. Overrides require explicit user/editor action.
+
 ## Exact next action
 
 1. V1_E002 is complete. Do not mutate it unless the user explicitly reopens it.
-2. Preserve `EDITOR_SCENE_MODEL_V1`, the four-layer COVER/BODY hierarchy, `EDITABLE_COMPOSITION_PACKAGE_V1`, and `JIPBAP_PRESENTATION_SHELL_V1` for subsequent episodes.
+2. Preserve `EDITOR_SCENE_MODEL_V1`, the four-layer COVER/BODY hierarchy, and `EDITABLE_COMPOSITION_PACKAGE_V1`; instantiate `JIPBAP_PRESENTATION_SHELL_V2` as the default profile for subsequent new episodes while preserving V1 shell provenance for completed episodes.
 3. On the next new-episode request, boot from latest main and create a fresh PLAN under the current JIPBAP_V1_SPEC.md.
 4. Keep copy concise and natural on mobile; prefer one short reaction plus at most one concrete sensory observation per beat.
 5. Keep speech / inner-thought / SFX visually distinct through the frozen semantic lettering roles.
