@@ -14,28 +14,22 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: PAGE_FINAL_RECOMPOSE
+Stage: STORYBOARD_USER_GATE
 
-## Boot snapshot — V1_E006 migrated to board-contract finalization
+## Boot snapshot — V1_E006 user-reset / fresh storyboard
 
 - Active episode: `V1_E006`
-- Current stage: `PAGE_FINAL_RECOMPOSE`
+- Current stage: `STORYBOARD_USER_GATE`
 - Food: 두부조림
-- STORYBOARD_USER_GATE: APPROVED
-- PERSON renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
-- FOOD renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
-- BODY master BOARD: APPROVED_ANCHOR_LOCKED
-- approved BODY generation id: `54838e01-8a57-41ad-8ab2-e3b2517cec0e`
-- approved BODY session SHA-256: `10fa1ed93513497a3372e43f50416ab57710a83fb2e27ef70efe6cc753e0341d`
-- approved BODY dimensions: 1024 × 1536
-- distinct COVER hero: APPROVED_ANCHOR_LOCKED
-- approved COVER generation id: `100db926-2200-4ecf-8db7-9b8a6cb01639`
-- approved COVER session SHA-256: `fd7cc633fdf13e2c50d505f884390b7474ace94ce8d11933e75d69a059aee284`
-- approved COVER dimensions: 1122 × 1402
-- ART_BUNDLE_USER_GATE: APPROVED
+- Reset authority: USER_EXPLICIT_RESET on 2026-09-09
+- STORYBOARD_USER_GATE: AWAITING_USER_REVIEW
+- ART_BUNDLE_USER_GATE: NOT_STARTED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E006/PLAN.md`
-- V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` unchanged.
+- Required S01: rainy 먹자골목; protagonist notices/smells 두부조림 aroma
+- Required payoff: tofu is visibly crushed into rice, mixed 쓱쓱, then eaten
+- All prior E006 storyboard/copy, BODY board, COVER hero, artwork approvals, presentation drafts and PAGE_FINAL_RECOMPOSE assumptions are SUPERSEDED and MUST NOT be reused.
+- V1_E005 and all other episodes remain preserved unchanged.
 
 ## Architecture revision — board contract, not pixel lock
 
@@ -56,23 +50,12 @@ Session policy:
 - if a new chat is unavoidable before recomposition and repository-direct image binding is unavailable, the user may re-supply the same approved BODY + COVER as `SESSION_ONLY` production-anchor carriers;
 - such reattachment is transport only: no new reference, no new episode, no reset, no re-approval.
 
-Previous E006 lettered image-generation sets:
-- first set: user-named `초안`, DESIGN_REFERENCE_ONLY;
-- second set: `PRESENTATION_DRAFT_V2`, DESIGN_REFERENCE_ONLY;
-- they are not failures merely because their pixels differ from the approved anchors;
-- they are not final candidates because they predate the explicit `PAGE_FINAL_RECOMPOSE → contract QC → page-art lock → presentation` sequence and S05 still under-expressed the required crushing contact.
-
 Exact next action for episode production:
-1. Use the approved E006 BODY board and COVER hero as the visual/semantic anchor set.
-2. Stay in the current image-runtime session by default.
-3. Run `PAGE_FINAL_RECOMPOSE` to create text-free 4:5 COVER + S01..S06 artwork.
-4. Preserve PERSON/FOOD identity, scene event, food-state continuity, emotional beat and approved composition intent while allowing 4:5 reframing and small pose/background/detail refinements.
-5. S05 contract is mandatory for this episode: the spoon visibly presses/crushes a still-large tofu piece while larger tofu, newly crumbled tofu, white rice and sauce-stained rice coexist.
-6. Internally QC every final page; regenerate only a failing page.
-7. Lock passing final-page artwork bytes.
-8. Build the quality-first `PRESENTATION_MASTER_DRAFT` on those locked page-art bytes using approved literal copy.
-9. Show the complete seven-page presentation master at `FINAL_PUBLISH_GATE`.
-10. If handoff becomes unavoidable before recomposition completes, try repository-direct anchor binding first; if unavailable, request the same approved BODY + COVER as `SESSION_ONLY` production-anchor carriers.
+1. Present the reset E006 storyboard in `episodes/V1_E006/PLAN.md` for user review.
+2. Stop at `STORYBOARD_USER_GATE`; do not generate new episode artwork before approval.
+3. On approval, bind the already locked PERSON/FOOD renderer carriers according to V1 runtime policy.
+4. Create `INITIAL_ART_BUNDLE`: one text-free 2×3 BODY master board plus one separate text-free COVER hero.
+5. Do not use any superseded E006 BODY/COVER/presentation artifact as an anchor or reference.
 
 Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
