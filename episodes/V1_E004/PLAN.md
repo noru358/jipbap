@@ -1,6 +1,6 @@
 # V1_E004 PLAN
 
-Status: STORYBOARD_USER_GATE
+Status: DONE
 Architecture: SIX_PANEL_BOARD_FIRST
 Carousel: COVER 1 + BODY 6
 BODY generation surface: one text-free 2×3 master board
