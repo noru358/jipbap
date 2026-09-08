@@ -3,14 +3,14 @@
 Updated: 2026-09-08
 Architecture: SIX_PANEL_BOARD_FIRST
 Episode: V1_E001
-Stage: FINAL_PUBLISH_GATE
+Stage: DONE
 
 ## User approvals
 
 - STORYBOARD_USER_GATE: APPROVED
 - JIPBAP_STYLE_CARRIER_V1: USER_LOCKED from supplied single-person transparent carrier
 - BOARD_STYLE_USER_GATE: APPROVED ("우선 통과")
-- FINAL_PUBLISH_GATE: PENDING
+- FINAL_PUBLISH_GATE: APPROVED ("우선 승인")
 
 ## Carrier
 
@@ -73,8 +73,8 @@ Final deterministic copy:
 
 This production conversation contained earlier raw/multi-expression style material before the single-person carrier was supplied. The accepted production BOARD was nevertheless explicitly approved by the user. Do not treat this as evidence to remove the canonical clean carrier-isolation rule; it is a run-level deviation, not a new V1 rule.
 
-## Exact next action
+## Final status
 
-Present the seven-page completed carousel at FINAL_PUBLISH_GATE.
-Do not regenerate BOARD for lettering/layout-only feedback.
-If the user approves final publish, mark V1_E001 DONE.
+V1_E001 is DONE.
+The final carousel was explicitly approved at FINAL_PUBLISH_GATE.
+No further mutation is authorized unless the user explicitly reopens this episode.
