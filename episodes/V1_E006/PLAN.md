@@ -1,6 +1,6 @@
 # V1_E006 PLAN
 
-Status: COVER_PENDING_CLEAN_CHAT
+Status: INITIAL_ART_BUNDLE_COVER_PENDING_MIGRATION
 Food: 두부조림
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
@@ -20,8 +20,9 @@ Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 ## Approval state
 
 - STORYBOARD_USER_GATE: APPROVED
-- BODY master BOARD: APPROVED
+- BODY master BOARD: APPROVED_AND_LOCKED_PRE_BUNDLE_MIGRATION
 - COVER hero: NOT_STARTED
+- ART_BUNDLE_USER_GATE: PENDING
 - FINAL_PUBLISH_GATE: NOT_STARTED
 
 ## COVER
@@ -37,7 +38,9 @@ Distinct COVER hero:
 - 완성된 두부조림 접시와 흰밥이 전경의 주초점.
 - 주인공은 숟가락을 들고 두부조림 쪽을 보며 바로 먹으려는 순간.
 - 음식과 얼굴은 동시에 읽히되 상단/측면에 제목을 위한 자연스러운 여백 확보.
-- BODY의 구도나 정확한 동작을 복제하지 않는다.
+- BODY 셀을 재사용하지 않는 독립 COVER source artwork로 만든다.
+- 카메라·구도·포즈·표정은 표지 역할과 이번 화의 핵심 식욕 포인트에 맞게 자유롭게 설계한다.
+- 특정 BODY 슬롯과의 관계를 영구 규칙으로 고정하지 않는다.
 
 ## BODY storyboard / copy draft
 
@@ -285,18 +288,25 @@ Continuity:
 - S06 accepted correction: wider/different finishing composition, not a near-copy of S04.
 - approved BOARD is locked; no stochastic BOARD regeneration is authorized by the current state.
 
-## Image-runtime contamination note
+## Architecture migration note
 
-After BOARD approval, three attempts to generate the distinct COVER hero were semantically contaminated by the stale 2×3 BOARD template and returned six-panel storyboard images with generated text.
-These outputs are rejected, non-canonical, and must not become references, carrier candidates, COVER authority, or BODY replacements.
+V1_E006 began under the prior split flow and already has a user-approved BODY master board.
+The new canonical flow creates BODY + COVER together before `ART_BUNDLE_USER_GATE`.
 
-This matches the V1 clean-chat handoff condition: repeated outputs remain locked to a stale semantic template despite corrected instructions.
+Migration rule for this episode:
+- preserve the already approved BODY board exactly; do not regenerate it merely to make the historical sequence look like the new flow;
+- generate only the still-missing independent COVER source;
+- then show the locked BODY + new COVER together at `ART_BUNDLE_USER_GATE`;
+- approval at that gate locks the complete artwork bundle for downstream deterministic work.
+
+The earlier failed COVER attempts that returned stale six-panel storyboard semantics remain rejected and non-canonical.
+They do not justify a permanent slot-specific COVER rule.
 
 ## Exact next action
 
-Start a clean image-generation chat at COVER only.
-1. Restore latest `main` and this saved V1_E006 state.
-2. Do NOT regenerate or reopen the approved BODY BOARD.
-3. Because repository binaries for `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` are still not materialized, attach the exact approved PERSON + FOOD SESSION_ONLY carriers once in the clean chat.
-4. Generate one distinct text-free COVER hero only: completed 두부조림 + white rice as foreground focus, protagonist holding a spoon just before eating, composition clearly different from BODY S04/S06, natural title-safe negative space.
-5. Run COVER QC, then continue deterministic extraction/FIT → quality-first PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE.
+Complete the migrated `INITIAL_ART_BUNDLE` for V1_E006:
+1. keep the approved BODY board locked;
+2. generate only the missing text-free COVER hero using the already-approved episode intent and renderer carriers;
+3. use role-based COVER direction only: independent cover-source artwork, episode-level hero function, freely chosen camera/composition/pose/expression, no BODY-cell reuse;
+4. present the locked BODY + generated COVER together at `ART_BUNDLE_USER_GATE`;
+5. after approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
