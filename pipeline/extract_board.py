@@ -45,6 +45,12 @@ class PanelExtraction:
             "dark_threshold": self.dark_threshold,
             "density_threshold": self.density_threshold,
             "method": "actual_dark_panel_border_detection",
+            "derivation_policy": {
+                "mode": "EXACT_CROP_FROM_APPROVED_BOARD",
+                "stochastic_generation": False,
+                "source_identity_must_match_approved_body": True,
+                "aspect_ratio_stretch_allowed": False,
+            },
         }
 
 
@@ -212,6 +218,8 @@ def extract_board(
                     "page_id": page_id,
                     "box_index": box_index,
                     "box": list(box),
+                    "derivation": "EXACT_CROP_FROM_APPROVED_BOARD",
+                    "stochastic_generation": False,
                     "output": {
                         "filename": target.name,
                         "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
