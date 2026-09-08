@@ -13,19 +13,25 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: STORYBOARD_USER_GATE
+Stage: EXTRACT_FIT
 
-## Boot snapshot — V1_E006 restarted by explicit user reset
+## Boot snapshot — V1_E006 artwork approved; presentation redraw rejected by QC
 
 - Active episode: `V1_E006`
-- Current stage: `STORYBOARD_USER_GATE`
+- Current stage: `EXTRACT_FIT`
 - Food: 두부조림
-- STORYBOARD_USER_GATE: PENDING
+- STORYBOARD_USER_GATE: APPROVED
 - PERSON renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
 - FOOD renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
-- BODY master BOARD: NOT_STARTED_FOR_RESTARTED_E006
-- distinct COVER hero: NOT_STARTED_FOR_RESTARTED_E006
-- ART_BUNDLE_USER_GATE: NOT_STARTED
+- BODY master BOARD: APPROVED_AND_LOCKED
+- approved BODY generation id: `54838e01-8a57-41ad-8ab2-e3b2517cec0e`
+- approved BODY session SHA-256: `10fa1ed93513497a3372e43f50416ab57710a83fb2e27ef70efe6cc753e0341d`
+- approved BODY dimensions: 1024 × 1536
+- distinct COVER hero: APPROVED_AND_LOCKED
+- approved COVER generation id: `100db926-2200-4ecf-8db7-9b8a6cb01639`
+- approved COVER session SHA-256: `fd7cc633fdf13e2c50d505f884390b7474ace94ce8d11933e75d69a059aee284`
+- approved COVER dimensions: 1122 × 1402
+- ART_BUNDLE_USER_GATE: APPROVED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E006/PLAN.md`
 - V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` unchanged.
@@ -38,11 +44,13 @@ V1_E006 explicit reset on 2026-09-09:
 - required story anchors: S01 is a rainy-day 먹자골목 moment where the protagonist catches the smell of 두부조림; a later scene must show tofu being actively crushed into rice and mixed, not an already-finished mixed-rice state.
 
 Exact next action for episode production:
-1. Present the restarted V1_E006 COVER + six-scene storyboard/copy plan from `episodes/V1_E006/PLAN.md` for user review.
-2. Stop at `STORYBOARD_USER_GATE`; do not generate artwork before approval.
-3. On storyboard approval, bind the already USER_LOCKED PERSON/FOOD renderer carriers in the same handoff turn, preferring repository-direct validated bytes and using identical SESSION_ONLY carriers only if direct binding is unavailable.
-4. Generate a fresh `INITIAL_ART_BUNDLE`: one text-free BODY 2×3 master board plus one independent text-free COVER hero.
-5. Do not recover, redraw, or reuse any artwork from the discarded E006 iteration.
+1. Keep the approved BODY and COVER exact source pixels locked.
+2. Discard the seven post-approval image-generation pages as `REJECTED_NON_CANONICAL_PRESENTATION_ATTEMPT`; they stochastically redrew approved artwork and cannot be publish authority.
+3. Run actual border-based extraction on the approved BODY board; do not nominally split or redraw panels.
+4. FIT the six exact extracted BODY cells and exact approved COVER into 4:5 pages without stretching.
+5. Build a quality-first `PRESENTATION_MASTER_DRAFT` by adding title/copy/bubbles/SFX as presentation overlays on the locked artwork, not by image-model redraw.
+6. Preserve the approved literal copy strings. In particular S05 must remain the in-progress crush/mix moment; do not substitute a finished mixed-rice state.
+7. Show the corrected seven-page presentation master at `FINAL_PUBLISH_GATE`.
 
 Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
