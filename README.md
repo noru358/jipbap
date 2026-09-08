@@ -14,19 +14,30 @@ Product:
 - COVER 1 + BODY 6
 - one text-free 2×3 BODY master board
 - style/format frozen, staging/storytelling fluid
-- deterministic extraction / 4:5 assembly / cover / lettering
+- actual-boundary extraction + 4:5 FIT without artwork stretch
+- quality-first `PRESENTATION_MASTER_DRAFT` before editable reconstruction
+- approved artwork/copy preserved into `EDITABLE_COMPOSITION_PACKAGE_V1`
 - minimal publish-blocking hard QC
 
 ## Normal production conversation
 
 One episode is normally produced in **one ChatGPT conversation across multiple turns**, not one giant response:
 
-`BOOT + PLAN → storyboard approval → same chat BOARD → ASSEMBLY/FINAL → publish approval`
+`BOOT + PLAN → storyboard approval → same chat BOARD → COVER/EXTRACT/FIT → PRESENTATION_MASTER_DRAFT → publish approval → EDITABLE_RECONSTRUCTION/PARITY_QC`
 
 The storyboard approval is permanent.
 The BOARD/style approval exists only while style-carrier calibration is active and should disappear after style delivery becomes stable.
 
 A new chat is used only for real runtime contamination, conversation/context-limit risk, or artifact/approval uncertainty.
+
+## Planning input
+
+A food name alone is sufficient to start a new PLAN.
+Situation, remembered sensation, actual words, unexpected detail or a small choice are optional enrichment, not a required questionnaire.
+
+Planning keeps user-provided experience/copy distinct from AI-filled connective assumptions.
+Storyboard design may include approximate copy-space, protected face/hand/food regions and text reading order, while final coordinates remain presentation-stage data.
+The generated 2×3 BOARD stays text-free.
 
 ## Style references and attachment policy
 
@@ -60,6 +71,17 @@ Normal episode flow:
 `PROXY_EATER`: the comic eats on the reader's behalf.
 Food state, eating action and sensory payoff are central.
 Background/decorative assets are omitted unless needed to explain the moment.
+
+## Extraction and ToonDesk handoff
+
+- `pipeline.extract_board` detects actual 2×3 panel boundaries; it does not use nominal equal slicing.
+- one `JIPBAP_BOARD_EXTRACTION_V1` metadata record owns source SHA, detected boxes and S01..S06 extracted-output hashes.
+- BODY scene `artwork_provenance` references that extraction metadata + box index.
+- final 4:5 FIT remains the artwork object's scene `crop`; no second crop manifest is introduced.
+- ToonDesk consumes the project profile but is not JIPBAP authority.
+- same-ID reconstruction preserves only properties explicitly marked in `manual_overrides`.
+- manual line breaks, bubble/tail geometry, typography and artwork source remain inspectable/editable scene data.
+- missing font substitution is surfaced rather than silently accepted.
 
 Legacy composition-first / BODY4 / ASSET_GAP / PERSON-FOOD foundation workflows are historical/debugging material only.
 
