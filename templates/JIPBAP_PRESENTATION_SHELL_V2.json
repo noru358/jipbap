@@ -13,7 +13,7 @@
     "allow_custom_override": true,
     "override_class": "CUSTOM_OVERRIDE",
     "override_is_scene_corruption": false,
-    "revision": "2026-09-09_COVER_TITLE_SYSTEM_V1"
+    "revision": "2026-09-09_UNIQUE_COVER_ORGANIC_LETTERING_V1"
   },
   "page_structure": {
     "automatic_default": {
@@ -124,9 +124,10 @@
     },
     "layout_mode": "FULL_ART_OVERLAY",
     "artwork_source_policy": {
-      "mode": "sticky_selected_source",
+      "mode": "distinct_cover_hero_default",
       "record_provenance": true,
-      "silent_body_substitution": false,
+      "automatic_body_reuse": false,
+      "body_reuse_requires_explicit_selection": true,
       "replacement_requires_explicit_override": true,
       "focal_aware_lettering": true
     },
@@ -155,7 +156,9 @@
         "episode_label": {
           "literal_pattern": "EP.{episode_no}",
           "typography_role": "cover_episode_label",
-          "visual_role": "compact_series_label"
+          "visual_role": "compact_series_label",
+          "container_default": "none",
+          "enclosure_default": false
         },
         "main_title": {
           "literal_pattern": "{topic_phrase}와 {food_name}",
@@ -237,17 +240,17 @@
   },
   "lettering": {
     "speech": {
-      "container": "bubble",
+      "container": "organic_bubble",
       "fill": "#FFFFFF",
       "stroke": "#2A2A2A",
-      "stroke_width": 4,
+      "stroke_width": 3,
       "tail": {
         "enabled": true,
         "style": "soft_curved",
         "default_attach_side": "bottom",
         "default_attach": 0.55,
-        "default_base_width": 56,
-        "default_curve": 0.58,
+        "default_base_width": 42,
+        "default_curve": 0.72,
         "editable_handles": [
           "tip",
           "attach"
@@ -263,7 +266,10 @@
           "hand_action"
         ],
         "manual_length_unrestricted": true
-      }
+      },
+      "body_style": "soft_oval",
+      "radius_ratio": 0.48,
+      "horizontal_flip_editable": true
     },
     "inner_thought": {
       "container": "thought_box_optional",
@@ -303,10 +309,11 @@
       "min_size": 72,
       "max_size": 112,
       "weight": 700,
-      "preferred_family": "Jua",
+      "preferred_family": "Gaegu",
       "fallback_families": [
+        "Nanum Pen Script",
+        "Jua",
         "Do Hyeon",
-        "Black Han Sans",
         "Noto Sans KR",
         "sans-serif"
       ]
@@ -317,8 +324,10 @@
       "min_size": 36,
       "max_size": 46,
       "weight": 700,
-      "preferred_family": "Jua",
+      "preferred_family": "Gaegu",
       "fallback_families": [
+        "Nanum Pen Script",
+        "Jua",
         "Gowun Dodum",
         "Noto Sans KR",
         "sans-serif"
@@ -368,9 +377,10 @@
       "min_size": 26,
       "max_size": 36,
       "weight": 700,
-      "preferred_family": "Jua",
+      "preferred_family": "Gaegu",
       "fallback_families": [
-        "Do Hyeon",
+        "Nanum Pen Script",
+        "Jua",
         "Noto Sans KR",
         "sans-serif"
       ]
