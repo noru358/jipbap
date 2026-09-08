@@ -1,7 +1,7 @@
 # V1_E001 PLAN
 
 Updated: 2026-09-08
-Status: STORYBOARD_USER_APPROVED
+Status: DONE
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
 Core menu: 제육볶음 + 흰밥
