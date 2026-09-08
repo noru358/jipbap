@@ -83,13 +83,14 @@
       "lettering_move_is_custom_override": false
     },
     "artwork_source_policy": {
-      "mode": "accepted_final_page_artwork",
-      "anchor_mode": "approved_board_visual_semantic_contract",
-      "finalization_method": "PAGE_FINAL_RECOMPOSE",
+      "mode": "approved_board_cell_exact_derivative",
+      "anchor_mode": "approved_board_pixel_lock",
+      "finalization_method": "EXACT_EXTRACTION_REUSE",
       "record_provenance": true,
-      "exact_extraction_reuse_supported": true,
-      "extraction_metadata_reuse_when_selected": true,
-      "replacement_requires_explicit_override": true
+      "exact_extraction_required": true,
+      "extraction_metadata_required": true,
+      "replacement_requires_reopened_art_gate": true,
+      "stochastic_regeneration_allowed": false
     }
   },
   "cover": {
@@ -133,14 +134,14 @@
     },
     "layout_mode": "FULL_ART_OVERLAY",
     "artwork_source_policy": {
-      "mode": "accepted_final_cover_artwork",
-      "anchor_mode": "approved_distinct_cover_visual_semantic_contract",
-      "finalization_method": "PAGE_FINAL_RECOMPOSE",
+      "mode": "approved_cover_exact_source",
+      "anchor_mode": "approved_cover_pixel_lock",
+      "finalization_method": "EXACT_ANCHOR_REUSE",
       "record_provenance": true,
       "automatic_body_reuse": false,
-      "body_reuse_requires_explicit_selection": true,
-      "exact_anchor_pixel_reuse_supported": true,
-      "replacement_requires_explicit_override": true,
+      "body_reuse_requires_explicit_selection_before_approval": true,
+      "replacement_requires_reopened_art_gate": true,
+      "stochastic_regeneration_allowed": false,
       "focal_aware_lettering": true
     },
     "placement_policy": {
@@ -436,17 +437,27 @@
     "accepted_artwork_identity_preserved_in_final_reconstruction": true,
     "target_provenance_required": true,
     "parity_qc_required_after_reconstruction": true,
-    "routine_second_user_gate_after_parity": false
+    "routine_second_user_gate_after_parity": false,
+    "stochastic_artwork_generation_after_art_bundle_approval": false,
+    "presentation_only_feedback_can_regenerate_artwork": false
   },
   "artwork_finalization": {
-    "mode": "PAGE_FINAL_RECOMPOSE",
-    "anchor_contract": "approved_body_board_plus_distinct_cover_visual_semantic_contract",
-    "same_session_preferred": true,
-    "exact_pixel_anchor_preservation_required": false,
-    "exact_extraction_default": false,
-    "exact_extraction_supported": true,
-    "page_contract_qc_before_lock": true,
-    "final_page_artwork_lock_after_contract_qc": true,
-    "new_chat_anchor_transport": "repository_direct_else_session_only"
-  }
+    "mode": "APPROVED_ART_PIXEL_LOCK",
+    "page_assembly": "DETERMINISTIC_PAGE_ASSEMBLY",
+    "approved_source_identity_required": true,
+    "stochastic_regeneration_after_approval_allowed": false,
+    "body_finalization_method": "EXACT_EXTRACTION_REUSE",
+    "cover_finalization_method": "EXACT_ANCHOR_REUSE",
+    "actual_border_detection_required_for_body": true,
+    "allow_stretch": false,
+    "allowed_post_approval_transforms": [
+      "crop_window",
+      "uniform_scale",
+      "position",
+      "frame",
+      "deterministic_padding_or_background"
+    ],
+    "artwork_change_requires_reopened_art_gate": true
+  },
+  "revision": "2026-09-09_APPROVED_ART_PIXEL_LOCK_V1"
 }
