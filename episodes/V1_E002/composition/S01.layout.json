@@ -1,5 +1,6 @@
 {
   "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "template_id": "JIPBAP_PRESENTATION_SHELL_V1",
   "page": {
     "width": 1080,
     "height": 1350,
@@ -10,18 +11,12 @@
       "id": "s01_art",
       "type": "artwork",
       "source": "../artwork/S01.png",
-      "x": 30,
-      "y": 300,
-      "width": 1020,
-      "height": 1020,
-      "crop": {
-        "mode": "fit"
-      },
-      "corner_radius": 26,
-      "border": {
-        "width": 4,
-        "color": "#1c1c1c"
-      },
+      "x": 40,
+      "y": 175,
+      "width": 1000,
+      "height": 1000,
+      "fit": "contain_1to1",
+      "allow_stretch": false,
       "z": 1
     },
     {
@@ -29,12 +24,15 @@
       "type": "bubble",
       "role": "speech",
       "x": 70,
-      "y": 70,
-      "width": 940,
-      "height": 190,
-      "radius": 28,
+      "y": 40,
+      "width": 820,
+      "height": 145,
+      "tail_to": {
+        "x": 640,
+        "y": 235
+      },
       "fill": "#ffffff",
-      "stroke": "#2a2a2a",
+      "stroke": "#221f1d",
       "stroke_width": 4,
       "z": 10
     },
@@ -42,24 +40,19 @@
       "id": "s01_text",
       "type": "text",
       "role": "speech",
-      "text": "와, 노른자 상태 좋다.\n이거부터 터뜨려야지.",
-      "x": 96,
-      "y": 96,
-      "width": 888,
-      "height": 138,
+      "text": "와, 노른자 좋다.\n이거부터 터뜨려야지.",
+      "x": 98,
+      "y": 62,
+      "width": 764,
+      "height": 100,
       "font": {
         "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
         "weight": 700,
-        "size": 49
+        "size": 43
       },
       "fill": "#221f1d",
-      "align": "left",
       "rotation": 0,
-      "z": 11,
-      "group_id": "s01_bubble"
+      "z": 11
     }
   ]
 }
