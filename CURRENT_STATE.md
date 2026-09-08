@@ -7,12 +7,12 @@ Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Presentation shell: JIPBAP_PRESENTATION_SHELL_V1
-Status: ACTIVE
+Status: DONE
 
 ## Active production state
 
 Active episode: V1_E002
-Stage: FINAL_PUBLISH_GATE
+Stage: DONE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -101,7 +101,7 @@ The geometry of JIPBAP_PRESENTATION_SHELL_V1 remains unchanged.
 
 - STORYBOARD_USER_GATE: APPROVED
 - BOARD_STYLE_USER_GATE: APPROVED
-- FINAL_PUBLISH_GATE: PROVISIONALLY_APPROVED_FEEDBACK_PENDING
+- FINAL_PUBLISH_GATE: APPROVED
 
 Accepted BOARD:
 - generation id: f11550ac-4963-465e-8262-fed8052e4ef4
@@ -151,10 +151,11 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Treat `EDITOR_SCENE_MODEL_V1` and the four-layer COVER/BODY hierarchy as frozen V1 presentation structure.
-2. Deterministically rerender V1_E002 from updated `composition/*.layout.json` only; do not regenerate or mutate accepted BOARD artwork.
-3. Inspect the complete COVER + 6 BODY carousel for visual parity plus lettering/crop integrity.
-4. Return V1_E002 to `FINAL_PUBLISH_GATE` for the single final publish decision.
-5. New episodes instantiate the same layer contract; only content, semantic lettering instance count and permitted object geometry/crop values vary.
-6. Do not introduce Canva, PPTX or another external format as authority; the future first-party API/editor consumes this same scene model.
-7. Keep FOOD gloss as a soft next-BOARD direction and keep the proposed S05 artwork-payoff change deferred unless explicitly reopened.
+1. V1_E002 is complete. Do not mutate it unless the user explicitly reopens it.
+2. Preserve `EDITOR_SCENE_MODEL_V1`, the four-layer COVER/BODY hierarchy, `EDITABLE_COMPOSITION_PACKAGE_V1`, and `JIPBAP_PRESENTATION_SHELL_V1` for subsequent episodes.
+3. On the next new-episode request, boot from latest main and create a fresh PLAN under the current JIPBAP_V1_SPEC.md.
+4. Keep copy concise and natural on mobile; prefer one short reaction plus at most one concrete sensory observation per beat.
+5. Keep speech / inner-thought / SFX visually distinct through the frozen semantic lettering roles.
+6. Apply the existing FOOD spec more strictly so FOOD remains appetizing but less glossy / ad-like; this remains a soft quality direction, not a new hard gate.
+7. Keep the proposed S05 artwork-payoff intervention deferred unless explicitly reopened.
+8. Do not add a new routine approval gate or hard-fail class from V1_E002 soft observations.
