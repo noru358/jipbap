@@ -11,14 +11,14 @@ Status: DONE
 
 ## Active production state
 
-Active episode: V1_E002
-Stage: DONE
+Active episode: V1_E003
+Stage: BOARD_PENDING_RUNTIME_CARRIER
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
-Plan: episodes/V1_E002/PLAN.md
-Run receipt: episodes/V1_E002/RUN_RECEIPT.md
+Plan: episodes/V1_E003/PLAN.md
+Run receipt: pending
 
 ## Runtime authority
 
@@ -156,11 +156,11 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. V1_E002 is complete. Do not mutate it unless the user explicitly reopens it.
-2. Preserve `EDITOR_SCENE_MODEL_V1`, the four-layer COVER/BODY hierarchy, and `EDITABLE_COMPOSITION_PACKAGE_V1`; instantiate `JIPBAP_PRESENTATION_SHELL_V2` as the default profile for subsequent new episodes while preserving V1 shell provenance for completed episodes.
-3. On the next new-episode request, boot from latest main and create a fresh PLAN under the current JIPBAP_V1_SPEC.md.
-4. Keep copy concise and natural on mobile; prefer one short reaction plus at most one concrete sensory observation per beat.
-5. Keep speech / inner-thought / SFX visually distinct through the frozen semantic lettering roles.
-6. Apply the existing FOOD spec more strictly so FOOD remains appetizing but less glossy / ad-like; this remains a soft quality direction, not a new hard gate.
-7. Keep the proposed S05 artwork-payoff intervention deferred unless explicitly reopened.
-8. Do not add a new routine approval gate or hard-fail class from V1_E002 soft observations.
+1. V1_E003 PLAN is created at `episodes/V1_E003/PLAN.md`; do not mutate V1_E001 or V1_E002.
+2. Generate one text-free 2×3 master board for V1_E003 under `SIX_PANEL_BOARD_FIRST` using the USER_LOCKED `JIPBAP_STYLE_CARRIER_V1` as style-delivery authority.
+3. In this Chat image runtime, repository binary direct-binding is not exposed through the image-generation interface. If the carrier pixels are not already attached in this conversation, use the same approved carrier image as the one-time `SESSION_ONLY` runtime carrier; this is transport only and does not create a new reference or reset the episode.
+4. Apply V1 hard-fail QC only. Keep FOOD appetizing but less glossy/ad-like as a soft quality direction.
+5. After BOARD PASS, extract six cells and instantiate `JIPBAP_PRESENTATION_SHELL_V2`; create authoritative `composition/*.layout.json`, editable SVG derivatives and flattened PNG carousel pages without stretching artwork.
+6. Keep speech / inner-thought / SFX visually distinct using the frozen semantic roles and the concise copy in the PLAN.
+7. Present the completed COVER + 6 BODY carousel at the final publish gate.
+8. Do not add a new permanent gate or hard-fail class from soft observations.
