@@ -1,314 +1,296 @@
 # V1_E006 PLAN
 
-Status: INITIAL_ART_BUNDLE_COVER_PENDING_MIGRATION
+Status: STORYBOARD_USER_GATE
 Food: 두부조림
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
 Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 
+## Reset receipt
+
+- Reset date: 2026-09-09
+- Reset authority: explicit user instruction
+- Previous V1_E006 iteration: DISCARDED
+- Previous storyboard approval: REVOKED
+- Previous BODY approval / generation id / hash: REVOKED_AS_RUNTIME_AUTHORITY
+- Previous COVER attempts: REJECTED_NON_CANONICAL
+- Reuse rule: do not reuse any previous E006 storyboard, BODY/COVER artwork, generation provenance, approval identity or stale scene semantics.
+- Git history may retain the discarded iteration for provenance only.
+
 ## Episode intent
 
-집에서 막 졸여낸 두부조림을 먼저 한입 먹고, 남은 양념과 두부를 흰밥에 으깨 비벼 먹는 2차 payoff까지 이어가는 PROXY_EATER 에피소드.
+비 오는 날 먹자골목을 지나가다 두부조림 냄새에 발이 붙잡히고, 결국 들어가 한 접시 먹는다.
+첫입의 뜨끈하고 부드러운 두부보다 한 번 더 강한 payoff는 마지막이다.
+남은 두부와 양념을 흰밥 위에 올린 뒤 숟가락으로 막 으깨며 쓱쓱 비비고, 그 밥을 크게 한입 먹는다.
 
-핵심은 조리법 설명이 아니라:
-- 두부 표면에 양념이 졸아 붙는 시각적 식욕,
-- 첫입에서 짭짤한 양념과 뜨끈하고 부드러운 두부의 대비,
-- 마지막에 두부와 양념을 밥알 사이에 섞어 먹는 만족감이다.
+조리법 설명보다:
+- 비 오는 골목의 공기와 따뜻한 음식 냄새의 대비,
+- 양념 밴 두부의 뜨거움과 부드러움,
+- 숟가락으로 두부를 깨뜨릴 때의 촉감과 밥알 사이로 양념이 번지는 시각,
+- 두부+양념+밥이 한 숟갈에 합쳐지는 2차 payoff
+를 중심으로 한다.
 
-배경은 조리/식사 위치가 읽힐 만큼만 두고, 음식·손동작·표정이 주초점이다.
+배경은 S01의 먹자골목과 식당 맥락을 읽히는 정도만 사용하고, 이후에는 음식·손동작·표정 중심으로 단순화한다.
 
 ## Approval state
 
-- STORYBOARD_USER_GATE: APPROVED
-- BODY master BOARD: APPROVED_AND_LOCKED_PRE_BUNDLE_MIGRATION
+- STORYBOARD_USER_GATE: PENDING
+- BODY master BOARD: NOT_STARTED
 - COVER hero: NOT_STARTED
-- ART_BUNDLE_USER_GATE: PENDING
+- ART_BUNDLE_USER_GATE: NOT_STARTED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 
-## COVER
+## COVER storyboard
 
-Title fields:
+Role:
+- episode hero / rain-day craving
+
+Visual intent:
+- 비가 맺힌 식당 창가 안쪽.
+- 전경에는 김이 살짝 오르는 두부조림과 흰밥.
+- 주인공은 막 숟가락을 들고 두부조림을 바라보는 기대감 있는 표정.
+- 비 오는 바깥과 따뜻한 실내의 대비가 한눈에 읽히되 배경 디테일은 최소화.
+- 제목을 얹을 자연스러운 여백은 남기지만 텍스트는 이미지 생성 단계에서 넣지 않는다.
+- 카메라·구도·포즈·표정은 COVER 역할에 맞게 자유롭게 설계한다.
+
+Working title:
 - episode_no: 6
-- topic_phrase: 밥 한 공기
+- topic_phrase: 비 오는 날
 - food_name: 두부조림
-- composed title: EP.6 밥 한 공기와 두부조림
-
-Distinct COVER hero:
-- BODY 셀 재사용 없음.
-- 완성된 두부조림 접시와 흰밥이 전경의 주초점.
-- 주인공은 숟가락을 들고 두부조림 쪽을 보며 바로 먹으려는 순간.
-- 음식과 얼굴은 동시에 읽히되 상단/측면에 제목을 위한 자연스러운 여백 확보.
-- BODY 셀을 재사용하지 않는 독립 COVER source artwork로 만든다.
-- 카메라·구도·포즈·표정은 표지 역할과 이번 화의 핵심 식욕 포인트에 맞게 자유롭게 설계한다.
-- 특정 BODY 슬롯과의 관계를 영구 규칙으로 고정하지 않는다.
+- composed title candidate: `EP.6 비 오는 날과 두부조림`
 
 ## BODY storyboard / copy draft
 
-### S01 — 두부를 노릇하게 굽기
+### S01 — 비 오는 먹자골목, 냄새에 멈춤
 
 Story function:
-- preparation / anticipation
+- trigger / craving hook
 
 What becomes new:
-- 생두부 상태에서 표면이 노릇하게 구워진 조리 상태로 진입.
+- 비를 피해 지나가던 주인공이 식당 쪽에서 올라오는 두부조림 냄새를 맡고 걸음을 멈춘다.
 
 Visual:
-- 두툼하게 썬 두부 여러 장이 팬에 놓여 있고 한 조각을 뒤집는 순간.
-- 두부 가장자리와 닿은 면만 노릇해지고, 전체가 튀김처럼 과하게 갈색이 되지 않는다.
-- 팬과 두부가 주초점, 주인공은 손이나 상반신 일부만 보여도 된다.
-- 배경은 최소.
+- 젖은 골목 바닥과 몇 개의 작은 식당 간판만 읽히는 먹자골목.
+- 우산을 쓴 주인공이 걷다가 고개를 살짝 돌려 냄새가 오는 방향을 찾는 순간.
+- 열린 식당 문이나 환기구 쪽에서 따뜻한 김/향의 흐름을 아주 절제되게 표현.
+- 비 오는 배경은 분위기만 전달하고 인물·향의 방향이 주초점.
 
 Person / food state:
-- 아직 양념을 넣기 전.
-- 먹기 전.
+- 아직 음식을 보거나 먹지 않음.
+- 냄새만 먼저 감지.
 
 Copy:
-- 없음. 무음 컷.
+- inner_thought: `어? 두부조림 냄새.`
 
 Camera / focus:
-- 약간 위에서 보는 미디엄 클로즈.
-- 뒤집히는 한 조각과 노릇한 면에 시선이 모이게.
+- 골목 맥락이 보이는 미디엄 와이드.
+- 인물의 멈춘 동작과 고개 방향이 읽혀야 함.
 
 Copy-space hint:
-- 별도 텍스트 공간 불필요.
+- 우산과 얼굴을 피한 상단 또는 측면 여백.
 
 Avoid:
-- 두부, 뒤집는 손/도구, 팬 중심부를 가리는 레터링 금지.
+- 얼굴, 우산 손, 향이 오는 방향을 가리지 않는다.
 
 Continuity:
-- 다음 컷에서 양념이 들어가므로 이 컷에서는 붉은 양념이 이미 묻어 있지 않는다.
+- 다음 컷에서 식당 안의 실제 두부조림을 확인하게 된다.
 
-### S02 — 양념 붓고 자글자글
+### S02 — 자리에 앉자마자 두부조림 등장
 
 Story function:
-- transformation / aroma
+- reveal / appetite escalation
 
 What becomes new:
-- 간장·고춧가루 계열 양념과 파/양파가 들어가며 두부조림의 색과 향이 생김.
+- 냄새의 정체가 실제 두부조림 한 접시로 확인된다.
 
 Visual:
-- 구운 두부 위로 붉은 갈색 양념을 끼얹거나 부어 주는 손동작.
-- 양념이 팬 바닥에서 자글거리기 시작하고 파/양파가 자연스럽게 섞임.
-- 과도한 국물탕처럼 보이지 않고 조림 양념 상태.
+- 식탁 위 막 나온 두부조림을 음식 중심으로 보여준다.
+- 붉은 갈색 양념이 두부에 배어 있고 파/양파 같은 고명이 자연스럽게 보이되 과도한 실사 광택은 피한다.
+- 흰밥 그릇이 옆에 있어 곧 함께 먹을 상황을 암시.
+- 주인공의 손이나 상반신 일부는 있어도 되지만 음식이 주초점.
 
 Person / food state:
-- 아직 먹기 전.
-- 양념은 막 들어가 아직 완전히 졸지 않음.
+- 먹기 직전.
+- 두부와 밥은 아직 분리된 상태.
 
 Copy:
-- inner_thought: "간장 냄새 확 올라온다."
-- sfx: "자글"
+- inner_thought: `비 오는 날 이 냄새는 못 지나치지.`
 
 Camera / focus:
-- 손과 팬을 비스듬히 보는 3/4 클로즈.
-- 흐르는 양념과 두부 표면이 주초점.
+- 3/4 음식 클로즈.
 
 Copy-space hint:
-- 생각 문구는 팬 바깥쪽 상단 여백.
-- SFX는 팬 가장자리 근처의 작은 보조 요소.
+- 접시와 밥그릇을 피한 한쪽 여백.
 
 Avoid:
-- 양념 흐름, 두부 표면, 손 접촉부를 가리지 않는다.
+- 두부 표면, 양념, 밥그릇을 가리지 않는다.
 
 Continuity:
-- S01에서 구운 두부가 같은 팬 안에서 이어짐.
-- 아직 맛/식감 문구는 사용하지 않는다.
+- S01에서 맡은 냄새의 원인이 자연스럽게 이어진다.
 
-### S03 — 양념이 졸아든 순간
+### S03 — 뜨거운 두부 첫입
 
 Story function:
-- sensory reveal / anticipation
+- first ingestion / flavor payoff
 
 What becomes new:
-- 묽던 양념이 졸아 두부 표면과 사이에 진하게 배어든 상태.
+- 두부조림이 처음 실제로 입에 들어간다.
 
 Visual:
-- 완성 직전 또는 완성된 두부조림을 음식 중심으로 가까이 보여줌.
-- 붉은 갈색 양념이 두부에 얇게 코팅되고 파 조각이 보임.
-- 숟가락이나 조리도구로 한 조각을 살짝 들어 올려 양념 상태가 읽혀도 좋음.
-- 지나친 광택·실사형 기름광 금지. 일러스트 질감 유지.
+- 젓가락으로 집은 두부 한 조각을 입에 넣는 순간.
+- 두부가 지나치게 단단한 큐브처럼 보이지 않고 부드러운 조직이 약간 느껴져야 함.
+- 눈썹과 입 주변에 뜨거움+만족감이 동시에 읽히는 현실적인 반응.
+- 접시와 밥은 프레임 일부에만 남겨 식사 맥락 유지.
 
 Person / food state:
-- 조리는 완료.
-- 아직 주인공은 먹지 않음.
+- 첫입 섭취 성립.
+- 밥은 아직 흰밥 그대로.
 
 Copy:
-- inner_thought: "이건 밥 있어야 돼."
+- inner_thought: `아 뜨거. 근데 두부 진짜 부드럽다.`
 
 Camera / focus:
-- 음식 매크로에 가까운 클로즈.
-- 인물 얼굴은 생략 가능.
+- 얼굴과 젓가락 접촉이 보이는 3/4 미디엄 클로즈.
 
 Copy-space hint:
-- 음식 덩어리 위가 아닌 한쪽 모서리의 작은 여백.
+- 얼굴과 젓가락 경로 반대편의 측면 여백.
 
 Avoid:
-- 두부 표면, 양념 고임, 들어 올린 조각을 가리지 않는다.
+- 눈, 입, 젓가락, 두부를 가리지 않는다.
 
 Continuity:
-- S02의 양념이 자연스럽게 졸아든 결과여야 한다.
-- 이 시점까지 입에 들어간 음식은 없음.
+- 맛/식감 문구는 실제 섭취가 성립한 이 컷부터 사용.
 
-### S04 — 두부 첫입
+### S04 — 밥 위에 두부와 양념 올리기
 
 Story function:
-- ingestion / first flavor payoff
+- setup for second payoff
 
 What becomes new:
-- 처음으로 두부조림이 실제 입 안에 들어감.
+- 그냥 두부만 먹던 흐름에서 밥과 합칠 준비로 전환한다.
 
 Visual:
-- 젓가락으로 집은 두부 한 조각이 입에 들어간 상태가 분명한 순간.
-- 접시와 밥그릇은 화면 일부에 남아 식사 맥락을 유지.
-- 두부가 지나치게 단단한 큐브처럼 보이지 않고 부드러운 조직이 읽힘.
-- 손-젓가락-두부-입 접촉 관계가 자연스러워야 함.
+- 흰밥 위에 두부 한 조각과 양념을 숟가락 또는 젓가락으로 올리는 순간.
+- 밥 일부는 여전히 새하얗고, 양념이 닿은 부분만 막 물들기 시작함.
+- 두부는 아직 비교적 큰 조각으로 형태가 남아 있어 다음 컷의 으깨기 행동이 가능해야 함.
 
 Person / food state:
-- 첫 섭취 완료 직전/직후가 한눈에 읽힘.
-- 밥은 아직 비비지 않은 흰밥 상태.
+- S03 이후.
+- 아직 두부를 으깨지 않음.
+- 비빈 밥도 아직 먹지 않음.
 
 Copy:
-- inner_thought: "짭짤한 양념 뒤에 두부가 뜨끈하고 부드럽네."
+- speech 또는 inner_thought: `이제 이걸 밥에다가...`
 
 Camera / focus:
-- 측면 또는 3/4 미디엄 클로즈.
-- 얼굴 반응과 실제 섭취 접촉을 함께 읽게.
+- 밥그릇과 손동작 중심의 하이앵글 클로즈.
 
 Copy-space hint:
-- 얼굴과 젓가락 경로 반대편의 여백.
+- 손과 밥그릇 외곽을 피한 작은 측면 여백.
 
 Avoid:
-- 눈, 입, 젓가락, 두부, 밥그릇을 가리지 않는다.
+- 밥 위 두부, 양념이 떨어지는 경계, 손 접촉부를 가리지 않는다.
 
 Continuity:
-- 맛/식감 문구는 이 컷에서 실제 ingestion이 성립한 뒤에만 사용.
-- 다음 컷의 밥 비비기는 이 첫입 이후의 2차 선택.
+- S05에서 이 큰 두부 조각이 실제로 으깨지기 시작한다.
 
-### S05 — 두부조림을 밥에 으깨 비비기
+### S05 — 막 으깨서 쓱쓱 비비는 중
 
 Story function:
-- secondary transformation / residue payoff
+- tactile transformation / signature action
 
 What becomes new:
-- 흰밥에 두부 한 조각과 조림 양념을 얹고 숟가락으로 으깨 섞기 시작함.
+- 숟가락이 두부를 눌러 깨뜨리면서 밥과 양념을 실제로 섞기 시작한다.
 
 Visual:
-- 밥그릇 위에 두부와 양념이 올라가 있고 숟가락으로 두부를 살짝 으깨며 밥과 비비는 장면.
-- 흰밥 일부는 아직 남아 있고, 일부는 붉은 갈색 양념이 스며들어 색이 변하는 중.
-- 두부가 밥알 사이로 작은 덩어리로 섞이는 모습이 먹음직스럽게 보임.
-- 주인공 얼굴은 생략하고 손·숟가락·밥그릇에 집중해도 됨.
+- 완성된 비빔밥이 아니라 **막 으깨고 있는 진행 중 순간**.
+- 밥 위 큰 두부 조각 일부는 아직 남아 있고, 숟가락 아래쪽만 작은 덩어리로 깨지는 중.
+- 양념이 흰밥 사이로 퍼져 흰 부분과 붉은 갈색 부분이 동시에 보임.
+- 숟가락이 두부를 누르고 끌면서 밥알과 섞이는 접촉부를 가장 맛있게 보여준다.
+- 얼굴은 생략 가능. 손·숟가락·밥그릇이 주초점.
 
 Person / food state:
-- S04에서 두부 한입을 먹은 뒤.
-- 밥은 이제 처음으로 양념과 섞이는 중.
-- 아직 이 비빈 밥은 먹지 않음.
+- 두부 으깨기와 밥 비비기가 현재 진행 중.
+- 아직 이 혼합밥을 먹지 않음.
 
 Copy:
-- sfx: "슥슥"
+- sfx: `쓱쓱`
+- optional inner_thought: `이렇게 으깨야 돼.`
 
 Camera / focus:
-- 위에서 가까이 보는 탑다운 또는 하이앵글 극근접.
-- 숟가락이 두부를 으깨고 밥과 섞는 접촉부가 주초점.
+- 탑다운에 가까운 극근접 또는 높은 하이앵글.
+- 숟가락 끝과 으깨지는 두부/밥의 경계가 주초점.
 
 Copy-space hint:
-- SFX만 작은 자유 배치. 별도 말풍선 없음.
+- SFX만 동작선 주변의 작은 여백에 배치.
 
 Avoid:
-- 숟가락 끝, 으깨지는 두부, 양념이 밥에 스미는 경계를 가리지 않는다.
+- 숟가락 끝, 두부가 깨지는 부분, 양념이 번지는 경계를 가리지 않는다.
 
 Continuity:
-- S04의 흰밥이 같은 식사에서 이어짐.
-- 양념은 두부조림 접시에서 가져온 것으로 읽혀야 함.
+- S04의 큰 두부 조각이 그대로 이어져야 한다.
+- 이미 전부 으깨진 상태로 시작하면 안 된다.
 
-### S06 — 비빈 밥 한 숟갈
+### S06 — 두부 비빈 밥 크게 한입
 
 Story function:
-- second ingestion / aftertaste payoff
+- second ingestion / final payoff
 
 What becomes new:
-- 두부와 양념이 섞인 밥을 실제로 한 숟갈 먹으며 에피소드의 식욕 payoff 완성.
+- S05에서 만든 두부+양념+밥 조합을 실제로 먹는다.
 
 Visual:
-- 숟가락 위에 양념이 밴 밥과 으깨진 두부가 함께 보이고, 실제로 입에 들어가는 순간.
-- 남은 밥그릇에는 흰밥과 양념 밴 부분이 자연스럽게 섞여 있음.
-- 얼굴은 만족감이 또렷하게 읽히되 과도한 광고식 환희보다 현실적인 맛있는 반응.
-- 음식도 충분히 보여 얼굴만 남는 반복 클로즈업을 피함.
+- 숟가락 위에 양념 밴 밥과 잘게 으깨진 두부가 같이 보임.
+- 주인공이 그 숟가락을 크게 한입 먹고, 만족감이 바로 올라오는 순간.
+- 밥그릇 안에는 완전히 균질한 죽처럼 섞인 것이 아니라 밥알과 작은 두부 덩어리가 살아 있음.
+- 음식이 충분히 보이도록 구성하고 표정만 남는 얼굴 클로즈업은 피한다.
+- 마무리 장면은 식탁과 밥그릇까지 읽히는 조금 더 여유 있는 구도로 설계해, 첫입과 다른 리듬을 준다.
 
 Person / food state:
-- 비빈 밥 첫 섭취.
-- S05의 혼합 상태가 그대로 이어짐.
+- 비빈 밥 첫 섭취 성립.
+- S05의 혼합 상태가 자연스럽게 이어짐.
 
 Copy:
-- inner_thought: "양념 밴 밥이 진짜 맛있다. 두부까지 으깨져서 부드럽고."
+- inner_thought: `양념 밴 밥에 두부까지 풀리니까 그냥 술술 들어가네.`
 
 Camera / focus:
-- 3/4 미디엄 또는 미디엄 클로즈.
-- 숟가락 내용물 + 입 + 표정을 함께 읽게.
+- 인물+숟가락+밥그릇이 함께 읽히는 미디엄 3/4 또는 살짝 낮은 앵글.
 
 Copy-space hint:
-- 인물 머리 위 고정 밴드가 아니라, 얼굴과 숟가락 동선을 피한 측면 여백.
+- 얼굴과 숟가락 동선을 피한 측면 여백.
 
 Avoid:
-- 눈/입/숟가락/밥그릇/두부조림 접시를 가리지 않는다.
+- 눈, 입, 숟가락 내용물, 밥그릇을 가리지 않는다.
 
 Continuity:
-- S05에서 섞은 밥이 그대로 이어져야 함.
-- 두부가 갑자기 온전한 새 조각으로만 돌아가거나 밥이 다시 완전한 흰밥으로 리셋되지 않는다.
+- S05에서 섞은 밥이 그대로 이어져야 한다.
+- 밥이 다시 완전한 흰밥으로 리셋되거나 두부가 온전한 큰 조각으로만 돌아가면 안 된다.
 
 ## Overall visual rhythm
 
-- S01: 팬과 손 중심의 조리 미디엄 클로즈
-- S02: 양념이 흐르는 3/4 액션 클로즈
-- S03: 인물을 줄이고 음식 자체를 보는 매크로 reveal
-- S04: 얼굴+젓가락 첫입 미디엄 클로즈
-- S05: 밥그릇을 위에서 보는 혼합 극근접
-- S06: 얼굴+숟가락+밥그릇을 함께 보는 3/4 마무리
+- S01: 비 오는 먹자골목 미디엄 와이드
+- S02: 음식 중심 3/4 클로즈 reveal
+- S03: 얼굴+젓가락 첫입 미디엄 클로즈
+- S04: 밥그릇/손 하이앵글 클로즈
+- S05: 으깨는 접촉부 극근접
+- S06: 인물+숟가락+밥그릇이 함께 보이는 여유 있는 마무리
 
-이는 컷별 강제 템플릿이 아니라 이번 음식 흐름에 맞춘 리듬이다.
+이 리듬은 이번 에피소드의 스토리 선택이며 영구 슬롯 템플릿이 아니다.
 
 ## Copy rhythm
 
-- S01 무음으로 시작.
-- S02는 먹기 전 향.
-- S03은 밥을 찾게 되는 욕구.
-- S04에서 실제 첫입 후 두부의 온도/부드러움.
-- S05는 비비는 동작을 SFX로만 살림.
-- S06은 양념 밴 밥과 으깨진 두부의 2차 식감 payoff.
-- 행동을 그대로 설명하는 문장은 피하고 실제 혼잣말처럼 유지한다.
-
-## Storyboard / BOARD approval receipt
-
-- STORYBOARD_USER_GATE: APPROVED by user.
-- First BOARD draft: rejected for S05 already-crushed tofu state and S06 composition too close to S04.
-- Revised BOARD: APPROVED by user.
-- approved generation id: `92d89711-72ad-4286-8868-443c64123885`
-- approved session SHA-256: `86229c6426192a102cd104926e662dfdf307e368993064b58641140c4048f6e0`
-- dimensions: 1024 × 1536
-- repository binary materialization: NOT_CONFIRMED; exact approved pixels are required for downstream extraction and must not be reconstructed from hash/generation id
-- S05 accepted correction: tofu remains in larger pieces while the spoon is actively beginning to crush/mix it into rice.
-- S06 accepted correction: wider/different finishing composition, not a near-copy of S04.
-- approved BOARD is locked; no stochastic BOARD regeneration is authorized by the current state.
-
-## Architecture migration note
-
-V1_E006 began under the prior split flow and already has a user-approved BODY master board.
-The new canonical flow creates BODY + COVER together before `ART_BUNDLE_USER_GATE`.
-
-Migration rule for this episode:
-- preserve the already approved BODY board exactly; do not regenerate it merely to make the historical sequence look like the new flow;
-- generate only the still-missing independent COVER source;
-- then show the locked BODY + new COVER together at `ART_BUNDLE_USER_GATE`;
-- approval at that gate locks the complete artwork bundle for downstream deterministic work.
-
-The earlier failed COVER attempts that returned stale six-panel storyboard semantics remain rejected and non-canonical.
-They do not justify a permanent slot-specific COVER rule.
+- S01은 냄새를 알아채는 짧은 혼잣말.
+- S02는 비 오는 날의 욕구를 한 줄로 연결.
+- S03에서 실제 첫 섭취 뒤에 뜨거움/부드러움을 말함.
+- S04는 말끝을 열어 다음 행동을 예고.
+- S05는 `쓱쓱` 동작감을 중심으로 텍스트를 최소화.
+- S06에서 두부가 밥에 풀린 식감을 최종 payoff로 설명.
+- 문어체보다 실제 혼잣말/커뮤니티 말투에 가깝게 유지하되 과도한 유행어 남발은 피한다.
 
 ## Exact next action
 
-Complete the migrated `INITIAL_ART_BUNDLE` for V1_E006:
-1. keep the approved BODY board locked;
-2. if execution moves to a new chat, carry/recover the exact approved BODY pixels rather than redrawing from the saved hash/generation id;
-3. generate only the missing text-free COVER hero using the already-approved episode intent and renderer carriers;
-4. use role-based COVER direction only: independent cover-source artwork, episode-level hero function, freely chosen camera/composition/pose/expression, no BODY-cell reuse;
-5. present the locked BODY + generated COVER together at `ART_BUNDLE_USER_GATE`;
-6. after approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
+1. Present this restarted COVER + S01..S06 storyboard to the user.
+2. Stop at STORYBOARD_USER_GATE.
+3. If approved, bind the USER_LOCKED PERSON/FOOD renderer carriers in the approval turn.
+4. Generate a fresh INITIAL_ART_BUNDLE: BODY 2×3 master board + independent COVER hero.
+5. Never reuse the discarded E006 iteration as authority.
