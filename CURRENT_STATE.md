@@ -13,26 +13,36 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: STORYBOARD_USER_GATE
+Stage: COVER_PENDING_CLEAN_CHAT
 
 ## Boot snapshot — active new episode
 
 - Active episode: `V1_E006`
-- Current stage: `STORYBOARD_USER_GATE`
+- Current stage: `COVER_PENDING_CLEAN_CHAT`
 - Food: 두부조림
-- STORYBOARD_USER_GATE: PENDING
-- PERSON renderer projection: USER_LOCKED; bind only when BOARD image generation begins
-- FOOD renderer projection: USER_LOCKED; bind only when BOARD image generation begins
-- BODY master BOARD: NOT_STARTED
-- distinct COVER hero: NOT_STARTED
+- STORYBOARD_USER_GATE: APPROVED
+- PERSON renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
+- FOOD renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
+- BODY master BOARD: APPROVED
+- approved BOARD generation id: `92d89711-72ad-4286-8868-443c64123885`
+- approved BOARD SHA-256: `86229c6426192a102cd104926e662dfdf307e368993064b58641140c4048f6e0`
+- approved BOARD dimensions: 1024 × 1536
+- distinct COVER hero: NOT_STARTED / clean-chat required
 - FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E006/PLAN.md`
-- V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` with its accepted BOARD/COVER/presentation-master candidate unchanged; starting V1_E006 does not approve, reject, regenerate, or close V1_E005.
+- V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` unchanged.
+
+Image-runtime contamination:
+- three post-BOARD COVER attempts returned stale six-panel storyboard semantics with generated text despite corrected COVER-only instructions;
+- all three are REJECTED_NON_CANONICAL and are not references/carriers/COVER/BODY authority;
+- approved BODY BOARD remains locked and must not be regenerated.
 
 Exact next action for episode production:
-1. Await user decision on the V1_E006 두부조림 storyboard/copy/camera/continuity plan.
-2. If approved, continue in the same chat to BOARD preparation and bind the already USER_LOCKED PERSON/FOOD renderer carriers once when image generation is actually needed.
-3. If rejected or edited, revise V1_E006 PLAN only; do not generate artwork before storyboard approval.
+1. Start a clean chat at V1_E006 COVER only.
+2. Restore latest `main`; do not reopen STORYBOARD or BOARD.
+3. Attach the exact already-approved `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` once as SESSION_ONLY carriers because repository binaries are not materialized.
+4. Generate one distinct text-free COVER hero matching the saved PLAN and clearly different from BODY S04/S06.
+5. After COVER QC, continue deterministic BOARD extraction/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
 
 Infrastructure upgrade completed for future/new work:
 - JIPBAP planning/copy guidance now co-designs image + lettering space without putting text into the BOARD.
@@ -55,7 +65,7 @@ Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
 Plan: episodes/V1_E006/PLAN.md
-Run receipt: pending STORYBOARD_USER_GATE approval
+Run receipt: pending FINAL_PUBLISH_GATE approval
 
 ## Runtime authority
 
