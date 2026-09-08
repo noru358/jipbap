@@ -144,6 +144,7 @@ Speech-bubble tail geometry is also explicit scene data, not a fixed renderer tr
 - base width
 - curvature/softness
 The editor should expose direct-manipulation handles for tail tip and attachment point plus width/curve controls. Legacy `tail_to` remains readable for backward compatibility but new saves should emit the richer tail geometry.
+Automatic speech-tail placement should use a short pointer to the speaker-facing edge rather than drawing a long pointer across a face/food focal region. The automatic default should target roughly <= 180 px from the attachment point when practical; this is a soft layout default, not an editor limit. Manual tail dragging may exceed it.
 The future editor may expose related objects as a convenience group without flattening them.
 SFX such as `톡` is a text/SFX object, not part of the generated artwork raster.
 
