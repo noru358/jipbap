@@ -1,22 +1,29 @@
 {
   "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
   "episode": "V1_E002",
+  "template_id": "JIPBAP_PRESENTATION_SHELL_V1",
   "presentation_authority": "episodes/V1_E002/composition/*.layout.json",
-  "editable_derivative": "SVG",
-  "publish_derivative": "PNG",
-  "accepted_board_generation_id": "f11550ac-4963-465e-8262-fed8052e4ef4",
-  "accepted_board_sha256": "df1c5c0d6a8c8dd6b38868c579dd4772747dc506591ec615cad007ec4dd736d9",
-  "pages": [
-    "COVER",
-    "S01",
-    "S02",
-    "S03",
-    "S04",
-    "S05",
-    "S06"
-  ],
-  "notes": [
-    "S02 톡 is independent object s02_sfx_01.",
-    "Font binaries are not repository authority."
-  ]
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "ratio": "4:5"
+  },
+  "body_artwork_frame": {
+    "x": 40,
+    "y": 175,
+    "width": 1000,
+    "height": 1000,
+    "allow_stretch": false
+  },
+  "cover_hero_frame": {
+    "x": 60,
+    "y": 330,
+    "width": 960,
+    "height": 960,
+    "allow_stretch": false
+  },
+  "publish_page_markers": false,
+  "current_runtime_package_sha256": "29ca16ead377b2cf63d7653cfcfd633ef380e4b1979d57c59c5653a4d4278ecc",
+  "copy_revision": "compressed_after_user_feedback",
+  "s05_artwork_payoff_change": "deferred_by_user"
 }
