@@ -1,0 +1,65 @@
+{
+  "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "page": {
+    "width": 1080,
+    "height": 1350,
+    "background": "#fff9f0"
+  },
+  "objects": [
+    {
+      "id": "s03_art",
+      "type": "artwork",
+      "source": "../artwork/S03.png",
+      "x": 30,
+      "y": 70,
+      "width": 1020,
+      "height": 1020,
+      "crop": {
+        "mode": "fit"
+      },
+      "corner_radius": 26,
+      "border": {
+        "width": 4,
+        "color": "#1c1c1c"
+      },
+      "z": 1
+    },
+    {
+      "id": "s03_bubble",
+      "type": "bubble",
+      "role": "inner_thought",
+      "x": 70,
+      "y": 1065,
+      "width": 940,
+      "height": 230,
+      "radius": 28,
+      "fill": "#ffffff",
+      "stroke": "#2a2a2a",
+      "stroke_width": 4,
+      "z": 10
+    },
+    {
+      "id": "s03_text",
+      "type": "text",
+      "role": "inner_thought",
+      "text": "오… 노른자 섞이니까 매운맛이 한 번 눌리네.\n김치 맛은 그대로인데 훨씬 부드럽다.",
+      "x": 96,
+      "y": 1091,
+      "width": 888,
+      "height": 178,
+      "font": {
+        "family_intent": "NanumSquareRound",
+        "fallback": [
+          "sans-serif"
+        ],
+        "weight": 400,
+        "size": 44
+      },
+      "fill": "#221f1d",
+      "align": "left",
+      "rotation": 0,
+      "z": 11,
+      "group_id": "s03_bubble"
+    }
+  ]
+}
