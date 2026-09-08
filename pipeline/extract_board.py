@@ -199,17 +199,32 @@ def extract_board(
     source = source.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    cells: list[dict] = []
     with Image.open(source) as image:
         image.load()
         extraction = detect_panel_interiors(image, inset=inset)
-        for i, box in enumerate(extraction.boxes, start=1):
-            image.crop(box).save(output_dir / f"S{i:02d}.png", "PNG")
+        for box_index, box in enumerate(extraction.boxes):
+            page_id = f"S{box_index + 1:02d}"
+            target = output_dir / f"{page_id}.png"
+            image.crop(box).save(target, "PNG")
+            cells.append(
+                {
+                    "page_id": page_id,
+                    "box_index": box_index,
+                    "box": list(box),
+                    "output": {
+                        "filename": target.name,
+                        "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
+                    },
+                }
+            )
 
     if metadata_path is not None:
         metadata_path.parent.mkdir(parents=True, exist_ok=True)
         payload = extraction.to_json()
         payload["source"]["path"] = str(source)
         payload["source"]["sha256"] = hashlib.sha256(source.read_bytes()).hexdigest()
+        payload["cells"] = cells
         metadata_path.write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
