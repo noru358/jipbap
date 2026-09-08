@@ -145,9 +145,13 @@ V1_CAL_001:
 
 ## Generic editor boundary
 
-- ToonDesk is treated as a separate generic editor/renderer capability surface, not JIPBAP canonical authority.
-- JIPBAP owns its project profile/default shell; the generic engine consumes it.
-- ToonDesk transport/session wrappers, if used, are non-authoritative. `composition/*.layout.json` remains the JIPBAP presentation authority.
+- Generic editor implementation repository: `noru358/Toondesk`.
+- ToonDesk is a separate generic editor/renderer capability surface, not JIPBAP canonical authority.
+- JIPBAP owns its project profile/default shell; ToonDesk consumes it.
+- Canonical JIPBAP profile: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`.
+- Any `profiles/jipbap_v2.example.json` copy in ToonDesk is a non-authoritative development/example mirror only.
+- ToonDesk transport/session wrappers (`TOONDESK_PACKAGE_V1`, `TOONDESK_PROJECT_V1`) are non-authoritative. `composition/*.layout.json` remains the JIPBAP presentation authority.
+- ToonDesk may report explicit profile deviations as `CUSTOM_OVERRIDE`; this is not corruption and does not change scene-format authority.
 - Automatic Chat production does not invent per-episode custom overrides. Overrides require explicit user/editor action.
 
 ## Exact next action
