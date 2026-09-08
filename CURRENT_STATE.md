@@ -52,6 +52,44 @@ Exact next action for episode production:
 6. Preserve the approved literal copy strings. In particular S05 must remain the in-progress crush/mix moment; do not substitute a finished mixed-rice state.
 7. Show the corrected seven-page presentation master at `FINAL_PUBLISH_GATE`.
 
+## V1_E006 presentation draft v2 QC
+
+User naming:
+- the first seven-page lettered image-generation set is treated as the initial `초안`.
+- the subsequent seven-page set is `PRESENTATION_DRAFT_V2` for review only.
+
+V2 visual QC:
+- COVER title hierarchy / placement: GOOD; title does not materially cover face or primary food focal area.
+- S01 rainy-alley hook: GOOD.
+- S02 food reveal: GOOD, though staging drifts from the approved BODY cell.
+- S03 ingestion timing/contact: GOOD.
+- S04 large intact tofu-on-rice setup: GOOD.
+- S05 in-progress mix state: IMPROVED versus initial draft; white rice, sauce-stained rice, crumbled tofu and larger tofu pieces coexist. However the visible spoon-to-large-tofu crushing contact is still less explicit than the approved signature-action intent.
+- S06 final spoonful payoff: GOOD.
+- Literal generated Korean copy: visually appears correct in this draft.
+- Bubble system: readable but overly repetitive cloud-like thought containers; soft quality issue.
+- Food remains somewhat glossy/advertising-like relative to the simplified person drawing language; soft quality issue already known.
+
+Pipeline QC: FAIL.
+Reason:
+- active canonical stage was `EXTRACT_FIT`;
+- exact next action required actual border-based extraction of the approved BODY raster, 4:5 FIT of those exact pixels, then presentation overlays;
+- instead, V2 was produced with page-level stochastic image generation using the approved BOARD/COVER as references;
+- therefore approved artwork pixels, framing, background, pose and local food geometry changed again;
+- no actual `JIPBAP_BOARD_EXTRACTION_V1` extraction record was produced;
+- these V2 pages are not canonical artwork/FIT outputs and cannot advance the state machine.
+
+Root cause:
+- execution-path error in this chat, not a limitation of the approved assets or extraction architecture.
+- the exact approved BODY and COVER bytes are available in-session, so deterministic extraction/FIT was technically possible.
+- presentation-master generation was incorrectly treated as permission to redraw page artwork, despite the E006 exact-next-action explicitly requiring overlays on locked pixels.
+
+Disposition:
+- mark `PRESENTATION_DRAFT_V2` as `REJECTED_NON_CANONICAL_FOR_PIPELINE`.
+- keep approved BODY/COVER locked and unchanged.
+- remain at `EXTRACT_FIT`.
+- next execution must use deterministic extraction/FIT tooling only; no image-generation call is authorized unless the user explicitly reopens artwork.
+
 Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
 - `ART_BUNDLE_USER_GATE` replaces the prior split BOARD-now/COVER-later approval pattern for new episodes.
