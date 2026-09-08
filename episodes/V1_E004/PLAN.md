@@ -24,11 +24,13 @@ Core appetite idea:
 
 ## COVER
 
-Menu tag:
-- 김치볶음밥
-
-Title draft:
-- 퇴근길에 김치볶음밥을 봤다
+Cover title system:
+- COVER_TITLE_SYSTEM_V1
+- episode_no: 4
+- topic_phrase: 퇴근길
+- food_name: 김치볶음밥
+- composed title: EP.4 퇴근길과 김치볶음밥
+- separate menu tag: not used by automatic default because food_name is already present in the title
 
 Visual intent:
 - 갓 완성된 김치볶음밥과 반숙 계란이 전경의 핵심.
