@@ -7,18 +7,18 @@ Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
-Status: IN_PROGRESS
+Status: DONE
 
 ## Active production state
 
 Active episode: V1_E004
-Stage: FINAL_PUBLISH_GATE
+Stage: DONE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
 Plan: episodes/V1_E004/PLAN.md
-Run receipt: not created
+Run receipt: episodes/V1_E004/RUN_RECEIPT.md
 
 ## Runtime authority
 
@@ -420,10 +420,21 @@ Structural changes applied:
 - ToonDesk candidate SHA-256: `c994ec0ef46c27477636f9833e482d6697936a5684b8dc54fdb3df10bda7bbe4`
 - preferred profile webfonts were unavailable in this deterministic render runtime; candidate lettering is pinned to Noto Sans KR intent / local Noto Sans CJK KR fallback and this substitution is surfaced rather than hidden.
 - canonical composition/export files are prepared in-session but are not yet persisted to repository until FINAL_PUBLISH_GATE approval.
+## V1_E004 closure
+
+- EPISODE STATUS: DONE
+- STORYBOARD_USER_GATE: APPROVED
+- revised BOARD: APPROVED
+- FINAL_PUBLISH_GATE: APPROVED
+- final publish artifact: earlier 7-page stochastic draft, explicitly selected by user
+- final selection record: `episodes/V1_E004/FINAL_SELECTION.md`
+- run receipt: `episodes/V1_E004/RUN_RECEIPT.md`
+- later deterministic BOARD-derived candidate: preserved for feedback at `episodes/V1_E004/review_candidates/DETERMINISTIC_GATE_20260909.md`
+- known FOOD-realism / cross-domain coherence issues remain accepted soft-quality feedback for future episodes
+- the E004 page-level stochastic final selection is an explicit one-episode override and does not change the normal V1 deterministic approval-identity path
 ## Exact next action
 
-1. Present the seven-page canonical V1_E004 carousel rendered from the prepared editable composition package.
-2. Await the single `FINAL_PUBLISH_GATE` user decision.
-3. If approved, persist artwork/composition/manifest/run receipt to repository, mark V1_E004 DONE, and do not reopen unless explicitly requested.
-4. If only lettering/layout feedback is given, mutate layout deterministically and rerender; do not regenerate BOARD.
-5. If the user explicitly rejects the accepted BOARD artwork itself, reopen BOARD deliberately rather than silently replacing it.
+1. V1_E004 is DONE. Do not mutate its selected publish artifact unless the user explicitly reopens episode 4.
+2. Accept forthcoming feedback on the preserved deterministic candidate as structural/pipeline feedback by default, without silently replacing the published E004 artifact.
+3. Carry forward the accepted structural improvements: natural-spoken copy, background minimization, FOOD de-photorealization/coherence guidance, and `COVER_TITLE_SYSTEM_V1`.
+4. On the next new-episode request, create V1_E005 under the current JIPBAP_V1_SPEC.md and resume the normal BOARD → deterministic composition → final publish identity path.
