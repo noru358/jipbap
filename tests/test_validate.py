@@ -7,7 +7,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from pipeline.validate import ImageExpectation, inspect_image
+from pipeline.validate import ImageExpectation, _reference_expectations, inspect_image
 
 
 class MediaIntegrityTests(unittest.TestCase):
@@ -21,6 +21,36 @@ class MediaIntegrityTests(unittest.TestCase):
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         return path, digest
 
+    def test_non_materialized_session_carrier_skips_repository_byte_expectation(self) -> None:
+        import json
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "assets").mkdir()
+            registry = {
+                "schema_version": "1.0",
+                "assets": [
+                    {
+                        "asset_id": "JIPBAP_STYLE_CARRIER_V1",
+                        "status": "USER_LOCKED_SESSION_VALIDATED",
+                        "path": "assets/references/JIPBAP_STYLE_CARRIER_V1.png",
+                        "repository_materialization_status": "NOT_MATERIALIZED_IN_REPOSITORY_THIS_RUN",
+                        "width": 583,
+                        "height": 622,
+                        "alpha_policy": "TRANSPARENT_ALLOWED",
+                    }
+                ],
+            }
+            (root / "assets" / "reference_registry.json").write_text(
+                json.dumps(registry), encoding="utf-8"
+            )
+
+            expectations, loaded = _reference_expectations(root)
+            self.assertEqual(expectations, [])
+            self.assertEqual(
+                loaded["assets"][0]["asset_id"],
+                "JIPBAP_STYLE_CARRIER_V1",
+            )
     def test_valid_rgba_full_decode_passes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
