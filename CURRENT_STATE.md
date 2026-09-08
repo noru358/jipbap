@@ -5,6 +5,7 @@ Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
+Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Presentation shell: JIPBAP_PRESENTATION_SHELL_V1
 Status: ACTIVE
 
@@ -70,6 +71,27 @@ Lettering semantics:
 
 The shell freezes presentation geometry only. Story staging/camera/pose/expression remain fluid inside BOARD generation.
 
+## Editor architecture checkpoint
+
+Midpoint decision recorded:
+- `composition/*.layout.json` is the shared scene model for current Chat deterministic rendering and the future first-party Canva-like editor.
+- Canva itself is not a production dependency and no Canva/PPTX/PDF format becomes authority.
+- current Chat mode remains able to complete BOARD → scene/layout JSON → deterministic render → PNG without the future editor.
+- future API/editor may manipulate the same scene objects through selection, drag, resize, rotation, text edit, crop, z-order and grouping.
+- minimum scene support now includes stable ids, geometry, rotation, z-index, visibility/lock state, optional grouping and artwork crop metadata.
+- SVG remains an interchange/debug derivative; PNG remains a publish derivative.
+- no new user gate or BOARD hard-fail class is added by this editor architecture.
+
+Deferred intentionally:
+- final COVER object/group structure
+- final BODY object/group structure
+- lock defaults
+- frame/crop interaction rules
+- typography-role presets
+- text-placement freedom/defaults
+
+The existing frozen COVER/BODY shell remains in force until that dedicated redesign pass is approved.
+
 ## V1_E002 approval state
 
 - STORYBOARD_USER_GATE: APPROVED
@@ -124,9 +146,10 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Present the fixed-shell V1_E002 carousel and editable package for user review at FINAL_PUBLISH_GATE.
-2. If the user requests copy/bubble/SFX/title placement changes, mutate layout JSON only and rerender deterministic derivatives.
-3. Do not move/resize the frozen BODY/COVER artwork frames and do not regenerate the accepted BOARD for presentation-only feedback.
-4. Keep the accepted FOOD gloss observation as a soft production direction for the next BOARD; add no new hard gate.
-5. Keep the proposed S05 artwork-payoff change deferred unless the user reopens it.
-6. When the user confirms final publish, mark V1_E002 DONE and preserve final hashes.
+1. In the next clean design session, continue from `EDITOR_SCENE_MODEL_V1_BASELINE` and redesign/freeze the editor-facing COVER and BODY scene structure.
+2. Decide only the presentation-layer details still deferred: object/group hierarchy, lock defaults, artwork frame/crop interaction, typography roles and default placement freedom.
+3. Preserve the current Chat-mode path: BOARD → scene/layout JSON → deterministic renderer → PNG must remain fully functional without any API editor.
+4. Do not introduce Canva, PPTX or another external format as production authority.
+5. Until the redesign is approved, keep `JIPBAP_PRESENTATION_SHELL_V1` geometry unchanged and do not regenerate the accepted V1_E002 BOARD for presentation-only work.
+6. After the presentation-shell redesign checkpoint is resolved, return to V1_E002 `FINAL_PUBLISH_GATE`; layout-only changes mutate scene/layout JSON and deterministic derivatives only.
+7. Keep FOOD gloss as a soft next-BOARD direction and keep the proposed S05 artwork-payoff change deferred unless explicitly reopened.
