@@ -13,38 +13,52 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: COVER_PENDING_CLEAN_CHAT
+Stage: INITIAL_ART_BUNDLE_COVER_PENDING_MIGRATION
 
-## Boot snapshot — active new episode
+## Boot snapshot — active episode under new artwork-bundle flow
 
 - Active episode: `V1_E006`
-- Current stage: `COVER_PENDING_CLEAN_CHAT`
+- Current stage: `INITIAL_ART_BUNDLE_COVER_PENDING_MIGRATION`
 - Food: 두부조림
 - STORYBOARD_USER_GATE: APPROVED
 - PERSON renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
 - FOOD renderer projection: USER_LOCKED; repository binary NOT_MATERIALIZED
-- BODY master BOARD: APPROVED
+- BODY master BOARD: APPROVED_AND_LOCKED_PRE_BUNDLE_MIGRATION
 - approved BOARD generation id: `92d89711-72ad-4286-8868-443c64123885`
 - approved BOARD SHA-256: `86229c6426192a102cd104926e662dfdf307e368993064b58641140c4048f6e0`
 - approved BOARD dimensions: 1024 × 1536
-- distinct COVER hero: NOT_STARTED / clean-chat required
+- distinct COVER hero: NOT_STARTED
+- ART_BUNDLE_USER_GATE: PENDING
 - FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E006/PLAN.md`
 - V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` unchanged.
 
-Image-runtime contamination:
-- three post-BOARD COVER attempts returned stale six-panel storyboard semantics with generated text despite corrected COVER-only instructions;
-- all three are REJECTED_NON_CANONICAL and are not references/carriers/COVER/BODY authority;
-- approved BODY BOARD remains locked and must not be regenerated.
+Canonical flow upgraded 2026-09-09:
+- storyboard approval and renderer-carrier binding occur in the same handoff turn;
+- `INITIAL_ART_BUNDLE` creates one text-free BODY 2×3 master board plus one separate text-free COVER hero before artwork approval;
+- BODY and COVER are shown together at `ART_BUNDLE_USER_GATE`;
+- that approval locks the exact BODY/COVER artwork sources for all downstream extraction, presentation and editor work;
+- COVER is governed by role, not by any specific BODY slot; no permanent rule such as “different from S04/S06” is allowed;
+- approved artwork is never regenerated merely because a later/new chat lacks its bytes; recover/re-supply the exact accepted pixels or fail closed.
+
+V1_E006 migration:
+- BODY was already approved before this architecture change and remains locked;
+- do not regenerate BODY to conform retroactively;
+- generate only the missing independent COVER, then present locked BODY + COVER together at `ART_BUNDLE_USER_GATE`;
+- earlier stale six-panel COVER attempts are REJECTED_NON_CANONICAL and do not become references, carriers, COVER authority or BODY replacements.
 
 Exact next action for episode production:
-1. Start a clean chat at V1_E006 COVER only.
-2. Restore latest `main`; do not reopen STORYBOARD or BOARD.
-3. Attach the exact already-approved `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` once as SESSION_ONLY carriers because repository binaries are not materialized.
-4. Generate one distinct text-free COVER hero matching the saved PLAN and clearly different from BODY S04/S06.
-5. After COVER QC, continue deterministic BOARD extraction/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
+1. Complete the missing COVER component of V1_E006 `INITIAL_ART_BUNDLE` without regenerating the approved BODY.
+2. Use the approved PERSON/FOOD renderer carriers only as style-delivery inputs; if repository-direct bytes are unavailable, bind the exact approved SESSION_ONLY carriers.
+3. Generate one independent text-free COVER hero using episode-level cover intent with free camera/composition/pose/expression; do not encode any BODY-slot-specific rule.
+4. Present the locked BODY + new COVER together at `ART_BUNDLE_USER_GATE`.
+5. After approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
 
 Infrastructure upgrade completed for future/new work:
+- `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
+- `ART_BUNDLE_USER_GATE` replaces the prior split BOARD-now/COVER-later approval pattern for new episodes.
+- COVER remains role-based and fluid; no BODY-slot-specific camera/composition rule is permanent.
+- Approved BODY/COVER source pixels are immutable downstream unless the user explicitly reopens artwork.
 - JIPBAP planning/copy guidance now co-designs image + lettering space without putting text into the BOARD.
 - `JIPBAP_BOARD_EXTRACTION_V1` remains the single extraction record and now maps each S01..S06 output to the detected box + output SHA-256.
 - BODY scene provenance references that extraction record/box index; final 4:5 FIT stays owned by the artwork object's `crop`.
