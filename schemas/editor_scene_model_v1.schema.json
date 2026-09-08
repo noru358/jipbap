@@ -87,6 +87,37 @@
             },
             "additionalProperties": true
           }
+        },
+        "cover_artwork_provenance": {
+          "type": "object",
+          "description": "Sticky provenance for the selected COVER artwork/crop. Prevents silent substitution during presentation-only edits.",
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "source_kind": {
+              "type": "string"
+            },
+            "source_page_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "crop": {
+              "type": "object"
+            },
+            "locked_for_final_candidate": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
         }
       },
       "additionalProperties": true
@@ -254,6 +285,50 @@
                   "number",
                   "string"
                 ]
+              }
+            },
+            "additionalProperties": true
+          },
+          "tail": {
+            "type": "object",
+            "description": "Editable speech-bubble tail geometry. Legacy tail_to may still be read.",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "style": {
+                "enum": [
+                  "soft_curved",
+                  "triangle"
+                ]
+              },
+              "tip_x": {
+                "type": "number"
+              },
+              "tip_y": {
+                "type": "number"
+              },
+              "attach_side": {
+                "enum": [
+                  "top",
+                  "right",
+                  "bottom",
+                  "left"
+                ]
+              },
+              "attach": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "base_width": {
+                "type": "number",
+                "minimum": 8
+              },
+              "curve": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
               }
             },
             "additionalProperties": true
