@@ -33,21 +33,48 @@ V1 최적화 목표:
 - panel boundary는 명확해야 하며 panel 간 bleed/collage 혼합을 허용하지 않는다.
 - board는 생성 컨테이너이지 최종 carousel layout authority가 아니다.
 
-### 1.3 Deterministic presentation shell
-master board PASS 후에는 확률적 재생성 없이:
+### 1.3 Presentation-master-first assembly
+
+master board PASS 후의 presentation 단계는 **quality-first design → editable reconstruction** 순서로 처리한다.
+
 1. six-cell extraction
 2. 4:5 page fit
-3. cover assembly
-4. editable scene/composition construction
-5. deterministic SVG / PNG export
-를 deterministic post-processing으로 처리한다.
+3. distinct COVER hero fit
+4. `PRESENTATION_MASTER_DRAFT`: 대사 / 내면독백 / SFX / 표지 타이틀까지 포함한 완성형 7장 visual draft를 먼저 설계
+5. `FINAL_PUBLISH_GATE`: 사용자는 이 완성형 visual draft의 디자인을 승인
+6. `EDITABLE_RECONSTRUCTION`: 승인된 visual draft를 원본 artwork bytes 위에 editable scene objects로 재구성
+7. `PRESENTATION_PARITY_QC`: 승인 visual target과 ToonDesk/scene render의 시각적 동등성 검수
+8. deterministic SVG / PNG / editable package export
+
+핵심 dependency rule:
+- **ToonDesk/editor primitive가 presentation 디자인을 선행 결정하지 않는다.**
+- 먼저 가장 자연스럽고 완성도 높은 말풍선, 글씨, 행갈이, 위치, 크기, 강조, 표지 타이포를 설계한다.
+- 그 다음 editor scene model이 그 디자인을 따라간다.
+- 현재 editor가 승인된 디자인을 표현하지 못하면 디자인을 단순화하는 것이 아니라 editor capability를 확장하거나 scene 표현을 보강한다.
+- shell의 bubble/font/placement 값은 승인된 presentation master가 없을 때의 **fallback/bootstrap default**일 뿐 aesthetic authority가 아니다.
 
 Artwork는 stretch하지 않는다. 4:5 adaptation은 crop / safe inset / placement로 처리하되, BODY의 기본값은 페이지 전체를 artwork surface로 사용하는 full-art composition이다.
 생성 보드가 nominal 2×3 equal-cell contract를 따르더라도 deterministic extraction은 512px 같은 이론적 등분 좌표를 가정하지 않는다. 실제 panel boundary를 검출/확정하여 crop metadata로 기록하고, 인접 패널 픽셀이 섞이지 않게 추출한다.
 
-The authoritative presentation artifact is **not the flattened PNG**.
-After BOARD acceptance, presentation authority is the editable composition package described below.
+`PRESENTATION_MASTER_DRAFT`는 accepted BOARD/COVER의 **presentation design target**이다.
+- artwork의 정체성/스토리 authority를 새로 만드는 이미지가 아니다.
+- creative draft에서 artwork 픽셀이 미세하게 재해석되어 보이더라도 final editable reconstruction은 반드시 승인된 BOARD/COVER 원본 raster를 사용한다.
+- presentation master가 소유하는 것은 bubble silhouette, tail feel, text placement, line break, typography character, title hierarchy, emphasis/decor rhythm 같은 presentation intent다.
+- literal copy는 PLAN/approved copy가 authority이며, 이미지 모델의 오타나 자형 오류를 final text로 채택하지 않는다.
+
+최종 editable authority는 여전히 `composition/*.layout.json`이다.
+다만 각 final composition은 승인된 presentation master의 provenance/hash를 기록하고 그 target을 충실히 재현해야 한다.
 Flattened PNG is a publish/export derivative only.
+
+`PRESENTATION_PARITY_QC`:
+- accepted BOARD/COVER artwork source identity: exact
+- literal text: exact
+- page count / page order: exact
+- bubble silhouette family, tail direction/feel, line breaks, typography character, title hierarchy, relative placement: materially equivalent
+- face/food/hand focal obstruction: no material regression
+- antialiasing/font rasterization 차이처럼 의미 없는 pixel-level 차이는 허용
+- tool-linked render가 승인 target보다 명백히 기계적/박스형/서식형으로 퇴행하면 FAIL
+- parity FAIL은 BOARD 재생성 사유가 아니다. scene reconstruction 또는 editor/tool capability를 고친다.
 
 Cover / lettering presentation defaults:
 
@@ -77,8 +104,9 @@ General COVER / lettering presentation defaults:
 - Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and visibly hand-drawn rather than office/document-like or mechanically typeset.
 - BODY speech containers should default toward soft organic oval/pillow silhouettes with a restrained curved tail, not rigid rounded rectangles. Bubble geometry remains editable and may be horizontally flipped without mirroring the text.
 - No single font family is a V1 creative lock. Each typography role may declare a preferred real font plus fallback chain. Runtime substitution is allowed only when the preferred font is unavailable, and the editor must surface the substitution rather than silently changing appearance.
-- The final publish preview and the handed-off editable package must resolve the same scene and font choices. A separately generated lookalike preview is never the approval artifact.
-- Cover or BODY lettering defects are deterministic presentation defects. Repair typography/layout without regenerating accepted BOARD artwork.
+- A presentation master may be a separate quality-first visual design artifact, but it is never an untracked lookalike. Each approved page target must be hash/provenance-bound to the editable reconstruction and checked by PRESENTATION_PARITY_QC.
+- The handed-off editable package must reproduce the approved presentation intent without silently falling back to simpler editor defaults.
+- Cover or BODY lettering defects are presentation-layer defects. Repair/reconstruct typography/layout or extend editor capability without regenerating accepted BOARD artwork.
 
 
 ### 1.4 Editable composition package / editor scene model
@@ -95,8 +123,12 @@ Logical package:
 ```text
 episode/
 ├─ artwork/
+│  ├─ COVER.png
 │  ├─ S01.png
-│  ├─ S02.png
+│  └─ ...
+├─ presentation_master/
+│  ├─ COVER.png
+│  ├─ S01.png
 │  └─ ...
 ├─ composition/
 │  ├─ COVER.layout.json
@@ -116,8 +148,9 @@ episode/
 ```
 
 Authority and derivation:
-- `artwork/*.png` contains accepted raster artwork extracted from the approved BOARD.
-- `composition/*.layout.json` is the deterministic presentation authority and shared scene model.
+- `artwork/*.png` contains accepted raster artwork extracted from the approved BOARD plus the approved distinct COVER hero.
+- `presentation_master/*.png` contains the approved quality-first visual presentation targets. These are design-reference artifacts, not editable state and not authority for literal text spelling.
+- `composition/*.layout.json` is the final editable presentation authority and shared scene model; it must carry presentation-target provenance and pass parity against the approved presentation master.
 - current Chat mode consumes the same scene model through a deterministic renderer and still produces final PNG without any interactive editor.
 - a future API/editor surface consumes the same scene model for direct manipulation, then rerenders deterministic derivatives.
 - `editable/*.svg` remains a generated interchange/debug derivative; it is not the human-editing authority.
@@ -519,7 +552,7 @@ Do not try to force PLAN → BOARD → FINAL into one assistant response.
 
 Canonical production flow:
 
-`BOOT → PLAN → STORYBOARD_USER_GATE → BOARD → [TEMP_STYLE_GATE] → ASSEMBLY → FINAL_PUBLISH_GATE → DONE`
+`BOOT → PLAN → STORYBOARD_USER_GATE → BOARD → [TEMP_STYLE_GATE] → COVER → EXTRACT/FIT → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
 
 ### 8.1 BOOT + PLAN turn
 At the beginning of a production chat:
@@ -557,21 +590,40 @@ Normal steady-state user gates are therefore:
 1. storyboard approval;
 2. final publish approval.
 
-### 8.4 COVER HERO + ASSEMBLY + FINAL
+### 8.4 COVER + PRESENTATION MASTER + EDITABLE RECONSTRUCTION
 After BOARD PASS:
-- create/select one distinct text-free COVER hero artwork under the approved episode intent and locked renderer style delivery; this is not a new user gate.
+- create/select one distinct text-free COVER hero artwork under the approved episode intent and locked renderer style delivery;
 - detect/confirm the six actual panel boundaries and extract six cells as accepted raster artwork; never assume equal pixel split coordinates merely from board dimensions;
-- fit the extracted artwork into full-canvas 4:5 BODY scenes without stretching;
-- assemble COVER as full-canvas artwork plus independent editable title/menu/decor objects;
-- create/update per-page layout JSON with independent artwork / bubble / text / SFX objects and optional focal/avoid placement metadata;
-- resolve preferred/fallback fonts and record any substitution warning;
-- derive editable SVG and flattened PNG from that exact layout package;
-- inspect the complete seven-page carousel, including panel-edge cleanliness, cover hierarchy/font/line-break/negative-space fit, focal obstruction and BODY lettering placement;
-- present **the PNG derivatives rendered from the same composition package that will be handed off** at `FINAL_PUBLISH_GATE`.
+- fit accepted COVER/BODY artwork into full-canvas 4:5 pages without stretching;
+- lock the exact approved artwork sources for the presentation stage.
 
-The final publish preview may be PNG, but the editable layout package remains the presentation authority.
-A separately generated or re-imagined preview is not a valid approval proxy for a different handoff package.
-A lettering/layout-only defect mutates layout JSON and rerenders deterministic derivatives; it never authorizes stochastic BOARD regeneration.
+Then create `PRESENTATION_MASTER_DRAFT`:
+- compose the complete 7-page carousel with final copy, natural bubble shapes/tails, line breaks, typography character, cover title treatment, SFX and local spacing;
+- optimize for the comic's visual quality first, **without constraining the draft to the current ToonDesk primitive/default set**;
+- preserve the semantic distinction between speech / thought / narration / SFX, but do not force them into one box style or one fixed font template;
+- do not let meaning-bearing generated text become literal authority: the approved copy strings remain authoritative and are corrected during editable reconstruction;
+- inspect the complete carousel as a visual design object.
+
+At `FINAL_PUBLISH_GATE`:
+- show the quality-first `PRESENTATION_MASTER_DRAFT`;
+- user approval locks the presentation intent for all seven pages;
+- store page-level target provenance/hash.
+
+After approval, do `EDITABLE_RECONSTRUCTION`:
+- use the exact accepted BOARD/COVER raster artwork, not the potentially reinterpreted pixels inside the visual draft;
+- reconstruct bubble / text / SFX / title / decoration as editable scene objects;
+- inherit geometry/style from the approved presentation master rather than re-applying generic shell defaults;
+- shell presets may fill unspecified details only.
+
+Then run `PRESENTATION_PARITY_QC`:
+- compare the editor-rendered 7 pages against the approved presentation targets;
+- if materially equivalent, persist composition/SVG/PNG/package and finish without another routine user gate;
+- if the editor render visibly degrades the approved design, repair the scene or extend ToonDesk capability and rerun parity;
+- only return to the user when a material visual mismatch cannot be resolved without changing approved intent/artwork.
+
+The final editable layout package remains presentation authority after reconstruction.
+The approved presentation master is its bound visual target, not an unrelated preview.
+A lettering/layout-only defect never authorizes stochastic BOARD regeneration.
 
 ### 8.5 When to start a new chat
 A new chat is **not** required between PLAN and BOARD or between BOARD and FINAL.
@@ -585,7 +637,7 @@ Start a new chat only when:
 Before handoff, save current stage and exact next action in `CURRENT_STATE.md`.
 
 If the resumed stage requires image generation, attach `JIPBAP_STYLE_CARRIER_V1` once in the new chat.
-If the resumed stage is deterministic ASSEMBLY/FINAL only, no style carrier is required.
+If the resumed stage is EXTRACT/FIT, PRESENTATION_MASTER_DRAFT, EDITABLE_RECONSTRUCTION or PRESENTATION_PARITY_QC only, no style carrier is required unless actual image generation is needed for a new presentation-master visual draft.
 
 ## 9. Creative references vs renderer carrier
 
