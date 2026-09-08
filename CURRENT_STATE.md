@@ -12,7 +12,7 @@ Status: ACTIVE_REPAIR
 ## Active production state
 
 Active episode: V1_E003
-Stage: FULL_ART_V2_HANDOFF_READY_ROUNDTRIP_PENDING
+Stage: TOONDESK_0_3_REBUILD_AND_COVER_REPAIR_REQUIRED
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -193,6 +193,49 @@ Session rebuild created under corrected V2 profile:
 - preferred fonts: Jua / Gowun Dodum / Gaegu by semantic role
 - final publish gate: still reopened; this session file is a round-trip test handoff, not yet canonical repository completion
 
+## V1_E003 full-art round-trip #2
+
+User returned `V1_E003_package_1` after importing the full-art V2 handoff and exporting without edits.
+
+Verified:
+- COVER + S01..S06 layout JSON semantic equality against the supplied `.toondesk`: PASS for all 7 pages
+- ToonDesk did not mutate scene geometry/content during the no-edit round trip
+- font resolver receipt mostly matched preferred fonts
+- one old-build substitution remained: S04 SFX preferred `Gaegu` resolved to `Jua`
+
+Newly diagnosed content-authoring defect:
+- the full-art test package itself used `../artwork/S06.png` as COVER artwork, so the previously liked COVER visual source/composition was not preserved
+- this is not a ToonDesk round-trip mutation; it is COVER source/provenance loss in package authoring
+- COVER text placement also became awkward because source selection and focal-aware lettering were not treated as one deterministic composition problem
+
+Structural repairs accepted 2026-09-09:
+- sticky `cover_artwork_provenance` added to V1 scene/profile contract
+- presentation-only edits must not silently substitute another BODY source after a cover candidate source/crop is selected
+- COVER lettering placement is focal-aware against face/food/hand avoid regions
+- speech-bubble tail geometry is now explicit editable scene data (tip, attachment, base width, curve)
+- soft safe/avoid guides are editor-toggleable and snapping targets
+- font picker must mutate `preferred_family`; requested fonts are loaded before export and fallback remains visible in QC/manifest
+
+## ToonDesk 0.3 implementation checkpoint
+
+Implemented in `noru358/Toondesk`:
+- speech bubble tail upgraded from fixed triangle/`tail_to` to soft-curved geometry with direct tip + attachment handles
+- tail base width, curve and side controls added
+- legacy `tail_to` imports are upgraded on load
+- font-family selector bug fixed: changing font updates the real preferred family rather than leaving stale `preferred_family`
+- preferred fonts are explicitly loaded before project save/PNG/SVG/package export
+- guide toggle added (`G` / UI button); cover title-safe, body safe inset, placement guides and avoid regions can be visualized
+- snapping now includes placement-guide and avoid-region boundaries
+- focal overlap QC warning added for lettering covering high-priority avoid regions
+- exact layer clicks select exact objects for easier bubble/text editing
+- horizontal + vertical alignment and equal-spacing operations added
+- deterministic `빈곳 배치` helper added for selected lettering/containers
+- desktop version bumped to 0.3.0
+- relevant pushes to main still auto-build Windows dev artifacts
+- `vX.Y.Z` tag builds now publish executable files to GitHub Releases
+- workflow now performs static JS/JSON validation before packaging
+- auto-update remains intentionally deferred until signed/stable releases are established
+
 ## Previous episode provenance
 
 V1_E001:
@@ -245,10 +288,11 @@ The desktop wrapper is transport/UX only. It does not change JIPBAP `composition
 
 ## Exact next action
 
-1. Use the rebuilt `V1_E003_제육볶음_FULL_ART_V2.toondesk` as the current handoff candidate. It is derived from actual detected panel borders and the corrected full-art V2 profile.
-2. Open it in the updated ToonDesk and perform a no-edit export round trip. Verify page count, layout JSON semantic equality, artwork source integrity, font-resolution warnings, and PNG/SVG export.
-3. Inspect the exported COVER + 6 BODY PNG derivatives. Confirm no adjacent-panel contamination and no focal face/food obstruction from lettering.
-4. ToonDesk Windows desktop build has passed GitHub Actions. Use the desktop path as the preferred local UX; browser/static mode remains fallback and must render the same scene model.
-5. If the no-edit round trip passes, use those exact exported PNG derivatives as the FINAL_PUBLISH_GATE preview. Do not generate a separate lookalike preview.
-6. After final approval, persist V1_E003 composition/*.layout.json, manifest.json and RUN_RECEIPT.md and mark V1_E003 DONE.
-7. Do not add a new production gate or V3 shell solely from this repair.
+1. Wait for the latest ToonDesk 0.3 Windows development build to pass static validation + packaging, then use that build for the next editor test.
+2. Rebuild V1_E003 COVER without silently substituting S06. Preserve the previously approved COVER visual source/composition as the episode-specific visual target/source where available, while keeping title/menu lettering as separate editable presentation objects.
+3. Record `cover_artwork_provenance` (source + crop) on the rebuilt COVER candidate and add face/food/hand avoid regions so title/menu placement is focal-aware.
+4. Rebuild V1_E003 speech bubbles using rich soft-curved tail geometry; ensure tip and attachment handles round-trip in ToonDesk 0.3.
+5. Export a new no-edit package from ToonDesk 0.3 and verify: 7-page semantic equality, COVER provenance preservation, no focal obstruction, rich-tail geometry preservation, and preferred/resolved font behavior including Gaegu.
+6. Use the exact exported COVER + 6 BODY PNGs from that package as FINAL_PUBLISH_GATE preview. Do not generate a separate lookalike preview.
+7. After approval, persist canonical V1_E003 composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
+8. Do not add V3 or a new production gate from these editor/presentation repairs.
