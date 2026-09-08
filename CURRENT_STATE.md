@@ -204,6 +204,19 @@ V1_CAL_001:
 - prior calibration provenance only
 - rejected boards remain non-reference material
 
+## Board extraction implementation checkpoint
+
+Reusable implementation added:
+- `pipeline/extract_board.py`
+- `python -m pipeline.cli extract-board <source> <output_dir> --metadata <json>`
+- actual dark panel-border detection for the frozen 2×3 board
+- refuses implausible/missing border geometry rather than falling back to nominal 512px slicing
+- non-equal-boundary regression test added
+- CI run #166: PASS
+- repository validator now skips byte expectations only for explicitly non-materialized SESSION_ONLY carriers, consistent with JIPBAP_V1_SPEC §9.5; it still fails active materialized references without hashes
+
+This implementation prevents the V1_E003 adjacent-panel crop bug from becoming a one-off manual fix.
+
 ## ToonDesk desktop usability checkpoint
 
 Implemented in `noru358/Toondesk`:
@@ -214,7 +227,7 @@ Implemented in `noru358/Toondesk`:
 - Ctrl/Cmd+S in-place save for an opened project
 - preferred-font resolution warnings in QC
 - JIPBAP full-art V2 example profile mirrored as non-authoritative example only
-- Windows desktop build workflow: PASS on run #1 (head `9a53d4b...`)
+- Windows desktop build workflow: PASS through run #4 (head `0492910...`); artifact contains `ToonDesk Setup 0.2.0.exe` and portable `ToonDesk 0.2.0.exe`
 - subsequent workflow revisions only narrow automatic triggers/artifact upload scope; they do not change scene authority
 
 The desktop wrapper is transport/UX only. It does not change JIPBAP `composition/*.layout.json` authority or create a new production gate.
