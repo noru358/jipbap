@@ -1,6 +1,6 @@
 # V1_E006 PLAN — RESET 2026-09-09
 
-Status: AWAITING_STORYBOARD_USER_REVIEW
+Status: ART_BUNDLE_APPROVED__PAGE_FINAL_RECOMPOSE_IN_PROGRESS
 Architecture: SIX_PANEL_BOARD_FIRST
 Food: 두부조림
 Carousel target: COVER + S01..S06
@@ -264,9 +264,22 @@ S01: unseen / aroma only
 
 ## Current gate
 
-STORYBOARD_USER_GATE: AWAITING_USER_REVIEW
+STORYBOARD_USER_GATE: APPROVED
+ART_BUNDLE_USER_GATE: APPROVED
 
-On user approval:
-- bind the already locked PERSON/FOOD style carriers according to JIPBAP_V1 runtime rules;
-- then create INITIAL_ART_BUNDLE: one text-free 2×3 BODY master board + one separate text-free COVER hero;
-- do not resurrect any discarded E006 artwork or approval state.
+Approved BODY anchor:
+- SHA-256: d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76
+- dimensions: 1024 × 1536
+- generation id: 69ecb818-d655-4d46-9db6-d60d75b98b76
+- hard-fail QC: PASS
+
+Approved COVER anchor:
+- SHA-256: 063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db
+- dimensions: 1122 × 1402
+- generation id: 4855db49-538d-48bf-a039-7b8aaaa3ed46
+- hard-fail QC: PASS
+
+Exact next action:
+- run PAGE_FINAL_RECOMPOSE for COVER + S01..S06 using only this approved anchor set;
+- lock final 4:5 artwork after contract QC;
+- create PRESENTATION_MASTER_DRAFT and stop at FINAL_PUBLISH_GATE.
