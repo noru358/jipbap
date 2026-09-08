@@ -118,6 +118,31 @@
             }
           },
           "additionalProperties": true
+        },
+        "presentation_target": {
+          "type": "object",
+          "description": "Page-local presentation-master provenance/target metadata. It is a visual design reference and must not replace accepted artwork bytes.",
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "parity_required": {
+              "type": "boolean"
+            },
+            "non_exporting_reference": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
         }
       },
       "additionalProperties": true
@@ -336,6 +361,34 @@
         },
         "additionalProperties": true
       }
+    },
+    "presentation_target": {
+      "type": "object",
+      "description": "Optional page-level binding to the approved PRESENTATION_MASTER visual target used for editable reconstruction parity.",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "role": {
+          "const": "PRESENTATION_MASTER_VISUAL_TARGET"
+        },
+        "literal_text_authority": {
+          "type": "string"
+        },
+        "parity_required": {
+          "type": "boolean"
+        },
+        "non_exporting_reference": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
     }
   },
   "additionalProperties": true
