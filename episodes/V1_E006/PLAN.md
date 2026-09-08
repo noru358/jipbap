@@ -62,7 +62,7 @@ Person / food state:
 - no plated food is visible yet.
 
 Copy:
-- inner_thought: "어? 두부조림 냄새."
+- inner_thought: "어? 두부조림 냄새 나는데?"
 
 Camera / visual focus:
 - wider three-quarter street view, enough environment to read rain + alley but not a dense background;
@@ -227,7 +227,7 @@ Person / food state:
 - bowl stays large in the foreground so the mixed state is obvious.
 
 Copy:
-- inner_thought: "두부 으깨서 양념까지 밥에 싹 묻히면… 이게 진짜다."
+- inner_thought: "두부 으깨서 양념까지 밥에 싹 비비면… 아 이거지."
 
 Camera / visual focus:
 - low three-quarter angle from bowl/spoon toward the protagonist, distinct from S03 and S04;
