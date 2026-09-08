@@ -62,6 +62,31 @@
         "camera/composition",
         "meal-context entity selection"
       ]
+    },
+    {
+      "asset_id": "JIPBAP_STYLE_CARRIER_V1",
+      "role": "RENDERER_SAFE_STYLE_CARRIER",
+      "status": "USER_LOCKED_SESSION_VALIDATED",
+      "path": "assets/references/JIPBAP_STYLE_CARRIER_V1.png",
+      "repository_materialization_status": "NOT_MATERIALIZED_IN_REPOSITORY_THIS_RUN",
+      "session_source_sha256": "43e791e8ebb1389fb7c469786f76fe118bcb96182d7c06e080d9088fb4057a80",
+      "width": 583,
+      "height": 622,
+      "alpha_policy": "TRANSPARENT_ALLOWED",
+      "content_contract": {
+        "exactly_one_person": true,
+        "food": false,
+        "text": false,
+        "panel_grid": false,
+        "story_sequence": false,
+        "background": "transparent/minimal",
+        "authority_scope": "style delivery only"
+      },
+      "provenance": {
+        "user_approved_on": "2026-09-08",
+        "runtime_binding": "SESSION_ONLY_FALLBACK",
+        "note": "User supplied and explicitly identified this single-person transparent image as the carrier. Repository binary could not be materialized through the current runtime; until materialized, future image-generation sessions must bind the same user-supplied pixels as SESSION_ONLY fallback."
+      }
     }
   ]
 }
