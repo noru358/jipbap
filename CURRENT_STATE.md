@@ -5,6 +5,7 @@ Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
+Presentation shell: JIPBAP_PRESENTATION_SHELL_V1
 Status: ACTIVE
 
 ## Active production state
@@ -43,6 +44,32 @@ Renderer-safe production carrier:
 
 The carrier is style-delivery authority only and does not own menu, staging, camera, layout, story or copy.
 
+## V1 frozen presentation shell
+
+Template:
+- templates/JIPBAP_PRESENTATION_SHELL_V1.json
+
+BODY:
+- canvas: 1080 × 1350
+- artwork frame: x=40, y=175, 1000 × 1000
+- frame is fixed across S01–S06
+- no artwork stretch/aspect distortion
+- no publish page numbers/internal episode markers
+
+COVER:
+- title safe region: x=60..1020, y=50..300
+- hero frame: x=60, y=330, 960 × 960
+- default grammar: menu tag + dominant title + hero artwork
+- subtitle/deck omitted by default
+- no hero artwork squeezing/stretching to fit copy
+
+Lettering semantics:
+- speech: white bubble + dark outline + tail
+- inner thought: tail-free warm off-white thought box + muted outline
+- SFX: independent editable text/SFX object
+
+The shell freezes presentation geometry only. Story staging/camera/pose/expression remain fluid inside BOARD generation.
+
 ## V1_E002 approval state
 
 - STORYBOARD_USER_GATE: APPROVED
@@ -55,34 +82,32 @@ Accepted BOARD:
 - dimensions: 1024 × 1536
 - hard-fail QC: PASS
 
-## Deterministic assembly
+## V1_E002 deterministic retrofit
 
-Complete:
-1. six-cell extraction
-2. 4:5 page fit
-3. separate cover composition
-4. lettering / inner-thought / SFX composition
-5. complete seven-page carousel inspection
-6. cover typography deterministic repair
+Applied without BOARD regeneration:
+1. fixed BODY frame across all six pages
+2. fixed COVER title/hero shell
+3. removed artwork aspect distortion
+4. removed page markers
+5. compressed mobile copy
+6. made speech / inner-thought / SFX visually distinct
+7. kept S05 artwork unchanged per user decision
 
-Final carousel ZIP SHA-256:
-- 3214a3b8c7c39a4fe34fbbe9f1d0eece211a60553e14c19ea43a10fa2953637f
+Accepted content feedback:
+- shorter natural copy: APPLIED
+- speech/thought visual distinction: APPLIED
+- less glossy/ad-like FOOD on future BOARD runs: ACCEPTED, use existing FOOD spec more strictly
+- additional S05 artwork-payoff intervention: DEFERRED
 
-## Editable composition retrofit
+Presentation authority:
+- episodes/V1_E002/composition/*.layout.json
+- template_id: JIPBAP_PRESENTATION_SHELL_V1
 
-V1 presentation output contract is now EDITABLE_COMPOSITION_PACKAGE_V1.
+Current runtime package ZIP SHA-256:
+- 29ca16ead377b2cf63d7653cfcfd633ef380e4b1979d57c59c5653a4d4278ecc
 
-Current V1_E002 runtime package:
-- artwork: six accepted BOARD crops
-- presentation authority: per-page layout JSON
-- editable derivative: per-page SVG
-- publish derivative: flattened PNG
-- S02 "톡": independent SFX object s02_sfx_01
-- runtime package ZIP SHA-256: 4175c23da45ec0036958997bed34365f5111dfcfded9f07dfa39f9be6095d6b0
-
-Text, bubble and SFX strings/geometry can be changed independently without modifying accepted artwork.
-The package contract is defined in JIPBAP_V1_SPEC.md.
-This adds no new user gate and no new BOARD hard-fail class.
+Current flattened carousel ZIP SHA-256:
+- 12b1fe0d0e13cee8bb72b94ec36300776dba9686f2115f3c27fdc8351ba0b418
 
 No stochastic BOARD regeneration is authorized for presentation-only feedback.
 
@@ -99,9 +124,9 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Keep V1_E002 open at FINAL_PUBLISH_GATE while the user gives follow-up content/presentation feedback.
-2. Apply copy, bubble, title, SFX and placement changes by mutating editable composition objects and rerendering deterministic derivatives.
-3. Do not regenerate the accepted BOARD for those changes.
-4. If feedback identifies an artwork-level publish-blocking defect, use the existing V1 hard-fail rules rather than adding a new permanent gate.
-5. Preserve EDITABLE_COMPOSITION_PACKAGE_V1 for subsequent episodes so later external tooling can directly edit text/SFX geometry.
-6. After feedback is finished and the user confirms the final result, mark V1_E002 DONE and preserve final package/export hashes.
+1. Present the fixed-shell V1_E002 carousel and editable package for user review at FINAL_PUBLISH_GATE.
+2. If the user requests copy/bubble/SFX/title placement changes, mutate layout JSON only and rerender deterministic derivatives.
+3. Do not move/resize the frozen BODY/COVER artwork frames and do not regenerate the accepted BOARD for presentation-only feedback.
+4. Keep the accepted FOOD gloss observation as a soft production direction for the next BOARD; add no new hard gate.
+5. Keep the proposed S05 artwork-payoff change deferred unless the user reopens it.
+6. When the user confirms final publish, mark V1_E002 DONE and preserve final hashes.
