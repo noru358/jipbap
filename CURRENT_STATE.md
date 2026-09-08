@@ -46,7 +46,7 @@ The carrier is style-delivery authority only and does not own menu, staging, cam
 
 - STORYBOARD_USER_GATE: APPROVED
 - BOARD_STYLE_USER_GATE: APPROVED
-- FINAL_PUBLISH_GATE: PENDING
+- FINAL_PUBLISH_GATE: PROVISIONALLY_APPROVED_FEEDBACK_PENDING
 
 Accepted BOARD:
 - generation id: f11550ac-4963-465e-8262-fed8052e4ef4
@@ -82,8 +82,8 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Present the completed V1_E002 seven-page carousel at FINAL_PUBLISH_GATE.
-2. Wait for explicit user publish approval.
-3. If the user requests cover/lettering/layout-only changes, repair deterministically without regenerating the accepted BOARD.
-4. If user approves final publish, mark V1_E002 DONE and preserve the final carousel ZIP hash in CURRENT_STATE / receipt.
+1. Keep V1_E002 open at FINAL_PUBLISH_GATE while the user provides follow-up feedback after provisional approval.
+2. Apply only the requested deterministic cover/lettering/layout repairs if feedback is presentation-only; do not regenerate the accepted BOARD for such feedback.
+3. If feedback identifies a true publish-blocking BOARD defect, handle it under the existing V1 hard-fail rules rather than inventing a new permanent gate.
+4. After the user finishes feedback and confirms the final result, mark V1_E002 DONE and preserve the final carousel ZIP hash in CURRENT_STATE / receipt.
 5. Add no new routine gate or hard-fail class from isolated soft-quality observations.
