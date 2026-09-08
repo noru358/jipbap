@@ -1,6 +1,6 @@
 # V1_E006 PLAN
 
-Status: STORYBOARD_USER_GATE
+Status: COVER_PENDING_CLEAN_CHAT
 Food: 두부조림
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
@@ -19,8 +19,8 @@ Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 
 ## Approval state
 
-- STORYBOARD_USER_GATE: PENDING
-- BODY master BOARD: NOT_STARTED
+- STORYBOARD_USER_GATE: APPROVED
+- BODY master BOARD: APPROVED
 - COVER hero: NOT_STARTED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 
@@ -273,10 +273,30 @@ Continuity:
 - S06은 양념 밴 밥과 으깨진 두부의 2차 식감 payoff.
 - 행동을 그대로 설명하는 문장은 피하고 실제 혼잣말처럼 유지한다.
 
-## Storyboard gate
+## Storyboard / BOARD approval receipt
 
-Await explicit user approval before any production image generation.
+- STORYBOARD_USER_GATE: APPROVED by user.
+- First BOARD draft: rejected for S05 already-crushed tofu state and S06 composition too close to S04.
+- Revised BOARD: APPROVED by user.
+- approved generation id: `92d89711-72ad-4286-8868-443c64123885`
+- approved session SHA-256: `86229c6426192a102cd104926e662dfdf307e368993064b58641140c4048f6e0`
+- dimensions: 1024 × 1536
+- S05 accepted correction: tofu remains in larger pieces while the spoon is actively beginning to crush/mix it into rice.
+- S06 accepted correction: wider/different finishing composition, not a near-copy of S04.
+- approved BOARD is locked; no stochastic BOARD regeneration is authorized by the current state.
+
+## Image-runtime contamination note
+
+After BOARD approval, three attempts to generate the distinct COVER hero were semantically contaminated by the stale 2×3 BOARD template and returned six-panel storyboard images with generated text.
+These outputs are rejected, non-canonical, and must not become references, carrier candidates, COVER authority, or BODY replacements.
+
+This matches the V1 clean-chat handoff condition: repeated outputs remain locked to a stale semantic template despite corrected instructions.
 
 ## Exact next action
 
-Await user decision at STORYBOARD_USER_GATE. If approved, continue in the same chat to BOARD preparation and bind the already USER_LOCKED PERSON/FOOD style carriers only when image generation is actually needed.
+Start a clean image-generation chat at COVER only.
+1. Restore latest `main` and this saved V1_E006 state.
+2. Do NOT regenerate or reopen the approved BODY BOARD.
+3. Because repository binaries for `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` are still not materialized, attach the exact approved PERSON + FOOD SESSION_ONLY carriers once in the clean chat.
+4. Generate one distinct text-free COVER hero only: completed 두부조림 + white rice as foreground focus, protagonist holding a spoon just before eating, composition clearly different from BODY S04/S06, natural title-safe negative space.
+5. Run COVER QC, then continue deterministic extraction/FIT → quality-first PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE.
