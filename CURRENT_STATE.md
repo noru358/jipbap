@@ -12,7 +12,7 @@ Status: ACTIVE_REPAIR
 ## Active production state
 
 Active episode: V1_E003
-Stage: FULL_ART_V2_REBUILD_REQUIRED
+Stage: FULL_ART_V2_HANDOFF_READY_ROUNDTRIP_PENDING
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -176,6 +176,22 @@ Interpretation:
 - V1_E003 must not be declared DONE until the canonical package is rebuilt under the corrected full-art V2 shell and the changed final carousel is shown at the final publish gate.
 - the prior final preview approval is not canonical package approval because preview/package identity diverged; FINAL_PUBLISH_GATE is therefore REOPENED_FOR_CANONICAL_IDENTITY for E003 only.
 
+## V1_E003 full-art rebuild test
+
+Session rebuild created under corrected V2 profile:
+- profile revision: `2026-09-09_FULL_ART_OVERLAY`
+- handoff filename: `V1_E003_제육볶음_FULL_ART_V2.toondesk`
+- session SHA-256: `5adfaadf727887af6d12248393f372e2ba0b6c2ccb3bc5898fc84eeb2e547b78`
+- BODY artwork extraction: actual border-based, not nominal equal split
+- x interiors: [16,501], [522,1010]
+- y interiors: [11,488], [509,937], [958,1517]
+- crop contamination QC: PASS in session contact preview
+- COVER/BODY artwork frames: full-canvas 1080×1350
+- fixed lower meta band: REMOVED
+- lettering: independent editable overlays
+- preferred fonts: Jua / Gowun Dodum / Gaegu by semantic role
+- final publish gate: still reopened; this session file is a round-trip test handoff, not yet canonical repository completion
+
 ## Previous episode provenance
 
 V1_E001:
@@ -200,12 +216,10 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Rebuild V1_E003 under the corrected `2026-09-09_FULL_ART_OVERLAY` revision of `JIPBAP_PRESENTATION_SHELL_V2`; do not create V3 solely for this correction because no V2 episode was ever completed.
-2. Re-extract the accepted master BOARD using detected/confirmed actual panel borders, never nominal 512px slicing. Remove all adjacent-panel contamination from S01..S06.
-3. Use full-canvas 1080×1350 artwork on COVER and BODY. COVER title/menu/decor and all BODY speech/thought/narration/SFX must remain independent editable lettering/overlay objects.
-4. Remove the mandatory lower meta band. Place lettering focal-aware using soft safe insets and optional face/food/hand avoid regions; repair any focal obstruction such as the prior S06 face-covering bubble.
-5. Resolve preferred real fonts from the V2 profile. If the preferred family is unavailable, surface the fallback and ensure final preview/export use the same resolved family.
-6. Render the FINAL_PUBLISH_GATE preview from the exact same composition package that will be handed to the user; never separately generate a lookalike preview.
-7. Verify no-edit ToonDesk round-trip preserves the rebuilt scene. ToonDesk remains a generic engine; JIPBAP `composition/*.layout.json` remains authority.
-8. After the corrected carousel is approved, persist composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
-9. Separately improve ToonDesk usability by adding a desktop-app launch path while keeping the browser/static fallback; this must not change JIPBAP authority or add a production gate.
+1. Use the rebuilt `V1_E003_제육볶음_FULL_ART_V2.toondesk` as the current handoff candidate. It is derived from actual detected panel borders and the corrected full-art V2 profile.
+2. Open it in the updated ToonDesk and perform a no-edit export round trip. Verify page count, layout JSON semantic equality, artwork source integrity, font-resolution warnings, and PNG/SVG export.
+3. Inspect the exported COVER + 6 BODY PNG derivatives. Confirm no adjacent-panel contamination and no focal face/food obstruction from lettering.
+4. The Windows desktop-app build for ToonDesk is being produced through GitHub Actions; browser/static mode remains fallback and must render the same scene model.
+5. If the no-edit round trip passes, use those exact exported PNG derivatives as the FINAL_PUBLISH_GATE preview. Do not generate a separate lookalike preview.
+6. After final approval, persist V1_E003 composition/*.layout.json, manifest.json and RUN_RECEIPT.md and mark V1_E003 DONE.
+7. Do not add a new production gate or V3 shell solely from this repair.
