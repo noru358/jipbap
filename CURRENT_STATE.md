@@ -12,7 +12,7 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E004
-Stage: BOARD_ACCEPTED_AWAITING_CANONICAL_ASSEMBLY
+Stage: FINAL_PUBLISH_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -405,11 +405,25 @@ Structural changes applied:
 - `templates/JIPBAP_PRESENTATION_SHELL_V2.json`: revision advanced to `2026-09-09_COVER_TITLE_SYSTEM_V1`; episode label + semantic title fields added; duplicate menu tag disabled by automatic default while remaining an editor capability.
 - `episodes/V1_E004/PLAN.md`: COVER title updated to `EP.4 퇴근길과 김치볶음밥`.
 
+## V1_E004 canonical candidate checkpoint
+
+- approved BODY source: revised 2×3 BOARD generation `5203ada2-e4fb-4f49-bd88-865f763e7eaa`
+- actual detected x border bands: [8,11], [503,505], [518,520], [1014,1016]
+- actual detected y border bands: [4,6], [490,492], [503,506], [1005,1007], [1020,1022], [1523,1525]
+- extracted x interiors: [12,503], [521,1014]
+- extracted y interiors: [7,490], [507,1005], [1023,1523]
+- nominal equal slicing: NOT USED
+- cover source: accepted S06 cell reused deterministically; provenance locked
+- cover title system: `COVER_TITLE_SYSTEM_V1`
+- composed cover title: `EP.4 퇴근길과 김치볶음밥`
+- candidate package SHA-256: `a93e34374aa4ba8ec2eb2c78ff7f483e19eb16ca89deb29836a16b386f6a08eb`
+- ToonDesk candidate SHA-256: `c994ec0ef46c27477636f9833e482d6697936a5684b8dc54fdb3df10bda7bbe4`
+- preferred profile webfonts were unavailable in this deterministic render runtime; candidate lettering is pinned to Noto Sans KR intent / local Noto Sans CJK KR fallback and this substitution is surfaced rather than hidden.
+- canonical composition/export files are prepared in-session but are not yet persisted to repository until FINAL_PUBLISH_GATE approval.
 ## Exact next action
 
-1. Preserve the user-approved revised V1_E004 2×3 BOARD as the accepted BODY source; do not use the separately generated 4:5 exploratory images as canonical artwork.
-2. Materialize/extract the six BODY cells from the approved BOARD using actual detected panel boundaries, not nominal equal slicing.
-3. Build COVER + S01..S06 through the deterministic full-art V2 composition path. Apply `COVER_TITLE_SYSTEM_V1` with E004 fields: episode_no=4, topic_phrase=`퇴근길`, food_name=`김치볶음밥`.
-4. Do not stochastically regenerate BODY solely to chase the soft FOOD-realism score. If the accepted BOARD itself is later rejected by the user at final publish review, reopen BOARD deliberately rather than silently replacing it.
-5. Render the final seven-page preview from the exact same editable composition package that will be handed off.
-6. Present that canonical carousel once at `FINAL_PUBLISH_GATE`.
+1. Present the seven-page canonical V1_E004 carousel rendered from the prepared editable composition package.
+2. Await the single `FINAL_PUBLISH_GATE` user decision.
+3. If approved, persist artwork/composition/manifest/run receipt to repository, mark V1_E004 DONE, and do not reopen unless explicitly requested.
+4. If only lettering/layout feedback is given, mutate layout deterministically and rerender; do not regenerate BOARD.
+5. If the user explicitly rejects the accepted BOARD artwork itself, reopen BOARD deliberately rather than silently replacing it.
