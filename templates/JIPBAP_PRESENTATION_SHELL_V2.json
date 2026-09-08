@@ -13,7 +13,7 @@
     "allow_custom_override": true,
     "override_class": "CUSTOM_OVERRIDE",
     "override_is_scene_corruption": false,
-    "revision": "2026-09-09_MANUAL_OVERRIDE_PROVENANCE_V1"
+    "revision": "2026-09-09_PAGE_FINAL_RECOMPOSE_V1"
   },
   "page_structure": {
     "automatic_default": {
@@ -83,9 +83,12 @@
       "lettering_move_is_custom_override": false
     },
     "artwork_source_policy": {
-      "mode": "accepted_board_cell",
+      "mode": "accepted_final_page_artwork",
+      "anchor_mode": "approved_board_visual_semantic_contract",
+      "finalization_method": "PAGE_FINAL_RECOMPOSE",
       "record_provenance": true,
-      "extraction_metadata_reuse": true,
+      "exact_extraction_reuse_supported": true,
+      "extraction_metadata_reuse_when_selected": true,
       "replacement_requires_explicit_override": true
     }
   },
@@ -130,10 +133,13 @@
     },
     "layout_mode": "FULL_ART_OVERLAY",
     "artwork_source_policy": {
-      "mode": "distinct_cover_hero_default",
+      "mode": "accepted_final_cover_artwork",
+      "anchor_mode": "approved_distinct_cover_visual_semantic_contract",
+      "finalization_method": "PAGE_FINAL_RECOMPOSE",
       "record_provenance": true,
       "automatic_body_reuse": false,
       "body_reuse_requires_explicit_selection": true,
+      "exact_anchor_pixel_reuse_supported": true,
       "replacement_requires_explicit_override": true,
       "focal_aware_lettering": true
     },
@@ -431,5 +437,16 @@
     "target_provenance_required": true,
     "parity_qc_required_after_reconstruction": true,
     "routine_second_user_gate_after_parity": false
+  },
+  "artwork_finalization": {
+    "mode": "PAGE_FINAL_RECOMPOSE",
+    "anchor_contract": "approved_body_board_plus_distinct_cover_visual_semantic_contract",
+    "same_session_preferred": true,
+    "exact_pixel_anchor_preservation_required": false,
+    "exact_extraction_default": false,
+    "exact_extraction_supported": true,
+    "page_contract_qc_before_lock": true,
+    "final_page_artwork_lock_after_contract_qc": true,
+    "new_chat_anchor_transport": "repository_direct_else_session_only"
   }
 }
