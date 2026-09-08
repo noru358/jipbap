@@ -1,6 +1,6 @@
 # JIPBAP_V1_SPEC
 
-Updated: 2026-09-08
+Updated: 2026-09-09
 Status: FROZEN_FOR_V1
 Canonical visual architecture: SIX_PANEL_BOARD_FIRST
 
@@ -42,7 +42,8 @@ master board PASS 후에는 확률적 재생성 없이:
 5. deterministic SVG / PNG export
 를 deterministic post-processing으로 처리한다.
 
-Artwork는 stretch하지 않는다. 4:5 adaptation은 crop, safe margin, padding, placement 중 고정 template 규칙으로 처리한다.
+Artwork는 stretch하지 않는다. 4:5 adaptation은 crop / safe inset / placement로 처리하되, BODY의 기본값은 페이지 전체를 artwork surface로 사용하는 full-art composition이다.
+생성 보드가 nominal 2×3 equal-cell contract를 따르더라도 deterministic extraction은 512px 같은 이론적 등분 좌표를 가정하지 않는다. 실제 panel boundary를 검출/확정하여 crop metadata로 기록하고, 인접 패널 픽셀이 섞이지 않게 추출한다.
 
 The authoritative presentation artifact is **not the flattened PNG**.
 After BOARD acceptance, presentation authority is the editable composition package described below.
@@ -50,10 +51,12 @@ Flattened PNG is a publish/export derivative only.
 
 Cover / lettering presentation defaults:
 - COVER is a separate design surface, not a default reuse of S01. Accepted BODY artwork may be reused only when it reads strongly as a cover composition.
-- Prefer one clear focal food/action image plus intentional negative space for the title.
+- COVER automatic layout is a full-canvas artwork layer with editable vector lettering/decoration over it; it is not a rigid header-frame + hero-frame split.
+- Prefer one clear focal food/action image plus intentional negative space for the title. A soft title-safe region may guide automatic placement but does not crop the artwork into a separate lower hero box.
 - Title hierarchy, line break, scale and placement must be composed together with the artwork; do not merely place a centered text block above an image.
 - Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and slightly organic rather than office/document-like.
-- No single font family is a V1 creative lock. Font choice is an implementation/presentation decision and may change if the current runtime lacks the preferred font.
+- No single font family is a V1 creative lock. Each typography role may declare a preferred real font plus fallback chain. Runtime substitution is allowed only when the preferred font is unavailable, and the editor must surface the substitution rather than silently changing appearance.
+- The final publish preview and the handed-off editable package must resolve the same scene and font choices. A separately generated lookalike preview is never the approval artifact.
 - Cover or BODY lettering defects are deterministic presentation defects. Repair typography/layout without regenerating accepted BOARD artwork.
 
 
@@ -98,7 +101,8 @@ Authority and derivation:
 - a future API/editor surface consumes the same scene model for direct manipulation, then rerenders deterministic derivatives.
 - `editable/*.svg` remains a generated interchange/debug derivative; it is not the human-editing authority.
 - `export/*.png` is a flattened publish derivative only.
-- No font binary is embedded or treated as repository authority; layout records reference font family/style intent and runtime substitution is allowed when needed.
+- No font binary is embedded or treated as repository authority; layout records preserve semantic family/style intent plus optional preferred real font and fallback chain.
+- Runtime font substitution is allowed when needed, but the editor/renderer must expose the resolved family and warn when the preferred family is unavailable. Silent substitution that changes the approved look is not acceptable for final export.
 
 Each layout JSON stores independent objects rather than pre-flattened pixels.
 Minimum object classes:
@@ -123,6 +127,9 @@ Common scene-object fields should support, where applicable:
 Editable text/SFX objects additionally preserve:
 - literal string
 - font family/style role intent
+- optional preferred real font family
+- optional fallback family chain
+- resolved runtime family when an export/preview receipt is recorded
 - font size / weight
 - alignment
 
@@ -205,12 +212,15 @@ Artwork frame/crop interaction:
 - crop edits and frame transforms mutate scene metadata only unless the user explicitly replaces the artwork source.
 
 Placement freedom:
-- COVER uses the active shell's title/header region plus hero region as the automatic default.
-- BODY uses two semantic regions by default: `artwork` and lower `meta`.
-- speech / speech bubbles / SFX belong inside the artwork region by default because their placement is story-dependent.
-- inner thought / narration belong inside the lower meta region by default.
-- these are production defaults, not editor capability limits: explicit human/editor repositioning may cross the default regions and is treated as `CUSTOM_OVERRIDE`.
-- unnecessary coverage of focal food/face is a soft quality issue, not a new hard gate.
+- COVER and BODY both use full-art composition by default: the accepted raster occupies the complete 4:5 canvas and lettering is layered over it as independent vector/scene objects.
+- COVER may use a soft title-safe hint to encourage negative space; this is not a separate artwork frame.
+- BODY has no mandatory lower meta band and no structural top-art/bottom-copy split.
+- speech, inner thought, narration and SFX are all freeform lettering overlays. Their semantic roles remain distinct even when their geometry is fluid.
+- automatic placement is focal-aware: prefer naturally empty areas and avoid covering primary face, food or hand-action regions when reasonable.
+- a page may carry optional `placement_guides` / `avoid_regions` metadata such as `face_primary`, `food_primary`, `hand_action`; these are soft placement hints, not new BOARD gates.
+- if no safe area exists, shorten/reline copy, reduce container footprint, or use a restrained translucent/light container before obscuring the focal action.
+- explicit human/editor repositioning remains allowed and is a normal scene edit; it becomes `CUSTOM_OVERRIDE` only when it changes project-profile structural defaults such as artwork-frame geometry/page structure, not merely because a lettering object moved.
+- unnecessary coverage of focal food/face is a presentation quality defect; obvious obstruction that makes the focal action unreadable must be repaired before publish.
 - automatic copy overflow is repaired by reline/shorten/reposition/font-size adjustment within the role preset, never by squeezing artwork.
 
 Typography role presets are implementation defaults, not font-family locks:
@@ -222,6 +232,7 @@ Typography role presets are implementation defaults, not font-family locks:
 - `body_sfx`: nominal 64 px, 44..84, bold hand-drawn display.
 
 Runtime font substitution remains allowed; semantic typography role is authority and no font binary is.
+Automatic production should also persist `preferred_family` / `fallback_families` when a role has a selected real font. ToonDesk or any renderer must expose a missing-preferred-font warning and use the same resolved family for preview and export.
 
 Scene object requirements:
 - page-level `scene_model: EDITOR_SCENE_MODEL_V1`;
@@ -240,6 +251,7 @@ The scene model is the reusable editor data model; the JIPBAP presentation shell
 Versioning:
 - `JIPBAP_PRESENTATION_SHELL_V1` remains frozen for episodes already completed with it, including V1_E001 / V1_E002.
 - new automatic JIPBAP episodes use `JIPBAP_PRESENTATION_SHELL_V2`.
+- V2 had no completed episode before the 2026-09-09 full-art correction; the failed V1_E003 test package is non-canonical. Therefore V2 is corrected in place instead of creating unnecessary V3 version churn.
 - changing the default shell does not mutate completed episodes.
 
 V2 template:
@@ -249,19 +261,19 @@ Canvas default:
 - 1080 × 1350 (4:5)
 
 COVER V2 default:
-- title/header region: x=60, y=40, width=960, height=240
-- hero artwork frame: x=40, y=310, width=1000, height=1000
-- default grammar: one small menu tag + one dominant title + one hero artwork
+- artwork frame: full canvas x=0, y=0, width=1080, height=1350
+- soft title-safe hint: x=48, y=36, width=984, height≈330; this guides negative-space composition only and does not partition the artwork
+- default grammar: one full-canvas artwork + one small menu tag + one dominant title; optional decorative vector accents
 - subtitle/deck remains optional
-- automatic assembly does not squeeze/stretch hero artwork to make copy fit
+- title/menu/decor are independent editable vector/scene objects above artwork
+- automatic assembly does not squeeze/stretch artwork to make copy fit
 
 BODY V2 default:
-- artwork frame: x=40, y=40, width=1000, height=1000
-- lower meta region: x=60, y=1080, width=960, height=230
-- speech / speech bubble / SFX are placed inside the artwork region by default
-- inner thought / narration are placed inside the meta region by default
-- the meta region is a semantic placement region; it need not always render as a visible box
-- automatic Chat-mode assembly starts the artwork frame locked and never stretches the raster
+- artwork frame: full canvas x=0, y=0, width=1080, height=1350
+- no mandatory lower meta region and no fixed top-art/bottom-copy split
+- speech / inner thought / narration / SFX are independent freeform overlays above artwork
+- automatic placement uses soft safe insets plus optional focal/avoid metadata rather than a fixed band
+- automatic Chat-mode assembly starts the full-canvas artwork frame locked and never stretches the raster
 
 Default-versus-override rule:
 - normal Chat production instantiates the V2 defaults consistently across episodes;
@@ -273,10 +285,11 @@ Default-versus-override rule:
 
 Lettering semantics:
 - `speech`: white speech bubble with a visible tail toward the speaker; dark outline.
-- `inner_thought`: tail-free warm off-white thought treatment with a lighter/muted outline when a container is used.
-- `narration`: text or light container inside the meta region by default.
+- `inner_thought`: tail-free warm off-white thought treatment, free text, or restrained translucent/light container depending on local artwork.
+- `narration`: compact freeform caption/text; no mandatory meta band.
 - `sfx`: independent text/SFX object; may be moved/rotated/scaled.
 - literal strings and geometry remain editable in layout JSON.
+- container style and placement must preserve the focal food/action/face rather than enforcing a page-wide template.
 
 This shell freezes the **automatic first-pass defaults**, not human editor freedom and not story staging. Camera, pose, crop content inside the accepted BOARD cell, expression and generated composition remain fluid.
 
@@ -407,7 +420,7 @@ Frozen copy grammar:
 - when copy adds food information, prefer one concrete sensory observation from the immediate bite: aroma, heat, texture, seasoning, moisture, aftertaste or the effect of combining foods
 - describe why the bite works rather than relying on generic praise such as simply saying it is delicious
 - copy should add what the image cannot fully show — mouthfeel, smell, temperature, flavor transition, aftertaste or the impulse to take another bite — rather than narrating an obvious hand motion
-- on mobile, prefer one short reaction and at most one concrete sensory observation per beat; if copy starts competing with the artwork, compress the copy rather than enlarging the lettering area or moving the fixed artwork frame
+- on mobile, prefer one short reaction and at most one concrete sensory observation per beat; if copy starts competing with the artwork, compress/reposition the copy or reduce its container footprint rather than sacrificing the focal artwork
 - silent BODY panels are allowed when the image carries the beat
 - do not force a `잘 먹었다`, lesson, punchline or emotional conclusion
 - inner thought, speech and narration are separate editable layers
@@ -504,15 +517,17 @@ Normal steady-state user gates are therefore:
 
 ### 8.4 ASSEMBLY + FINAL
 After BOARD PASS:
-- extract six cells as accepted raster artwork;
-- fit six 4:5 BODY pages;
-- assemble COVER from accepted artwork;
-- create/update per-page layout JSON with independent artwork / bubble / text / SFX objects;
-- derive editable SVG and flattened PNG from the layout package;
-- inspect the complete seven-page carousel, including cover hierarchy/font/line-break/negative-space fit and BODY lettering placement;
-- present the completed carousel at `FINAL_PUBLISH_GATE`.
+- detect/confirm the six actual panel boundaries and extract six cells as accepted raster artwork; never assume equal pixel split coordinates merely from board dimensions;
+- fit the extracted artwork into full-canvas 4:5 BODY scenes without stretching;
+- assemble COVER as full-canvas artwork plus independent editable title/menu/decor objects;
+- create/update per-page layout JSON with independent artwork / bubble / text / SFX objects and optional focal/avoid placement metadata;
+- resolve preferred/fallback fonts and record any substitution warning;
+- derive editable SVG and flattened PNG from that exact layout package;
+- inspect the complete seven-page carousel, including panel-edge cleanliness, cover hierarchy/font/line-break/negative-space fit, focal obstruction and BODY lettering placement;
+- present **the PNG derivatives rendered from the same composition package that will be handed off** at `FINAL_PUBLISH_GATE`.
 
 The final publish preview may be PNG, but the editable layout package remains the presentation authority.
+A separately generated or re-imagined preview is not a valid approval proxy for a different handoff package.
 A lettering/layout-only defect mutates layout JSON and rerenders deterministic derivatives; it never authorizes stochastic BOARD regeneration.
 
 ### 8.5 When to start a new chat
