@@ -87,7 +87,7 @@ Infrastructure upgrade completed for future/new work:
 - preferred/resolved font family + weight + substitution are persisted/surfaced; preview + PNG continue to share the same Canvas scene renderer.
 - curved-tail, organic-bubble, horizontal-flip, guides/alignment and generic page/frame editing remain existing capabilities and were not reimplemented.
 - ToonDesk tests + Web Live Sync: PASS at `b06a357d3364cd22b7681a64d4537546cf9c3073`.
-- JIPBAP validation including extraction/scene-contract regressions: PASS at `927ad28245933cdf0808b84897020a19c0549e45`.
+- JIPBAP validation including page-recomposition provenance/editor-contract regressions: PASS on workflow run #245 at `6446797585ea6a60d7975f6603ceaafe7c6a2979`.
 
 Remaining verification limits:
 - no real-device mobile touch test was performed in this infrastructure pass;
@@ -135,7 +135,7 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_MANUAL_OVERRIDE_PROVENANCE_V1`
+- V2 revision: `2026-09-09_PAGE_FINAL_RECOMPOSE_V1`
 - canvas: 1080 × 1350
 - COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
