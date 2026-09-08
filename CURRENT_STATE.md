@@ -11,14 +11,14 @@ Status: DONE
 
 ## Active production state
 
-Active episode: V1_E004
-Stage: DONE
+Active episode: V1_E005
+Stage: FINAL_PUBLISH_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
-Plan: episodes/V1_E004/PLAN.md
-Run receipt: episodes/V1_E004/RUN_RECEIPT.md
+Plan: episodes/V1_E005/PLAN.md
+Run receipt: pending FINAL_PUBLISH_GATE approval
 
 ## Runtime authority
 
@@ -453,10 +453,29 @@ Structural changes applied:
 - JIPBAP hand-drawn typography profile mirror: UPDATED
 - JavaScript syntax validation: PASS for core/render/panels/actions/interaction/io/wiring
 - this editor change does not mutate completed E004 output.
+## V1_E005 production state
+
+- STORYBOARD_USER_GATE: APPROVED
+- one-time FOOD renderer projection: APPROVED / USER_LOCKED
+- JIPBAP_FOOD_STYLE_CARRIER_V1 session SHA-256: `e2cb04ff82671fff655830b1a3be540561d3dde108eb18bed7a8cc6d09a9c73a`
+- FOOD carrier dimensions: 1254 × 1254
+- FOOD carrier repository binary materialization: NOT_COMPLETED_IN_THIS_RUNTIME
+- permitted binding until materialization: identical approved SESSION_ONLY fallback
+- BODY master BOARD: APPROVED
+- approved BOARD SHA-256: `f1c27c4a635406d616f1649127318767ba22ba5d2d51f87088db4808fd76c126`
+- approved BOARD dimensions: 1024 × 1536
+- detected cell interiors: x [12,503], [520,1012]; y [9,487], [504,986], [1003,1522]
+- BODY eye-design correction in S03/S06: APPROVED with revised BOARD
+- distinct COVER hero: APPROVED
+- COVER source SHA-256: `eba699359373e2534fe5edcfd027c78af0e77962c2609607b086047960828fc8`
+- COVER dimensions: 1122 × 1402
+- deterministic candidate package: PREPARED_IN_SESSION
+- candidate page count: COVER + S01..S06
+- final publish preview: PENDING USER APPROVAL
+- approved BOARD/COVER artwork must not be stochastically regenerated for lettering/layout feedback
+
 ## Exact next action
 
-1. Before V1_E005 production BOARD generation, run one isolated clean calibration task for `JIPBAP_FOOD_STYLE_CARRIER_V1` using the locked creative style authorities; do not create the carrier inside an episode-production image context.
-2. Present the food-style projection once for user approval and register it as renderer-safe style delivery; this is a one-time calibration gate, not a recurring episode gate.
-3. After both PERSON and FOOD renderer projections are USER_LOCKED, create V1_E005 under the current spec.
-4. V1_E005 normal path: PLAN → STORYBOARD_USER_GATE → BODY 2×3 BOARD → distinct text-free COVER hero → deterministic lettering/composition → FINAL_PUBLISH_GATE.
-5. Do not reopen or mutate V1_E004 unless the user explicitly requests an episode-4 revision.
+1. Present the seven-page deterministic V1_E005 carousel rendered from the current `EDITABLE_COMPOSITION_PACKAGE_V1` candidate at `FINAL_PUBLISH_GATE`.
+2. If the user approves the final carousel, persist canonical composition / RUN_RECEIPT, mark V1_E005 DONE, and do not mutate it unless explicitly reopened.
+3. If the user gives lettering/layout-only feedback, mutate scene/layout metadata and rerender deterministically; do not regenerate the approved BODY BOARD or COVER hero.
