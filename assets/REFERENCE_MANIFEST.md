@@ -64,6 +64,24 @@ The user explicitly supplied two PERSON-style candidates and requested that both
 - selection status: NOT_SELECTED_CALIBRATION_EVIDENCE_ONLY
 - domain firewall note: the visible food/table/kitchen content in this reference is incidental and MUST NOT become FOOD, BACKGROUND, meal-layout, camera or composition authority.
 
+
+## Renderer-safe production carrier
+
+### JIPBAP_STYLE_CARRIER_V1
+
+- role: RENDERER_SAFE_STYLE_CARRIER
+- creative authority relationship: runtime-safe projection only; does not replace PERSON_STYLE_REF_1 or TARGET_LOOK_BOARD_REF_1
+- content contract: exactly one person; no food; no text; no panel/grid; no story sequence; transparent/minimal background
+- dimensions: 583 × 622
+- approved session-source byte SHA-256: 43e791e8ebb1389fb7c469786f76fe118bcb96182d7c06e080d9088fb4057a80
+- user lock status: USER_LOCKED
+- repository registry: assets/reference_registry.json
+- intended repository path: assets/references/JIPBAP_STYLE_CARRIER_V1.png
+- repository binary status: NOT_MATERIALIZED_IN_REPOSITORY_THIS_RUN
+- current runtime binding: SESSION_ONLY_FALLBACK using the exact user-supplied approved carrier pixels
+- production rule: future image-generation sessions should prefer validated repository bytes once materialized; until then, attach the same approved carrier once as SESSION_ONLY fallback.
+- authority scope: face construction, eye grammar, hair silhouette, line/color/texture style delivery only; no menu, staging, camera, layout, story or copy authority.
+
 ## Selected calibration evidence
 
 ### PERSON_CONTEXT_SEATED_STYLE1_SELECTED
