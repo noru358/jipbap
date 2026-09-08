@@ -37,11 +37,15 @@ master board PASS 후에는 확률적 재생성 없이:
 1. six-cell extraction
 2. 4:5 page fit
 3. cover assembly
-4. lettering / speech / inner-thought vector composition
-5. export
+4. editable composition construction
+5. SVG / PNG export
 를 deterministic post-processing으로 처리한다.
 
 Artwork는 stretch하지 않는다. 4:5 adaptation은 crop, safe margin, padding, placement 중 고정 template 규칙으로 처리한다.
+
+The authoritative presentation artifact is **not the flattened PNG**.
+After BOARD acceptance, presentation authority is the editable composition package described below.
+Flattened PNG is a publish/export derivative only.
 
 Cover / lettering presentation defaults:
 - COVER is a separate design surface, not a default reuse of S01. Accepted BODY artwork may be reused only when it reads strongly as a cover composition.
@@ -50,6 +54,74 @@ Cover / lettering presentation defaults:
 - Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and slightly organic rather than office/document-like.
 - No single font family is a V1 creative lock. Font choice is an implementation/presentation decision and may change if the current runtime lacks the preferred font.
 - Cover or BODY lettering defects are deterministic presentation defects. Repair typography/layout without regenerating accepted BOARD artwork.
+
+
+### 1.4 Editable composition package
+
+BOARD 이후의 기본 산출 단위는 `EDITABLE_COMPOSITION_PACKAGE_V1`이다.
+
+Logical package:
+
+```text
+episode/
+├─ artwork/
+│  ├─ S01.png
+│  ├─ S02.png
+│  └─ ...
+├─ composition/
+│  ├─ COVER.layout.json
+│  ├─ S01.layout.json
+│  ├─ S02.layout.json
+│  └─ ...
+├─ editable/
+│  ├─ COVER.svg
+│  ├─ S01.svg
+│  ├─ S02.svg
+│  └─ ...
+└─ export/
+   ├─ COVER.png
+   ├─ S01.png
+   ├─ S02.png
+   └─ ...
+```
+
+Authority and derivation:
+- `artwork/*.png` contains accepted raster artwork extracted from the approved BOARD.
+- `composition/*.layout.json` is the deterministic presentation authority for editable placement/content.
+- `editable/*.svg` is a generated editable/interchange representation derived from layout JSON + artwork.
+- `export/*.png` is a flattened publish derivative only.
+- No font binary is embedded or treated as repository authority; layout records reference font family/style intent and runtime substitution is allowed when needed.
+
+Each layout JSON stores independent objects rather than pre-flattened pixels.
+Minimum object classes:
+- `artwork`
+- `bubble`
+- `text`
+- `sfx`
+- optional decorative vector shape
+
+For editable text/SFX objects, preserve at least:
+- stable object id
+- object type / semantic role
+- literal string
+- x / y
+- width / height or wrapping box
+- font family intent
+- font size / weight
+- alignment
+- rotation
+- z-index
+
+Bubble geometry is separate from the text string so either may move or resize independently.
+SFX such as `톡` is a text/SFX object, not part of the generated artwork raster.
+
+External-editor contract:
+- changing dialogue, narration, inner thought, title or SFX mutates layout JSON only;
+- dragging/resizing/rotating text, bubbles or SFX mutates geometry only;
+- deterministic rerender updates SVG/PNG without BOARD regeneration;
+- accepted artwork must remain byte-identical unless the user explicitly requests an artwork-level change.
+
+This package structure is an output-interface rule, not a new user gate and not a new BOARD hard-fail class.
 
 ## 2. Frozen visual result range
 
@@ -112,7 +184,8 @@ Frozen policy:
 ### 2.5 Text
 - no meaning-bearing text is baked into generated BODY raster.
 - no generated speech bubbles, captions, labels, logos or panel numbers.
-- cover title, speech, narration and inner thought are editable deterministic layers.
+- cover title, speech, narration, inner thought and SFX are editable deterministic composition objects.
+- final flattened PNG is not text authority; the literal string and geometry live in the page layout JSON.
 
 ## 3. What remains deliberately fluid
 
@@ -273,14 +346,16 @@ Normal steady-state user gates are therefore:
 
 ### 8.4 ASSEMBLY + FINAL
 After BOARD PASS:
-- extract six cells;
+- extract six cells as accepted raster artwork;
 - fit six 4:5 BODY pages;
 - assemble COVER from accepted artwork;
-- apply editable lettering / inner thought / speech / SFX;
+- create/update per-page layout JSON with independent artwork / bubble / text / SFX objects;
+- derive editable SVG and flattened PNG from the layout package;
 - inspect the complete seven-page carousel, including cover hierarchy/font/line-break/negative-space fit and BODY lettering placement;
 - present the completed carousel at `FINAL_PUBLISH_GATE`.
 
-A lettering/layout-only defect never authorizes stochastic BOARD regeneration.
+The final publish preview may be PNG, but the editable layout package remains the presentation authority.
+A lettering/layout-only defect mutates layout JSON and rerenders deterministic derivatives; it never authorizes stochastic BOARD regeneration.
 
 ### 8.5 When to start a new chat
 A new chat is **not** required between PLAN and BOARD or between BOARD and FINAL.
