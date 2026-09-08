@@ -4,18 +4,17 @@ Updated: 2026-09-08
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Status: STYLE_CARRIER_CALIBRATION
+Status: STORYBOARD_USER_GATE
 
 ## Active production state
 
-Active episode: V1_CAL_001
-Stage: BOARD / STYLE_CARRIER_CALIBRATION
+Active episode: V1_E001
+Stage: PLAN / STORYBOARD_USER_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
-Plan: episodes/V1_CAL_001/PLAN.md
-Run receipt: episodes/V1_CAL_001/RUN_RECEIPT.md
+Plan: episodes/V1_E001/PLAN.md
 
 ## Runtime authority
 
@@ -46,11 +45,11 @@ Required carrier shape:
 - plain/transparent minimal background
 - carries only face/eye/hair/line/color/texture style information
 
-Carrier creation is isolated from production:
+Carrier creation remains isolated from production:
 - raw references may be attached in a dedicated carrier-calibration chat;
 - user approves the derived carrier there;
 - do not generate an episode board in the same raw-reference chat;
-- production starts in a clean chat using only the approved carrier.
+- production board generation resumes using only the approved carrier.
 
 ## Controlled experiment evidence
 
@@ -69,39 +68,33 @@ Interpretation:
 
 ## Approval/session protocol
 
-Normal steady-state production uses one conversation with multiple turns:
-
+Normal steady-state production:
 1. BOOT + PLAN
 2. STORYBOARD_USER_GATE
-3. same chat: user approves storyboard and attaches JIPBAP_STYLE_CARRIER_V1 once
-4. BOARD generation + internal hard QC
-5. ASSEMBLY + FINAL
-6. FINAL_PUBLISH_GATE
-7. DONE
+3. BOARD generation + internal hard QC
+4. ASSEMBLY + FINAL
+5. FINAL_PUBLISH_GATE
+6. DONE
 
-While carrier/style calibration is active, insert one temporary BOARD_STYLE_USER_GATE between 4 and 5.
+While carrier/style calibration is active, a temporary BOARD_STYLE_USER_GATE remains after BOARD generation.
 
-A new chat is not required between these stages.
-Use a new chat only for context-limit risk, observed runtime contamination, repeated stale-template behavior, or artifact/approval uncertainty.
+Do not generate V1_E001 BOARD before explicit storyboard approval.
 
-## Current BOARD history
+## Prior calibration provenance
 
-V1_CAL_001 has eight rejected production BOARD attempts recorded in RUN_RECEIPT.md.
-Those failures remain non-reference material.
-
-They showed semantic leakage / stale-template behavior and do not create new permanent V1 hard gates.
+V1_CAL_001 remains prior calibration provenance and is not the active episode.
+Its rejected boards remain non-reference material.
+Its kimchi-pancake story is not reused for V1_E001.
 
 ## Exact next action
 
-1. Do not re-plan V1_CAL_001.
-2. Create one candidate JIPBAP_STYLE_CARRIER_V1 in a dedicated carrier-calibration chat using the locked raw creative references.
-3. The candidate must satisfy the content-neutral one-person carrier contract in JIPBAP_V1_SPEC.md.
-4. Present the carrier for explicit user style approval.
-5. On approval, store/register it as JIPBAP_STYLE_CARRIER_V1 and update this state to CARRIER_USER_LOCKED.
-6. End the raw-reference calibration chat; do not create the episode BOARD there.
-7. Start/resume V1_CAL_001 production in a clean chat.
-8. Restore GitHub state and existing PLAN; do not re-plan.
-9. Attach only JIPBAP_STYLE_CARRIER_V1 once immediately before BOARD generation.
-10. Generate exactly one text-free 2×3 master board and apply only V1 hard-fail QC.
-11. Because style calibration is still active, present that board at the temporary BOARD_STYLE_USER_GATE.
-12. On board approval, continue in the same chat through deterministic ASSEMBLY → FINAL and present the completed carousel at FINAL_PUBLISH_GATE.
+1. Present and hold at V1_E001 STORYBOARD_USER_GATE.
+2. Wait for explicit user storyboard approval or requested revisions.
+3. Do not generate any production image or master board before approval.
+4. If the storyboard is revised, update episodes/V1_E001/PLAN.md and remain at STORYBOARD_USER_GATE.
+5. If approved and JIPBAP_STYLE_CARRIER_V1 is still NOT_YET_USER_LOCKED, complete the separate carrier-calibration approval flow before production BOARD generation.
+6. Once the carrier is USER_LOCKED, resume V1_E001 from the saved PLAN without re-planning.
+7. Attach only JIPBAP_STYLE_CARRIER_V1 once immediately before BOARD generation.
+8. Generate exactly one text-free 2×3 master board and apply only V1 hard-fail QC.
+9. While style calibration remains active, present that board at the temporary BOARD_STYLE_USER_GATE.
+10. On board approval, continue through deterministic ASSEMBLY → FINAL and present the completed carousel at FINAL_PUBLISH_GATE.
