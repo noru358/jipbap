@@ -14,21 +14,24 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: DETERMINISTIC_PAGE_ASSEMBLY
+Stage: STORYBOARD_USER_GATE
 
-## Boot snapshot — V1_E006 user-reset / fresh storyboard
+## Boot snapshot — V1_E006 fresh reset at 2026-09-09 08:43 KST
 
 - Active episode: `V1_E006`
-- Current stage: `DETERMINISTIC_PAGE_ASSEMBLY`
+- Current stage: `STORYBOARD_USER_GATE`
 - Food: 두부조림
-- Reset authority: USER_EXPLICIT_RESET on 2026-09-09
-- STORYBOARD_USER_GATE: APPROVED
-- ART_BUNDLE_USER_GATE: APPROVED
+- Reset authority: USER_EXPLICIT_FULL_RESET on 2026-09-09 08:43 KST
+- STORYBOARD_USER_GATE: AWAITING_USER_REVIEW
+- ART_BUNDLE_USER_GATE: NOT_STARTED
+- APPROVED_ART_PIXEL_LOCK: NOT_STARTED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E006/PLAN.md`
-- Required S01: rainy 먹자골목; protagonist notices/smells 두부조림 aroma
-- Required payoff: tofu is visibly crushed into rice, mixed 쓱쓱, then eaten
-- All prior E006 storyboard/copy, BODY board, COVER hero, artwork approvals, presentation drafts and PAGE_FINAL_RECOMPOSE assumptions are SUPERSEDED and MUST NOT be reused.
+- Required S01: rainy 먹자골목; protagonist catches/smells 두부조림 aroma before seeing the dish.
+- Required action payoff: tofu is transferred onto rice, visibly crushed with a spoon, mixed 쓱쓱, then eaten.
+- Fresh BODY arc: aroma trigger → hot dish reveal → intact tofu first bite → tofu+sauce onto rice → visible crush/mix → mixed-rice bite payoff.
+- All E006 storyboards, copy, BODY/COVER artwork, approvals, pixel locks, crops, presentation drafts and packages that predate this reset are SUPERSEDED_NON_AUTHORITY.
+- Prior files may remain only as historical provenance and MUST NOT be reused as current E006 source/reference/anchor/crop input.
 - V1_E005 and all other episodes remain preserved unchanged.
 
 ## Architecture revision — approved artwork is pixel-locked
@@ -49,36 +52,19 @@ Canonical rule now:
 Canonical flow:
 `BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
 
-E006 approved artwork lock:
-- BODY source SHA-256: `d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76`
-- BODY dimensions: 1024 × 1536
-- BODY generation id: `69ecb818-d655-4d46-9db6-d60d75b98b76`
-- COVER source SHA-256: `063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db`
-- COVER dimensions: 1122 × 1402
-- COVER generation id: `4855db49-538d-48bf-a039-7b8aaaa3ed46`
-- these two approved sources are the only current E006 artwork authority.
-
-Rejected post-approval redraw attempts:
-- generation `4e6ae0e7-ce06-4884-b88e-2b10ca24e378`
-- generation `ee62aeb6-8134-4bf2-a3e5-9d0bbcd8cc2c`
-- generation `8fd172f7-3f9c-4fe6-882e-733bd4124224`
-- status: REJECTED_NON_AUTHORITY_STYLE_DRIFT
-- they must never be used as E006 source, reference, anchor, presentation artwork or recovery material.
-
-Session / recovery policy after artwork approval:
-- exact approved BODY/COVER bytes are required for deterministic assembly;
-- prefer repository/materialized approved bytes when available;
-- otherwise identical approved files may be re-supplied as `SESSION_ONLY` production-art carriers;
-- if exact approved bytes are unavailable, fail closed rather than recreate them from prompt/hash.
+Prior E006 artwork provenance from the superseded run:
+- former BODY source SHA-256: `d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76`
+- former COVER source SHA-256: `063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db`
+- former generation ids and rejected redraw attempts remain historical only.
+- status for this reset: `SUPERSEDED_NON_AUTHORITY`
+- they must not be used as E006 source, reference, anchor, presentation artwork, crop input or recovery material.
 
 Exact next action for episode production:
-1. Do **not** call image generation.
-2. Run `JIPBAP_BOARD_EXTRACTION_V1` on the approved E006 BODY source and verify the source SHA-256 above.
-3. Create S01..S06 exact crops from detected actual borders and record extraction boxes + cell hashes.
-4. Use the approved COVER source unchanged.
-5. Assemble COVER + S01..S06 into 4:5 scenes using deterministic crop/scale/position only, with no aspect stretch.
-6. Add the approved PLAN copy / bubbles / inner thought / SFX / COVER title to create `PRESENTATION_MASTER_DRAFT`.
-7. Stop at `FINAL_PUBLISH_GATE` for user review.
+1. Present the fresh E006 storyboard in `episodes/V1_E006/PLAN.md`.
+2. Stop at `STORYBOARD_USER_GATE` for user review.
+3. Do not call image generation before storyboard approval.
+4. On approval, bind validated STYLE + FOOD carriers per `JIPBAP_V1_SPEC.md`.
+5. Then create `INITIAL_ART_BUNDLE`: one text-free BODY 2×3 master board + one independent text-free COVER hero.
 
 Infrastructure change applied for future/new work:
 - `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` as the canonical finalization mode.
@@ -92,16 +78,16 @@ Infrastructure change applied for future/new work:
 - no new routine user gate was added; the existing artwork approval gate now has stronger media authority.
 
 Remaining verification limits:
-- E006 approved BODY/COVER bytes are currently available in this active session but are not yet claimed as repository-materialized episode binaries.
-- structural implementation/tests: PASS on GitHub Actions validate run #259 at `029b8f80fe32963b9151b299f353b4070fdc5de0`.
-- browser/mobile rendering differences remain presentation-layer concerns and do not weaken artwork-source identity.
+- this reset has no approved E006 BODY/COVER artwork yet;
+- structural implementation/tests from the architecture revision remain PASS on GitHub Actions validate run #259 at `029b8f80fe32963b9151b299f353b4070fdc5de0`;
+- browser/mobile rendering differences remain presentation-layer concerns for later stages.
 
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
 Plan: episodes/V1_E006/PLAN.md
-Run receipt: pending FINAL_PUBLISH_GATE approval
+Run receipt: not started for this reset
 
 ## Runtime authority
 
