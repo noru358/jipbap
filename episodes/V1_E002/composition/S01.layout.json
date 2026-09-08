@@ -1,0 +1,65 @@
+{
+  "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "page": {
+    "width": 1080,
+    "height": 1350,
+    "background": "#fff9f0"
+  },
+  "objects": [
+    {
+      "id": "s01_art",
+      "type": "artwork",
+      "source": "../artwork/S01.png",
+      "x": 30,
+      "y": 300,
+      "width": 1020,
+      "height": 1020,
+      "crop": {
+        "mode": "fit"
+      },
+      "corner_radius": 26,
+      "border": {
+        "width": 4,
+        "color": "#1c1c1c"
+      },
+      "z": 1
+    },
+    {
+      "id": "s01_bubble",
+      "type": "bubble",
+      "role": "speech",
+      "x": 70,
+      "y": 70,
+      "width": 940,
+      "height": 190,
+      "radius": 28,
+      "fill": "#ffffff",
+      "stroke": "#2a2a2a",
+      "stroke_width": 4,
+      "z": 10
+    },
+    {
+      "id": "s01_text",
+      "type": "text",
+      "role": "speech",
+      "text": "와, 노른자 상태 좋다.\n이거부터 터뜨려야지.",
+      "x": 96,
+      "y": 96,
+      "width": 888,
+      "height": 138,
+      "font": {
+        "family_intent": "NanumSquareRound",
+        "fallback": [
+          "sans-serif"
+        ],
+        "weight": 700,
+        "size": 49
+      },
+      "fill": "#221f1d",
+      "align": "left",
+      "rotation": 0,
+      "z": 11,
+      "group_id": "s01_bubble"
+    }
+  ]
+}
