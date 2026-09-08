@@ -1,0 +1,65 @@
+{
+  "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "page": {
+    "width": 1080,
+    "height": 1350,
+    "background": "#fff9f0"
+  },
+  "objects": [
+    {
+      "id": "s04_art",
+      "type": "artwork",
+      "source": "../artwork/S04.png",
+      "x": 30,
+      "y": 300,
+      "width": 1020,
+      "height": 1020,
+      "crop": {
+        "mode": "fit"
+      },
+      "corner_radius": 26,
+      "border": {
+        "width": 4,
+        "color": "#1c1c1c"
+      },
+      "z": 1
+    },
+    {
+      "id": "s04_bubble",
+      "type": "bubble",
+      "role": "inner_thought",
+      "x": 70,
+      "y": 70,
+      "width": 940,
+      "height": 190,
+      "radius": 28,
+      "fill": "#ffffff",
+      "stroke": "#2a2a2a",
+      "stroke_width": 4,
+      "z": 10
+    },
+    {
+      "id": "s04_text",
+      "type": "text",
+      "role": "inner_thought",
+      "text": "여기 눌은 데도 같이 떠야겠다.\n이게 씹을 때 제일 맛있어.",
+      "x": 96,
+      "y": 96,
+      "width": 888,
+      "height": 138,
+      "font": {
+        "family_intent": "NanumSquareRound",
+        "fallback": [
+          "sans-serif"
+        ],
+        "weight": 700,
+        "size": 49
+      },
+      "fill": "#221f1d",
+      "align": "left",
+      "rotation": 0,
+      "z": 11,
+      "group_id": "s04_bubble"
+    }
+  ]
+}
