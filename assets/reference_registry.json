@@ -87,6 +87,32 @@
         "runtime_binding": "SESSION_ONLY_FALLBACK",
         "note": "User supplied and explicitly identified this single-person transparent image as the carrier. Repository binary could not be materialized through the current runtime; until materialized, future image-generation sessions must bind the same user-supplied pixels as SESSION_ONLY fallback."
       }
+    },
+    {
+      "asset_id": "JIPBAP_FOOD_STYLE_CARRIER_V1",
+      "role": "RENDERER_SAFE_FOOD_STYLE_CARRIER",
+      "status": "USER_LOCKED_SESSION_VALIDATED",
+      "path": "assets/references/JIPBAP_FOOD_STYLE_CARRIER_V1.png",
+      "repository_materialization_status": "NOT_MATERIALIZED_IN_REPOSITORY_THIS_RUN",
+      "session_source_sha256": "e2cb04ff82671fff655830b1a3be540561d3dde108eb18bed7a8cc6d09a9c73a",
+      "width": 1254,
+      "height": 1254,
+      "alpha_policy": "NONE",
+      "content_contract": {
+        "person": false,
+        "hand": false,
+        "text": false,
+        "panel_grid": false,
+        "story_sequence": false,
+        "environment": false,
+        "purpose": "food rendering style delivery only",
+        "authority_scope": "line/fill/highlight/microtexture abstraction only; not menu/entity/staging"
+      },
+      "provenance": {
+        "user_approved_on": "2026-09-09",
+        "runtime_binding": "SESSION_ONLY_FALLBACK",
+        "note": "One-time isolated food-style projection approved before V1_E005 BOARD. Repository binary is not materialized in this runtime; future image-generation sessions must bind the same approved pixels as SESSION_ONLY fallback until materialized."
+      }
     }
   ]
 }
