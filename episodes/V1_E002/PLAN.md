@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 Architecture: SIX_PANEL_BOARD_FIRST
-Stage: STORYBOARD_USER_GATE
+Stage: FINAL_PUBLISH_GATE
 Format: COVER 1 + BODY 6
 BODY generation: one text-free 2×3 master board
 Final page ratio: 4:5
@@ -34,8 +34,8 @@ Visual:
 Working title:
 - `노른자 터지면 게임 끝`
 
-Optional small deck:
-- `노른자 하나에 맛이 확 달라진다`
+Subtitle/deck:
+- omitted in final fixed-shell assembly by default
 
 Typography intent:
 - casual hand-drawn food-comic feel
@@ -57,7 +57,7 @@ Camera / expression:
 - small anticipatory grin; shoulders subtly forward.
 
 Copy draft:
-- speech: `와, 노른자 상태 좋다. 이거부터 터뜨려야지.`
+- speech: `와, 노른자 좋다. 이거부터 터뜨려야지.`
 
 Continuity state:
 - yolk intact.
@@ -97,7 +97,7 @@ Camera / expression:
 - hand action is more important than face.
 
 Copy draft:
-- inner thought: `오… 노른자 섞이니까 매운맛이 한 번 눌리네. 김치 맛은 그대로인데 훨씬 부드럽다.`
+- inner thought: `오… 노른자 섞이니까 매운맛이 확 부드러워지네.`
 
 Continuity state:
 - egg partly mixed, not uniformly blended.
@@ -116,7 +116,7 @@ Camera / expression:
 - face sits behind or beside the spoon with focused anticipation, not a repeated neutral portrait.
 
 Copy draft:
-- speech or thought: `여기 눌은 데도 같이 떠야겠다. 이게 씹을 때 제일 맛있어.`
+- speech or thought: `눌은 데도 같이 떠야지. 이게 씹을 때 맛있어.`
 
 Continuity state:
 - spoonful is a physically plausible scoop from S03 state.
@@ -137,7 +137,7 @@ Camera / expression:
 
 Copy draft:
 - speech fragment: `아 뜨거…`
-- inner thought: `근데 좋다. 김치는 아삭하고 밥알은 고슬고슬한데, 노른자가 싹 감싸줘.`
+- inner thought: `김치는 아삭하고, 노른자는 부드럽게 감싸네.`
 
 Continuity state:
 - the S04 spoonful is now being consumed.
@@ -156,8 +156,8 @@ Camera / expression:
 - relaxed satisfaction with a small “already going back in” urgency.
 
 Copy draft:
-- inner thought: `음… 고소한 맛 남아있다가 끝에 김치가 다시 올라오네.`
-- small speech/reaction: `아, 한 입만 더.`
+- inner thought: `음… 고소하다가 끝에 김치 맛 다시 올라오네.`
+- small speech/reaction: `한 입만 더.`
 
 Continuity state:
 - first bite completed.
@@ -211,5 +211,5 @@ Bridge motions may happen between cells, but no panel may contradict these befor
 
 ## Gate
 
-Current gate: STORYBOARD_USER_GATE
-Do not generate BOARD until user approval.
+Current gate: FINAL_PUBLISH_GATE
+Storyboard and BOARD are approved. Presentation-only feedback must be handled deterministically without BOARD regeneration.
