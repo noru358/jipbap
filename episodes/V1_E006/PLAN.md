@@ -1,6 +1,6 @@
-# V1_E006 PLAN — RESET 2026-09-09
+# V1_E006 PLAN — FRESH RESET 2026-09-09 08:43 KST
 
-Status: ART_BUNDLE_APPROVED__DETERMINISTIC_PAGE_ASSEMBLY
+Status: AWAITING_STORYBOARD_USER_GATE
 Architecture: SIX_PANEL_BOARD_FIRST
 Food: 두부조림
 Carousel target: COVER + S01..S06
@@ -9,289 +9,304 @@ Final page ratio: 4:5
 
 ## Reset authority
 
-The user explicitly discarded all earlier V1_E006 creative/production work on 2026-09-09.
+The user explicitly ordered a full creative/production reset of V1_E006 on 2026-09-09 08:43 KST.
 
-Superseded and NOT reusable as current authority:
-- prior E006 storyboard/copy
-- prior E006 BODY board and its approval
-- prior E006 COVER hero and its approval
-- prior E006 lettered/presentation drafts
-- prior E006 PAGE_FINAL_RECOMPOSE assumptions
+All E006 work that predates this reset is superseded and is NOT current production authority, including:
+- every prior E006 storyboard and copy draft;
+- every prior E006 BODY board / COVER image;
+- every prior artwork approval and pixel lock;
+- every prior crop, presentation draft, lettering layout, package and publish assumption;
+- rejected redraw attempts from the prior run.
 
-This is an E006 re-plan, not a new episode number.
-V1_E005 and all other episodes remain unchanged.
+Those files may remain only as historical provenance. They must not be reused as source, reference, anchor, crop input or approved media for this reset.
+
+Episode number remains V1_E006. Other episodes remain unchanged.
 
 ## User-locked story inputs
 
-1. Topic/menu: 두부조림.
-2. S01 must begin on a rainy day in a 먹자골목.
-3. In S01 the protagonist notices/smells the tofu-braise aroma.
-4. The episode must visibly include crushing tofu into rice and mixing it 쓱쓱 before eating it.
+1. Menu: 두부조림.
+2. S01 begins on a rainy day in a 먹자골목.
+3. In S01 the protagonist catches the smell of 두부조림.
+4. The BODY must visibly show tofu being crushed into rice and mixed 쓱쓱 before it is eaten.
 5. Stop at STORYBOARD_USER_GATE before any new episode artwork is generated.
 
 ## Story intent
 
-The episode is built around a simple appetite escalation:
-rainy alley aroma → hot tofu-braise reveal → first intact tofu bite → realization that rice should join → tactile crushing/mixing action → one-spoon payoff.
+A rain-soaked outside-to-inside appetite arc:
+비 냄새 섞인 골목 → 두부조림 향 → 뜨거운 두부 첫입 → 밥 위에 두부와 양념 얹기 → 숟가락으로 으깨며 쓱쓱 비비기 → 두부밥 한 숟갈 payoff.
 
-The food should feel like Korean 두부조림: tofu in a red-brown soy/chili-based braising sauce with restrained scallion/onion garnish, illustrated rather than photoreal. Background detail stays sparse except where the rainy alley context is story-essential.
+The sequence should feel tactile and edible rather than explanatory. The mixing action is the episode's main physical payoff, so S04 prepares it and S05 shows the deformation/mixing itself.
+
+Food language:
+- Korean 두부조림;
+- red-brown soy/chili braising sauce;
+- soft tofu with sauce absorbed around the edges;
+- restrained scallion/onion garnish;
+- appetizing but illustrated, not photoreal or glossy ad-food.
+
+Backgrounds stay sparse except where the rainy alley is story-essential.
 
 ## COVER direction — plan only
 
-Role:
-- independent text-free hero artwork for the episode, not a BODY crop.
+Independent text-free COVER hero, not a BODY crop.
 
 Visual concept:
-- warm indoor hero shot with the protagonist holding a rice bowl where crushed tofu and braising sauce have just been mixed in;
-- rainy restaurant window / soft rain streaks in the background as a minimal echo of S01;
-- food and satisfied expression are the focal pair;
-- leave a natural negative-space area for later title placement without forcing a fixed side or coordinate.
+- protagonist indoors with the finished 두부조림-비빔밥 bowl close to camera;
+- one spoonful lifted, satisfied anticipation rather than a generic thumbs-up;
+- a rain-streaked window or cool rainy light in the background as a subtle callback to S01;
+- warm food / cool rain contrast;
+- natural negative space for later title lettering.
 
-Do not generate lettering inside the artwork.
+No generated text inside the artwork.
 
 ## BODY storyboard
 
-### S01 — 비 오는 먹자골목, 냄새에 붙잡힘
+### S01 — 비 오는 먹자골목, 냄새가 먼저 잡음
 
 What becomes new:
-- rainy-day setting and the smell trigger establish the craving.
+- rain, alley and aroma trigger the craving before the dish is seen.
 
 Person / food state:
 - protagonist walks under an umbrella through a wet 먹자골목;
-- pauses mid-step and turns slightly toward a small restaurant as warm steam/aroma drifts out;
-- no plated food is visible yet.
+- mid-step, nose/head turns toward a modest restaurant;
+- warm steam/aroma escapes from the doorway;
+- plated tofu is not yet visible.
 
 Copy:
-- inner_thought: "어? 두부조림 냄새 나는데?"
+- inner_thought: "어? 두부조림 냄새."
 
 Camera / visual focus:
-- wider three-quarter street view, enough environment to read rain + alley but not a dense background;
-- protagonist is not a centered ID-photo pose; head/shoulder turn carries the beat;
-- warm doorway/steam contrasts with cool wet street.
+- wide three-quarter street shot;
+- wet pavement and a few shop lights are enough to read the setting;
+- protagonist off-center, caught in the act of turning rather than posing.
 
 Expression:
-- small surprised sniff, appetite just waking up.
+- small sniff + instant attention.
 
 Copy-space hint:
-- open rainy-air area away from the face and doorway.
+- open rainy-air pocket away from face, umbrella hand and doorway steam.
 
-Avoid regions:
-- face_primary
-- umbrella/hand_action
+Protected regions:
+- face
+- umbrella/hand
 - warm doorway/aroma cue
 
 Continuity:
-- next scene may bridge directly indoors; no need to depict walking through the door.
+- may cut directly indoors next; entering the door is a bridge action.
 
-### S02 — 두부조림 등장
+### S02 — 보글보글, 진짜 두부조림 등장
 
 What becomes new:
-- the smelled dish is revealed.
+- the aroma source is revealed.
 
 Person / food state:
-- freshly served 두부조림 sits hot and saucy on the table;
-- tofu pieces are still intact;
-- white rice is present beside it but not yet mixed;
-- protagonist leans in from the edge of frame.
+- hot 두부조림 arrives on the table;
+- tofu pieces are intact and sauce-coated;
+- white rice sits beside it, still untouched;
+- protagonist leans slightly toward the dish.
 
 Copy:
-- inner_thought: "비 오는 날 이건 못 지나치지."
+- inner_thought: "이 냄새였네."
 - sfx: "보글"
 
 Camera / visual focus:
-- food-forward close/medium close angle at table height;
-- steam, sauce sheen and tofu edges read clearly without turning photoreal;
+- food-forward medium close shot at low/table height;
+- steam, tofu edges and sauce should read clearly;
 - person is secondary.
 
 Expression:
-- eager, slightly smiling anticipation.
+- restrained grin / eyes fixed on food.
 
 Copy-space hint:
-- upper/side negative space created by shallow background.
+- shallow-background pocket, not over the dish.
 
-Avoid regions:
-- food_primary
-- steam/aroma
-- protagonist_face_secondary
+Protected regions:
+- tofu dish
+- steam
+- face secondary
 
 Continuity:
-- tofu remains intact going into the first bite.
+- tofu remains intact enough for an unmistakable first bite in S03.
 
-### S03 — 첫 두부 한입
+### S03 — 두부 한입, 안쪽은 보들
 
 What becomes new:
-- the protagonist actually tastes an intact piece.
+- first ingestion establishes the dish's texture and seasoning.
 
 Person / food state:
-- spoon carries one intact, sauce-coated tofu piece into the mouth;
-- the bite is visibly at/inside the mouth, not hovering before it;
-- rice remains separate.
+- spoon carries one intact tofu piece fully to/into the mouth;
+- contact geometry is clear;
+- rice is still separate.
 
 Copy:
-- inner_thought: "양념은 쫙 배었는데 안은 보들보들."
+- inner_thought: "겉엔 양념 쫙 배고, 안은 보들보들."
 
 Camera / visual focus:
-- tight side/three-quarter close-up on mouth, spoon and tofu;
-- enough face to read reaction, but the contact geometry is the focal point.
+- tight side or three-quarter close-up;
+- mouth, spoon and tofu are the focal triangle.
 
 Expression:
-- eyes soften immediately after the bite lands; pleased but not exaggerated ad-face.
+- pleased eyes soften just after the bite lands; no exaggerated commercial reaction.
 
 Copy-space hint:
-- free area behind/above head, not over spoon or mouth.
+- behind/above head, clear of spoon path.
 
-Avoid regions:
-- mouth_contact
-- spoon_hand_action
-- tofu_primary
+Protected regions:
+- mouth contact
+- spoon hand
+- tofu
 - eyes
 
 Continuity:
-- ingestion is established here, so sensory copy is valid from this scene onward.
+- sensory copy is valid because ingestion is visible here.
 
-### S04 — 밥이랑 섞어야겠다는 전환
+### S04 — 밥 위에 두부 올리고, 양념까지
 
 What becomes new:
-- the protagonist changes strategy from alternating bites to mixing.
+- the eating method changes from separate bites to deliberate mixing.
 
 Person / food state:
-- partly eaten 두부조림 and untouched/mostly white rice are both visible;
-- protagonist pulls the rice bowl closer and looks between dish and rice;
-- no crushing has happened yet.
+- protagonist transfers a large remaining tofu piece onto the white rice;
+- a spoonful of braising sauce drips/spreads onto the rice;
+- tofu is still largely intact at this moment;
+- dish and rice bowl are both visible enough to understand the transfer.
 
 Copy:
-- inner_thought: "잠깐. 이건 따로 먹는 게 아닌데?"
+- inner_thought: "이제 밥 차례."
+- sfx: "척"
 
 Camera / visual focus:
-- oblique top-down/tabletop composition showing the relationship between tofu dish, rice bowl and hand;
-- face may be only partially visible at frame edge, preventing another face-forward eating shot.
+- oblique tabletop / close action composition;
+- the falling sauce and tofu-on-rice relationship own the frame;
+- full face is unnecessary.
 
 Expression:
-- small realization / mischievous "아 이거다" look.
+- optional partial "이거지" look at frame edge.
 
 Copy-space hint:
-- tabletop/background pocket away from the two food focal zones.
+- edge pocket outside the transfer path.
 
-Avoid regions:
-- tofu_dish_primary
-- rice_bowl_primary
-- hand_action
+Protected regions:
+- tofu-on-rice
+- sauce drip
+- spoon/hand
+- rice bowl
 
 Continuity:
-- rice is still mostly white; tofu pieces are still large enough for the next crushing action.
+- this panel must NOT show fully crushed or fully mixed rice yet.
 
-### S05 — 두부를 밥에 실제로 으깨기
+### S05 — 숟가락으로 으깨서 쓱쓱
 
 What becomes new:
-- the tactile payoff begins; crushing is shown as an action, not only as an already-finished result.
+- the tactile core action happens visibly.
 
 Person / food state:
-- a spoon visibly presses down into a still-large tofu piece inside/on top of the rice bowl;
-- large tofu, newly crumbled tofu, white rice and sauce-stained rice coexist in the same frame;
-- sauce begins spreading through the rice but mixing is not yet complete.
+- spoon presses into the large tofu piece on the rice;
+- tofu visibly deforms and breaks into chunks;
+- some white rice remains, some is becoming sauce-stained;
+- a second motion cue shows the spoon dragging/folding the mixture through the rice;
+- the bowl is not yet perfectly homogeneous.
 
 Copy:
 - sfx: "푹"
-- sfx: "슥슥"
+- sfx: "쓱쓱"
 
 Camera / visual focus:
-- extreme close hand/food action shot;
-- spoon pressure and tofu deformation must be physically legible;
-- no need for the whole face.
+- extreme close food/hand action;
+- spoon pressure, tofu breakup and rice mixing must be physically legible;
+- face can be omitted.
 
 Expression:
-- not required; action itself owns the beat.
+- not needed; action carries the beat.
 
 Copy-space hint:
-- small edge pockets only; prioritize the crushing geometry over text.
+- only small peripheral pockets; action legibility has priority.
 
-Avoid regions:
-- spoon_contact
-- hand_action
-- large_tofu_piece
-- crumbled_tofu
-- white_rice_and_sauce_transition
+Protected regions:
+- spoon contact
+- tofu deformation
+- rice/sauce transition
+- hand
 
 Continuity:
-- this scene must precede fully mixed rice;
-- do not render the bowl as already homogeneous before the spoon visibly crushes the tofu.
+- this is the required visible crushing/mixing scene, not an already-finished bowl.
 
-### S06 — 쓱쓱 비빈 한 숟갈, 먹고 끝
+### S06 — 두부밥 크게 한 숟갈
 
 What becomes new:
-- mixing is complete enough to eat, and the episode cashes out on the combined texture/flavor.
+- the mixed state is eaten and the appetite arc cashes out.
 
 Person / food state:
-- rice is visibly mixed with crumbled tofu and sauce but still has readable rice grains/texture;
-- a generous spoonful has just entered the protagonist's mouth or is being withdrawn after ingestion;
-- bowl stays large in the foreground so the mixed state is obvious.
+- rice is now visibly mixed with crumbled tofu and braising sauce while retaining readable rice texture;
+- a generous spoonful has just entered the mouth or is being withdrawn after ingestion;
+- the bowl remains large in the foreground so the mixed result is unmistakable.
 
 Copy:
-- inner_thought: "두부 으깨서 양념까지 밥에 싹 비비면… 아 이거지."
+- inner_thought: "두부랑 양념이 밥알 사이사이 들어가네. 이거지."
 
 Camera / visual focus:
-- low three-quarter angle from bowl/spoon toward the protagonist, distinct from S03 and S04;
-- foreground mixed rice + background satisfied face share the frame.
+- low three-quarter bowl-to-face angle;
+- foreground mixed rice, spoon path and satisfied face share the shot;
+- clearly different from S03's tight bite close-up.
 
 Expression:
-- relaxed, genuinely satisfied, slightly absorbed in chewing rather than a posed thumbs-up.
+- absorbed, genuinely satisfied chewing; not a posed ending gesture.
 
 Copy-space hint:
 - side/upper pocket opposite the spoon path.
 
-Avoid regions:
-- mixed_food_primary
-- spoon_mouth_contact
-- face_primary
+Protected regions:
+- mixed rice
+- mouth/spoon contact
+- face
 
 Continuity:
-- sensory judgment occurs only after the bite is visibly in the mouth.
+- texture/flavor judgment comes only after the bite is visibly in the mouth.
 
 ## Visual rhythm
 
-S01 wide exterior → S02 food-forward reveal → S03 tight bite contact → S04 oblique tabletop decision → S05 extreme tactile crush → S06 bowl-to-face payoff.
+S01 wide exterior
+→ S02 food reveal
+→ S03 tight ingestion
+→ S04 tabletop transfer
+→ S05 extreme tactile crush/mix
+→ S06 bowl-to-face payoff.
 
-The rhythm deliberately changes camera distance and what owns the frame without imposing a permanent slot template. The episode-specific aim is to make the crushing/mixing sequence feel earned rather than appearing as a sudden finished state.
+The episode changes camera relationship according to the beat rather than forcing per-slot camera rules.
 
 ## Food-state progression
 
-S01: unseen / aroma only
-→ S02: intact hot braised tofu + separate white rice
-→ S03: one intact tofu piece eaten, rice still separate
-→ S04: tofu partly eaten, rice still mostly white, bowl pulled closer
-→ S05: large tofu + newly crumbled tofu + white rice + sauce-stained rice coexist under visible spoon pressure
-→ S06: mixed tofu-rice state, then ingestion.
+S01: food unseen / aroma only
+→ S02: intact braised tofu + separate white rice
+→ S03: one intact tofu piece eaten; rice separate
+→ S04: intact tofu moved onto rice + sauce added
+→ S05: visible crushing and partial mixing in progress
+→ S06: mixed tofu-rice eaten.
+
+## Storyboard self-QC
+
+PASS:
+- exactly six BODY beats;
+- required rainy 먹자골목 smell opener is explicit;
+- required crushing + 쓱쓱 mixing is shown as an action, not only as a finished state;
+- food-state progression is physically compatible;
+- sensory copy occurs only at/after visible ingestion;
+- camera / focal role changes across the six beats without hardcoded quotas;
+- no generated-text requirement is introduced for the BODY board;
+- no prior E006 artwork or approval is reused.
+
+Soft note for user review:
+- S06 copy is intentionally concrete rather than a generic "맛있다" ending; wording can be tightened at storyboard approval without changing the visual sequence.
 
 ## Current gate
 
-STORYBOARD_USER_GATE: APPROVED
-ART_BUNDLE_USER_GATE: APPROVED
-APPROVED_ART_PIXEL_LOCK: ACTIVE
-
-Approved BODY source:
-- SHA-256: d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76
-- dimensions: 1024 × 1536
-- generation id: 69ecb818-d655-4d46-9db6-d60d75b98b76
-- hard-fail QC: PASS
-- source role: PIXEL_LOCKED_BODY_AUTHORITY
-
-Approved COVER source:
-- SHA-256: 063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db
-- dimensions: 1122 × 1402
-- generation id: 4855db49-538d-48bf-a039-7b8aaaa3ed46
-- hard-fail QC: PASS
-- source role: PIXEL_LOCKED_COVER_AUTHORITY
-
-Rejected post-approval generations:
-- 4e6ae0e7-ce06-4884-b88e-2b10ca24e378
-- ee62aeb6-8134-4bf2-a3e5-9d0bbcd8cc2c
-- 8fd172f7-3f9c-4fe6-882e-733bd4124224
-- all are REJECTED_NON_AUTHORITY_STYLE_DRIFT and must not be reused.
+STORYBOARD_USER_GATE: AWAITING_USER_REVIEW
+ART_BUNDLE_USER_GATE: NOT_STARTED
+APPROVED_ART_PIXEL_LOCK: NOT_STARTED
+FINAL_PUBLISH_GATE: NOT_STARTED
 
 Exact next action:
-- no image generation;
-- exact-border extract S01..S06 from the approved BODY source and record source/cell hashes;
-- reuse approved COVER source exactly;
-- create deterministic 4:5 page scenes with crop/non-stretched-scale/position only;
-- add approved copy and presentation design on the locked artwork;
-- create PRESENTATION_MASTER_DRAFT and stop at FINAL_PUBLISH_GATE.
+1. Present this fresh storyboard to the user.
+2. Stop at STORYBOARD_USER_GATE.
+3. On user approval, bind the validated STYLE + FOOD carriers as specified by JIPBAP_V1.
+4. Only then generate INITIAL_ART_BUNDLE: one text-free BODY 2×3 board + one independent text-free COVER hero.
