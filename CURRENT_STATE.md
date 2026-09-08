@@ -7,18 +7,18 @@ Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
-Status: DONE
+Status: IN_PROGRESS
 
 ## Active production state
 
-Active episode: V1_E003
-Stage: DONE
+Active episode: V1_E004
+Stage: STORYBOARD_USER_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
-Plan: episodes/V1_E003/PLAN.md
-Run receipt: episodes/V1_E003/RUN_RECEIPT.md
+Plan: episodes/V1_E004/PLAN.md
+Run receipt: not created
 
 ## Runtime authority
 
@@ -377,9 +377,9 @@ Primary interactive-editor transport changed 2026-09-09:
 
 ## Exact next action
 
-1. V1_E003 is DONE. Do not mutate it unless the user explicitly reopens episode 3.
-2. Preserve the structural improvements validated during E003: actual panel-boundary extraction, full-art V2 presentation, sticky COVER provenance, focal-aware lettering, rich speech-tail geometry, explicit font resolution, and ToonDesk Web Live transport.
-3. On the next new-episode request, boot latest main and create V1_E004 under the current JIPBAP_V1_SPEC.md.
-4. Use COVER 1 + BODY 6, one text-free 2×3 master board, deterministic crop/composition, and one final publish gate.
-5. Do not reintroduce the fixed lower meta band or separately generated approval preview.
-6. Do not create a new permanent gate from E003's historical repair loop.
+1. V1_E004 storyboard is prepared at `episodes/V1_E004/PLAN.md`.
+2. Stop at `STORYBOARD_USER_GATE` and await explicit user approval; do not generate production imagery before approval.
+3. After approval, continue in the same conversation and bind the already USER_LOCKED `JIPBAP_STYLE_CARRIER_V1` once for BOARD generation, preferring repository-direct validated bytes when the runtime can bind them and using the identical SESSION_ONLY carrier only if repository-byte binding is unavailable.
+4. Generate exactly one text-free 2×3 BODY master board, apply only JIPBAP_V1 hard-fail QC, then proceed without a routine BOARD approval gate if it passes.
+5. After BOARD PASS, use actual panel-boundary extraction and deterministic full-art V2 composition for COVER + S01..S06; the final approval preview must be rendered from the same canonical composition package.
+6. Present the complete carousel once at `FINAL_PUBLISH_GATE`; do not create a new permanent gate from one-off quality issues.
