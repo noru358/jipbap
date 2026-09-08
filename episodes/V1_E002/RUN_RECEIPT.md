@@ -55,3 +55,38 @@ Soft observations:
 
 FINAL_PUBLISH_GATE: PENDING USER REVIEW
 Do not mark DONE until explicit user publish approval.
+
+
+## Fixed-shell deterministic retrofit
+
+Applied after provisional final approval and follow-up feedback.
+
+Template:
+- JIPBAP_PRESENTATION_SHELL_V1
+- BODY artwork frame: 1000 × 1000 at x=40, y=175
+- COVER hero frame: 960 × 960 at x=60, y=330
+- artwork aspect distortion: prohibited
+- publish page markers: removed
+
+Lettering semantics:
+- speech = white dark-outline bubble with tail
+- inner thought = tail-free warm off-white thought box
+- SFX = independent text/SFX object
+
+Copy compression applied:
+- S01: 와, 노른자 좋다. / 이거부터 터뜨려야지.
+- S03: 오… 노른자 섞이니까 / 매운맛이 확 부드러워지네.
+- S04: 눌은 데도 같이 떠야지. / 이게 씹을 때 맛있어.
+- S05: 아 뜨거… / 김치는 아삭하고, 노른자는 부드럽게 감싸네.
+- S06: 음… 고소하다가 끝에 김치 맛 다시 올라오네. / 한 입만 더.
+
+User decisions:
+- shorter mobile copy: ACCEPTED
+- speech/thought visual distinction: ACCEPTED
+- FOOD should stay less glossy / less ad-like on future BOARD runs: ACCEPTED, existing FOOD spec reused
+- additional S05 artwork-payoff intervention: DEFERRED
+
+Runtime editable-package ZIP SHA-256:
+- 29ca16ead377b2cf63d7653cfcfd633ef380e4b1979d57c59c5653a4d4278ecc
+
+No stochastic BOARD regeneration was performed.
