@@ -23,6 +23,7 @@ V1 최적화 목표:
 - COVER 1장 + BODY 6장 = 총 7장.
 - 모든 최종 carousel page는 4:5.
 - COVER는 BODY S01이 아니며 food-state sequence에도 포함되지 않는다.
+- This 7-page structure is the automatic JIPBAP production default. A generic editor may expose page add/delete/duplicate/type-change capabilities; an explicit deviation is a `CUSTOM_OVERRIDE`, not the normal JIPBAP V1 production path.
 
 ### 1.2 BODY generation container
 - BODY는 정확히 6컷.
@@ -132,9 +133,10 @@ SFX such as `톡` is a text/SFX object, not part of the generated artwork raster
 Shared renderer/editor contract:
 - changing dialogue, narration, inner thought, title or SFX mutates layout JSON only;
 - dragging/resizing/rotating editable objects mutates scene geometry only;
-- artwork crop/position changes mutate crop metadata rather than stretching the accepted raster;
+- routine Chat production changes artwork framing through crop metadata and never stretches the accepted raster;
+- the interactive editor may explicitly unlock an artwork frame and move / resize / rotate the frame; this mutates scene geometry only and is recorded as a `CUSTOM_OVERRIDE`, not as a new scene format;
 - deterministic rerender updates SVG/PNG without BOARD regeneration;
-- accepted artwork must remain byte-identical unless the user explicitly requests an artwork-level change;
+- accepted artwork bytes remain byte-identical during ordinary presentation editing; explicit image replacement is an artwork-level override and must not be confused with approved BOARD provenance;
 - the interactive editor must remain optional: absence of the future API/editor must not block or alter the current Chat-mode production path.
 
 ### 1.4.1 Frozen editor-facing layer contract
@@ -185,28 +187,31 @@ BODY hierarchy for each page `SNN`:
 The top-level BODY hierarchy is fixed; semantic lettering instance count remains fluid. Speech/thought groups contain separate container geometry and text objects: group move moves both, while data stays independently editable/ungroupable.
 
 Lock defaults:
-- page background: locked.
-- artwork frame geometry: locked.
-- accepted artwork raster: not replaceable by normal presentation editing.
+- page background: locked by default.
+- artwork frame geometry: locked by default in automatic JIPBAP production.
 - artwork crop metadata: editable through crop mode.
 - lettering and overlay objects: unlocked by default.
-- lock changes never authorize BOARD regeneration.
+- the editor engine retains frame move / resize / rotation capability; an explicit user unlock enables those transforms and marks the page/profile state as `CUSTOM_OVERRIDE`.
+- an explicit user image replacement is allowed by the editor engine but is an artwork-level override, not ordinary BOARD-preserving presentation editing.
+- lock or geometry overrides never authorize BOARD regeneration.
 
 Artwork frame/crop interaction:
-- shell owns artwork x/y/width/height;
-- normal drag/resize/rotate does not change the frame in V1;
+- the active JIPBAP presentation shell owns the automatic first-pass artwork x/y/width/height;
+- routine Chat-mode assembly instantiates that geometry and leaves the frame locked;
 - crop mode may pan and uniformly scale the accepted raster inside the frame;
 - default crop: centered, scale 1.0, zero offset;
-- stretching and crop rotation disabled;
-- crop pan/scale cannot expose empty frame area;
-- crop edits mutate scene metadata only; source artwork bytes stay identical.
+- stretching is disabled by default; crop pan/scale cannot expose empty frame area;
+- an explicit interactive-editor unlock may transform the frame without changing the underlying scene format;
+- crop edits and frame transforms mutate scene metadata only unless the user explicitly replaces the artwork source.
 
 Placement freedom:
-- COVER lettering stays inside the title-safe region by default; hero geometry never moves for copy.
-- BODY lettering is not tied to fixed caption slots.
-- preferred first-pass zones are the top band above artwork and bottom band below it; controlled artwork overlap is allowed when composition benefits.
+- COVER uses the active shell's title/header region plus hero region as the automatic default.
+- BODY uses two semantic regions by default: `artwork` and lower `meta`.
+- speech / speech bubbles / SFX belong inside the artwork region by default because their placement is story-dependent.
+- inner thought / narration belong inside the lower meta region by default.
+- these are production defaults, not editor capability limits: explicit human/editor repositioning may cross the default regions and is treated as `CUSTOM_OVERRIDE`.
 - unnecessary coverage of focal food/face is a soft quality issue, not a new hard gate.
-- copy overflow is repaired by reline/shorten/reposition/font-size adjustment within the role preset, never by squeezing artwork.
+- automatic copy overflow is repaired by reline/shorten/reposition/font-size adjustment within the role preset, never by squeezing artwork.
 
 Typography role presets are implementation defaults, not font-family locks:
 - `cover_menu_tag`: nominal 30 px, 26..34, bold.
@@ -228,47 +233,52 @@ Scene object requirements:
 This layer contract is a presentation/interface rule, not a new user gate and not a new BOARD hard-fail class. Malformed scene data that cannot render deterministically is an artifact-integrity error, never a reason to regenerate accepted BOARD artwork.
 
 
-### 1.5 Frozen presentation shell
+### 1.5 Presentation shell / project profile
 
-V1 presentation geometry is fixed so episodes can be edited externally without per-episode frame drift.
+The scene model is the reusable editor data model; the JIPBAP presentation shell is a **project default profile**, not the editor engine's capability ceiling.
 
-Template id:
-- `JIPBAP_PRESENTATION_SHELL_V1`
+Versioning:
+- `JIPBAP_PRESENTATION_SHELL_V1` remains frozen for episodes already completed with it, including V1_E001 / V1_E002.
+- new automatic JIPBAP episodes use `JIPBAP_PRESENTATION_SHELL_V2`.
+- changing the default shell does not mutate completed episodes.
 
-Canvas:
-- all pages: 1080 × 1350 (4:5)
+V2 template:
+- `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
 
-BODY artwork frame:
-- x = 40
-- y = 175
-- width = 1000
-- height = 1000
-- accepted square BOARD cell is fit 1:1 into this frame
-- artwork is never stretched or aspect-distorted
-- BODY artwork frame does not move to make room for copy
+Canvas default:
+- 1080 × 1350 (4:5)
 
-BODY presentation rule:
-- the artwork frame is fixed across S01–S06;
-- text, bubble, thought-box and SFX objects may move within the page;
-- if copy does not fit cleanly, shorten/reline/reposition the copy object rather than shifting or squeezing artwork;
-- no visible page numbers or internal episode markers in publish output.
+COVER V2 default:
+- title/header region: x=60, y=40, width=960, height=240
+- hero artwork frame: x=40, y=310, width=1000, height=1000
+- default grammar: one small menu tag + one dominant title + one hero artwork
+- subtitle/deck remains optional
+- automatic assembly does not squeeze/stretch hero artwork to make copy fit
 
-COVER geometry:
-- title safe region: x = 60..1020, y = 50..300
-- hero artwork frame: x = 60, y = 330, width = 960, height = 960
-- accepted square artwork is fit 1:1 without distortion
-- default cover grammar is one small menu tag + one dominant title + one hero artwork
-- subtitle/deck is optional, not a default requirement
-- title and hero must remain visually separate; do not squeeze hero artwork to make extra text fit.
+BODY V2 default:
+- artwork frame: x=40, y=40, width=1000, height=1000
+- lower meta region: x=60, y=1080, width=960, height=230
+- speech / speech bubble / SFX are placed inside the artwork region by default
+- inner thought / narration are placed inside the meta region by default
+- the meta region is a semantic placement region; it need not always render as a visible box
+- automatic Chat-mode assembly starts the artwork frame locked and never stretches the raster
+
+Default-versus-override rule:
+- normal Chat production instantiates the V2 defaults consistently across episodes;
+- the generic editor retains page add/delete/duplicate, page-type change, frame move/resize/rotation, crop, text edit, group and z-order capabilities;
+- explicit user unlock or structural edit may deviate from the JIPBAP defaults and is recorded as `CUSTOM_OVERRIDE`;
+- a custom override is not scene corruption and does not create a new canonical file format;
+- profile deviation alone is not a BOARD hard fail, does not create a new user gate, and never authorizes stochastic BOARD regeneration;
+- if the user wants to return to automatic JIPBAP defaults, the profile can be reapplied deterministically.
 
 Lettering semantics:
 - `speech`: white speech bubble with a visible tail toward the speaker; dark outline.
-- `inner_thought`: tail-free warm off-white thought box with a lighter/muted outline.
-- `sfx`: independent text/SFX object with no bubble; may be moved/rotated/scaled.
+- `inner_thought`: tail-free warm off-white thought treatment with a lighter/muted outline when a container is used.
+- `narration`: text or light container inside the meta region by default.
+- `sfx`: independent text/SFX object; may be moved/rotated/scaled.
 - literal strings and geometry remain editable in layout JSON.
-- a semantic role must not be conveyed only by the words themselves; speech, thought and SFX should be visually distinguishable before reading.
 
-This shell freezes presentation geometry, not story staging. Camera, pose, crop content inside the accepted BOARD cell, expression and object placement in the generated art remain fluid.
+This shell freezes the **automatic first-pass defaults**, not human editor freedom and not story staging. Camera, pose, crop content inside the accepted BOARD cell, expression and generated composition remain fluid.
 
 ## 2. Frozen visual result range
 
