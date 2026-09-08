@@ -7,18 +7,18 @@ Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
-Status: ACTIVE_REPAIR
+Status: DONE
 
 ## Active production state
 
 Active episode: V1_E003
-Stage: TOONDESK_0_3_1_READY_USER_ROUNDTRIP_REQUIRED
+Stage: DONE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
 Plan: episodes/V1_E003/PLAN.md
-Run receipt: pending
+Run receipt: episodes/V1_E003/RUN_RECEIPT.md
 
 ## Runtime authority
 
@@ -139,9 +139,10 @@ No stochastic BOARD regeneration is authorized for presentation-only feedback.
 - STORYBOARD_USER_GATE: IMPLICITLY_ACCEPTED_BY_PRODUCTION_CONTINUATION
 - BOARD hard-fail QC: PASS
 - prior visual preview: APPROVED
-- FINAL_PUBLISH_GATE: REOPENED_FOR_CANONICAL_IDENTITY
-- reason: approved preview and handed-off package were not the same deterministic artifact
-- user prior decision recorded: 2026-09-08
+- FINAL_PUBLISH_GATE: APPROVED_BY_EXPLICIT_USER_CLOSE
+- user close decision recorded: 2026-09-09
+- canonical composition: episodes/V1_E003/composition/*.layout.json
+- run receipt: episodes/V1_E003/RUN_RECEIPT.md
 
 Important implementation note:
 - the approved visual preview was shown successfully, but the repository has not yet received the canonical V2 editable composition package / RUN_RECEIPT for V1_E003.
@@ -301,6 +302,18 @@ Font resolver repair:
 - availability checks now use the requested font weight and sample text
 - this specifically addresses the false `Gaegu 700 → Jua` fallback observed in the returned TD03 package
 
+## V1_E003 closure
+
+- EPISODE STATUS: DONE
+- closed by explicit user request on 2026-09-09
+- canonical shell: `JIPBAP_PRESENTATION_SHELL_V2`
+- profile revision: `2026-09-09_FULL_ART_OVERLAY`
+- canonical handoff candidate SHA-256: `bdd412e63f80ef0bd5d1fc555efb9840cb6a1ccadda5b04d452036c2de850817`
+- composition authority persisted under `episodes/V1_E003/composition/`
+- RUN_RECEIPT persisted
+- no additional TD031 user round-trip is required for E003 closure
+- do not mutate V1_E003 unless the user explicitly reopens episode 3
+
 ## Previous episode provenance
 
 V1_E001:
@@ -364,10 +377,9 @@ Primary interactive-editor transport changed 2026-09-09:
 
 ## Exact next action
 
-1. Use ToonDesk 0.3.1 Windows build (workflow run #23 PASS) with `V1_E003_제육볶음_COVER_RESTORED_TD031.toondesk`.
-2. Open S04/S06 and verify the new short rich tails no longer cross the focal face; optionally drag tail tip/attachment and adjust width/curve to confirm direct manipulation.
-3. Change one text object's actual font family once and visually confirm the preview changes. Export a package.
-4. Verify the returned package preserves all 7 layouts semantically, COVER provenance, rich-tail geometry and guide metadata; verify the chosen font's preferred/resolved families match when available and Gaegu 700 no longer false-falls back.
-5. Use those exact exported COVER + 6 BODY PNG derivatives as FINAL_PUBLISH_GATE preview.
-6. After approval, persist canonical V1_E003 composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
-7. Do not create V3 or a new production gate from these presentation/editor fixes.
+1. V1_E003 is DONE. Do not mutate it unless the user explicitly reopens episode 3.
+2. Preserve the structural improvements validated during E003: actual panel-boundary extraction, full-art V2 presentation, sticky COVER provenance, focal-aware lettering, rich speech-tail geometry, explicit font resolution, and ToonDesk Web Live transport.
+3. On the next new-episode request, boot latest main and create V1_E004 under the current JIPBAP_V1_SPEC.md.
+4. Use COVER 1 + BODY 6, one text-free 2×3 master board, deterministic crop/composition, and one final publish gate.
+5. Do not reintroduce the fixed lower meta band or separately generated approval preview.
+6. Do not create a new permanent gate from E003's historical repair loop.
