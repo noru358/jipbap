@@ -428,8 +428,8 @@ Frozen policy:
 - a situational establishing panel may use more context than a bite/detail panel, but contextual density should fall away once the story function is already readable.
 
 ### 2.5 Text
-- no meaning-bearing text is baked into generated BODY raster.
-- no generated speech bubbles, captions, labels, logos or panel numbers.
+- no meaning-bearing text is baked into generated BODY master-board cells or generated COVER source raster.
+- no generated speech bubbles, captions, labels, logos or panel numbers are accepted as source-art authority.
 - cover title, speech, narration, inner thought and SFX are editable deterministic composition objects.
 - final flattened PNG is not text authority; the literal string and geometry live in the page layout JSON.
 
@@ -571,11 +571,13 @@ A new hard gate requires repeated publish-blocking evidence across episodes, or 
 ## 8. Runtime / approval flow
 
 Normal production is **one ChatGPT conversation with multiple user turns**.
-Do not try to force PLAN → BOARD → FINAL into one assistant response.
+Do not try to force PLAN → ART → FINAL into one assistant response.
 
 Canonical production flow:
 
-`BOOT → PLAN → STORYBOARD_USER_GATE → BOARD → [TEMP_STYLE_GATE] → COVER → EXTRACT/FIT → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
+`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → EXTRACT/FIT → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
+
+`SIX_PANEL_BOARD_FIRST` remains the V1 BODY architecture. `INITIAL_ART_BUNDLE` is the image-authoring phase that produces the BODY master board and the separate COVER hero together before the artwork approval gate.
 
 ### 8.1 BOOT + PLAN turn
 At the beginning of a production chat:
@@ -587,38 +589,62 @@ At the beginning of a production chat:
 - present storyboard, copy draft, expression/camera intent, overall visual rhythm and continuity for user review;
 - stop at `STORYBOARD_USER_GATE`.
 
-The storyboard gate is permanent because it prevents expensive image work from proceeding on an unwanted story/copy/cut plan.
+The storyboard gate remains permanent because it prevents image work from proceeding on an unwanted story/copy/cut plan.
 
-### 8.2 BOARD turn — same conversation
-After the user approves the storyboard, continue in the **same chat**.
+When the user approves the storyboard:
+- treat that same turn as the normal carrier-binding handoff;
+- prefer repository-direct validated `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` bytes;
+- only when repository-direct binding is unavailable, the user supplies the exact already-approved PERSON + FOOD carriers once as `SESSION_ONLY` runtime carriers;
+- the carrier attachment does not create a new reference, story, episode or state reset.
 
-If a renderer-safe carrier is already USER_LOCKED:
-- the user attaches only `JIPBAP_STYLE_CARRIER_V1` once in the approval/BOARD message;
-- the attachment is a SESSION_ONLY runtime carrier, not new creative authority;
-- generate the text-free 2×3 master board;
-- apply V1 hard-fail QC.
+### 8.2 INITIAL_ART_BUNDLE — same image-authoring phase
+After storyboard approval and carrier binding, create the initial artwork bundle before asking for another approval.
 
-Do not ask the user to reattach the carrier again within the same chat.
+The bundle contains two separate source artifacts:
+1. **BODY master board** — exactly one text-free 2×3 board containing S01..S06.
+2. **COVER hero** — exactly one independently authored, text-free cover-source artwork.
 
-### 8.3 Temporary style gate
-While `JIPBAP_STYLE_CARRIER_V1` is still being calibrated, show the generated master board once for user style/board approval before ASSEMBLY.
+They are created in the same initial image-authoring phase, but they are **not one combined raster**:
+- COVER does not consume a BODY cell;
+- COVER is not a crop/reuse of a BODY cell;
+- COVER has its own source/provenance;
+- BODY still obeys the frozen six-cell board contract.
 
-This is a temporary calibration checkpoint, not a permanent production gate.
+COVER is defined by role, not by a hardcoded relation to specific BODY slots:
+- it should function as the episode's cover/hero image and represent the episode's food/emotion/situation;
+- camera, framing, pose, expression, food placement and title-safe negative space remain story-driven;
+- do not encode rules such as “different from S04/S06” or any other slot-specific prohibition;
+- similarity to a BODY composition is a soft quality consideration unless it causes an actual publish-blocking failure or source/provenance confusion.
 
-After the carrier is USER_LOCKED and repeated production evidence shows stable style delivery:
-- remove/disable the routine BOARD user gate;
-- internal QC may pass BOARD directly to ASSEMBLY.
+Run the existing V1 hard-fail logic on the BODY board. Apply the same publish-blocking standard to COVER for unintended generated text, wrong core menu/entity, catastrophic PERSON/style drift, or focal anatomy/contact failure.
+Do not create a new permanent gate from ordinary cover-composition preference.
 
-Normal steady-state user gates are therefore:
+If only one bundle component fails or is rejected, regenerate/repair only that component unless the defect proves the shared style delivery itself is invalid.
+
+### 8.3 ART_BUNDLE_USER_GATE
+Show the BODY master board and the distinct COVER hero together for user review.
+
+This is the normal artwork approval gate.
+The user may approve, reject, or request changes to BODY, COVER, or both.
+
+On approval:
+- lock the exact accepted BODY board source bytes/provenance;
+- lock the exact accepted COVER source bytes/provenance;
+- do not stochastically redraw either source for downstream crop, layout, lettering, typography or editor work;
+- presentation-only feedback never authorizes BODY/COVER regeneration.
+
+Normal V1 user gates are therefore:
 1. storyboard approval;
-2. final publish approval.
+2. initial artwork bundle approval;
+3. final publish approval.
 
-### 8.4 COVER + PRESENTATION MASTER + EDITABLE RECONSTRUCTION
-After BOARD PASS:
-- create/select one distinct text-free COVER hero artwork under the approved episode intent and locked renderer style delivery;
-- detect/confirm the six actual panel boundaries and extract six cells as accepted raster artwork; never assume equal pixel split coordinates merely from board dimensions;
-- fit accepted COVER/BODY artwork into full-canvas 4:5 pages without stretching;
-- lock the exact approved artwork sources for the presentation stage.
+This artwork gate replaces the old split “BOARD approval now / COVER later” operating pattern. It is not a slot template and does not freeze creative staging.
+
+### 8.4 EXTRACT/FIT + PRESENTATION MASTER + EDITABLE RECONSTRUCTION
+After `ART_BUNDLE_USER_GATE` approval:
+- detect/confirm the six actual BODY panel boundaries and extract six cells as accepted raster artwork; never assume equal pixel split coordinates merely from board dimensions;
+- fit the accepted COVER and BODY artwork into full-canvas 4:5 pages without stretching;
+- preserve the exact accepted artwork sources for the presentation stage.
 
 Then create `PRESENTATION_MASTER_DRAFT`:
 - compose the complete 7-page carousel with final copy, natural bubble shapes/tails, line breaks, typography character, cover title treatment, SFX and local spacing;
@@ -633,7 +659,7 @@ At `FINAL_PUBLISH_GATE`:
 - store page-level target provenance/hash.
 
 After approval, do `EDITABLE_RECONSTRUCTION`:
-- use the exact accepted BOARD/COVER raster artwork, not the potentially reinterpreted pixels inside the visual draft;
+- use the exact accepted BODY-board extractions and exact accepted COVER raster, not stochastic reinterpretations;
 - reconstruct bubble / text / SFX / title / decoration as editable scene objects;
 - inherit geometry/style from the approved presentation master rather than re-applying generic shell defaults;
 - shell presets may fill unspecified details only.
@@ -646,10 +672,10 @@ Then run `PRESENTATION_PARITY_QC`:
 
 The final editable layout package remains presentation authority after reconstruction.
 The approved presentation master is its bound visual target, not an unrelated preview.
-A lettering/layout-only defect never authorizes stochastic BOARD regeneration.
+A lettering/layout-only defect never authorizes stochastic artwork regeneration.
 
-### 8.5 When to start a new chat
-A new chat is **not** required between PLAN and BOARD or between BOARD and FINAL.
+### 8.5 When to start a new chat / approved-art continuity
+A new chat is **not** required between PLAN and `INITIAL_ART_BUNDLE` or between `ART_BUNDLE_USER_GATE` and FINAL.
 
 Start a new chat only when:
 - the conversation approaches a product/context limit;
@@ -659,8 +685,16 @@ Start a new chat only when:
 
 Before handoff, save current stage and exact next action in `CURRENT_STATE.md`.
 
-If the resumed stage requires image generation, attach `JIPBAP_STYLE_CARRIER_V1` once in the new chat.
-If the resumed stage is EXTRACT/FIT, PRESENTATION_MASTER_DRAFT, EDITABLE_RECONSTRUCTION or PRESENTATION_PARITY_QC only, no style carrier is required unless actual image generation is needed for a new presentation-master visual draft.
+If resumed before artwork-bundle approval and image generation is still needed, bind the approved renderer carriers once in the new chat.
+
+If resumed after artwork-bundle approval:
+- prefer materialized episode artwork bytes for the exact approved BODY and COVER;
+- if those exact bytes are not materialized but are available as user/session artifacts, re-supply the exact approved artwork as a `SESSION_ONLY` production-art carrier;
+- a path, hash, generation id or prose description without the approved pixels is not permission to redraw them;
+- **never regenerate an approved BODY or COVER merely because a new chat cannot access its bytes**;
+- if exact approved bytes are unavailable, fail closed and request/recover those exact bytes rather than creating a replacement.
+
+If the resumed stage is EXTRACT/FIT, PRESENTATION_MASTER_DRAFT, EDITABLE_RECONSTRUCTION or PRESENTATION_PARITY_QC, renderer style carriers are not required unless the user explicitly reopens stochastic artwork generation.
 
 ## 9. Creative references vs renderer carrier
 
@@ -724,11 +758,15 @@ This separation prevents raw-reference semantic content from sharing the same im
 ### 9.4 Production attachment timing
 For normal episode production after both projections are USER_LOCKED:
 1. start the chat with no image attachment and reach storyboard approval;
-2. in the same chat, bind `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` once, preferring repository-direct validated bytes and using identical SESSION_ONLY carriers only when direct binding is unavailable;
-3. continue BOARD → distinct COVER hero → deterministic ASSEMBLY → FINAL in that conversation.
+2. in the storyboard-approval turn, bind `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` once, preferring repository-direct validated bytes and using identical `SESSION_ONLY` carriers only when direct binding is unavailable;
+3. generate `INITIAL_ART_BUNDLE`: one text-free BODY 2×3 master board plus one separate text-free COVER hero in the same initial image-authoring phase;
+4. present both at `ART_BUNDLE_USER_GATE`;
+5. after approval, continue deterministic extraction/FIT → presentation master → final publish gate without stochastic BODY/COVER regeneration.
 
 The attachment does not reset episode/state/story and does not create a new reference.
-It is a SESSION_ONLY pixel carrier for the already locked runtime style projection.
+It is a `SESSION_ONLY` pixel carrier for the already locked runtime style projection.
+
+COVER role is episode-level and fluid. Do not turn current-episode observations about any specific BODY slot into permanent COVER rules.
 
 ### 9.5 Reference/media integrity
 Reference or carrier byte validation is not a per-run ritual.
