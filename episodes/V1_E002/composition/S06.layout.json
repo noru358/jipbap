@@ -4,7 +4,8 @@
   "page": {
     "width": 1080,
     "height": 1350,
-    "background": "#fff9f0"
+    "background": "#fff9f0",
+    "page_type": "body"
   },
   "objects": [
     {
@@ -17,7 +18,23 @@
       "height": 1000,
       "fit": "contain_1to1",
       "allow_stretch": false,
-      "z": 1
+      "z": 1,
+      "visible": true,
+      "rotation": 0,
+      "group_id": "s06.artwork",
+      "locked": true,
+      "crop": {
+        "mode": "frame_crop",
+        "scale": 1,
+        "offset_x": 0,
+        "offset_y": 0,
+        "anchor_x": 0.5,
+        "anchor_y": 0.5,
+        "allow_stretch": false,
+        "allow_rotation": false,
+        "clamp_to_frame": true,
+        "editable": true
+      }
     },
     {
       "id": "s06_thought",
@@ -30,7 +47,11 @@
       "fill": "#fff7e8",
       "stroke": "#b7a995",
       "stroke_width": 2,
-      "z": 10
+      "z": 10,
+      "visible": true,
+      "rotation": 0,
+      "locked": false,
+      "group_id": "s06.thought.01"
     },
     {
       "id": "s06_thought_text",
@@ -48,7 +69,10 @@
       },
       "fill": "#221f1d",
       "rotation": 0,
-      "z": 11
+      "z": 11,
+      "visible": true,
+      "locked": false,
+      "group_id": "s06.thought.01"
     },
     {
       "id": "s06_bubble",
@@ -65,7 +89,11 @@
       "fill": "#ffffff",
       "stroke": "#221f1d",
       "stroke_width": 4,
-      "z": 10
+      "z": 10,
+      "visible": true,
+      "rotation": 0,
+      "locked": false,
+      "group_id": "s06.speech.01"
     },
     {
       "id": "s06_speech",
@@ -83,7 +111,83 @@
       },
       "fill": "#221f1d",
       "rotation": 0,
-      "z": 11
+      "z": 11,
+      "visible": true,
+      "locked": false,
+      "group_id": "s06.speech.01"
+    }
+  ],
+  "scene_model": "EDITOR_SCENE_MODEL_V1",
+  "groups": [
+    {
+      "id": "s06.background",
+      "parent_id": null,
+      "role": "background",
+      "z_band": [
+        0,
+        0
+      ],
+      "visible": true,
+      "locked": true
+    },
+    {
+      "id": "s06.artwork",
+      "parent_id": null,
+      "role": "artwork",
+      "z_band": [
+        1,
+        9
+      ],
+      "visible": true,
+      "locked": true,
+      "interaction": {
+        "frame_transform": "locked",
+        "crop": "editable"
+      }
+    },
+    {
+      "id": "s06.lettering",
+      "parent_id": null,
+      "role": "lettering",
+      "z_band": [
+        10,
+        99
+      ],
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "s06.overlay",
+      "parent_id": null,
+      "role": "overlay",
+      "z_band": [
+        100,
+        199
+      ],
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "s06.thought.01",
+      "parent_id": "s06.lettering",
+      "role": "inner_thought",
+      "z_band": [
+        10,
+        99
+      ],
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "s06.speech.01",
+      "parent_id": "s06.lettering",
+      "role": "speech",
+      "z_band": [
+        10,
+        99
+      ],
+      "visible": true,
+      "locked": false
     }
   ]
 }

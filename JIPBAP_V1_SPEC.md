@@ -137,10 +137,95 @@ Shared renderer/editor contract:
 - accepted artwork must remain byte-identical unless the user explicitly requests an artwork-level change;
 - the interactive editor must remain optional: absence of the future API/editor must not block or alter the current Chat-mode production path.
 
-Detailed COVER/BODY object grouping, locking defaults, crop behavior, typography roles and placement freedoms are deliberately deferred to the next presentation-shell design pass.
-Do not hardcode them here before that pass is approved.
+### 1.4.1 Frozen editor-facing layer contract
 
-This package structure is an output-interface rule, not a new user gate and not a new BOARD hard-fail class.
+The V1 editor scene model is now frozen as `EDITOR_SCENE_MODEL_V1`.
+
+All COVER and BODY pages share the same four top-level layers, in this order:
+1. `background`
+2. `artwork`
+3. `lettering`
+4. `overlay`
+
+The scene graph is metadata over a flat `objects[]` list. Objects remain flat for current Chat renderer compatibility; `groups[]` supplies parent/child semantics for the future direct-manipulation editor.
+
+Top-level defaults:
+- `background`: visible and locked.
+- `artwork`: visible; frame transform locked; crop content editable.
+- `lettering`: visible and editable.
+- `overlay`: visible/editable but empty by default; optional non-story decorative vectors only.
+- meaning-bearing text belongs in `lettering`.
+
+Stable z-bands:
+- background: 0
+- artwork: 1..9
+- lettering: 10..99
+- overlay: 100..199
+
+COVER hierarchy:
+- `cover.background`
+- `cover.artwork`
+- `cover.lettering`
+  - `cover.menu_tag`
+  - `cover.title`
+- `cover.overlay`
+
+The menu-tag and title groups are stable editor groups. Their child object count may vary for styling/line treatment while group identity stays fixed. Subtitle/deck remains optional and hidden by default.
+
+BODY hierarchy for each page `SNN`:
+- `sNN.background`
+- `sNN.artwork`
+- `sNN.lettering`
+  - zero or more `sNN.speech.NN`
+  - zero or more `sNN.thought.NN`
+  - zero or more `sNN.narration.NN`
+  - zero or more `sNN.sfx.NN`
+- `sNN.overlay`
+
+The top-level BODY hierarchy is fixed; semantic lettering instance count remains fluid. Speech/thought groups contain separate container geometry and text objects: group move moves both, while data stays independently editable/ungroupable.
+
+Lock defaults:
+- page background: locked.
+- artwork frame geometry: locked.
+- accepted artwork raster: not replaceable by normal presentation editing.
+- artwork crop metadata: editable through crop mode.
+- lettering and overlay objects: unlocked by default.
+- lock changes never authorize BOARD regeneration.
+
+Artwork frame/crop interaction:
+- shell owns artwork x/y/width/height;
+- normal drag/resize/rotate does not change the frame in V1;
+- crop mode may pan and uniformly scale the accepted raster inside the frame;
+- default crop: centered, scale 1.0, zero offset;
+- stretching and crop rotation disabled;
+- crop pan/scale cannot expose empty frame area;
+- crop edits mutate scene metadata only; source artwork bytes stay identical.
+
+Placement freedom:
+- COVER lettering stays inside the title-safe region by default; hero geometry never moves for copy.
+- BODY lettering is not tied to fixed caption slots.
+- preferred first-pass zones are the top band above artwork and bottom band below it; controlled artwork overlap is allowed when composition benefits.
+- unnecessary coverage of focal food/face is a soft quality issue, not a new hard gate.
+- copy overflow is repaired by reline/shorten/reposition/font-size adjustment within the role preset, never by squeezing artwork.
+
+Typography role presets are implementation defaults, not font-family locks:
+- `cover_menu_tag`: nominal 30 px, 26..34, bold.
+- `cover_title`: nominal 92 px, 72..112, bold display.
+- `body_speech`: nominal 42 px, 36..46, bold.
+- `body_thought`: nominal 38 px, 34..42, regular.
+- `body_narration`: nominal 36 px, 32..40, medium; text-only by default.
+- `body_sfx`: nominal 64 px, 44..84, bold hand-drawn display.
+
+Runtime font substitution remains allowed; semantic typography role is authority and no font binary is.
+
+Scene object requirements:
+- page-level `scene_model: EDITOR_SCENE_MODEL_V1`;
+- page type `cover` or `body`;
+- stable `groups[]` metadata;
+- each render object carries `group_id`, `visible`, `locked`, and `rotation` where applicable;
+- artwork carries explicit crop metadata.
+
+This layer contract is a presentation/interface rule, not a new user gate and not a new BOARD hard-fail class. Malformed scene data that cannot render deterministically is an artifact-integrity error, never a reason to regenerate accepted BOARD artwork.
 
 
 ### 1.5 Frozen presentation shell

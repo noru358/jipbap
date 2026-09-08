@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/noru358/jipbap/schemas/editor_scene_model_v1.schema.json",
+  "title": "EDITOR_SCENE_MODEL_V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "scene_model",
+    "template_id",
+    "page",
+    "groups",
+    "objects"
+  ],
+  "properties": {
+    "schema": {
+      "const": "EDITABLE_COMPOSITION_PACKAGE_V1"
+    },
+    "scene_model": {
+      "const": "EDITOR_SCENE_MODEL_V1"
+    },
+    "template_id": {
+      "type": "string"
+    },
+    "page": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "background",
+        "page_type"
+      ],
+      "properties": {
+        "width": {
+          "const": 1080
+        },
+        "height": {
+          "const": 1350
+        },
+        "background": {
+          "type": "string"
+        },
+        "page_type": {
+          "enum": [
+            "cover",
+            "body"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "z_band",
+          "visible",
+          "locked"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "z_band": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "interaction": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "group_id",
+          "visible",
+          "locked",
+          "z"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "artwork",
+              "bubble",
+              "thought_box",
+              "caption_box",
+              "text",
+              "sfx",
+              "shape"
+            ]
+          },
+          "group_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "rotation": {
+            "type": "number"
+          },
+          "z": {
+            "type": "integer"
+          },
+          "crop": {
+            "type": "object",
+            "properties": {
+              "mode": {
+                "const": "frame_crop"
+              },
+              "scale": {
+                "type": "number",
+                "minimum": 1
+              },
+              "offset_x": {
+                "type": "number"
+              },
+              "offset_y": {
+                "type": "number"
+              },
+              "anchor_x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "anchor_y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "allow_stretch": {
+                "const": false
+              },
+              "allow_rotation": {
+                "const": false
+              },
+              "clamp_to_frame": {
+                "const": true
+              },
+              "editable": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -15,7 +15,22 @@
       "allow_stretch": false
     },
     "page_markers": false,
-    "text_policy": "move_or_compress_text_never_move_artwork"
+    "text_policy": "move_or_compress_text_never_move_artwork",
+    "group_contract": {
+      "top_level_pattern": [
+        "{page}.background",
+        "{page}.artwork",
+        "{page}.lettering",
+        "{page}.overlay"
+      ],
+      "lettering_instance_patterns": [
+        "{page}.speech.NN",
+        "{page}.thought.NN",
+        "{page}.narration.NN",
+        "{page}.sfx.NN"
+      ],
+      "fixed_instance_count": false
+    }
   },
   "cover": {
     "title_safe_region": {
@@ -37,7 +52,20 @@
       "title",
       "hero_artwork"
     ],
-    "subtitle_default": false
+    "subtitle_default": false,
+    "group_contract": {
+      "top_level": [
+        "cover.background",
+        "cover.artwork",
+        "cover.lettering",
+        "cover.overlay"
+      ],
+      "lettering_children": [
+        "cover.menu_tag",
+        "cover.title"
+      ],
+      "subtitle_group": "optional_hidden_by_default"
+    }
   },
   "lettering": {
     "speech": {
@@ -58,6 +86,158 @@
       "container": "none",
       "editable": true,
       "rotation_allowed": true
+    },
+    "narration": {
+      "container": "none",
+      "tail": false,
+      "editable": true
+    }
+  },
+  "editor_scene_model": {
+    "id": "EDITOR_SCENE_MODEL_V1",
+    "storage": {
+      "objects": "flat_object_list",
+      "groups": "metadata_scene_graph"
+    },
+    "top_level_layers": [
+      "background",
+      "artwork",
+      "lettering",
+      "overlay"
+    ],
+    "z_bands": {
+      "background": [
+        0,
+        0
+      ],
+      "artwork": [
+        1,
+        9
+      ],
+      "lettering": [
+        10,
+        99
+      ],
+      "overlay": [
+        100,
+        199
+      ]
+    },
+    "layer_defaults": {
+      "background": {
+        "locked": true,
+        "visible": true
+      },
+      "artwork": {
+        "locked": true,
+        "visible": true,
+        "frame_transform": "locked",
+        "crop_editable": true
+      },
+      "lettering": {
+        "locked": false,
+        "visible": true
+      },
+      "overlay": {
+        "locked": false,
+        "visible": true,
+        "default_empty": true
+      }
+    },
+    "common_object_defaults": {
+      "visible": true,
+      "rotation": 0
+    }
+  },
+  "artwork_interaction": {
+    "geometry_source": "presentation_shell",
+    "frame_move": false,
+    "frame_resize": false,
+    "frame_rotation": false,
+    "crop_mode": "frame_crop",
+    "crop_default": {
+      "scale": 1,
+      "offset_x": 0,
+      "offset_y": 0,
+      "anchor_x": 0.5,
+      "anchor_y": 0.5,
+      "allow_stretch": false,
+      "allow_rotation": false,
+      "clamp_to_frame": true
+    },
+    "editor_gesture": "select_artwork_then_enter_crop_mode"
+  },
+  "placement_defaults": {
+    "cover": {
+      "lettering_bounds": "title_safe_region",
+      "artwork_bounds": "hero_frame",
+      "artwork_never_moves_for_copy": true
+    },
+    "body": {
+      "preferred_text_zones": [
+        {
+          "name": "top_band",
+          "x": 60,
+          "y": 24,
+          "width": 960,
+          "height": 151
+        },
+        {
+          "name": "bottom_band",
+          "x": 60,
+          "y": 1175,
+          "width": 960,
+          "height": 151
+        }
+      ],
+      "free_canvas_reposition": true,
+      "controlled_artwork_overlap_allowed": true,
+      "avoid_covering_focal_food_or_face": "soft_quality_rule",
+      "artwork_never_moves_for_copy": true
+    }
+  },
+  "typography_roles": {
+    "cover_menu_tag": {
+      "family_intent": "friendly_round_display",
+      "nominal_size": 30,
+      "min_size": 26,
+      "max_size": 34,
+      "weight": 700
+    },
+    "cover_title": {
+      "family_intent": "friendly_handdrawn_display",
+      "nominal_size": 92,
+      "min_size": 72,
+      "max_size": 112,
+      "weight": 700
+    },
+    "body_speech": {
+      "family_intent": "friendly_round_body",
+      "nominal_size": 42,
+      "min_size": 36,
+      "max_size": 46,
+      "weight": 700
+    },
+    "body_thought": {
+      "family_intent": "friendly_round_body",
+      "nominal_size": 38,
+      "min_size": 34,
+      "max_size": 42,
+      "weight": 400
+    },
+    "body_narration": {
+      "family_intent": "friendly_round_body",
+      "nominal_size": 36,
+      "min_size": 32,
+      "max_size": 40,
+      "weight": 500
+    },
+    "body_sfx": {
+      "family_intent": "handdrawn_display",
+      "nominal_size": 64,
+      "min_size": 44,
+      "max_size": 84,
+      "weight": 700
     }
   }
 }

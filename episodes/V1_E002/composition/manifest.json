@@ -25,5 +25,9 @@
   "publish_page_markers": false,
   "current_runtime_package_sha256": "29ca16ead377b2cf63d7653cfcfd633ef380e4b1979d57c59c5653a4d4278ecc",
   "copy_revision": "compressed_after_user_feedback",
-  "s05_artwork_payoff_change": "deferred_by_user"
+  "s05_artwork_payoff_change": "deferred_by_user",
+  "scene_model": "EDITOR_SCENE_MODEL_V1",
+  "layer_contract": "FOUR_LAYER_SHARED_V1",
+  "artwork_frame_transform": "locked",
+  "artwork_crop": "editable_metadata_only"
 }
