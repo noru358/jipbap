@@ -4,6 +4,7 @@ Updated: 2026-09-08
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
+Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Status: ACTIVE
 
 ## Active production state
@@ -67,7 +68,23 @@ Complete:
 Final carousel ZIP SHA-256:
 - 3214a3b8c7c39a4fe34fbbe9f1d0eece211a60553e14c19ea43a10fa2953637f
 
-No stochastic BOARD regeneration is authorized for lettering/layout-only feedback.
+## Editable composition retrofit
+
+V1 presentation output contract is now EDITABLE_COMPOSITION_PACKAGE_V1.
+
+Current V1_E002 runtime package:
+- artwork: six accepted BOARD crops
+- presentation authority: per-page layout JSON
+- editable derivative: per-page SVG
+- publish derivative: flattened PNG
+- S02 "톡": independent SFX object s02_sfx_01
+- runtime package ZIP SHA-256: 4175c23da45ec0036958997bed34365f5111dfcfded9f07dfa39f9be6095d6b0
+
+Text, bubble and SFX strings/geometry can be changed independently without modifying accepted artwork.
+The package contract is defined in JIPBAP_V1_SPEC.md.
+This adds no new user gate and no new BOARD hard-fail class.
+
+No stochastic BOARD regeneration is authorized for presentation-only feedback.
 
 ## Previous episode provenance
 
@@ -82,8 +99,9 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Keep V1_E002 open at FINAL_PUBLISH_GATE while the user provides follow-up feedback after provisional approval.
-2. Apply only the requested deterministic cover/lettering/layout repairs if feedback is presentation-only; do not regenerate the accepted BOARD for such feedback.
-3. If feedback identifies a true publish-blocking BOARD defect, handle it under the existing V1 hard-fail rules rather than inventing a new permanent gate.
-4. After the user finishes feedback and confirms the final result, mark V1_E002 DONE and preserve the final carousel ZIP hash in CURRENT_STATE / receipt.
-5. Add no new routine gate or hard-fail class from isolated soft-quality observations.
+1. Keep V1_E002 open at FINAL_PUBLISH_GATE while the user gives follow-up content/presentation feedback.
+2. Apply copy, bubble, title, SFX and placement changes by mutating editable composition objects and rerendering deterministic derivatives.
+3. Do not regenerate the accepted BOARD for those changes.
+4. If feedback identifies an artwork-level publish-blocking defect, use the existing V1 hard-fail rules rather than adding a new permanent gate.
+5. Preserve EDITABLE_COMPOSITION_PACKAGE_V1 for subsequent episodes so later external tooling can directly edit text/SFX geometry.
+6. After feedback is finished and the user confirms the final result, mark V1_E002 DONE and preserve final package/export hashes.
