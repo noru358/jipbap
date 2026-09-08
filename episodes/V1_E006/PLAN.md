@@ -1,6 +1,6 @@
 # V1_E006 PLAN
 
-Status: STORYBOARD_USER_GATE
+Status: EXTRACT_FIT
 Food: 두부조림
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
@@ -34,11 +34,32 @@ Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 
 ## Approval state
 
-- STORYBOARD_USER_GATE: PENDING
-- BODY master BOARD: NOT_STARTED
-- COVER hero: NOT_STARTED
-- ART_BUNDLE_USER_GATE: NOT_STARTED
+- STORYBOARD_USER_GATE: APPROVED
+- BODY master BOARD: APPROVED_AND_LOCKED
+- BODY generation id: `54838e01-8a57-41ad-8ab2-e3b2517cec0e`
+- BODY session SHA-256: `10fa1ed93513497a3372e43f50416ab57710a83fb2e27ef70efe6cc753e0341d`
+- BODY dimensions: 1024 × 1536
+- COVER hero: APPROVED_AND_LOCKED
+- COVER generation id: `100db926-2200-4ecf-8db7-9b8a6cb01639`
+- COVER session SHA-256: `fd7cc633fdf13e2c50d505f884390b7474ace94ce8d11933e75d69a059aee284`
+- COVER dimensions: 1122 × 1402
+- ART_BUNDLE_USER_GATE: APPROVED
 - FINAL_PUBLISH_GATE: NOT_STARTED
+
+## Post-approval presentation QC
+
+The first seven-page lettered attempt after artwork approval is rejected and non-canonical.
+
+Reason:
+- it used stochastic image generation to recreate COVER and each BODY page instead of preserving the exact approved COVER/BODY pixels;
+- therefore character pose, background, food rendering and composition changed after the artwork lock;
+- this violates approved-art immutability and approval identity;
+- S05 also became less explicit about the spoon actively crushing the tofu at the visible contact moment, weakening the episode's required signature action.
+
+Disposition:
+- keep the approved BODY/COVER sources locked;
+- discard only the seven regenerated lettered pages;
+- rebuild from actual BODY border extraction + exact COVER FIT + presentation overlays.
 
 ## COVER storyboard
 
