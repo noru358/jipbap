@@ -12,24 +12,27 @@ Status: IN_PROGRESS
 
 ## Active production state
 
-Active episode: V1_E005
-Stage: FINAL_PUBLISH_GATE
+Active episode: V1_E006
+Stage: STORYBOARD_USER_GATE
 
-## Boot snapshot — current episode is read-only during infrastructure work
+## Boot snapshot — active new episode
 
-- Active episode: `V1_E005`
-- Current stage: `FINAL_PUBLISH_GATE`
-- STORYBOARD_USER_GATE: APPROVED
-- FOOD renderer projection: APPROVED / USER_LOCKED
-- BODY master BOARD: APPROVED (`f1c27c4a635406d616f1649127318767ba22ba5d2d51f87088db4808fd76c126`)
-- distinct COVER hero: APPROVED (`eba699359373e2534fe5edcfd027c78af0e77962c2609607b086047960828fc8`)
-- PRESENTATION_MASTER_DRAFT candidate: awaiting user decision (`38f25a32289af32631279c2ec8afecf3997292e8043b649dddf2e0c6b4a6b226`)
-- This infrastructure change does not regenerate, reopen, approve, reject, or otherwise mutate V1_E005 artwork/story/copy state.
+- Active episode: `V1_E006`
+- Current stage: `STORYBOARD_USER_GATE`
+- Food: 두부조림
+- STORYBOARD_USER_GATE: PENDING
+- PERSON renderer projection: USER_LOCKED; bind only when BOARD image generation begins
+- FOOD renderer projection: USER_LOCKED; bind only when BOARD image generation begins
+- BODY master BOARD: NOT_STARTED
+- distinct COVER hero: NOT_STARTED
+- FINAL_PUBLISH_GATE: NOT_STARTED
+- Plan: `episodes/V1_E006/PLAN.md`
+- V1_E005 remains preserved at its prior `FINAL_PUBLISH_GATE` with its accepted BOARD/COVER/presentation-master candidate unchanged; starting V1_E006 does not approve, reject, regenerate, or close V1_E005.
 
-Exact next action for episode production remains:
-1. Await user decision on the current V1_E005 quality-first `PRESENTATION_MASTER_DRAFT`.
-2. If approved, reconstruct exact accepted artwork/copy into the editable package and run `PRESENTATION_PARITY_QC`.
-3. If rejected, revise presentation design only unless the user explicitly reopens artwork.
+Exact next action for episode production:
+1. Await user decision on the V1_E006 두부조림 storyboard/copy/camera/continuity plan.
+2. If approved, continue in the same chat to BOARD preparation and bind the already USER_LOCKED PERSON/FOOD renderer carriers once when image generation is actually needed.
+3. If rejected or edited, revise V1_E006 PLAN only; do not generate artwork before storyboard approval.
 
 Infrastructure upgrade completed for future/new work:
 - JIPBAP planning/copy guidance now co-designs image + lettering space without putting text into the BOARD.
@@ -51,8 +54,8 @@ BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
-Plan: episodes/V1_E005/PLAN.md
-Run receipt: pending FINAL_PUBLISH_GATE approval
+Plan: episodes/V1_E006/PLAN.md
+Run receipt: pending STORYBOARD_USER_GATE approval
 
 ## Runtime authority
 
