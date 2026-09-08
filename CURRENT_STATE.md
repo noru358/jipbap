@@ -38,7 +38,7 @@ Canonical flow upgraded 2026-09-09:
 - `INITIAL_ART_BUNDLE` creates one text-free BODY 2×3 master board plus one separate text-free COVER hero before artwork approval;
 - BODY and COVER are shown together at `ART_BUNDLE_USER_GATE`;
 - that approval locks the exact BODY/COVER artwork sources for all downstream extraction, presentation and editor work;
-- COVER is governed by role, not by any specific BODY slot; no permanent rule such as “different from S04/S06” is allowed;
+- COVER is governed by role, not by any specific BODY slot; slot-specific camera/composition restrictions do not become permanent rules;
 - approved artwork is never regenerated merely because a later/new chat lacks its bytes; recover/re-supply the exact accepted pixels or fail closed.
 
 V1_E006 migration:
