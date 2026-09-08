@@ -123,6 +123,49 @@ External-editor contract:
 
 This package structure is an output-interface rule, not a new user gate and not a new BOARD hard-fail class.
 
+
+### 1.5 Frozen presentation shell
+
+V1 presentation geometry is fixed so episodes can be edited externally without per-episode frame drift.
+
+Template id:
+- `JIPBAP_PRESENTATION_SHELL_V1`
+
+Canvas:
+- all pages: 1080 × 1350 (4:5)
+
+BODY artwork frame:
+- x = 40
+- y = 175
+- width = 1000
+- height = 1000
+- accepted square BOARD cell is fit 1:1 into this frame
+- artwork is never stretched or aspect-distorted
+- BODY artwork frame does not move to make room for copy
+
+BODY presentation rule:
+- the artwork frame is fixed across S01–S06;
+- text, bubble, thought-box and SFX objects may move within the page;
+- if copy does not fit cleanly, shorten/reline/reposition the copy object rather than shifting or squeezing artwork;
+- no visible page numbers or internal episode markers in publish output.
+
+COVER geometry:
+- title safe region: x = 60..1020, y = 50..300
+- hero artwork frame: x = 60, y = 330, width = 960, height = 960
+- accepted square artwork is fit 1:1 without distortion
+- default cover grammar is one small menu tag + one dominant title + one hero artwork
+- subtitle/deck is optional, not a default requirement
+- title and hero must remain visually separate; do not squeeze hero artwork to make extra text fit.
+
+Lettering semantics:
+- `speech`: white speech bubble with a visible tail toward the speaker; dark outline.
+- `inner_thought`: tail-free warm off-white thought box with a lighter/muted outline.
+- `sfx`: independent text/SFX object with no bubble; may be moved/rotated/scaled.
+- literal strings and geometry remain editable in layout JSON.
+- a semantic role must not be conveyed only by the words themselves; speech, thought and SFX should be visually distinguishable before reading.
+
+This shell freezes presentation geometry, not story staging. Camera, pose, crop content inside the accepted BOARD cell, expression and object placement in the generated art remain fluid.
+
 ## 2. Frozen visual result range
 
 ### 2.1 PERSON
@@ -250,6 +293,7 @@ Frozen copy grammar:
 - when copy adds food information, prefer one concrete sensory observation from the immediate bite: aroma, heat, texture, seasoning, moisture, aftertaste or the effect of combining foods
 - describe why the bite works rather than relying on generic praise such as simply saying it is delicious
 - copy should add what the image cannot fully show — mouthfeel, smell, temperature, flavor transition, aftertaste or the impulse to take another bite — rather than narrating an obvious hand motion
+- on mobile, prefer one short reaction and at most one concrete sensory observation per beat; if copy starts competing with the artwork, compress the copy rather than enlarging the lettering area or moving the fixed artwork frame
 - silent BODY panels are allowed when the image carries the beat
 - do not force a `잘 먹었다`, lesson, punchline or emotional conclusion
 - inner thought, speech and narration are separate editable layers
