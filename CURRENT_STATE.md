@@ -53,7 +53,7 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_COVER_TITLE_SYSTEM_V1`
+- V2 revision: `2026-09-09_UNIQUE_COVER_ORGANIC_LETTERING_V1`
 - canvas: 1080 × 1350
 - COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
@@ -432,9 +432,31 @@ Structural changes applied:
 - later deterministic BOARD-derived candidate: preserved for feedback at `episodes/V1_E004/review_candidates/DETERMINISTIC_GATE_20260909.md`
 - known FOOD-realism / cross-domain coherence issues remain accepted soft-quality feedback for future episodes
 - the E004 page-level stochastic final selection is an explicit one-episode override and does not change the normal V1 deterministic approval-identity path
+## V1_E004 post-publish structural feedback
+
+- published V1_E004 artifact remains CLOSED and unchanged.
+- postmortem: `episodes/V1_E004/POSTMORTEM_20260909.md`
+- repeated FOOD photorealism is now classified as unresolved renderer style-delivery, not merely prompt wording.
+- new renderer-safe projection required before next production BOARD: `JIPBAP_FOOD_STYLE_CARRIER_V1`.
+- COVER automatic default: distinct text-free hero artwork; no silent BODY-cell reuse.
+- `COVER_TITLE_SYSTEM_V1` remains; EP label defaults to plain lettering without an enclosing bubble/pill.
+- BODY speech default: soft organic oval bubble + hand-drawn typography; horizontal bubble flip supported in ToonDesk.
+- ingestion/copy timing rule added: flavor/mouthfeel claims cannot precede visible or already-established ingestion.
+
+## ToonDesk 0.3.2 checkpoint
+
+- repository: `noru358/Toondesk`
+- package version: 0.3.2
+- speech bubble horizontal flip: IMPLEMENTED
+- default bubble silhouette: `soft_oval`
+- default tail: narrower + more curved
+- JIPBAP hand-drawn typography profile mirror: UPDATED
+- JavaScript syntax validation: PASS for core/render/panels/actions/interaction/io/wiring
+- this editor change does not mutate completed E004 output.
 ## Exact next action
 
-1. V1_E004 is DONE. Do not mutate its selected publish artifact unless the user explicitly reopens episode 4.
-2. Accept forthcoming feedback on the preserved deterministic candidate as structural/pipeline feedback by default, without silently replacing the published E004 artifact.
-3. Carry forward the accepted structural improvements: natural-spoken copy, background minimization, FOOD de-photorealization/coherence guidance, and `COVER_TITLE_SYSTEM_V1`.
-4. On the next new-episode request, create V1_E005 under the current JIPBAP_V1_SPEC.md and resume the normal BOARD → deterministic composition → final publish identity path.
+1. Before V1_E005 production BOARD generation, run one isolated clean calibration task for `JIPBAP_FOOD_STYLE_CARRIER_V1` using the locked creative style authorities; do not create the carrier inside an episode-production image context.
+2. Present the food-style projection once for user approval and register it as renderer-safe style delivery; this is a one-time calibration gate, not a recurring episode gate.
+3. After both PERSON and FOOD renderer projections are USER_LOCKED, create V1_E005 under the current spec.
+4. V1_E005 normal path: PLAN → STORYBOARD_USER_GATE → BODY 2×3 BOARD → distinct text-free COVER hero → deterministic lettering/composition → FINAL_PUBLISH_GATE.
+5. Do not reopen or mutate V1_E004 unless the user explicitly requests an episode-4 revision.
