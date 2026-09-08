@@ -7,12 +7,12 @@ Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
-Status: DONE
+Status: IN_PROGRESS
 
 ## Active production state
 
 Active episode: V1_E005
-Stage: FINAL_PUBLISH_GATE
+Stage: PRESENTATION_MASTER_DRAFT
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -53,7 +53,7 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_UNIQUE_COVER_ORGANIC_LETTERING_V1`
+- V2 revision: `2026-09-09_PRESENTATION_MASTER_FIRST_V1`
 - canvas: 1080 × 1350
 - COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
@@ -469,13 +469,19 @@ Structural changes applied:
 - distinct COVER hero: APPROVED
 - COVER source SHA-256: `eba699359373e2534fe5edcfd027c78af0e77962c2609607b086047960828fc8`
 - COVER dimensions: 1122 × 1402
-- deterministic candidate package: PREPARED_IN_SESSION
-- candidate page count: COVER + S01..S06
-- final publish preview: PENDING USER APPROVAL
-- approved BOARD/COVER artwork must not be stochastically regenerated for lettering/layout feedback
+- prior tool-first deterministic final candidate: REJECTED_AS_PRESENTATION_BASELINE_BY_STRUCTURAL_FEEDBACK
+- rejection reason: editor/shell defaults were allowed to define the upstream bubble/typography design, causing visible quality regression versus the earlier quality-first lettered drafts
+- approved BOARD/COVER artwork remain locked and are NOT reopened
+- new presentation architecture: `PRESENTATION_MASTER_FIRST`
+- current stage: create a quality-first fully lettered 7-page `PRESENTATION_MASTER_DRAFT` using the approved artwork/story/copy
+- final editable package must be reconstructed from the approved visual target and pass `PRESENTATION_PARITY_QC`
+- tool limitation must not silently simplify approved presentation design; extend ToonDesk/scene capability when required
 
 ## Exact next action
 
-1. Present the seven-page deterministic V1_E005 carousel rendered from the current `EDITABLE_COMPOSITION_PACKAGE_V1` candidate at `FINAL_PUBLISH_GATE`.
-2. If the user approves the final carousel, persist canonical composition / RUN_RECEIPT, mark V1_E005 DONE, and do not mutate it unless explicitly reopened.
-3. If the user gives lettering/layout-only feedback, mutate scene/layout metadata and rerender deterministically; do not regenerate the approved BODY BOARD or COVER hero.
+1. For V1_E005, keep the approved BODY BOARD and distinct COVER hero unchanged.
+2. Rebuild only the presentation layer as a quality-first `PRESENTATION_MASTER_DRAFT`: complete 7-page copy, speech/thought/SFX, line breaks, bubble silhouettes/tails, typography and cover lettering, without constraining design to current ToonDesk defaults.
+3. Present that completed visual carousel at `FINAL_PUBLISH_GATE`.
+4. After approval, reconstruct the approved presentation in `EDITABLE_COMPOSITION_PACKAGE_V1` using the exact accepted artwork bytes and approved literal copy.
+5. Run `PRESENTATION_PARITY_QC`. If editor output visibly regresses, repair scene data or extend ToonDesk; do not simplify the approved design and do not regenerate BOARD/COVER.
+6. When parity passes, persist canonical composition / presentation-target provenance / RUN_RECEIPT and mark V1_E005 DONE.
