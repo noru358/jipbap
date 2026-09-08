@@ -1,9 +1,10 @@
 # V1_E006 PLAN
 
-Status: EXTRACT_FIT
+Status: PAGE_FINAL_RECOMPOSE
 Food: 두부조림
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
+Finalization: PAGE_FINAL_RECOMPOSE
 Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 
 ## Reset receipt
@@ -35,33 +36,46 @@ Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 ## Approval state
 
 - STORYBOARD_USER_GATE: APPROVED
-- BODY master BOARD: APPROVED_AND_LOCKED
+- BODY master BOARD: APPROVED_ANCHOR_LOCKED
 - BODY generation id: `54838e01-8a57-41ad-8ab2-e3b2517cec0e`
 - BODY session SHA-256: `10fa1ed93513497a3372e43f50416ab57710a83fb2e27ef70efe6cc753e0341d`
 - BODY dimensions: 1024 × 1536
-- COVER hero: APPROVED_AND_LOCKED
+- COVER hero: APPROVED_ANCHOR_LOCKED
 - COVER generation id: `100db926-2200-4ecf-8db7-9b8a6cb01639`
 - COVER session SHA-256: `fd7cc633fdf13e2c50d505f884390b7474ace94ce8d11933e75d69a059aee284`
 - COVER dimensions: 1122 × 1402
 - ART_BUNDLE_USER_GATE: APPROVED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 
-## Post-approval presentation QC
+## Post-approval draft status under PAGE_FINAL_RECOMPOSE
 
-The first seven-page lettered attempt after artwork approval is rejected and non-canonical.
+The approved BODY board + COVER hero are the canonical **visual/semantic anchor set**, not exact-pixel final-page authority.
 
-Reason:
-- it used stochastic image generation to recreate COVER and each BODY page instead of preserving the exact approved COVER/BODY pixels;
-- therefore character pose, background, food rendering and composition changed after the artwork lock;
-- this violates approved-art immutability and approval identity;
-- S05 also became less explicit about the spoon actively crushing the tofu at the visible contact moment, weakening the episode's required signature action.
+The first seven-page lettered set is named by the user as the **초안**.
+The later seven-page set is `PRESENTATION_DRAFT_V2`.
+
+Both may remain as **DESIGN_REFERENCE_ONLY** evidence for:
+- title hierarchy;
+- bubble silhouette/placement;
+- typography feel;
+- page-level presentation rhythm.
+
+They are not final publish authority because:
+- they mixed page-art recomposition and lettering before the new contract-QC step was explicit;
+- S05 did not show the spoon visibly deforming a large tofu piece as strongly as the approved signature-action contract requires;
+- repeated cloud-like thought bubbles are visually serviceable but too repetitive as a series-level presentation solution.
+
+Pixel drift from the 2×3 BOARD is **not** a failure by itself under the revised V1 architecture.
 
 Disposition:
-- keep the approved BODY/COVER sources locked;
-- discard only the seven regenerated lettered pages;
-- rebuild from actual BODY border extraction + exact COVER FIT + presentation overlays.
+- keep BODY/COVER as approved anchors;
+- do not require exact BOARD extraction for E006;
+- run fresh text-free `PAGE_FINAL_RECOMPOSE` for COVER + S01..S06 using the approved anchors and this PLAN;
+- internally QC the seven recomposed pages against scene/continuity contracts;
+- lock passing final-page artwork bytes;
+- then build the quality-first presentation master using the approved copy.
 
-## COVER storyboard
+## COVER storyboard## COVER storyboard
 
 Role:
 - episode hero / rain-day craving
@@ -310,36 +324,34 @@ Continuity:
 
 ## Exact next action
 
-1. Present this restarted COVER + S01..S06 storyboard to the user.
-2. Stop at STORYBOARD_USER_GATE.
-3. If approved, bind the USER_LOCKED PERSON/FOOD renderer carriers in the approval turn.
-4. Generate a fresh INITIAL_ART_BUNDLE: BODY 2×3 master board + independent COVER hero.
-5. Never reuse the discarded E006 iteration as authority.
-
+1. Use the approved E006 BODY board and COVER hero as the visual/semantic anchor set.
+2. Stay in the same image-runtime session by default.
+3. Run `PAGE_FINAL_RECOMPOSE` to create text-free 4:5 COVER + S01..S06 pages.
+4. Preserve PERSON/FOOD identity, each scene event, food-state continuity, emotional beat and approved composition intent while allowing 4:5 reframing and small pose/background/detail refinements.
+5. Enforce the S05 scene contract: the spoon must be visibly pressing/crushing a still-large tofu piece while larger tofu, newly crumbled tofu, white rice and sauce-stained rice coexist.
+6. Internally QC each page; regenerate only a failing page.
+7. Once all seven final-page artworks pass, lock those exact page-art bytes.
+8. Build the quality-first `PRESENTATION_MASTER_DRAFT` on the locked final-page artwork using the approved literal copy.
+9. Show the complete seven-page presentation master at `FINAL_PUBLISH_GATE`.
+10. If a new chat becomes unavoidable before page recomposition is finished, first try repository-direct anchor-byte binding; if unavailable, request the same approved BODY + COVER as `SESSION_ONLY` production-anchor carriers. Do not treat that attachment as a reset or new reference.
 
 ## Presentation draft v2 QC
 
-Status: `REJECTED_NON_CANONICAL_FOR_PIPELINE`
+Status: `DESIGN_REFERENCE_ONLY`
 
-Visual findings:
+Visual findings retained:
 - COVER lettering/layout: GOOD.
 - S01: GOOD hook and readability.
-- S02: GOOD as a presentation image, but artwork staging changed from the approved source cell.
+- S02: GOOD presentation energy.
 - S03: ingestion and hot/soft reaction read correctly.
 - S04: intact tofu-on-rice setup reads correctly.
-- S05: improved active-mixing readability; still does not show the spoon visibly deforming a large tofu piece as explicitly as intended.
+- S05: active mixing improved, but the spoon-to-large-tofu crushing contact is still weaker than the required scene contract.
 - S06: payoff reads correctly.
-- all literal copy appears visually correct.
-- repeated cloud-shaped thought bubbles are a soft quality issue.
+- literal generated copy appeared visually correct.
+- repeated cloud-shaped thought bubbles remain a soft quality issue.
 
-Pipeline finding:
-- FAIL. The draft was created by stochastic page-level image generation rather than actual approved-BOARD border extraction + exact-pixel 4:5 FIT + presentation overlays.
-- do not use these pixels as artwork authority or canonical FIT outputs.
-- remain at `EXTRACT_FIT`.
+Architecture interpretation after V1 revision:
+- the prior `REJECTED_NON_CANONICAL_FOR_PIPELINE` classification is superseded;
+- these pages are not rejected merely because their pixels differ from the approved BOARD/COVER anchors;
+- they are still not the final publish candidate because they predate the explicit `PAGE_FINAL_RECOMPOSE → contract QC → final-page artwork lock → presentation` sequence.
 
-Required next action:
-1. extract S01..S06 from the exact approved BODY bytes with the existing border detector;
-2. persist `JIPBAP_BOARD_EXTRACTION_V1` box/output hashes;
-3. 4:5 FIT the exact extracted rasters and exact approved COVER without stretch/redraw;
-4. add title/bubble/text/SFX as presentation-layer overlays;
-5. only then build/show the seven-page presentation master.
