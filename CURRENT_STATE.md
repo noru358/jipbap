@@ -47,8 +47,8 @@ Do not resume it.
 
 V1_CAL_001 PLAN is complete for a six-beat kimchi-pancake episode.
 
-The current chat image runtime produced five rejected candidates.
-All five triggered V1 hard FAIL because they repeatedly introduced generated text and/or substituted egg-rice/reference-layout content instead of the planned text-free kimchi-pancake 2×3 BODY board.
+The image runtime has produced eight rejected candidates.
+All eight triggered V1 hard FAIL because they introduced generated text and/or substituted wrong menu, group-story, cover, reference-layout or other non-authoritative content instead of the planned text-free kimchi-pancake 2×3 BODY board.
 
 This is recorded as an execution/runtime failure, not a new permanent V1 gate or architecture rule.
 
