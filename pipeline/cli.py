@@ -1,20 +1,28 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
+from pathlib import Path
 
-from .extract_board import ExtractionError, extract_board\nfrom .validate import ValidationError, validate_repository
+from .extract_board import ExtractionError, extract_board
+from .validate import ValidationError, validate_repository
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Jipbap fail-closed validation CLI")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate", help="validate current repository media integrity")
-    extract = sub.add_parser("extract-board", help="detect actual 2×3 panel borders and extract six cells")
+
+    extract = sub.add_parser(
+        "extract-board",
+        help="detect actual 2×3 panel borders and extract six cells",
+    )
     extract.add_argument("source")
     extract.add_argument("output_dir")
     extract.add_argument("--metadata")
     extract.add_argument("--inset", type=int, default=1)
+
     args = parser.parse_args(argv)
 
     if args.command == "validate":
@@ -27,7 +35,6 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "extract-board":
-        from pathlib import Path
         try:
             result = extract_board(
                 Path(args.source),
@@ -40,6 +47,7 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         print("JIPBAP_EXTRACTED " + json.dumps(result.to_json(), ensure_ascii=False))
         return 0
+
     return 2
 
 
