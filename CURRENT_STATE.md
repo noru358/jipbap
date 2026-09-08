@@ -4,12 +4,12 @@ Updated: 2026-09-08
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Status: V1_SPEC_FROZEN
+Status: STYLE_CARRIER_CALIBRATION
 
 ## Active production state
 
 Active episode: V1_CAL_001
-Stage: BOARD
+Stage: BOARD / STYLE_CARRIER_CALIBRATION
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -17,51 +17,91 @@ Final page ratio: 4:5
 Plan: episodes/V1_CAL_001/PLAN.md
 Run receipt: episodes/V1_CAL_001/RUN_RECEIPT.md
 
-## Locked references
-
-- Primary PERSON style authority: PERSON_STYLE_REF_1
-- Auxiliary target-look anchor: TARGET_LOOK_BOARD_REF_1
-- Existing validated reference-byte provenance remains preserved.
-- Prior failed PERSON candidates remain non-reference material.
-- Rejected V1_CAL_001 board attempts are non-reference material.
-
 ## Runtime authority
 
 Normal boot reads only:
 1. CURRENT_STATE.md
 2. JIPBAP_V1_SPEC.md
 
-Read specific reference manifests only when reference bytes must actually be materialized/dispatched.
+Legacy asset-composition, ASSET_GAP, BODY4 Lane A/B, PERSON/FOOD foundation DAG and old calibration chains remain historical/debugging material only.
 
-Legacy protocol, calibration, BODY4 asset-composition, ASSET_GAP, foundation-DAG and Lane A/B documents are historical/debugging references only.
-They do not own runtime next action.
+## Style authority and renderer state
 
-AutoPipeline pin parity is not a jipbap creative/runtime boot gate under V1.
+Creative style authority remains:
+- PERSON_STYLE_REF_1
+- TARGET_LOOK_BOARD_REF_1
 
-## Retired current work
+Raw creative references are no longer normal production renderer attachments.
 
-The prior exact-next-action chain beginning with FOOD_EGG_RICE_INTACT_V2 regeneration and deterministic PERSON+FOOD S01 composition is RETIRED.
-Do not resume it.
+Renderer-safe production carrier:
+- JIPBAP_STYLE_CARRIER_V1
+- status: NOT_YET_USER_LOCKED
 
-## Current BOARD checkpoint
+Required carrier shape:
+- exactly one person
+- no food
+- no text
+- no panel/grid
+- no story sequence
+- plain/transparent minimal background
+- carries only face/eye/hair/line/color/texture style information
 
-V1_CAL_001 PLAN is complete for a six-beat kimchi-pancake episode.
+Carrier creation is isolated from production:
+- raw references may be attached in a dedicated carrier-calibration chat;
+- user approves the derived carrier there;
+- do not generate an episode board in the same raw-reference chat;
+- production starts in a clean chat using only the approved carrier.
 
-The image runtime has produced eight rejected candidates.
-All eight triggered V1 hard FAIL because they introduced generated text and/or substituted wrong menu, group-story, cover, reference-layout or other non-authoritative content instead of the planned text-free kimchi-pancake 2×3 BODY board.
+## Controlled experiment evidence
 
-This is recorded as an execution/runtime failure, not a new permanent V1 gate or architecture rule.
+USER-REPORTED CONTROL PASS:
+- clean chat/runtime
+- no reference attachment
+- same kimchi-pancake one-person six-beat contract
+- exact 2×3 / text-free structural result succeeded
+
+No artifact/hash was bound from this control, so this is architecture evidence, not an accepted production BOARD.
+
+Interpretation:
+- SIX_PANEL_BOARD_FIRST remains canonical;
+- the unresolved problem is style delivery / renderer reference representation;
+- do not restore legacy asset-composition complexity.
+
+## Approval/session protocol
+
+Normal steady-state production uses one conversation with multiple turns:
+
+1. BOOT + PLAN
+2. STORYBOARD_USER_GATE
+3. same chat: user approves storyboard and attaches JIPBAP_STYLE_CARRIER_V1 once
+4. BOARD generation + internal hard QC
+5. ASSEMBLY + FINAL
+6. FINAL_PUBLISH_GATE
+7. DONE
+
+While carrier/style calibration is active, insert one temporary BOARD_STYLE_USER_GATE between 4 and 5.
+
+A new chat is not required between these stages.
+Use a new chat only for context-limit risk, observed runtime contamination, repeated stale-template behavior, or artifact/approval uncertainty.
+
+## Current BOARD history
+
+V1_CAL_001 has eight rejected production BOARD attempts recorded in RUN_RECEIPT.md.
+Those failures remain non-reference material.
+
+They showed semantic leakage / stale-template behavior and do not create new permanent V1 hard gates.
 
 ## Exact next action
 
-Resume V1_CAL_001 at BOARD only:
-1. do not re-plan the episode;
-2. use the six beats and continuity contract already stored in episodes/V1_CAL_001/PLAN.md;
-3. in a clean image-runtime context, generate exactly one BODY-only, text-free, equal-cell 2 columns × 3 rows master board for the planned kimchi-pancake episode;
-4. bind locked reference media only for their allowed visual influence; TARGET_LOOK_BOARD_REF_1 menu/text/layout remain non-authoritative;
-5. do not use any rejected V1_CAL_001 candidate as a reference, continuity source or repair source;
-6. apply only JIPBAP_V1 hard-fail QC;
-7. on PASS, continue without routine approval through ASSEMBLY → FINAL;
-8. deterministically export COVER + six 4:5 BODY pages with lettering;
-9. present only the completed carousel for the single user publish gate;
-10. append generation-call count, human intervention points, first-pass publishability and rework loops to episodes/V1_CAL_001/RUN_RECEIPT.md.
+1. Do not re-plan V1_CAL_001.
+2. Create one candidate JIPBAP_STYLE_CARRIER_V1 in a dedicated carrier-calibration chat using the locked raw creative references.
+3. The candidate must satisfy the content-neutral one-person carrier contract in JIPBAP_V1_SPEC.md.
+4. Present the carrier for explicit user style approval.
+5. On approval, store/register it as JIPBAP_STYLE_CARRIER_V1 and update this state to CARRIER_USER_LOCKED.
+6. End the raw-reference calibration chat; do not create the episode BOARD there.
+7. Start/resume V1_CAL_001 production in a clean chat.
+8. Restore GitHub state and existing PLAN; do not re-plan.
+9. Attach only JIPBAP_STYLE_CARRIER_V1 once immediately before BOARD generation.
+10. Generate exactly one text-free 2×3 master board and apply only V1 hard-fail QC.
+11. Because style calibration is still active, present that board at the temporary BOARD_STYLE_USER_GATE.
+12. On board approval, continue in the same chat through deterministic ASSEMBLY → FINAL and present the completed carousel at FINAL_PUBLISH_GATE.
