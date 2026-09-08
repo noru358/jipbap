@@ -37,8 +37,8 @@ master board PASS 후에는 확률적 재생성 없이:
 1. six-cell extraction
 2. 4:5 page fit
 3. cover assembly
-4. editable composition construction
-5. SVG / PNG export
+4. editable scene/composition construction
+5. deterministic SVG / PNG export
 를 deterministic post-processing으로 처리한다.
 
 Artwork는 stretch하지 않는다. 4:5 adaptation은 crop, safe margin, padding, placement 중 고정 template 규칙으로 처리한다.
@@ -56,9 +56,14 @@ Cover / lettering presentation defaults:
 - Cover or BODY lettering defects are deterministic presentation defects. Repair typography/layout without regenerating accepted BOARD artwork.
 
 
-### 1.4 Editable composition package
+### 1.4 Editable composition package / editor scene model
 
 BOARD 이후의 기본 산출 단위는 `EDITABLE_COMPOSITION_PACKAGE_V1`이다.
+Its `composition/*.layout.json` files are also the shared **editor scene model** for both current Chat-mode rendering and a future first-party Canva-like interactive editor.
+
+This does **not** mean using Canva as a production dependency.
+No Canva, PPTX, PDF or other external-editor file format is canonical authority.
+The product goal is to reproduce the useful direct-manipulation UX internally: select an object, drag, resize, rotate, edit text, adjust crop, change stacking order, and group/ungroup where appropriate.
 
 Logical package:
 
@@ -87,8 +92,10 @@ episode/
 
 Authority and derivation:
 - `artwork/*.png` contains accepted raster artwork extracted from the approved BOARD.
-- `composition/*.layout.json` is the deterministic presentation authority for editable placement/content.
-- `editable/*.svg` is a generated editable/interchange representation derived from layout JSON + artwork.
+- `composition/*.layout.json` is the deterministic presentation authority and shared scene model.
+- current Chat mode consumes the same scene model through a deterministic renderer and still produces final PNG without any interactive editor.
+- a future API/editor surface consumes the same scene model for direct manipulation, then rerenders deterministic derivatives.
+- `editable/*.svg` remains a generated interchange/debug derivative; it is not the human-editing authority.
 - `export/*.png` is a flattened publish derivative only.
 - No font binary is embedded or treated as repository authority; layout records reference font family/style intent and runtime substitution is allowed when needed.
 
@@ -100,26 +107,38 @@ Minimum object classes:
 - `sfx`
 - optional decorative vector shape
 
-For editable text/SFX objects, preserve at least:
+Common scene-object fields should support, where applicable:
 - stable object id
 - object type / semantic role
-- literal string
 - x / y
 - width / height or wrapping box
-- font family intent
-- font size / weight
-- alignment
 - rotation
 - z-index
+- visible
+- locked
+- optional group id / parent group
+- optional crop position / crop scale for artwork
 
-Bubble geometry is separate from the text string so either may move or resize independently.
+Editable text/SFX objects additionally preserve:
+- literal string
+- font family/style role intent
+- font size / weight
+- alignment
+
+Bubble geometry remains separate from the text string at the data level so either may be edited independently.
+The future editor may expose related objects as a convenience group without flattening them.
 SFX such as `톡` is a text/SFX object, not part of the generated artwork raster.
 
-External-editor contract:
+Shared renderer/editor contract:
 - changing dialogue, narration, inner thought, title or SFX mutates layout JSON only;
-- dragging/resizing/rotating text, bubbles or SFX mutates geometry only;
+- dragging/resizing/rotating editable objects mutates scene geometry only;
+- artwork crop/position changes mutate crop metadata rather than stretching the accepted raster;
 - deterministic rerender updates SVG/PNG without BOARD regeneration;
-- accepted artwork must remain byte-identical unless the user explicitly requests an artwork-level change.
+- accepted artwork must remain byte-identical unless the user explicitly requests an artwork-level change;
+- the interactive editor must remain optional: absence of the future API/editor must not block or alter the current Chat-mode production path.
+
+Detailed COVER/BODY object grouping, locking defaults, crop behavior, typography roles and placement freedoms are deliberately deferred to the next presentation-shell design pass.
+Do not hardcode them here before that pass is approved.
 
 This package structure is an output-interface rule, not a new user gate and not a new BOARD hard-fail class.
 
