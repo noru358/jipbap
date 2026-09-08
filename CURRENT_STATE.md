@@ -4,17 +4,18 @@ Updated: 2026-09-08
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Status: STORYBOARD_USER_GATE
+Status: FINAL_PUBLISH_GATE
 
 ## Active production state
 
 Active episode: V1_E001
-Stage: PLAN / STORYBOARD_USER_GATE
+Stage: ASSEMBLY COMPLETE / FINAL_PUBLISH_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
 Plan: episodes/V1_E001/PLAN.md
+Run receipt: episodes/V1_E001/RUN_RECEIPT.md
 
 ## Runtime authority
 
@@ -26,59 +27,50 @@ Legacy asset-composition, ASSET_GAP, BODY4 Lane A/B, PERSON/FOOD foundation DAG 
 
 ## Style authority and renderer state
 
-Creative style authority remains:
+Creative style authority:
 - PERSON_STYLE_REF_1
 - TARGET_LOOK_BOARD_REF_1
 
-Raw creative references are no longer normal production renderer attachments.
-
 Renderer-safe production carrier:
 - JIPBAP_STYLE_CARRIER_V1
-- status: NOT_YET_USER_LOCKED
+- status: USER_LOCKED
+- approved session-source SHA-256: 43e791e8ebb1389fb7c469786f76fe118bcb96182d7c06e080d9088fb4057a80
+- dimensions: 583 × 622
+- repository registry: assets/reference_registry.json
+- repository binary materialization: NOT_COMPLETED_IN_THIS_RUNTIME
+- current permitted binding until materialization: same approved image as SESSION_ONLY fallback
 
-Required carrier shape:
-- exactly one person
-- no food
-- no text
-- no panel/grid
-- no story sequence
-- plain/transparent minimal background
-- carries only face/eye/hair/line/color/texture style information
+The carrier is style-delivery authority only and does not own menu, staging, camera, layout, story or copy.
 
-Carrier creation remains isolated from production:
-- raw references may be attached in a dedicated carrier-calibration chat;
-- user approves the derived carrier there;
-- do not generate an episode board in the same raw-reference chat;
-- production board generation resumes using only the approved carrier.
+## V1_E001 approval state
 
-## Controlled experiment evidence
+- STORYBOARD_USER_GATE: APPROVED
+- BOARD_STYLE_USER_GATE: APPROVED
+- FINAL_PUBLISH_GATE: PENDING
 
-USER-REPORTED CONTROL PASS:
-- clean chat/runtime
-- no reference attachment
-- same kimchi-pancake one-person six-beat contract
-- exact 2×3 / text-free structural result succeeded
+Accepted BOARD:
+- generation id: 3c20747b-7e9c-421c-8a00-1c4b5b481139
+- SHA-256: 59740618ec87d67acc0c5e1ac53a1705d585258e0228d16122fa99a8a50084f1
+- hard-fail QC: PASS
 
-No artifact/hash was bound from this control, so this is architecture evidence, not an accepted production BOARD.
+User-requested BOARD corrections that were applied before approval:
+1. stronger camera/composition/expression variety
+2. S05 shows pork already on lettuce while sliced garlic is being added
+3. FOOD rendering reduced away from photorealism toward the PERSON's illustrated medium
 
-Interpretation:
-- SIX_PANEL_BOARD_FIRST remains canonical;
-- the unresolved problem is style delivery / renderer reference representation;
-- do not restore legacy asset-composition complexity.
+## Deterministic assembly
 
-## Approval/session protocol
+Complete:
+1. six-cell extraction
+2. 4:5 page fit
+3. cover assembly
+4. lettering / inner-thought / speech composition
+5. final seven-page export
 
-Normal steady-state production:
-1. BOOT + PLAN
-2. STORYBOARD_USER_GATE
-3. BOARD generation + internal hard QC
-4. ASSEMBLY + FINAL
-5. FINAL_PUBLISH_GATE
-6. DONE
+Final carousel ZIP SHA-256:
+- 2f701ceb3e6044962cd8d6d4438d9d89268ad988bba4500854b6c7767f9b4da5
 
-While carrier/style calibration is active, a temporary BOARD_STYLE_USER_GATE remains after BOARD generation.
-
-Do not generate V1_E001 BOARD before explicit storyboard approval.
+No stochastic BOARD regeneration is authorized for lettering/layout-only feedback.
 
 ## Prior calibration provenance
 
@@ -88,13 +80,8 @@ Its kimchi-pancake story is not reused for V1_E001.
 
 ## Exact next action
 
-1. Present and hold at V1_E001 STORYBOARD_USER_GATE.
-2. Wait for explicit user storyboard approval or requested revisions.
-3. Do not generate any production image or master board before approval.
-4. If the storyboard is revised, update episodes/V1_E001/PLAN.md and remain at STORYBOARD_USER_GATE.
-5. If approved and JIPBAP_STYLE_CARRIER_V1 is still NOT_YET_USER_LOCKED, complete the separate carrier-calibration approval flow before production BOARD generation.
-6. Once the carrier is USER_LOCKED, resume V1_E001 from the saved PLAN without re-planning.
-7. Attach only JIPBAP_STYLE_CARRIER_V1 once immediately before BOARD generation.
-8. Generate exactly one text-free 2×3 master board and apply only V1 hard-fail QC.
-9. While style calibration remains active, present that board at the temporary BOARD_STYLE_USER_GATE.
-10. On board approval, continue through deterministic ASSEMBLY → FINAL and present the completed carousel at FINAL_PUBLISH_GATE.
+1. Present the complete seven-page V1_E001 carousel at FINAL_PUBLISH_GATE.
+2. Wait for explicit final publish approval or final deterministic layout/copy corrections.
+3. If feedback is lettering/layout/copy only, repair deterministically without regenerating BOARD.
+4. If the user explicitly approves final publish, update V1_E001 to DONE.
+5. Do not create a new permanent hard gate from isolated soft-quality observations.
