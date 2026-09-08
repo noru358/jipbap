@@ -43,6 +43,14 @@ master board PASS 후에는 확률적 재생성 없이:
 
 Artwork는 stretch하지 않는다. 4:5 adaptation은 crop, safe margin, padding, placement 중 고정 template 규칙으로 처리한다.
 
+Cover / lettering presentation defaults:
+- COVER is a separate design surface, not a default reuse of S01. Accepted BODY artwork may be reused only when it reads strongly as a cover composition.
+- Prefer one clear focal food/action image plus intentional negative space for the title.
+- Title hierarchy, line break, scale and placement must be composed together with the artwork; do not merely place a centered text block above an image.
+- Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and slightly organic rather than office/document-like.
+- No single font family is a V1 creative lock. Font choice is an implementation/presentation decision and may change if the current runtime lacks the preferred font.
+- Cover or BODY lettering defects are deterministic presentation defects. Repair typography/layout without regenerating accepted BOARD artwork.
+
 ## 2. Frozen visual result range
 
 ### 2.1 PERSON
@@ -132,6 +140,13 @@ The following are NOT V1 locks:
 
 Style is frozen; staging is fluid.
 
+Soft staging objective — this is guidance, not a gate or slot template:
+- the six BODY panels should have a readable visual rhythm rather than accidentally collapsing into the same camera/framing repeatedly;
+- vary shot scale, camera relation, amount of person shown and action emphasis when the story benefits from it;
+- food detail, hand action, face reaction and wider context may trade prominence across panels;
+- expressions may be modestly amplified beyond neutral realism when that improves appetite/emotional readability, while staying inside the approved drawing language;
+- do not satisfy variety by mechanically forcing one of each shot type or one prescribed expression per slot.
+
 ## 4. Six-slot storytelling rule
 
 Six slots are a fixed render surface, not six fixed event labels.
@@ -156,15 +171,18 @@ If a menu/moment cannot support six publishable visual beats without procedural 
 ## 5. Voice / copy boundary
 
 Frozen copy grammar:
-- short, conversational Korean rather than literary exposition
-- sensation is described through the immediate eating moment, not generic praise
+- use short, conversational Korean that can plausibly sound like a real person, Korean community post or thread reaction rather than polished script prose
+- fragments, dropped subjects, brief exclamations and reaction-first wording are allowed when natural
+- do not force slang, memes or trendy expressions merely to simulate community speech
+- when copy adds food information, prefer one concrete sensory observation from the immediate bite: aroma, heat, texture, seasoning, moisture, aftertaste or the effect of combining foods
+- describe why the bite works rather than relying on generic praise such as simply saying it is delicious
+- copy should add what the image cannot fully show — mouthfeel, smell, temperature, flavor transition, aftertaste or the impulse to take another bite — rather than narrating an obvious hand motion
 - silent BODY panels are allowed when the image carries the beat
 - do not force a `잘 먹었다`, lesson, punchline or emotional conclusion
 - inner thought, speech and narration are separate editable layers
-- copy must not explain what the image already makes obvious
 - food/appetite remains the subject; character backstory does not expand unless it directly strengthens the meal moment
 
-Exact wording, line count and whether a panel is silent remain fluid.
+Exact wording, dialect intensity, line count and whether a panel is silent remain fluid.
 
 ## 6. Physical and semantic continuity
 
@@ -194,7 +212,10 @@ Reject/retry a master board only for publish-blocking defects:
 
 ### 7.2 Soft quality score
 The following are normally score/repair observations, not automatic hard failure:
-- a mildly repetitive camera
+- mildly repetitive camera or framing
+- a board whose overall staging/emotional range feels flatter than ideal while remaining publishable
+- a reaction that could be modestly more expressive
+- cover title/font/placement that could be better integrated with accepted artwork
 - slightly imperfect utensil placement
 - background that is a little generic
 - minor tableware preference
@@ -221,7 +242,7 @@ At the beginning of a production chat:
 - read `CURRENT_STATE.md` and this spec;
 - if a new episode is required, create the six-beat PLAN;
 - if an episode is active, restore its saved PLAN/exact next action;
-- present storyboard, copy draft, expression/camera intent and continuity for user review;
+- present storyboard, copy draft, expression/camera intent, overall visual rhythm and continuity for user review;
 - stop at `STORYBOARD_USER_GATE`.
 
 The storyboard gate is permanent because it prevents expensive image work from proceeding on an unwanted story/copy/cut plan.
@@ -256,7 +277,7 @@ After BOARD PASS:
 - fit six 4:5 BODY pages;
 - assemble COVER from accepted artwork;
 - apply editable lettering / inner thought / speech / SFX;
-- inspect the complete seven-page carousel;
+- inspect the complete seven-page carousel, including cover hierarchy/font/line-break/negative-space fit and BODY lettering placement;
 - present the completed carousel at `FINAL_PUBLISH_GATE`.
 
 A lettering/layout-only defect never authorizes stochastic BOARD regeneration.
