@@ -1,6 +1,6 @@
 # V1_E005 PLAN
 
-Status: FINAL_PUBLISH_GATE
+Status: PRESENTATION_MASTER_DRAFT
 Food: 엽기떡볶이
 Format: COVER 1 + BODY 6
 Architecture: SIX_PANEL_BOARD_FIRST
@@ -17,7 +17,7 @@ Presentation shell: JIPBAP_PRESENTATION_SHELL_V2
 - JIPBAP_FOOD_STYLE_CARRIER_V1: USER_LOCKED
 - BODY master BOARD: APPROVED
 - COVER hero: APPROVED
-- FINAL_PUBLISH_GATE: PENDING
+- FINAL_PUBLISH_GATE: PENDING_QUALITY_FIRST_PRESENTATION_MASTER
 
 ## COVER
 
@@ -133,6 +133,23 @@ Approved distinct COVER hero:
 - dimensions: 1122 × 1402
 - COVER user approval: APPROVED
 
+## Presentation architecture revision
+
+User structural feedback on 2026-09-09:
+- the prior tool-first final candidate visibly degraded bubble/typography quality versus earlier quality-first lettered drafts;
+- root cause classification: editor/shell defaults were being used as upstream design authority rather than downstream editable representation;
+- approved BODY BOARD and COVER artwork remain accepted and unchanged;
+- presentation stage is reopened only.
+
+New path:
+1. Build a quality-first fully lettered 7-page `PRESENTATION_MASTER_DRAFT` from the approved artwork/copy, without constraining creative presentation to current ToonDesk defaults.
+2. Use that completed carousel at `FINAL_PUBLISH_GATE`.
+3. After approval, reconstruct its presentation intent into `EDITABLE_COMPOSITION_PACKAGE_V1` using exact approved artwork bytes and exact approved copy.
+4. Bind page-level presentation-target provenance/hash.
+5. Run `PRESENTATION_PARITY_QC`.
+6. If ToonDesk cannot reproduce the approved bubble/font/layout quality, extend editor/scene capability rather than simplifying the approved design.
+7. Persist canonical package and receipt only after parity passes.
+
 ## Exact next action
 
-Present the seven-page deterministic carousel derivative rendered from the candidate EDITABLE_COMPOSITION_PACKAGE_V1 at FINAL_PUBLISH_GATE. If approved, persist canonical composition/receipt and mark V1_E005 DONE. If lettering/layout feedback is given, repair layout deterministically without regenerating approved BOARD/COVER artwork.
+Create the quality-first fully lettered seven-page `PRESENTATION_MASTER_DRAFT` for V1_E005 from the already approved BODY BOARD and COVER hero. Do not regenerate artwork.
