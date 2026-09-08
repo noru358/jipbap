@@ -4,8 +4,9 @@ Updated: 2026-09-09
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
-Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
+Presentation architecture: PRESENTATION_MASTER_FIRST
+Editable scene package: EDITABLE_COMPOSITION_PACKAGE_V1
+Editor scene model: EDITOR_SCENE_MODEL_V1
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
 Status: IN_PROGRESS
 
@@ -30,10 +31,22 @@ Exact next action for episode production remains:
 2. If approved, reconstruct exact accepted artwork/copy into the editable package and run `PRESENTATION_PARITY_QC`.
 3. If rejected, revise presentation design only unless the user explicitly reopens artwork.
 
-Open infrastructure issues relevant to future episodes:
-- property-level manual-edit preservation must be implemented in ToonDesk before relying on layout re-import/reconstruction merge;
-- BODY artwork provenance should reuse BOARD extraction metadata and final scene crop, not create a parallel manifest;
-- font fallback must remain visible in preview/export receipts;
+Infrastructure upgrade completed for future/new work:
+- JIPBAP planning/copy guidance now co-designs image + lettering space without putting text into the BOARD.
+- `JIPBAP_BOARD_EXTRACTION_V1` remains the single extraction record and now maps each S01..S06 output to the detected box + output SHA-256.
+- BODY scene provenance references that extraction record/box index; final 4:5 FIT stays owned by the artwork object's `crop`.
+- ToonDesk 0.3.3 preserves manual edits at property scope during same-ID layout reconstruction; no whole-object lock system was added.
+- preferred/resolved font family + weight + substitution are persisted/surfaced; preview + PNG continue to share the same Canvas scene renderer.
+- curved-tail, organic-bubble, horizontal-flip, guides/alignment and generic page/frame editing remain existing capabilities and were not reimplemented.
+- ToonDesk tests + Web Live Sync: PASS at `b06a357d3364cd22b7681a64d4537546cf9c3073`.
+- JIPBAP validation including extraction/scene-contract regressions: PASS at `927ad28245933cdf0808b84897020a19c0549e45`.
+
+Remaining verification limits:
+- no real-device mobile touch test was performed in this infrastructure pass;
+- no browser visual/pixel parity claim is made beyond the shared scene/render contract and CI tests;
+- external SVG rasterizers may differ in font metrics/antialiasing;
+- whether the revised planning/copy prompt improves actual comic quality must be evaluated on the next new episode, not by rewriting V1_E005.
+
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -74,7 +87,7 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_PRESENTATION_MASTER_FIRST_V1`
+- V2 revision: `2026-09-09_MANUAL_OVERRIDE_PROVENANCE_V1`
 - canvas: 1080 × 1350
 - COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
