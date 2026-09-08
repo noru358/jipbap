@@ -1,6 +1,6 @@
 # V1_E006 PLAN — RESET 2026-09-09
 
-Status: ART_BUNDLE_APPROVED__PAGE_FINAL_RECOMPOSE_IN_PROGRESS
+Status: ART_BUNDLE_APPROVED__DETERMINISTIC_PAGE_ASSEMBLY
 Architecture: SIX_PANEL_BOARD_FIRST
 Food: 두부조림
 Carousel target: COVER + S01..S06
@@ -266,20 +266,32 @@ S01: unseen / aroma only
 
 STORYBOARD_USER_GATE: APPROVED
 ART_BUNDLE_USER_GATE: APPROVED
+APPROVED_ART_PIXEL_LOCK: ACTIVE
 
-Approved BODY anchor:
+Approved BODY source:
 - SHA-256: d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76
 - dimensions: 1024 × 1536
 - generation id: 69ecb818-d655-4d46-9db6-d60d75b98b76
 - hard-fail QC: PASS
+- source role: PIXEL_LOCKED_BODY_AUTHORITY
 
-Approved COVER anchor:
+Approved COVER source:
 - SHA-256: 063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db
 - dimensions: 1122 × 1402
 - generation id: 4855db49-538d-48bf-a039-7b8aaaa3ed46
 - hard-fail QC: PASS
+- source role: PIXEL_LOCKED_COVER_AUTHORITY
+
+Rejected post-approval generations:
+- 4e6ae0e7-ce06-4884-b88e-2b10ca24e378
+- ee62aeb6-8134-4bf2-a3e5-9d0bbcd8cc2c
+- 8fd172f7-3f9c-4fe6-882e-733bd4124224
+- all are REJECTED_NON_AUTHORITY_STYLE_DRIFT and must not be reused.
 
 Exact next action:
-- run PAGE_FINAL_RECOMPOSE for COVER + S01..S06 using only this approved anchor set;
-- lock final 4:5 artwork after contract QC;
+- no image generation;
+- exact-border extract S01..S06 from the approved BODY source and record source/cell hashes;
+- reuse approved COVER source exactly;
+- create deterministic 4:5 page scenes with crop/non-stretched-scale/position only;
+- add approved copy and presentation design on the locked artwork;
 - create PRESENTATION_MASTER_DRAFT and stop at FINAL_PUBLISH_GATE.
