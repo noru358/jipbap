@@ -284,6 +284,7 @@ Continuity:
 - approved generation id: `92d89711-72ad-4286-8868-443c64123885`
 - approved session SHA-256: `86229c6426192a102cd104926e662dfdf307e368993064b58641140c4048f6e0`
 - dimensions: 1024 × 1536
+- repository binary materialization: NOT_CONFIRMED; exact approved pixels are required for downstream extraction and must not be reconstructed from hash/generation id
 - S05 accepted correction: tofu remains in larger pieces while the spoon is actively beginning to crush/mix it into rice.
 - S06 accepted correction: wider/different finishing composition, not a near-copy of S04.
 - approved BOARD is locked; no stochastic BOARD regeneration is authorized by the current state.
@@ -306,7 +307,8 @@ They do not justify a permanent slot-specific COVER rule.
 
 Complete the migrated `INITIAL_ART_BUNDLE` for V1_E006:
 1. keep the approved BODY board locked;
-2. generate only the missing text-free COVER hero using the already-approved episode intent and renderer carriers;
-3. use role-based COVER direction only: independent cover-source artwork, episode-level hero function, freely chosen camera/composition/pose/expression, no BODY-cell reuse;
-4. present the locked BODY + generated COVER together at `ART_BUNDLE_USER_GATE`;
-5. after approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
+2. if execution moves to a new chat, carry/recover the exact approved BODY pixels rather than redrawing from the saved hash/generation id;
+3. generate only the missing text-free COVER hero using the already-approved episode intent and renderer carriers;
+4. use role-based COVER direction only: independent cover-source artwork, episode-level hero function, freely chosen camera/composition/pose/expression, no BODY-cell reuse;
+5. present the locked BODY + generated COVER together at `ART_BUNDLE_USER_GATE`;
+6. after approval, continue EXTRACT/FIT → quality-first `PRESENTATION_MASTER_DRAFT` → `FINAL_PUBLISH_GATE`.
