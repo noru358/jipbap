@@ -12,7 +12,8 @@
     "automatic_production": true,
     "allow_custom_override": true,
     "override_class": "CUSTOM_OVERRIDE",
-    "override_is_scene_corruption": false
+    "override_is_scene_corruption": false,
+    "revision": "2026-09-09_FULL_ART_OVERLAY"
   },
   "page_structure": {
     "automatic_default": {
@@ -29,26 +30,19 @@
   },
   "body": {
     "artwork_frame": {
-      "x": 40,
-      "y": 40,
-      "width": 1000,
-      "height": 1000,
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1350,
       "fit": "frame_crop",
       "default_locked": true,
       "allow_stretch": false
     },
-    "meta_region": {
-      "x": 60,
-      "y": 1080,
-      "width": 960,
-      "height": 230,
-      "visible_container_required": false
-    },
     "semantic_placement": {
-      "speech": "artwork",
-      "sfx": "artwork",
-      "inner_thought": "meta_region",
-      "narration": "meta_region"
+      "speech": "freeform_overlay",
+      "sfx": "freeform_overlay",
+      "inner_thought": "freeform_overlay",
+      "narration": "freeform_overlay"
     },
     "page_markers": false,
     "group_contract": {
@@ -65,28 +59,51 @@
         "{page}.sfx.NN"
       ],
       "fixed_instance_count": false
+    },
+    "layout_mode": "FULL_ART_OVERLAY",
+    "safe_inset": {
+      "left": 48,
+      "top": 48,
+      "right": 48,
+      "bottom": 48,
+      "kind": "soft_hint"
+    },
+    "placement_policy": {
+      "strategy": "focal_aware_freeform",
+      "optional_metadata": [
+        "placement_guides",
+        "avoid_regions"
+      ],
+      "avoid_roles": [
+        "face_primary",
+        "food_primary",
+        "hand_action"
+      ],
+      "structural_band_required": false,
+      "lettering_move_is_custom_override": false
     }
   },
   "cover": {
     "title_region": {
-      "x": 60,
-      "y": 40,
-      "width": 960,
-      "height": 240
+      "x": 48,
+      "y": 36,
+      "width": 984,
+      "height": 330,
+      "kind": "soft_hint"
     },
     "hero_frame": {
-      "x": 40,
-      "y": 310,
-      "width": 1000,
-      "height": 1000,
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1350,
       "fit": "frame_crop",
       "default_locked": true,
       "allow_stretch": false
     },
     "default_objects": [
+      "full_canvas_artwork",
       "menu_tag",
-      "title",
-      "hero_artwork"
+      "title"
     ],
     "subtitle_default": false,
     "group_contract": {
@@ -101,7 +118,8 @@
         "cover.title"
       ],
       "subtitle_group": "optional_hidden_by_default"
-    }
+    },
+    "layout_mode": "FULL_ART_OVERLAY"
   },
   "editor_defaults": {
     "background": {
@@ -180,42 +198,84 @@
       "nominal_size": 30,
       "min_size": 26,
       "max_size": 34,
-      "weight": 700
+      "weight": 700,
+      "preferred_family": "Jua",
+      "fallback_families": [
+        "Do Hyeon",
+        "Noto Sans KR",
+        "sans-serif"
+      ]
     },
     "cover_title": {
       "family_intent": "friendly_handdrawn_display",
       "nominal_size": 92,
       "min_size": 72,
       "max_size": 112,
-      "weight": 700
+      "weight": 700,
+      "preferred_family": "Jua",
+      "fallback_families": [
+        "Do Hyeon",
+        "Black Han Sans",
+        "Noto Sans KR",
+        "sans-serif"
+      ]
     },
     "body_speech": {
       "family_intent": "friendly_round_body",
       "nominal_size": 42,
       "min_size": 36,
       "max_size": 46,
-      "weight": 700
+      "weight": 700,
+      "preferred_family": "Jua",
+      "fallback_families": [
+        "Gowun Dodum",
+        "Noto Sans KR",
+        "sans-serif"
+      ]
     },
     "body_thought": {
       "family_intent": "friendly_round_body",
       "nominal_size": 38,
       "min_size": 34,
       "max_size": 42,
-      "weight": 400
+      "weight": 400,
+      "preferred_family": "Gowun Dodum",
+      "fallback_families": [
+        "Jua",
+        "Noto Sans KR",
+        "sans-serif"
+      ]
     },
     "body_narration": {
       "family_intent": "friendly_round_body",
       "nominal_size": 36,
       "min_size": 32,
       "max_size": 40,
-      "weight": 500
+      "weight": 500,
+      "preferred_family": "Gowun Dodum",
+      "fallback_families": [
+        "Noto Sans KR",
+        "sans-serif"
+      ]
     },
     "body_sfx": {
       "family_intent": "handdrawn_display",
       "nominal_size": 64,
       "min_size": 44,
       "max_size": 84,
-      "weight": 700
+      "weight": 700,
+      "preferred_family": "Gaegu",
+      "fallback_families": [
+        "Jua",
+        "Do Hyeon",
+        "sans-serif"
+      ]
     }
+  },
+  "font_resolution": {
+    "silent_substitution_allowed": false,
+    "surface_missing_preferred_font_warning": true,
+    "preview_export_must_share_resolved_family": true,
+    "font_binary_is_authority": false
   }
 }
