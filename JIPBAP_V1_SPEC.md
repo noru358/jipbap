@@ -205,53 +205,157 @@ The following are normally score/repair observations, not automatic hard failure
 One isolated defect does not create a new permanent hard gate.
 A new hard gate requires repeated publish-blocking evidence across episodes, or a true media-integrity/corruption class failure.
 
-## 8. Runtime flow
+## 8. Runtime / approval flow
 
-`PLAN → BOARD → ASSEMBLY → FINAL → DONE`
+Normal production is **one ChatGPT conversation with multiple user turns**.
+Do not try to force PLAN → BOARD → FINAL into one assistant response.
 
-### PLAN
-- choose menu/moment
-- map exactly six publishable beats
-- define minimal food-state/action continuity
-- draft cover title and lettering copy
+Canonical production flow:
 
-No asset resolution stage.
-No production-asset DAG.
-No S01 identity-anchor gate.
+`BOOT → PLAN → STORYBOARD_USER_GATE → BOARD → [TEMP_STYLE_GATE] → ASSEMBLY → FINAL_PUBLISH_GATE → DONE`
 
-### BOARD
-- generate one text-free six-panel master board using the locked style/reference authority
-- do internal hard-fail QC
-- retry only when a hard FAIL occurs
+### 8.1 BOOT + PLAN turn
+At the beginning of a production chat:
+- do not require image attachment yet;
+- restore latest jipbap `main`;
+- read `CURRENT_STATE.md` and this spec;
+- if a new episode is required, create the six-beat PLAN;
+- if an episode is active, restore its saved PLAN/exact next action;
+- present storyboard, copy draft, expression/camera intent and continuity for user review;
+- stop at `STORYBOARD_USER_GATE`.
 
-### ASSEMBLY
-- extract six cells
-- fit to fixed 4:5 BODY pages
-- construct COVER from accepted artwork; no dedicated stochastic cover render by default
-- apply lettering / inner thought / speech as editable layers
+The storyboard gate is permanent because it prevents expensive image work from proceeding on an unwanted story/copy/cut plan.
 
-### FINAL
-- inspect complete COVER + six BODY carousel
-- one user publish gate
-- repair the minimum affected layer
-- if only lettering/layout is wrong, never regenerate the board
+### 8.2 BOARD turn — same conversation
+After the user approves the storyboard, continue in the **same chat**.
 
-### DONE
-- export final carousel and record lightweight metrics
+If a renderer-safe carrier is already USER_LOCKED:
+- the user attaches only `JIPBAP_STYLE_CARRIER_V1` once in the approval/BOARD message;
+- the attachment is a SESSION_ONLY runtime carrier, not new creative authority;
+- generate the text-free 2×3 master board;
+- apply V1 hard-fail QC.
 
-## 9. Reference and media integrity
+Do not ask the user to reattach the carrier again within the same chat.
 
-Reference binaries remain valuable, but validation is not a per-run ritual.
+### 8.3 Temporary style gate
+While `JIPBAP_STYLE_CARRIER_V1` is still being calibrated, show the generated master board once for user style/board approval before ASSEMBLY.
+
+This is a temporary calibration checkpoint, not a permanent production gate.
+
+After the carrier is USER_LOCKED and repeated production evidence shows stable style delivery:
+- remove/disable the routine BOARD user gate;
+- internal QC may pass BOARD directly to ASSEMBLY.
+
+Normal steady-state user gates are therefore:
+1. storyboard approval;
+2. final publish approval.
+
+### 8.4 ASSEMBLY + FINAL
+After BOARD PASS:
+- extract six cells;
+- fit six 4:5 BODY pages;
+- assemble COVER from accepted artwork;
+- apply editable lettering / inner thought / speech / SFX;
+- inspect the complete seven-page carousel;
+- present the completed carousel at `FINAL_PUBLISH_GATE`.
+
+A lettering/layout-only defect never authorizes stochastic BOARD regeneration.
+
+### 8.5 When to start a new chat
+A new chat is **not** required between PLAN and BOARD or between BOARD and FINAL.
+
+Start a new chat only when:
+- the conversation approaches a product/context limit;
+- actual image-runtime contamination is observed;
+- repeated outputs stay locked to a stale semantic template despite corrected instructions;
+- artifact/approval identity becomes uncertain.
+
+Before handoff, save current stage and exact next action in `CURRENT_STATE.md`.
+
+If the resumed stage requires image generation, attach `JIPBAP_STYLE_CARRIER_V1` once in the new chat.
+If the resumed stage is deterministic ASSEMBLY/FINAL only, no style carrier is required.
+
+## 9. Creative references vs renderer carrier
+
+### 9.1 Creative authority
+The canonical style authorities remain:
+- `PERSON_STYLE_REF_1`
+- `TARGET_LOOK_BOARD_REF_1`
+
+They define what the desired style looks like.
+They do **not** automatically have to be direct image-generation inputs.
+
+Observed calibration evidence showed that content-rich or multi-subject references can leak non-authoritative semantics such as subject count, menu, text, panel structure or story context into generation.
+
+Therefore raw creative references are **not normal production renderer attachments**.
+
+### 9.2 Renderer-safe projection
+Production image generation should use a separately approved runtime projection:
+
+`JIPBAP_STYLE_CARRIER_V1`
+
+This carrier is not a third creative style authority.
+It is a runtime-safe projection of the locked creative authorities.
+
+Required carrier properties:
+- exactly one person;
+- no food;
+- no tableware or meal scene;
+- no text, logo, caption, number or speech bubble;
+- no comic panel/grid structure;
+- no story sequence;
+- plain or transparent/minimal background;
+- enough face/upper-body information to express the desired face construction, eye grammar, hair silhouette, line, fill, shading and texture;
+- no visual element whose count or narrative role should be copied into an episode.
+
+Its authority scope is style delivery only.
+
+### 9.3 One-time carrier creation isolation
+Creating or replacing `JIPBAP_STYLE_CARRIER_V1` is a **separate calibration task** from episode production.
+
+During carrier creation:
+- raw `PERSON_STYLE_REF_1` / `TARGET_LOOK_BOARD_REF_1` may be attached so the renderer can derive the intended look;
+- user approval is required before the result becomes `JIPBAP_STYLE_CARRIER_V1`;
+- the approved carrier should be stored/registered as the runtime carrier.
+
+Do **not** generate a production episode board later in that same raw-reference calibration chat.
+Start episode production in a clean chat and attach only the approved renderer-safe carrier.
+
+This separation prevents raw-reference semantic content from sharing the same image-runtime context as production BOARD generation.
+
+### 9.4 Production attachment timing
+For normal episode production:
+1. start the chat with no image attachment and reach storyboard approval;
+2. in the same chat, the user's storyboard-approval message attaches `JIPBAP_STYLE_CARRIER_V1` once;
+3. continue BOARD → ASSEMBLY → FINAL in that conversation.
+
+The attachment does not reset episode/state/story and does not create a new reference.
+It is a SESSION_ONLY pixel carrier for the already locked runtime style projection.
+
+### 9.5 Reference/media integrity
+Reference or carrier byte validation is not a per-run ritual.
 
 Run byte/full-decode validation only when:
-- a reference is newly added
-- repository bytes change
-- materialization source changes
-- corruption is suspected
+- a reference/carrier is newly added;
+- repository bytes change;
+- materialization source changes;
+- corruption is suspected.
 
-A previously validated unchanged reference does not require repeated media-integrity gating at every boot.
+A previously validated unchanged carrier does not need repeated integrity gating at every boot.
+Rejected generated boards are not references or carrier candidates.
 
-Rejected generated boards are not references.
+### 9.6 Controlled-experiment finding
+A user-run clean control with:
+- no attached reference image;
+- no prior production-image context;
+- the same one-person / kimchi-pancake / text-free / exact 2×3 content contract
+
+successfully produced a structurally correct six-panel board.
+
+Interpretation:
+- `SIX_PANEL_BOARD_FIRST` container/content obeyability is supported;
+- style delivery remains the unresolved layer;
+- do not respond by restoring asset-composition/state-machine complexity.
 
 ## 10. Legacy demotion
 
