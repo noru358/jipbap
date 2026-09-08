@@ -119,7 +119,27 @@
       ],
       "subtitle_group": "optional_hidden_by_default"
     },
-    "layout_mode": "FULL_ART_OVERLAY"
+    "layout_mode": "FULL_ART_OVERLAY",
+    "artwork_source_policy": {
+      "mode": "sticky_selected_source",
+      "record_provenance": true,
+      "silent_body_substitution": false,
+      "replacement_requires_explicit_override": true,
+      "focal_aware_lettering": true
+    },
+    "placement_policy": {
+      "strategy": "focal_aware_freeform",
+      "optional_metadata": [
+        "placement_guides",
+        "avoid_regions"
+      ],
+      "avoid_roles": [
+        "face_primary",
+        "food_primary",
+        "hand_action"
+      ],
+      "reflow_before_obstruction": true
+    }
   },
   "editor_defaults": {
     "background": {
@@ -146,7 +166,14 @@
       "resize": true,
       "rotation": true
     },
-    "image_replacement_capability": true
+    "image_replacement_capability": true,
+    "guides": {
+      "soft_guides_visible_default": false,
+      "toggleable": true,
+      "snap_to_placement_guides": true,
+      "snap_to_avoid_region_edges": true,
+      "export_visible": false
+    }
   },
   "z_bands": {
     "background": [
@@ -172,7 +199,22 @@
       "fill": "#FFFFFF",
       "stroke": "#2A2A2A",
       "stroke_width": 4,
-      "tail": true
+      "tail": {
+        "enabled": true,
+        "style": "soft_curved",
+        "default_attach_side": "bottom",
+        "default_attach": 0.55,
+        "default_base_width": 56,
+        "default_curve": 0.58,
+        "editable_handles": [
+          "tip",
+          "attach"
+        ],
+        "editable_numeric": [
+          "base_width",
+          "curve"
+        ]
+      }
     },
     "inner_thought": {
       "container": "thought_box_optional",
