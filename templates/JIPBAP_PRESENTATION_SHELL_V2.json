@@ -13,7 +13,7 @@
     "allow_custom_override": true,
     "override_class": "CUSTOM_OVERRIDE",
     "override_is_scene_corruption": false,
-    "revision": "2026-09-09_FULL_ART_OVERLAY"
+    "revision": "2026-09-09_COVER_TITLE_SYSTEM_V1"
   },
   "page_structure": {
     "automatic_default": {
@@ -102,7 +102,7 @@
     },
     "default_objects": [
       "full_canvas_artwork",
-      "menu_tag",
+      "episode_label",
       "title"
     ],
     "subtitle_default": false,
@@ -114,10 +114,13 @@
         "cover.overlay"
       ],
       "lettering_children": [
-        "cover.menu_tag",
+        "cover.episode_label",
         "cover.title"
       ],
-      "subtitle_group": "optional_hidden_by_default"
+      "subtitle_group": "optional_hidden_by_default",
+      "optional_lettering_children": [
+        "cover.menu_tag"
+      ]
     },
     "layout_mode": "FULL_ART_OVERLAY",
     "artwork_source_policy": {
@@ -139,6 +142,45 @@
         "hand_action"
       ],
       "reflow_before_obstruction": true
+    },
+    "title_system": {
+      "id": "COVER_TITLE_SYSTEM_V1",
+      "semantic_fields": [
+        "episode_no",
+        "topic_phrase",
+        "food_name"
+      ],
+      "composed_pattern": "EP.{episode_no} {topic_phrase}와 {food_name}",
+      "rendering": {
+        "episode_label": {
+          "literal_pattern": "EP.{episode_no}",
+          "typography_role": "cover_episode_label",
+          "visual_role": "compact_series_label"
+        },
+        "main_title": {
+          "literal_pattern": "{topic_phrase}와 {food_name}",
+          "typography_role": "cover_title",
+          "max_lines": 3,
+          "food_name_emphasis": "allowed_restrained"
+        }
+      },
+      "topic_phrase_policy": {
+        "kind": "short_natural_noun_phrase",
+        "avoid_full_plot_summary": true,
+        "compress_before_layout_overflow": true
+      },
+      "menu_tag_policy": {
+        "editor_capability": true,
+        "automatic_default": false,
+        "avoid_redundant_food_name": true
+      },
+      "layout_policy": {
+        "exact_coordinates_frozen": false,
+        "use_soft_title_region": true,
+        "focal_aware": true,
+        "reflow_before_focal_obstruction": true,
+        "allow_left_right_adaptation": true
+      }
     }
   },
   "editor_defaults": {
@@ -317,6 +359,19 @@
       "fallback_families": [
         "Jua",
         "Do Hyeon",
+        "sans-serif"
+      ]
+    },
+    "cover_episode_label": {
+      "family_intent": "friendly_round_display",
+      "nominal_size": 30,
+      "min_size": 26,
+      "max_size": 36,
+      "weight": 700,
+      "preferred_family": "Jua",
+      "fallback_families": [
+        "Do Hyeon",
+        "Noto Sans KR",
         "sans-serif"
       ]
     }
