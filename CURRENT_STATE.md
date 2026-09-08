@@ -14,7 +14,7 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: STORYBOARD_USER_GATE
+Stage: FINAL_PUBLISH_GATE
 
 ## Boot snapshot — V1_E006 fresh reset at 2026-09-09 08:43 KST
 
@@ -22,10 +22,10 @@ Stage: STORYBOARD_USER_GATE
 - Current stage: `STORYBOARD_USER_GATE`
 - Food: 두부조림
 - Reset authority: USER_EXPLICIT_FULL_RESET on 2026-09-09 08:43 KST
-- STORYBOARD_USER_GATE: AWAITING_USER_REVIEW
-- ART_BUNDLE_USER_GATE: NOT_STARTED
-- APPROVED_ART_PIXEL_LOCK: NOT_STARTED
-- FINAL_PUBLISH_GATE: NOT_STARTED
+- STORYBOARD_USER_GATE: APPROVED
+- ART_BUNDLE_USER_GATE: APPROVED
+- APPROVED_ART_PIXEL_LOCK: ACTIVE
+- FINAL_PUBLISH_GATE: AWAITING_USER_REVIEW
 - Plan: `episodes/V1_E006/PLAN.md`
 - Required S01: rainy 먹자골목; protagonist catches/smells 두부조림 aroma before seeing the dish.
 - Required action payoff: tofu is transferred onto rice, visibly crushed with a spoon, mixed 쓱쓱, then eaten.
@@ -59,12 +59,29 @@ Prior E006 artwork provenance from the superseded run:
 - status for this reset: `SUPERSEDED_NON_AUTHORITY`
 - they must not be used as E006 source, reference, anchor, presentation artwork, crop input or recovery material.
 
+Current approved E006 artwork authority:
+- BODY source SHA-256: `0c137977579bc72497a53d924305e3379b60197260af4f8b56bc9770fdadaf5e`
+- BODY dimensions: 1024 × 1536
+- BODY generation id: `0334542e-044b-4717-b36a-16411aba853e`
+- COVER source SHA-256: `01d55162dc66fdc54572bfd6a40452ed2f09df648a2c18e25c876a60c0be4e54`
+- COVER dimensions: 1122 × 1402
+- COVER generation id: `7de091b5-edd5-4182-8a34-45e52a3ff2af`
+- status: PIXEL_LOCKED_CURRENT_AUTHORITY
+- no stochastic episode-art generation is permitted after this approval unless the user explicitly reopens BODY or COVER.
+
+Deterministic extraction / presentation draft:
+- extraction mode: EXACT_CROP_FROM_APPROVED_BOARD
+- cell interiors (board xyxy): S01 [0,0,500,470]; S02 [521,0,1024,470]; S03 [0,489,500,954]; S04 [521,489,1024,954]; S05 [0,974,500,1536]; S06 [521,974,1024,1536]
+- 4:5 adaptation: deterministic crop + non-stretched scale only
+- presentation ZIP SHA-256: `13e40458103180be7bd8d9e5737221207832c0ca04d872bb4323b86d408746bf`
+- presentation contact-sheet SHA-256: `1b65c0bc05f872395a73a43f5d92e7433bf6894f22f3c9a15f63f7a1aa3032d8`
+- receipt: `episodes/V1_E006/PRESENTATION_MASTER_DRAFT_RECEIPT.md`
+
 Exact next action for episode production:
-1. Present the fresh E006 storyboard in `episodes/V1_E006/PLAN.md`.
-2. Stop at `STORYBOARD_USER_GATE` for user review.
-3. Do not call image generation before storyboard approval.
-4. On approval, bind validated STYLE + FOOD carriers per `JIPBAP_V1_SPEC.md`.
-5. Then create `INITIAL_ART_BUNDLE`: one text-free BODY 2×3 master board + one independent text-free COVER hero.
+1. Show the complete `PRESENTATION_MASTER_DRAFT` at `FINAL_PUBLISH_GATE`.
+2. Stop for user publish approval.
+3. If approved, perform `EDITABLE_RECONSTRUCTION` from the same locked BODY/COVER source bytes and the approved presentation intent.
+4. Run `PRESENTATION_PARITY_QC`, persist canonical package/receipt, then mark DONE if parity passes.
 
 Infrastructure change applied for future/new work:
 - `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` as the canonical finalization mode.
@@ -78,7 +95,7 @@ Infrastructure change applied for future/new work:
 - no new routine user gate was added; the existing artwork approval gate now has stronger media authority.
 
 Remaining verification limits:
-- this reset has no approved E006 BODY/COVER artwork yet;
+- this reset now has approved BODY/COVER hashes and active-session exact bytes; repository binary materialization of those production-art bytes is not claimed in this runtime;
 - structural implementation/tests from the architecture revision remain PASS on GitHub Actions validate run #259 at `029b8f80fe32963b9151b299f353b4070fdc5de0`;
 - browser/mobile rendering differences remain presentation-layer concerns for later stages.
 
@@ -87,7 +104,7 @@ Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
 Plan: episodes/V1_E006/PLAN.md
-Run receipt: not started for this reset
+Run receipt: presentation draft receipt recorded; final run receipt pending FINAL_PUBLISH_GATE
 
 ## Runtime authority
 
