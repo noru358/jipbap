@@ -12,7 +12,7 @@ Status: ACTIVE_REPAIR
 ## Active production state
 
 Active episode: V1_E003
-Stage: TOONDESK_0_3_1_REBUILD_PENDING_USER_ROUNDTRIP
+Stage: TOONDESK_0_3_1_READY_USER_ROUNDTRIP_REQUIRED
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -286,6 +286,21 @@ Repairs prepared:
 - candidate SHA-256: `bdd412e63f80ef0bd5d1fc555efb9840cb6a1ccadda5b04d452036c2de850817`
 - ToonDesk 0.3.1 source fix committed; Windows development build pending
 
+## ToonDesk 0.3.1 build result
+
+Latest Windows development build:
+- workflow run #23
+- head: `26d7a0999e36fdc951d21164d23c3414f97d2b06`
+- static JS/JSON validation: PASS
+- Windows packaging: PASS
+- artifact: `ToonDesk-windows`
+- artifact id: 10066881620
+- contents: ToonDesk 0.3.1 installer + portable executables
+
+Font resolver repair:
+- availability checks now use the requested font weight and sample text
+- this specifically addresses the false `Gaegu 700 → Jua` fallback observed in the returned TD03 package
+
 ## Previous episode provenance
 
 V1_E001:
@@ -338,11 +353,10 @@ The desktop wrapper is transport/UX only. It does not change JIPBAP `composition
 
 ## Exact next action
 
-1. Complete the latest ToonDesk 0.3.1 Windows development build and verify static JS/JSON checks + packaging PASS.
-2. Use `V1_E003_제육볶음_COVER_RESTORED_TD031.toondesk` for the next round-trip; it preserves COVER provenance, removes the remaining baked-title fragment and shortens S04/S06 rich tails away from focal facial regions.
-3. In ToonDesk 0.3.1, verify S04/S06 tail tip + attachment handles and width/curve controls remain editable without changing unrelated scene objects.
-4. Change one text object's actual font family once, confirm preview visibly changes, then export. Verify manifest preferred/resolved records that selected family and Gaegu 700 no longer false-falls back due the weight-check bug.
-5. Verify the returned package preserves all 7 layouts semantically, COVER provenance, rich-tail geometry and guide metadata.
-6. Use those exact exported COVER + 6 BODY PNG derivatives as FINAL_PUBLISH_GATE preview.
-7. After approval, persist canonical V1_E003 composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
-8. Do not create V3 or a new production gate from these presentation/editor fixes.
+1. Use ToonDesk 0.3.1 Windows build (workflow run #23 PASS) with `V1_E003_제육볶음_COVER_RESTORED_TD031.toondesk`.
+2. Open S04/S06 and verify the new short rich tails no longer cross the focal face; optionally drag tail tip/attachment and adjust width/curve to confirm direct manipulation.
+3. Change one text object's actual font family once and visually confirm the preview changes. Export a package.
+4. Verify the returned package preserves all 7 layouts semantically, COVER provenance, rich-tail geometry and guide metadata; verify the chosen font's preferred/resolved families match when available and Gaegu 700 no longer false-falls back.
+5. Use those exact exported COVER + 6 BODY PNG derivatives as FINAL_PUBLISH_GATE preview.
+6. After approval, persist canonical V1_E003 composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
+7. Do not create V3 or a new production gate from these presentation/editor fixes.
