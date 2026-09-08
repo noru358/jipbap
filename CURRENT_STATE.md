@@ -4,7 +4,7 @@ Updated: 2026-09-09
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Artwork finalization: PAGE_FINAL_RECOMPOSE
+Artwork finalization: APPROVED_ART_PIXEL_LOCK
 Presentation architecture: PRESENTATION_MASTER_FIRST
 Editable scene package: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1
@@ -14,12 +14,12 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: PAGE_FINAL_RECOMPOSE
+Stage: DETERMINISTIC_PAGE_ASSEMBLY
 
 ## Boot snapshot — V1_E006 user-reset / fresh storyboard
 
 - Active episode: `V1_E006`
-- Current stage: `PAGE_FINAL_RECOMPOSE`
+- Current stage: `DETERMINISTIC_PAGE_ASSEMBLY`
 - Food: 두부조림
 - Reset authority: USER_EXPLICIT_RESET on 2026-09-09
 - STORYBOARD_USER_GATE: APPROVED
@@ -31,53 +31,70 @@ Stage: PAGE_FINAL_RECOMPOSE
 - All prior E006 storyboard/copy, BODY board, COVER hero, artwork approvals, presentation drafts and PAGE_FINAL_RECOMPOSE assumptions are SUPERSEDED and MUST NOT be reused.
 - V1_E005 and all other episodes remain preserved unchanged.
 
-## Architecture revision — board contract, not pixel lock
+## Architecture revision — approved artwork is pixel-locked
 
-V1 finalization was revised on 2026-09-09 after repeated production evidence showed that exact BOARD/COVER pixel preservation created more complexity and poorer 4:5 presentation without being necessary for the product goal.
+The prior `PAGE_FINAL_RECOMPOSE` default is superseded. It caused an approved BODY/COVER bundle to be sent through stochastic image generation again, which created style/identity drift despite the artwork already having user approval.
 
 Canonical rule now:
 - `SIX_PANEL_BOARD_FIRST` remains the BODY authoring architecture.
-- The approved BODY board + COVER hero are the episode's **visual/semantic anchor set**.
-- Their approval locks PERSON/FOOD identity, scene events, food-state progression, key actions, emotional beats, story-relevant composition intent and continuity.
-- Their exact pixels are **not** required to survive into final 4:5 pages.
-- `PAGE_FINAL_RECOMPOSE` may reframe/recompose each page for stronger 4:5 readability while preserving the approved contract.
-- Exact extraction remains an optional reuse/debug utility, not the ordinary finalization gate.
-- After recomposed 4:5 page artwork passes internal contract QC, those final-page artwork bytes become locked for presentation/editor work.
+- `INITIAL_ART_BUNDLE` remains BODY 2×3 master board + separate COVER hero.
+- `ART_BUNDLE_USER_GATE` approval is an **exact artwork source lock**, not a loose visual/semantic anchor.
+- after artwork approval, no episode-art image generation, inpainting, outpainting or redraw is allowed unless the user explicitly reopens the affected BODY/COVER component;
+- BODY S01..S06 are exact crops from the approved BODY board using `JIPBAP_BOARD_EXTRACTION_V1` actual-border detection;
+- COVER uses the exact approved COVER source;
+- 4:5 adaptation is deterministic crop / non-stretched scale / position / frame / optional padding only;
+- lettering, speech/thought containers, SFX and COVER title are overlays on the locked artwork.
+- presentation/layout feedback never authorizes artwork regeneration.
 
-Session policy:
-- same-session continuation is the default through `PAGE_FINAL_RECOMPOSE` so approved anchor pixels remain available to the image runtime;
-- a new chat is exceptional, not a standard production step;
-- if a new chat is unavoidable before recomposition and repository-direct image binding is unavailable, the user may re-supply the same approved BODY + COVER as `SESSION_ONLY` production-anchor carriers;
-- such reattachment is transport only: no new reference, no new episode, no reset, no re-approval.
+Canonical flow:
+`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
+
+E006 approved artwork lock:
+- BODY source SHA-256: `d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76`
+- BODY dimensions: 1024 × 1536
+- BODY generation id: `69ecb818-d655-4d46-9db6-d60d75b98b76`
+- COVER source SHA-256: `063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db`
+- COVER dimensions: 1122 × 1402
+- COVER generation id: `4855db49-538d-48bf-a039-7b8aaaa3ed46`
+- these two approved sources are the only current E006 artwork authority.
+
+Rejected post-approval redraw attempts:
+- generation `4e6ae0e7-ce06-4884-b88e-2b10ca24e378`
+- generation `ee62aeb6-8134-4bf2-a3e5-9d0bbcd8cc2c`
+- generation `8fd172f7-3f9c-4fe6-882e-733bd4124224`
+- status: REJECTED_NON_AUTHORITY_STYLE_DRIFT
+- they must never be used as E006 source, reference, anchor, presentation artwork or recovery material.
+
+Session / recovery policy after artwork approval:
+- exact approved BODY/COVER bytes are required for deterministic assembly;
+- prefer repository/materialized approved bytes when available;
+- otherwise identical approved files may be re-supplied as `SESSION_ONLY` production-art carriers;
+- if exact approved bytes are unavailable, fail closed rather than recreate them from prompt/hash.
 
 Exact next action for episode production:
-1. Run PAGE_FINAL_RECOMPOSE from the approved E006 BODY/COVER anchor set.
-2. Approved BODY anchor SHA-256: d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76.
-3. Approved COVER anchor SHA-256: 063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db.
-4. Preserve scene events, PERSON/FOOD identity, food-state progression, key actions and continuity; do not reuse any superseded E006 artifact.
-5. After final 4:5 artwork passes contract QC, lock those bytes and create PRESENTATION_MASTER_DRAFT.
-6. Stop at FINAL_PUBLISH_GATE for user review.
+1. Do **not** call image generation.
+2. Run `JIPBAP_BOARD_EXTRACTION_V1` on the approved E006 BODY source and verify the source SHA-256 above.
+3. Create S01..S06 exact crops from detected actual borders and record extraction boxes + cell hashes.
+4. Use the approved COVER source unchanged.
+5. Assemble COVER + S01..S06 into 4:5 scenes using deterministic crop/scale/position only, with no aspect stretch.
+6. Add the approved PLAN copy / bubbles / inner thought / SFX / COVER title to create `PRESENTATION_MASTER_DRAFT`.
+7. Stop at `FINAL_PUBLISH_GATE` for user review.
 
-Infrastructure upgrade completed for future/new work:
-- `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
-- `ART_BUNDLE_USER_GATE` replaces the prior split BOARD-now/COVER-later approval pattern for new episodes.
-- COVER remains role-based and fluid; no BODY-slot-specific camera/composition rule is permanent.
-- Approved BODY/COVER form the visual/semantic anchor set; their exact pixels are not the default final-page authority.
-- Final 4:5 artwork produced by `PAGE_FINAL_RECOMPOSE` becomes byte-locked only after internal contract QC passes.
-- JIPBAP planning/copy guidance co-designs image + lettering space while keeping anchor BOARD/COVER generation text-free.
-- `JIPBAP_BOARD_EXTRACTION_V1` remains supported for optional exact reuse/debugging and records actual panel boxes + output hashes when that path is selected.
-- Final artwork provenance records the approved anchor set plus finalization method; extraction box provenance is added only for exact-reuse pages.
-- ToonDesk 0.3.3 preserves manual edits at property scope during same-ID layout reconstruction; no whole-object lock system was added.
-- preferred/resolved font family + weight + substitution are persisted/surfaced; preview + PNG continue to share the same Canvas scene renderer.
-- curved-tail, organic-bubble, horizontal-flip, guides/alignment and generic page/frame editing remain existing capabilities and were not reimplemented.
-- ToonDesk tests + Web Live Sync: PASS at `b06a357d3364cd22b7681a64d4537546cf9c3073`.
-- JIPBAP validation including page-recomposition provenance/editor-contract regressions: PASS on workflow run #245 at `6446797585ea6a60d7975f6603ceaafe7c6a2979`.
+Infrastructure change applied for future/new work:
+- `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` as the canonical finalization mode.
+- `templates/JIPBAP_PRESENTATION_SHELL_V2.json` revision is `2026-09-09_APPROVED_ART_PIXEL_LOCK_V1`.
+- BODY source policy is `approved_board_cell_exact_derivative` + `EXACT_EXTRACTION_REUSE`.
+- COVER source policy is `approved_cover_exact_source` + `EXACT_ANCHOR_REUSE`.
+- shell policy explicitly forbids stochastic regeneration after artwork approval and requires reopening the artwork gate for source replacement.
+- editor provenance schema records approved-source SHA, source-lock state and stochastic-regeneration policy while retaining historical `PAGE_FINAL_RECOMPOSE` enum readability for old packages only.
+- `JIPBAP_BOARD_EXTRACTION_V1` metadata now records `EXACT_CROP_FROM_APPROVED_BOARD`, `stochastic_generation=false`, approved-source identity requirement and no-stretch policy.
+- regression tests were updated to enforce the new source-lock contract.
+- no new routine user gate was added; the existing artwork approval gate now has stronger media authority.
 
 Remaining verification limits:
-- no real-device mobile touch test was performed in this infrastructure pass;
-- no browser visual/pixel parity claim is made beyond the shared scene/render contract and CI tests;
-- external SVG rasterizers may differ in font metrics/antialiasing;
-- whether the revised planning/copy prompt improves actual comic quality must be evaluated on the next new episode, not by rewriting V1_E005.
+- E006 approved BODY/COVER bytes are currently available in this active session but are not yet claimed as repository-materialized episode binaries.
+- CI status for the structural change must be checked after the final repository commit.
+- browser/mobile rendering differences remain presentation-layer concerns and do not weaken artwork-source identity.
 
 BODY count: 6
 Carousel: COVER + 6 BODY
@@ -119,7 +136,7 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_PAGE_FINAL_RECOMPOSE_V1`
+- V2 revision: `2026-09-09_APPROVED_ART_PIXEL_LOCK_V1`
 - canvas: 1080 × 1350
 - COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
