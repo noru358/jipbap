@@ -340,6 +340,17 @@ Implemented in `noru358/Toondesk`:
 
 The desktop wrapper is transport/UX only. It does not change JIPBAP `composition/*.layout.json` authority or create a new production gate.
 
+## ToonDesk Web Live checkpoint
+
+Primary interactive-editor transport changed 2026-09-09:
+- hosted ToonDesk web editor is now the normal development/use path
+- canonical URL: `https://noru358.github.io/Toondesk/`
+- ToonDesk `main` is automatically mirrored to the `gh-pages` branch through `Web Live Sync`
+- GitHub's branch-based Pages deployment is active; no EXE download is required for routine editor revisions
+- Chrome/Edge hosted mode uses the File System Access API for native project open/save and Ctrl/Cmd+S in-place save when supported
+- Electron/Windows builds remain optional for OS file association/offline use and are now manual/tag-driven instead of rebuilding on every `main` push
+- web/desktop transport does not change JIPBAP composition authority
+
 ## Generic editor boundary
 
 - Generic editor implementation repository: `noru358/Toondesk`.
