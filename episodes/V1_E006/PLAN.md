@@ -315,3 +315,31 @@ Continuity:
 3. If approved, bind the USER_LOCKED PERSON/FOOD renderer carriers in the approval turn.
 4. Generate a fresh INITIAL_ART_BUNDLE: BODY 2×3 master board + independent COVER hero.
 5. Never reuse the discarded E006 iteration as authority.
+
+
+## Presentation draft v2 QC
+
+Status: `REJECTED_NON_CANONICAL_FOR_PIPELINE`
+
+Visual findings:
+- COVER lettering/layout: GOOD.
+- S01: GOOD hook and readability.
+- S02: GOOD as a presentation image, but artwork staging changed from the approved source cell.
+- S03: ingestion and hot/soft reaction read correctly.
+- S04: intact tofu-on-rice setup reads correctly.
+- S05: improved active-mixing readability; still does not show the spoon visibly deforming a large tofu piece as explicitly as intended.
+- S06: payoff reads correctly.
+- all literal copy appears visually correct.
+- repeated cloud-shaped thought bubbles are a soft quality issue.
+
+Pipeline finding:
+- FAIL. The draft was created by stochastic page-level image generation rather than actual approved-BOARD border extraction + exact-pixel 4:5 FIT + presentation overlays.
+- do not use these pixels as artwork authority or canonical FIT outputs.
+- remain at `EXTRACT_FIT`.
+
+Required next action:
+1. extract S01..S06 from the exact approved BODY bytes with the existing border detector;
+2. persist `JIPBAP_BOARD_EXTRACTION_V1` box/output hashes;
+3. 4:5 FIT the exact extracted rasters and exact approved COVER without stretch/redraw;
+4. add title/bubble/text/SFX as presentation-layer overlays;
+5. only then build/show the seven-page presentation master.
