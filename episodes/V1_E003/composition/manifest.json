@@ -1,0 +1,73 @@
+{
+  "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "episode": "V1_E003",
+  "template_id": "JIPBAP_PRESENTATION_SHELL_V2",
+  "editor_profile": "JIPBAP_DEFAULT_V2",
+  "profile_revision": "2026-09-09_FULL_ART_OVERLAY",
+  "presentation_authority": "episodes/V1_E003/composition/*.layout.json",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "ratio": "4:5"
+  },
+  "scene_model": "EDITOR_SCENE_MODEL_V1",
+  "layer_contract": "FOUR_LAYER_SHARED_V1",
+  "custom_override": false,
+  "custom_override_reasons": [],
+  "pages": [
+    "COVER",
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06"
+  ],
+  "source_board": {
+    "dimensions": [
+      1024,
+      1536
+    ],
+    "extraction": {
+      "x_interiors": [
+        [
+          16,
+          501
+        ],
+        [
+          522,
+          1010
+        ]
+      ],
+      "y_interiors": [
+        [
+          11,
+          488
+        ],
+        [
+          509,
+          937
+        ],
+        [
+          958,
+          1517
+        ]
+      ],
+      "method": "detected_actual_panel_borders_not_nominal_equal_split"
+    }
+  },
+  "cover_artwork_provenance": {
+    "source": "../artwork/COVER_APPROVED.png",
+    "source_kind": "previously_approved_cover_visual",
+    "source_sha256": "12a701747e5fafc9ad36f20f729d91496f553a0d8a1b81c862d102f130b78a89",
+    "locked_for_final_candidate": true
+  },
+  "canonical_handoff": {
+    "filename": "V1_E003_제육볶음_COVER_RESTORED_TD031.toondesk",
+    "sha256": "bdd412e63f80ef0bd5d1fc555efb9840cb6a1ccadda5b04d452036c2de850817",
+    "toondesk_min_version": "0.3.1"
+  },
+  "final_publish_gate": "APPROVED_BY_EXPLICIT_USER_CLOSE",
+  "closed_at": "2026-09-09",
+  "closure_note": "User explicitly requested to close V1_E003 here. The final post-TD031 user round-trip test was not required to keep the episode open; the repaired TD031 scene is canonicalized as the accepted final composition."
+}
