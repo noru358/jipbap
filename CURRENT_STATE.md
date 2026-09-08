@@ -12,7 +12,7 @@ Status: DONE
 ## Active production state
 
 Active episode: V1_E003
-Stage: FINAL_APPROVED_CANONICALIZATION_PENDING
+Stage: CANONICAL_PACKAGE_QC_FAIL_REPAIR_REQUIRED
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -144,6 +144,33 @@ Important implementation note:
 - therefore do not declare the episode repository state DONE until deterministic canonicalization and receipt persistence are completed.
 - this is artifact completion, not a new user gate and not a new permanent hard-fail class.
 
+## V1_E003 ToonDesk round-trip QC
+
+User test:
+- imported the supplied `.toondesk` into ToonDesk
+- made no edits
+- exported `V1_E003_package.zip`
+- returned the export for QC
+
+Round-trip integrity:
+- all 7 layout JSON files are byte-semantic equivalent to the source project pages: PASS
+- page count COVER + S01..S06: PASS
+- 1080 × 1350 PNG export for all 7 pages: PASS
+- manifest `custom_override=false`: PASS
+- all 7 SVG derivatives parse successfully and retain embedded artwork: PASS
+
+Authoring/package defects discovered:
+- S03 artwork contains an obvious strip of the next panel at the bottom: HARD VISUAL FAIL
+- S04 artwork contains an obvious strip of the next panel at the bottom: HARD VISUAL FAIL
+- root cause: the supplied package naively sliced the 1024×1536 generated board at nominal 512px row boundaries even though the actual generated panel borders were not located at equal 512px row boundaries
+- S06 speech bubble obscures a substantial part of the protagonist face/eye area: presentation defect requiring deterministic layout repair
+- the previously approved 7-page preview was separately generated instead of being the deterministic derivative of the accepted master BOARD; therefore approval identity and canonical package identity diverged
+
+Interpretation:
+- ToonDesk did NOT introduce these defects. The no-edit round trip preserved the supplied scene exactly.
+- this is a package-authoring / deterministic-assembly failure, not evidence for a new permanent V1 hard gate or new editor rule.
+- V1_E003 must not be declared DONE until the canonical package is rebuilt and the changed final carousel is shown at the final publish gate.
+
 ## Previous episode provenance
 
 V1_E001:
@@ -168,10 +195,12 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. V1_E003 FINAL_PUBLISH_GATE is APPROVED; no further creative/user approval is required.
-2. Canonicalize the approved episode under JIPBAP_PRESENTATION_SHELL_V2 using deterministic post-processing from accepted BODY artwork: six-cell extraction/crop, clean artwork assets, COVER + six BODY scene/layout JSON, SVG/PNG derivatives, no artwork stretching.
-3. Ensure meaning-bearing BODY text lives in editable lettering objects rather than baked generated raster. Speech / inner-thought / narration / SFX must use the frozen semantic roles.
-4. Persist episodes/V1_E003/composition/*.layout.json, composition/manifest.json and episodes/V1_E003/RUN_RECEIPT.md; record artifact hashes.
-5. Validate the package can be consumed by ToonDesk without changing JIPBAP authority. A ToonDesk transport wrapper is non-authoritative.
-6. After successful canonicalization/round-trip validation, mark V1_E003 Stage and Status DONE.
-7. The next production test after that is a fresh V1_E004 request, verifying that one ordinary "집밥 4화 만들어줘" flow reaches the same editable package without manual structural intervention.
+1. Do not blame or modify ToonDesk for the observed S03/S04 defects; no-edit round-trip scene preservation is verified PASS.
+2. Re-extract the accepted V1_E003 master BOARD using detected actual panel borders rather than nominal 512px slicing. Remove all adjacent-panel/border contamination from S01..S06 artwork assets.
+3. Rebuild the JIPBAP_PRESENTATION_SHELL_V2 composition deterministically with editable lettering objects and no artwork stretching.
+4. Repair S06 speech placement so it does not cover the focal face/eye area.
+5. Inspect all seven rendered PNG derivatives at full size. S03/S04 adjacent-panel contamination is publish-blocking and must be absent.
+6. Export a fresh self-contained ToonDesk project file for user handoff.
+7. Because the corrected deterministic carousel will differ visually from the previously approved preview, present the corrected COVER + 6 BODY carousel once at FINAL_PUBLISH_GATE.
+8. After approval, persist composition/*.layout.json, manifest.json and RUN_RECEIPT.md, then mark V1_E003 DONE.
+9. Do not create a new permanent gate or editor restriction from this single package-authoring bug.
