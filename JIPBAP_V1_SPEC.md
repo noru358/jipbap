@@ -206,6 +206,10 @@ Shared renderer/editor contract:
 - the interactive editor may explicitly unlock an artwork frame and move / resize / rotate the frame; this mutates scene geometry only and is recorded as a `CUSTOM_OVERRIDE`, not as a new scene format;
 - deterministic rerender updates SVG/PNG without BOARD regeneration;
 - accepted artwork bytes remain byte-identical during ordinary presentation editing; explicit image replacement is an artwork-level override and must not be confused with approved BOARD provenance;
+- every accepted artwork page may carry one `artwork_provenance` reference. BODY provenance points to the existing BOARD-extraction metadata + box index; COVER provenance points to its approved source. The final FIT/crop transform remains owned by the artwork object's `crop` metadata rather than duplicated into a second manifest;
+- editor-originated `manual_overrides` are property-level metadata, not locks. Automatic layout/reconstruction preserves those properties by default while leaving unmodified properties editable and eligible for automatic updates;
+- a line-break-only edit is tracked separately from literal-copy editing. If upstream literal copy later changes, do not silently reuse stale line breaks or shrink text; keep the new copy, preserve unrelated manual geometry, and surface a reflow/manual-attention issue;
+- preview and PNG export share the same scene renderer. SVG is a deterministic derivative of the same geometry/text model, but external SVG rasterizers may differ in font metrics/antialiasing and this is not claimed as pixel identity;
 - the interactive editor must remain optional: absence of the future API/editor must not block or alter the current Chat-mode production path.
 
 ### 1.4.1 Frozen editor-facing layer contract
@@ -271,7 +275,10 @@ Artwork frame/crop interaction:
 - default crop: centered, scale 1.0, zero offset;
 - stretching is disabled by default; crop pan/scale cannot expose empty frame area;
 - an explicit interactive-editor unlock may transform the frame without changing the underlying scene format;
-- crop edits and frame transforms mutate scene metadata only unless the user explicitly replaces the artwork source.
+- crop edits and frame transforms mutate scene metadata only unless the user explicitly replaces the artwork source;
+- BODY extraction uses the existing `JIPBAP_BOARD_EXTRACTION_V1` record as the single owner of source hash + actual panel boxes. A scene references that record and box index; it does not create a duplicate crop manifest.
+- the final artwork object's `crop` metadata is the single owner of 4:5 FIT pan/scale/anchor. Downstream save/reopen/export reuses it.
+- final-crop review should be performed on the 4:5 page with optional `avoid_regions` visible so face/hand/food focal subjects can be checked after FIT.
 
 Placement freedom:
 - COVER and BODY both use full-art composition by default: the accepted raster occupies the complete 4:5 canvas and lettering is layered over it as independent vector/scene objects.
@@ -284,7 +291,9 @@ Placement freedom:
 - if no safe area exists, shorten/reline copy, reduce container footprint, or use a restrained translucent/light container before obscuring the focal action.
 - explicit human/editor repositioning remains allowed and is a normal scene edit; it becomes `CUSTOM_OVERRIDE` only when it changes project-profile structural defaults such as artwork-frame geometry/page structure, not merely because a lettering object moved.
 - unnecessary coverage of focal food/face is a presentation quality defect; obvious obstruction that makes the focal action unreadable must be repaired before publish.
-- automatic copy overflow is repaired by reline/shorten/reposition/font-size adjustment within the role preset, never by squeezing artwork.
+- automatic copy overflow on untouched generated layout may be repaired by reline/reposition or copy revision, never by squeezing artwork.
+- if the user has manually changed position, line breaks, tail geometry or typography, automation preserves those marked properties by default. A changed literal copy that no longer fits is surfaced as `layout_attention` instead of silently shrinking type or erasing the user's placement.
+- reapplying automatic placement is an explicit editor action that names the affected scope before clearing the relevant manual override; it does not globally reset unrelated edits.
 
 Typography role presets are implementation defaults, not font-family locks:
 - `cover_menu_tag`: nominal 30 px, 26..34, bold.
@@ -480,39 +489,53 @@ If a menu/moment cannot support six publishable visual beats without procedural 
 
 ## 5. Voice / copy boundary
 
-Frozen copy grammar:
-- use short, conversational Korean that can plausibly sound like a real person, Korean community post or thread reaction rather than polished script prose
-- fragments, dropped subjects, brief exclamations and reaction-first wording are allowed when natural
-- "community/thread-like" means natural spoken Korean or plausible inner speech, not a stock internet persona
-- do not default to compressed internet endings such as `~함` / `~임`, or stock meme-like phrases such as `못 참지`, `게임 끝`, `반칙`, merely to simulate community speech
-- do not force slang, memes or trendy expressions merely to simulate community speech; memes/drips are added only when the episode/user actually calls for them
-- when copy adds food information, prefer one concrete sensory observation from the immediate bite: aroma, heat, texture, seasoning, moisture, aftertaste or the effect of combining foods
-- describe why the bite works rather than relying on generic praise such as simply saying it is delicious
-- copy should add what the image cannot fully show — mouthfeel, smell, temperature, flavor transition, aftertaste or the impulse to take another bite — rather than narrating an obvious hand motion
-- on mobile, prefer one short reaction and at most one concrete sensory observation per beat; if copy starts competing with the artwork, compress/reposition the copy or reduce its container footprint rather than sacrificing the focal artwork
-- silent BODY panels are allowed when the image carries the beat
-- do not force a `잘 먹었다`, lesson, punchline or emotional conclusion
-- inner thought, speech and narration are separate editable layers
-- food/appetite remains the subject; character backstory does not expand unless it directly strengthens the meal moment
+Frozen copy principles:
+- `speech`, `inner_thought`, `narration`, `sfx` have distinct functions; none is a mandatory per-panel slot.
+- speech carries a reaction/request/relationship toward someone; inner thought carries immediate private reaction or small desire; narration adds time/context absent from the image; SFX carries sound or nonverbal rhythm.
+- use conversational Korean that can plausibly be spoken or thought by a real person. Community/thread-like rhythm is allowed when natural, but no global meme/`~함`/`~임` persona is imposed.
+- sensory wording is kept when it adds concrete temperature, texture, aroma, flavor direction, viscosity/coating, sound or aftertaste that the image cannot fully show.
+- do not narrate an obvious visible action merely because a text slot exists.
+- do not enforce a character count, one-sentence-per-panel rule, or one-text-object-per-panel rule.
+- read copy aloud as a naturalness check.
+- do not force `잘 먹었다`, a moral, emotional closure, punchline, conflict or reversal.
+
+Input policy:
+- a food name alone is sufficient to start planning.
+- when the user provides situation, remembered sensation, actual words, unexpected detail or small choice, use them.
+- these are optional enrichment, never a required questionnaire.
+- preserve the distinction between user-given experience/copy and AI-filled connective assumptions; do not present AI-filled details as user memory.
+- when story direction is genuinely undecided, offer at most two materially different directions and recommend one. If the user already provided a story/structure, follow it rather than generating alternatives.
 
 Exact wording, dialect intensity, line count and whether a panel is silent remain fluid.
+## 6. Storyboard, text-space and continuity
 
-## 6. Physical and semantic continuity
+Storyboard planning co-designs image and lettering while keeping the generated BOARD text-free.
+Per scene, reuse existing plan fields where they already carry the meaning and add only missing information:
+- what becomes new in the scene
+- person action and current food state
+- actual copy element(s), speaker and role (`speech` / `inner_thought` / `narration` / `sfx`)
+- camera distance/relation and visual focus
+- approximate copy-space hint, without freezing final x/y
+- protected face/hand/food regions that lettering should avoid
+- reading order when multiple text elements exist
 
-Board planning must define only what is necessary to avoid impossible states:
+`copy_space_hint`, `placement_guides` and `avoid_regions` are soft planning/presentation metadata. They must not become a universal top text band or a BOARD generation requirement.
+Where practical, review a small 4:5 storyboard view before image generation. If visual storyboard generation is impractical in Chat mode, a scene-by-scene placement description is sufficient; no dedicated storyboard application is required.
+
+Continuity uses the minimum state needed to prevent impossible images:
 - current food state
 - visible action
-- immediately required precondition
+- immediately required previous state
 - next visible consequence
 
-Do not build a full asset dependency DAG.
-
+Do not rebuild a full action/asset dependency DAG.
 For eating interactions:
 - spoon/chopstick/hand/food/mouth geometry must make physical sense at the visible moment.
-- flavor / mouthfeel / aftertaste copy must not occur before the depicted bite has actually entered the mouth, unless a prior panel already established ingestion. A pre-bite panel may express smell, appearance, anticipation or remain silent; do not let the character taste food that has not yet been eaten.
+- flavor / mouthfeel / aftertaste copy must not occur before the depicted bite has actually entered the mouth, unless a prior panel already established ingestion.
 - bridge actions may occur between panels, but before/after states must be compatible.
-- cultural meal details follow the current episode context; no global Korean table-setting pose is hardcoded.
+- cultural meal details follow the current episode context; no global table-setting pose is hardcoded.
 
+Shot scale, camera, expression, number of silent panels and amount of background remain story-driven. Do not impose quotas.
 ## 7. QC: hard fail vs soft score
 
 ### 7.1 Hard FAIL only

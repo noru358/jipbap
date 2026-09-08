@@ -143,6 +143,41 @@
             }
           },
           "additionalProperties": true
+        },
+        "artwork_provenance": {
+          "type": "object",
+          "description": "Sticky accepted-artwork identity. BODY may reference the existing board-extraction record + box index; final FIT is owned by the artwork object's crop field.",
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "source_kind": {
+              "type": "string"
+            },
+            "source_sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "extraction_metadata_ref": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "extraction_box_index": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "locked_for_final_candidate": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
         }
       },
       "additionalProperties": true
@@ -310,6 +345,15 @@
                   "number",
                   "string"
                 ]
+              },
+              "resolved_weight": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "substituted": {
+                "type": "boolean"
               }
             },
             "additionalProperties": true
@@ -357,6 +401,68 @@
               }
             },
             "additionalProperties": true
+          },
+          "manual_overrides": {
+            "type": "array",
+            "description": "Property-level user edit markers. These are merge-preservation hints, not object locks.",
+            "items": {
+              "enum": [
+                "position",
+                "size",
+                "rotation",
+                "z_order",
+                "visibility",
+                "line_breaks",
+                "text",
+                "typography",
+                "tail_tip",
+                "tail_attachment",
+                "tail_shape",
+                "bubble_style",
+                "crop",
+                "artwork_source",
+                "object_presence"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "layout_attention": {
+            "type": "array",
+            "description": "Non-destructive issues requiring reflow or manual review; never an excuse to silently discard manual edits.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "padding": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "left": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "right": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "top": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "bottom": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
           }
         },
         "additionalProperties": true

@@ -13,6 +13,27 @@ Status: IN_PROGRESS
 
 Active episode: V1_E005
 Stage: FINAL_PUBLISH_GATE
+
+## Boot snapshot — current episode is read-only during infrastructure work
+
+- Active episode: `V1_E005`
+- Current stage: `FINAL_PUBLISH_GATE`
+- STORYBOARD_USER_GATE: APPROVED
+- FOOD renderer projection: APPROVED / USER_LOCKED
+- BODY master BOARD: APPROVED (`f1c27c4a635406d616f1649127318767ba22ba5d2d51f87088db4808fd76c126`)
+- distinct COVER hero: APPROVED (`eba699359373e2534fe5edcfd027c78af0e77962c2609607b086047960828fc8`)
+- PRESENTATION_MASTER_DRAFT candidate: awaiting user decision (`38f25a32289af32631279c2ec8afecf3997292e8043b649dddf2e0c6b4a6b226`)
+- This infrastructure change does not regenerate, reopen, approve, reject, or otherwise mutate V1_E005 artwork/story/copy state.
+
+Exact next action for episode production remains:
+1. Await user decision on the current V1_E005 quality-first `PRESENTATION_MASTER_DRAFT`.
+2. If approved, reconstruct exact accepted artwork/copy into the editable package and run `PRESENTATION_PARITY_QC`.
+3. If rejected, revise presentation design only unless the user explicitly reopens artwork.
+
+Open infrastructure issues relevant to future episodes:
+- property-level manual-edit preservation must be implemented in ToonDesk before relying on layout re-import/reconstruction merge;
+- BODY artwork provenance should reuse BOARD extraction metadata and final scene crop, not create a parallel manifest;
+- font fallback must remain visible in preview/export receipts;
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -479,10 +500,7 @@ Structural changes applied:
 - final editable package must be reconstructed from the approved visual target and pass `PRESENTATION_PARITY_QC`
 - tool limitation must not silently simplify approved presentation design; extend ToonDesk/scene capability when required
 
-## Exact next action
+## Historical location note
 
-1. Await user decision on the current V1_E005 quality-first `PRESENTATION_MASTER_DRAFT`.
-2. If approved, bind page-level presentation-target provenance/hash and reconstruct the approved presentation in `EDITABLE_COMPOSITION_PACKAGE_V1` using the exact accepted artwork bytes and exact approved copy.
-3. Run `PRESENTATION_PARITY_QC`. If editor output visibly regresses, repair scene data or extend ToonDesk; do not simplify the approved design and do not regenerate BOARD/COVER.
-4. When parity passes, persist canonical composition / RUN_RECEIPT and mark V1_E005 DONE.
-5. If the presentation master is rejected, revise only presentation design unless the user explicitly reopens artwork.
+The canonical episode exact-next-action is intentionally kept in the boot snapshot near the top of this file.
+Do not infer a newer runtime action from historical checkpoints below.

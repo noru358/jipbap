@@ -1,5 +1,14 @@
-# PRODUCTION_PROTOCOL — jipbap v1.0
-Updated: 2026-09-07
+# PRODUCTION_PROTOCOL — LEGACY / DEBUG RECORD
+
+Status: NON_RUNTIME_AUTHORITY
+Retained only for historical/debug provenance.
+Do not boot, dispatch, gate, or infer the current pipeline from this file.
+Current runtime authority is only `CURRENT_STATE.md` then `JIPBAP_V1_SPEC.md`.
+In particular, COMPOSITION_FIRST_HYBRID_FOOD / ASSET_GAP / foundation-DAG state below is legacy and must not override SIX_PANEL_BOARD_FIRST or PRESENTATION_MASTER_FIRST.
+
+## Historical protocol below — do not execute
+
+Updated historically: 2026-09-07
 
 ## 0. Production boundary
 
