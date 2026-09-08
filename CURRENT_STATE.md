@@ -204,6 +204,21 @@ V1_CAL_001:
 - prior calibration provenance only
 - rejected boards remain non-reference material
 
+## ToonDesk desktop usability checkpoint
+
+Implemented in `noru358/Toondesk`:
+- Electron desktop shell added while retaining static-browser fallback
+- native open/save dialogs
+- `.toondesk` OS file-association build configuration
+- double-click / OS-open project handoff
+- Ctrl/Cmd+S in-place save for an opened project
+- preferred-font resolution warnings in QC
+- JIPBAP full-art V2 example profile mirrored as non-authoritative example only
+- Windows desktop build workflow: PASS on run #1 (head `9a53d4b...`)
+- subsequent workflow revisions only narrow automatic triggers/artifact upload scope; they do not change scene authority
+
+The desktop wrapper is transport/UX only. It does not change JIPBAP `composition/*.layout.json` authority or create a new production gate.
+
 ## Generic editor boundary
 
 - Generic editor implementation repository: `noru358/Toondesk`.
@@ -220,7 +235,7 @@ V1_CAL_001:
 1. Use the rebuilt `V1_E003_제육볶음_FULL_ART_V2.toondesk` as the current handoff candidate. It is derived from actual detected panel borders and the corrected full-art V2 profile.
 2. Open it in the updated ToonDesk and perform a no-edit export round trip. Verify page count, layout JSON semantic equality, artwork source integrity, font-resolution warnings, and PNG/SVG export.
 3. Inspect the exported COVER + 6 BODY PNG derivatives. Confirm no adjacent-panel contamination and no focal face/food obstruction from lettering.
-4. The Windows desktop-app build for ToonDesk is being produced through GitHub Actions; browser/static mode remains fallback and must render the same scene model.
+4. ToonDesk Windows desktop build has passed GitHub Actions. Use the desktop path as the preferred local UX; browser/static mode remains fallback and must render the same scene model.
 5. If the no-edit round trip passes, use those exact exported PNG derivatives as the FINAL_PUBLISH_GATE preview. Do not generate a separate lookalike preview.
 6. After final approval, persist V1_E003 composition/*.layout.json, manifest.json and RUN_RECEIPT.md and mark V1_E003 DONE.
 7. Do not add a new production gate or V3 shell solely from this repair.
