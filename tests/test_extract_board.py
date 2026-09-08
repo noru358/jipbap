@@ -76,6 +76,10 @@ class BoardExtractionTests(unittest.TestCase):
 
             self.assertEqual(payload["schema"], "JIPBAP_BOARD_EXTRACTION_V1")
             self.assertEqual(payload["source"]["sha256"], hashlib.sha256(source.read_bytes()).hexdigest())
+            self.assertEqual(payload["derivation_policy"]["mode"], "EXACT_CROP_FROM_APPROVED_BOARD")
+            self.assertFalse(payload["derivation_policy"]["stochastic_generation"])
+            self.assertTrue(payload["derivation_policy"]["source_identity_must_match_approved_body"])
+            self.assertFalse(payload["derivation_policy"]["aspect_ratio_stretch_allowed"])
             self.assertEqual(len(payload["cells"]), 6)
 
             for i, cell in enumerate(payload["cells"]):
@@ -83,6 +87,8 @@ class BoardExtractionTests(unittest.TestCase):
                 self.assertEqual(cell["page_id"], expected_id)
                 self.assertEqual(cell["box_index"], i)
                 self.assertEqual(cell["box"], list(result.boxes[i]))
+                self.assertEqual(cell["derivation"], "EXACT_CROP_FROM_APPROVED_BOARD")
+                self.assertFalse(cell["stochastic_generation"])
                 target = out / cell["output"]["filename"]
                 self.assertEqual(target.name, f"{expected_id}.png")
                 self.assertTrue(target.exists())
