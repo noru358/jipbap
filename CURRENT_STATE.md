@@ -12,7 +12,7 @@ Status: ACTIVE_REPAIR
 ## Active production state
 
 Active episode: V1_E003
-Stage: TOONDESK_0_3_REBUILD_AND_COVER_REPAIR_REQUIRED
+Stage: TOONDESK_0_3_BUILD_PASS_COVER_CANDIDATE_READY
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -236,6 +236,24 @@ Implemented in `noru358/Toondesk`:
 - workflow now performs static JS/JSON validation before packaging
 - auto-update remains intentionally deferred until signed/stable releases are established
 
+## ToonDesk 0.3 build result
+
+Latest Windows development build:
+- workflow run #20
+- static JS/JSON validation: PASS
+- Windows packaging: PASS
+- artifact: `ToonDesk-windows`
+- contents: `ToonDesk 0.3.0.exe`, `ToonDesk Setup 0.3.0.exe`
+
+E003 repaired local handoff candidate:
+- filename: `V1_E003_제육볶음_COVER_RESTORED_TD03.toondesk`
+- SHA-256: `82c3ab112aa935665b7d11e92d6c9bc046f66183571a0e9e4cbc0fb2278efe7f`
+- COVER source restored from the previously liked cover visual raster
+- source SHA-256: `12a701747e5fafc9ad36f20f729d91496f553a0d8a1b81c862d102f130b78a89`
+- old baked title/tag are hidden by deterministic artwork-band masks; visible title/menu are editable scene objects
+- `cover_artwork_provenance` recorded and locked for the final candidate
+- speech bubbles upgraded to rich soft-curved `tail` geometry
+
 ## Previous episode provenance
 
 V1_E001:
@@ -288,11 +306,10 @@ The desktop wrapper is transport/UX only. It does not change JIPBAP `composition
 
 ## Exact next action
 
-1. Wait for the latest ToonDesk 0.3 Windows development build to pass static validation + packaging, then use that build for the next editor test.
-2. Rebuild V1_E003 COVER without silently substituting S06. Preserve the previously approved COVER visual source/composition as the episode-specific visual target/source where available, while keeping title/menu lettering as separate editable presentation objects.
-3. Record `cover_artwork_provenance` (source + crop) on the rebuilt COVER candidate and add face/food/hand avoid regions so title/menu placement is focal-aware.
-4. Rebuild V1_E003 speech bubbles using rich soft-curved tail geometry; ensure tip and attachment handles round-trip in ToonDesk 0.3.
-5. Export a new no-edit package from ToonDesk 0.3 and verify: 7-page semantic equality, COVER provenance preservation, no focal obstruction, rich-tail geometry preservation, and preferred/resolved font behavior including Gaegu.
-6. Use the exact exported COVER + 6 BODY PNGs from that package as FINAL_PUBLISH_GATE preview. Do not generate a separate lookalike preview.
-7. After approval, persist canonical V1_E003 composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
-8. Do not add V3 or a new production gate from these editor/presentation repairs.
+1. Use ToonDesk 0.3.0 Windows build (workflow run #20 PASS) for the next user test.
+2. Open `V1_E003_제육볶음_COVER_RESTORED_TD03.toondesk`; verify the restored COVER composition, editable title/menu, focal-safe placement and rich bubble-tail handles.
+3. Test font selection by changing at least one text object's real family in ToonDesk; verify preview changes and exported manifest records the selected `preferred` family with the same resolved family when available.
+4. Export a no-edit/after-font-test package and verify: 7-page semantic integrity, `cover_artwork_provenance` preservation, rich-tail geometry preservation, guide metadata preservation, and font-resolution behavior.
+5. Use the exact package-export PNGs as FINAL_PUBLISH_GATE preview.
+6. After approval, persist canonical V1_E003 composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
+7. Do not create V3 or a new production gate from these editor/presentation repairs.
