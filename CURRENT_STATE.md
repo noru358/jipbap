@@ -181,7 +181,7 @@ Interpretation:
 Session rebuild created under corrected V2 profile:
 - profile revision: `2026-09-09_FULL_ART_OVERLAY`
 - handoff filename: `V1_E003_제육볶음_FULL_ART_V2.toondesk`
-- session SHA-256: `5adfaadf727887af6d12248393f372e2ba0b6c2ccb3bc5898fc84eeb2e547b78`
+- session SHA-256: `f5ecad7c32fd5f54ff7d13a211458c9465bef9b6ea35043f3d61fd6c9deac0be`
 - BODY artwork extraction: actual border-based, not nominal equal split
 - x interiors: [16,501], [522,1010]
 - y interiors: [11,488], [509,937], [958,1517]
@@ -189,6 +189,7 @@ Session rebuild created under corrected V2 profile:
 - COVER/BODY artwork frames: full-canvas 1080×1350
 - fixed lower meta band: REMOVED
 - lettering: independent editable overlays
+- local focal-overlap heuristic after placement repair: PASS (no text/container >35% overlap with declared primary avoid region)
 - preferred fonts: Jua / Gowun Dodum / Gaegu by semantic role
 - final publish gate: still reopened; this session file is a round-trip test handoff, not yet canonical repository completion
 
