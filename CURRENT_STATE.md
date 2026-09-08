@@ -93,7 +93,7 @@ Infrastructure change applied for future/new work:
 
 Remaining verification limits:
 - E006 approved BODY/COVER bytes are currently available in this active session but are not yet claimed as repository-materialized episode binaries.
-- CI status for the structural change must be checked after the final repository commit.
+- structural implementation/tests: PASS on GitHub Actions validate run #259 at `029b8f80fe32963b9151b299f353b4070fdc5de0`.
 - browser/mobile rendering differences remain presentation-layer concerns and do not weaken artwork-source identity.
 
 BODY count: 6
