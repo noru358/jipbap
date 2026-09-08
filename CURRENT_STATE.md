@@ -12,7 +12,7 @@ Status: DONE
 ## Active production state
 
 Active episode: V1_E003
-Stage: BOARD_PENDING_RUNTIME_CARRIER
+Stage: FINAL_APPROVED_CANONICALIZATION_PENDING
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -132,6 +132,18 @@ Current flattened carousel ZIP SHA-256:
 
 No stochastic BOARD regeneration is authorized for presentation-only feedback.
 
+## V1_E003 approval state
+
+- STORYBOARD_USER_GATE: IMPLICITLY_ACCEPTED_BY_PRODUCTION_CONTINUATION
+- BOARD hard-fail QC: PASS
+- FINAL_PUBLISH_GATE: APPROVED
+- user final decision recorded: 2026-09-08
+
+Important implementation note:
+- the approved visual preview was shown successfully, but the repository has not yet received the canonical V2 editable composition package / RUN_RECEIPT for V1_E003.
+- therefore do not declare the episode repository state DONE until deterministic canonicalization and receipt persistence are completed.
+- this is artifact completion, not a new user gate and not a new permanent hard-fail class.
+
 ## Previous episode provenance
 
 V1_E001:
@@ -156,11 +168,10 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. V1_E003 PLAN is created at `episodes/V1_E003/PLAN.md`; do not mutate V1_E001 or V1_E002.
-2. Generate one text-free 2×3 master board for V1_E003 under `SIX_PANEL_BOARD_FIRST` using the USER_LOCKED `JIPBAP_STYLE_CARRIER_V1` as style-delivery authority.
-3. In this Chat image runtime, repository binary direct-binding is not exposed through the image-generation interface. If the carrier pixels are not already attached in this conversation, use the same approved carrier image as the one-time `SESSION_ONLY` runtime carrier; this is transport only and does not create a new reference or reset the episode.
-4. Apply V1 hard-fail QC only. Keep FOOD appetizing but less glossy/ad-like as a soft quality direction.
-5. After BOARD PASS, extract six cells and instantiate `JIPBAP_PRESENTATION_SHELL_V2`; create authoritative `composition/*.layout.json`, editable SVG derivatives and flattened PNG carousel pages without stretching artwork.
-6. Keep speech / inner-thought / SFX visually distinct using the frozen semantic roles and the concise copy in the PLAN.
-7. Present the completed COVER + 6 BODY carousel at the final publish gate.
-8. Do not add a new permanent gate or hard-fail class from soft observations.
+1. V1_E003 FINAL_PUBLISH_GATE is APPROVED; no further creative/user approval is required.
+2. Canonicalize the approved episode under JIPBAP_PRESENTATION_SHELL_V2 using deterministic post-processing from accepted BODY artwork: six-cell extraction/crop, clean artwork assets, COVER + six BODY scene/layout JSON, SVG/PNG derivatives, no artwork stretching.
+3. Ensure meaning-bearing BODY text lives in editable lettering objects rather than baked generated raster. Speech / inner-thought / narration / SFX must use the frozen semantic roles.
+4. Persist episodes/V1_E003/composition/*.layout.json, composition/manifest.json and episodes/V1_E003/RUN_RECEIPT.md; record artifact hashes.
+5. Validate the package can be consumed by ToonDesk without changing JIPBAP authority. A ToonDesk transport wrapper is non-authoritative.
+6. After successful canonicalization/round-trip validation, mark V1_E003 Stage and Status DONE.
+7. The next production test after that is a fresh V1_E004 request, verifying that one ordinary "집밥 4화 만들어줘" flow reaches the same editable package without manual structural intervention.
