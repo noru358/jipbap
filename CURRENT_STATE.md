@@ -73,6 +73,17 @@ Final carousel ZIP SHA-256:
 
 No stochastic BOARD regeneration is authorized for lettering/layout-only feedback.
 
+## Postmortem refinement applied after V1_E001
+
+JIPBAP_V1_SPEC.md was minimally refined without changing SIX_PANEL_BOARD_FIRST or adding a new user gate/hard-fail class.
+
+The next episode should exercise three soft-result improvements:
+1. COPY: more natural real-person / Korean community-thread cadence, with concrete bite-level sensory information instead of polished generic lines.
+2. COVER / LETTERING: cover-specific composition, better title hierarchy/line-break/font fit, and deterministic repair for typography/layout defects.
+3. STAGING / EXPRESSION: broader visual rhythm across the six cells and modestly stronger emotional expression, without hardcoding shot quotas or expression templates.
+
+These are production-quality directions and soft observations, not new permanent gates.
+
 ## Prior calibration provenance
 
 V1_CAL_001 remains prior calibration provenance and is not the active episode.
@@ -82,6 +93,9 @@ Its kimchi-pancake story is not reused for V1_E001.
 ## Exact next action
 
 1. V1_E001 is complete. Do not mutate it unless the user explicitly reopens it.
-2. On the next new-episode request, boot from latest main and create a fresh PLAN under JIPBAP_V1_SPEC.md.
-3. Preserve SIX_PANEL_BOARD_FIRST, the locked style authority, and the single-carrier production rule.
-4. Do not promote isolated soft-quality observations from V1_E001 into new permanent hard gates.
+2. On the next new-episode request, boot from latest main and create a fresh PLAN under the refined JIPBAP_V1_SPEC.md.
+3. In that PLAN, explicitly demonstrate improved copy cadence, concrete food-sensation wording, and a non-mechanical but varied camera/expression rhythm for storyboard review.
+4. Preserve SIX_PANEL_BOARD_FIRST, the locked style authority, and the single-carrier production rule.
+5. At deterministic ASSEMBLY, treat cover typography/composition as an actual design task rather than default BODY reuse + centered title.
+6. Evaluate these refinements through normal STORYBOARD_USER_GATE and FINAL_PUBLISH_GATE only; add no new routine approval gate.
+7. Do not promote isolated soft-quality observations from V1_E001 or the next run into new permanent hard gates without repeated publish-blocking evidence.
