@@ -27,7 +27,7 @@ Cover is a separate design surface, not BODY S01 reuse by default.
 Visual:
 - food-forward close composition
 - character holding a heaped spoon near the mouth
-- bowl/pan shows red kimchi rice with glossy but illustrated yolk streaks
+- bowl/pan shows red kimchi rice with illustrated yolk streaks
 - expression is anticipatory, slightly mischievous rather than neutral
 - keep one clean negative-space zone for title treatment
 
@@ -57,7 +57,7 @@ Camera / expression:
 - small anticipatory grin; shoulders subtly forward.
 
 Copy draft:
-- speech: `이건 계란부터 터뜨려야 됨.`
+- speech: `일단 계란부터 터뜨려야지.`
 
 Continuity state:
 - yolk intact.
@@ -97,7 +97,7 @@ Camera / expression:
 - hand action is more important than face.
 
 Copy draft:
-- inner thought: `노른자 묻으니까 김치 매운맛이 좀 둥글어짐.`
+- inner thought: `와, 노른자 섞이니까 매운맛이 확 부드러워지네.`
 
 Continuity state:
 - egg partly mixed, not uniformly blended.
@@ -116,7 +116,7 @@ Camera / expression:
 - face sits behind or beside the spoon with focused anticipation, not a repeated neutral portrait.
 
 Copy draft:
-- speech or thought: `끝에 눌어붙은 데까지 같이 떠야 돼.`
+- speech or thought: `이거 눌은 데까지 같이 떠야 돼.`
 
 Continuity state:
 - spoonful is a physically plausible scoop from S03 state.
@@ -136,8 +136,8 @@ Camera / expression:
 - slight eye-widen / pleased cheek tension from heat + texture; no exaggerated anime reaction.
 
 Copy draft:
-- speech fragment: `아 뜨거.`
-- inner thought: `근데 김치는 아삭하고 밥알은 고슬해서 계속 씹힘.`
+- speech fragment: `앗 뜨거.`
+- inner thought: `근데 김치는 아삭하고 밥알은 고슬고슬해서 식감 좋다.`
 
 Continuity state:
 - the S04 spoonful is now being consumed.
@@ -156,8 +156,8 @@ Camera / expression:
 - relaxed satisfaction with a small “already going back in” urgency.
 
 Copy draft:
-- inner thought: `입엔 노른자 고소한 맛 남아있는데 김치 끝맛이 다시 올라옴.`
-- small speech/reaction: `…또 퍼.`
+- inner thought: `음... 노른자 고소한 맛 남아있다가 김치 맛 다시 올라온다.`
+- small speech/reaction: `한 입 더.`
 
 Continuity state:
 - first bite completed.
@@ -180,11 +180,17 @@ Expressions may be modestly amplified for readability but must remain inside the
 
 ## Copy refinement check
 
-This draft deliberately avoids polished narrator prose and generic `맛있다` praise.
+Copy should sound like someone actually talking to themselves while eating, not compressed written prose.
+Preferred cadence:
+- spoken endings such as `~해야지`, `~네`, `~좋다`, short reactions and pauses
+- short sensory remarks tied to the current bite
+- no report-like `-함 / -됨 / -임` cadence in dialogue or inner monologue unless a specific character voice genuinely calls for it
+- community/thread flavor may appear through natural rhythm, not sentence-ending gimmicks
+
 Concrete bite information included:
 - yolk softens perceived kimchi heat
 - kimchi stays crisp
-- rice remains separate / 고슬
+- rice remains separate / 고슬고슬
 - browned edge adds texture
 - yolk richness lingers before kimchi aftertaste returns
 - the aftertaste causes the next-scoop impulse
