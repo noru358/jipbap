@@ -4,12 +4,12 @@ Updated: 2026-09-08
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Status: FINAL_PUBLISH_GATE
+Status: DONE
 
 ## Active production state
 
 Active episode: V1_E001
-Stage: ASSEMBLY COMPLETE / FINAL_PUBLISH_GATE
+Stage: DONE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -46,7 +46,8 @@ The carrier is style-delivery authority only and does not own menu, staging, cam
 
 - STORYBOARD_USER_GATE: APPROVED
 - BOARD_STYLE_USER_GATE: APPROVED
-- FINAL_PUBLISH_GATE: PENDING
+- FINAL_PUBLISH_GATE: APPROVED
+- EPISODE STATUS: DONE
 
 Accepted BOARD:
 - generation id: 3c20747b-7e9c-421c-8a00-1c4b5b481139
@@ -80,8 +81,7 @@ Its kimchi-pancake story is not reused for V1_E001.
 
 ## Exact next action
 
-1. Present the complete seven-page V1_E001 carousel at FINAL_PUBLISH_GATE.
-2. Wait for explicit final publish approval or final deterministic layout/copy corrections.
-3. If feedback is lettering/layout/copy only, repair deterministically without regenerating BOARD.
-4. If the user explicitly approves final publish, update V1_E001 to DONE.
-5. Do not create a new permanent hard gate from isolated soft-quality observations.
+1. V1_E001 is complete. Do not mutate it unless the user explicitly reopens it.
+2. On the next new-episode request, boot from latest main and create a fresh PLAN under JIPBAP_V1_SPEC.md.
+3. Preserve SIX_PANEL_BOARD_FIRST, the locked style authority, and the single-carrier production rule.
+4. Do not promote isolated soft-quality observations from V1_E001 into new permanent hard gates.
