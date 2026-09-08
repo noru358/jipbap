@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import hashlib
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from pipeline.extract_board import detect_panel_interiors
+from pipeline.extract_board import detect_panel_interiors, extract_board
 
 
 def _synthetic_board() -> Image.Image:
@@ -58,6 +62,34 @@ class BoardExtractionTests(unittest.TestCase):
         for x0, y0, x1, y1 in result.boxes:
             self.assertGreater(x1, x0)
             self.assertGreater(y1, y0)
+
+    def test_metadata_maps_each_output_to_actual_box_and_hash(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "board.png"
+            out = root / "cells"
+            meta = root / "board_extraction.json"
+            _synthetic_board().save(source, "PNG")
+
+            result = extract_board(source, out, metadata_path=meta, inset=1)
+            payload = json.loads(meta.read_text(encoding="utf-8"))
+
+            self.assertEqual(payload["schema"], "JIPBAP_BOARD_EXTRACTION_V1")
+            self.assertEqual(payload["source"]["sha256"], hashlib.sha256(source.read_bytes()).hexdigest())
+            self.assertEqual(len(payload["cells"]), 6)
+
+            for i, cell in enumerate(payload["cells"]):
+                expected_id = f"S{i + 1:02d}"
+                self.assertEqual(cell["page_id"], expected_id)
+                self.assertEqual(cell["box_index"], i)
+                self.assertEqual(cell["box"], list(result.boxes[i]))
+                target = out / cell["output"]["filename"]
+                self.assertEqual(target.name, f"{expected_id}.png")
+                self.assertTrue(target.exists())
+                self.assertEqual(
+                    cell["output"]["sha256"],
+                    hashlib.sha256(target.read_bytes()).hexdigest(),
+                )
 
 
 if __name__ == "__main__":
