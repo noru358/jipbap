@@ -173,11 +173,25 @@ def _reference_expectations(root: Path) -> tuple[list[ImageExpectation], dict[st
         if asset_id in seen:
             raise ValidationError(f"duplicate reference asset_id: {asset_id}")
         seen.add(asset_id)
+
+        sha256 = item.get("sha256")
+        materialization = str(item.get("repository_materialization_status", ""))
+        if not sha256:
+            # SESSION_ONLY renderer carriers may be user-locked before repository
+            # binary materialization. JIPBAP_V1_SPEC §9.5 says byte validation
+            # applies when repository bytes actually exist/change; do not invent
+            # a repository hash for a non-materialized carrier.
+            if materialization.startswith("NOT_MATERIALIZED"):
+                continue
+            raise ValidationError(
+                f"{asset_id}: active reference has no sha256 and is not marked non-materialized"
+            )
+
         output.append(
             ImageExpectation(
                 asset_id=asset_id,
                 path=str(item["path"]),
-                sha256=str(item["sha256"]),
+                sha256=str(sha256),
                 width=int(item["width"]),
                 height=int(item["height"]),
                 alpha_policy=str(item.get("alpha_policy", "NONE")),
