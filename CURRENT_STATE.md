@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Updated: 2026-09-08
+Updated: 2026-09-09
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
@@ -12,7 +12,7 @@ Status: DONE
 ## Active production state
 
 Active episode: V1_E003
-Stage: CANONICAL_PACKAGE_QC_FAIL_REPAIR_REQUIRED
+Stage: FULL_ART_V2_REBUILD_REQUIRED
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -53,13 +53,15 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
+- V2 revision: `2026-09-09_FULL_ART_OVERLAY`
 - canvas: 1080 × 1350
-- COVER: title/header x=60,y=40,w=960,h=240 + hero x=40,y=310,w=1000,h=1000
-- BODY: artwork x=40,y=40,w=1000,h=1000 + lower meta x=60,y=1080,w=960,h=230
-- speech / SFX default inside artwork
-- inner thought / narration default inside meta
+- COVER: full-canvas artwork + vector menu tag/title/decor; title region is a soft placement hint, not a separate frame
+- BODY: full-canvas artwork; no fixed lower meta band
+- speech / inner-thought / narration / SFX are independent freeform vector/scene overlays
+- automatic placement is focal-aware and may use optional face/food/hand avoid metadata
 - artwork starts locked in automatic Chat production
-- explicit editor unlock / frame transform / page-structure change is allowed and classified as `CUSTOM_OVERRIDE`, not corruption
+- lettering movement is ordinary presentation editing; explicit artwork-frame/page-structure deviation is `CUSTOM_OVERRIDE`
+- preferred real fonts + fallback chains are recorded; missing preferred fonts must be surfaced instead of silently substituted
 
 The presentation shell is a project default profile. The editor engine may expose broader capabilities without changing JIPBAP's automatic production defaults.
 
@@ -169,7 +171,8 @@ Authoring/package defects discovered:
 Interpretation:
 - ToonDesk did NOT introduce these defects. The no-edit round trip preserved the supplied scene exactly.
 - this is a package-authoring / deterministic-assembly failure, not evidence for a new permanent V1 hard gate or new editor rule.
-- V1_E003 must not be declared DONE until the canonical package is rebuilt and the changed final carousel is shown at the final publish gate.
+- V1_E003 must not be declared DONE until the canonical package is rebuilt under the corrected full-art V2 shell and the changed final carousel is shown at the final publish gate.
+- the prior final preview approval is not canonical package approval because preview/package identity diverged; FINAL_PUBLISH_GATE is therefore REOPENED_FOR_CANONICAL_IDENTITY for E003 only.
 
 ## Previous episode provenance
 
@@ -195,12 +198,12 @@ V1_CAL_001:
 
 ## Exact next action
 
-1. Do not blame or modify ToonDesk for the observed S03/S04 defects; no-edit round-trip scene preservation is verified PASS.
-2. Re-extract the accepted V1_E003 master BOARD using detected actual panel borders rather than nominal 512px slicing. Remove all adjacent-panel/border contamination from S01..S06 artwork assets.
-3. Rebuild the JIPBAP_PRESENTATION_SHELL_V2 composition deterministically with editable lettering objects and no artwork stretching.
-4. Repair S06 speech placement so it does not cover the focal face/eye area.
-5. Inspect all seven rendered PNG derivatives at full size. S03/S04 adjacent-panel contamination is publish-blocking and must be absent.
-6. Export a fresh self-contained ToonDesk project file for user handoff.
-7. Because the corrected deterministic carousel will differ visually from the previously approved preview, present the corrected COVER + 6 BODY carousel once at FINAL_PUBLISH_GATE.
-8. After approval, persist composition/*.layout.json, manifest.json and RUN_RECEIPT.md, then mark V1_E003 DONE.
-9. Do not create a new permanent gate or editor restriction from this single package-authoring bug.
+1. Rebuild V1_E003 under the corrected `2026-09-09_FULL_ART_OVERLAY` revision of `JIPBAP_PRESENTATION_SHELL_V2`; do not create V3 solely for this correction because no V2 episode was ever completed.
+2. Re-extract the accepted master BOARD using detected/confirmed actual panel borders, never nominal 512px slicing. Remove all adjacent-panel contamination from S01..S06.
+3. Use full-canvas 1080×1350 artwork on COVER and BODY. COVER title/menu/decor and all BODY speech/thought/narration/SFX must remain independent editable lettering/overlay objects.
+4. Remove the mandatory lower meta band. Place lettering focal-aware using soft safe insets and optional face/food/hand avoid regions; repair any focal obstruction such as the prior S06 face-covering bubble.
+5. Resolve preferred real fonts from the V2 profile. If the preferred family is unavailable, surface the fallback and ensure final preview/export use the same resolved family.
+6. Render the FINAL_PUBLISH_GATE preview from the exact same composition package that will be handed to the user; never separately generate a lookalike preview.
+7. Verify no-edit ToonDesk round-trip preserves the rebuilt scene. ToonDesk remains a generic engine; JIPBAP `composition/*.layout.json` remains authority.
+8. After the corrected carousel is approved, persist composition/layouts, manifest and RUN_RECEIPT and mark V1_E003 DONE.
+9. Separately improve ToonDesk usability by adding a desktop-app launch path while keeping the browser/static fallback; this must not change JIPBAP authority or add a production gate.
