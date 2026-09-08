@@ -90,7 +90,7 @@
         },
         "cover_artwork_provenance": {
           "type": "object",
-          "description": "Sticky provenance for the selected COVER artwork/crop. Prevents silent substitution during presentation-only edits.",
+          "description": "Sticky provenance for accepted final COVER artwork. The approved COVER hero is a visual/semantic anchor; PAGE_FINAL_RECOMPOSE may change pixels before final-page contract QC locks the accepted cover artwork.",
           "properties": {
             "source": {
               "type": "string"
@@ -115,6 +115,26 @@
             },
             "locked_for_final_candidate": {
               "type": "boolean"
+            },
+            "finalization_method": {
+              "type": "string",
+              "enum": [
+                "PAGE_FINAL_RECOMPOSE",
+                "EXACT_ANCHOR_REUSE",
+                "LEGACY_ACCEPTED_RASTER"
+              ]
+            },
+            "anchor_source_sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "contract_version": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": true
@@ -146,7 +166,7 @@
         },
         "artwork_provenance": {
           "type": "object",
-          "description": "Sticky accepted-artwork identity. BODY may reference the existing board-extraction record + box index; final FIT is owned by the artwork object's crop field.",
+          "description": "Sticky accepted final-page artwork identity. Final page art normally comes from PAGE_FINAL_RECOMPOSE using approved BODY/COVER visual-semantic anchors. Exact board extraction remains optional and may reference extraction metadata + box index.",
           "properties": {
             "source": {
               "type": "string"
@@ -175,6 +195,39 @@
             },
             "locked_for_final_candidate": {
               "type": "boolean"
+            },
+            "finalization_method": {
+              "type": "string",
+              "enum": [
+                "PAGE_FINAL_RECOMPOSE",
+                "EXACT_EXTRACTION_REUSE",
+                "EXACT_ANCHOR_REUSE",
+                "LEGACY_ACCEPTED_RASTER"
+              ]
+            },
+            "anchor_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "anchor_sha256s": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "contract_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "contract_qc_passed": {
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           },
           "additionalProperties": true
