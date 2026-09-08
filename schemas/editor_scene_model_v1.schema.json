@@ -90,7 +90,7 @@
         },
         "cover_artwork_provenance": {
           "type": "object",
-          "description": "Sticky provenance for accepted final COVER artwork. The approved COVER hero is a visual/semantic anchor; PAGE_FINAL_RECOMPOSE may change pixels before final-page contract QC locks the accepted cover artwork.",
+          "description": "Sticky provenance for approved COVER artwork. New V1 production pixel-locks the approved COVER source at ART_BUNDLE_USER_GATE and reuses that exact source; PAGE_FINAL_RECOMPOSE remains schema-readable only for historical packages.",
           "properties": {
             "source": {
               "type": "string"
@@ -122,7 +122,8 @@
                 "PAGE_FINAL_RECOMPOSE",
                 "EXACT_ANCHOR_REUSE",
                 "LEGACY_ACCEPTED_RASTER"
-              ]
+              ],
+              "description": "New production uses EXACT_ANCHOR_REUSE. PAGE_FINAL_RECOMPOSE is retained only for backward compatibility with historical episode packages."
             },
             "anchor_source_sha256": {
               "type": [
@@ -135,6 +136,18 @@
                 "string",
                 "null"
               ]
+            },
+            "approved_source_sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_identity_locked": {
+              "type": "boolean"
+            },
+            "stochastic_regeneration_allowed": {
+              "type": "boolean"
             }
           },
           "additionalProperties": true
@@ -166,7 +179,7 @@
         },
         "artwork_provenance": {
           "type": "object",
-          "description": "Sticky accepted final-page artwork identity. Final page art normally comes from PAGE_FINAL_RECOMPOSE using approved BODY/COVER visual-semantic anchors. Exact board extraction remains optional and may reference extraction metadata + box index.",
+          "description": "Sticky page artwork provenance. New V1 BODY pages are exact deterministic crops of the approved BODY board (EXACT_EXTRACTION_REUSE); COVER uses exact approved source reuse. PAGE_FINAL_RECOMPOSE remains schema-readable only for historical packages.",
           "properties": {
             "source": {
               "type": "string"
@@ -203,7 +216,8 @@
                 "EXACT_EXTRACTION_REUSE",
                 "EXACT_ANCHOR_REUSE",
                 "LEGACY_ACCEPTED_RASTER"
-              ]
+              ],
+              "description": "New production uses EXACT_EXTRACTION_REUSE for BODY and EXACT_ANCHOR_REUSE for COVER. PAGE_FINAL_RECOMPOSE is legacy-readable only."
             },
             "anchor_refs": {
               "type": "array",
@@ -228,6 +242,18 @@
                 "boolean",
                 "null"
               ]
+            },
+            "approved_source_sha256": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_identity_locked": {
+              "type": "boolean"
+            },
+            "stochastic_regeneration_allowed": {
+              "type": "boolean"
             }
           },
           "additionalProperties": true
