@@ -50,6 +50,20 @@ After BOARD acceptance, presentation authority is the editable composition packa
 Flattened PNG is a publish/export derivative only.
 
 Cover / lettering presentation defaults:
+
+COVER title system — `COVER_TITLE_SYSTEM_V1`:
+- default semantic fields are `episode_no`, `topic_phrase`, and `food_name`.
+- default composed grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`.
+- the grammar is a series identity/default, not an episode-specific hardcode. The field values remain episode data.
+- visually, `EP.{episode_no}` may render as a compact episode label while `{topic_phrase}와 {food_name}` renders as the dominant title; together they must read as the same composed title grammar.
+- `topic_phrase` should be a short natural noun phrase that captures the episode situation rather than a full plot-summary sentence.
+- `food_name` uses the canonical reader-facing menu name and may receive restrained emphasis such as accent color or underline.
+- automatic COVER title layout uses the existing soft title region and focal-aware placement. It does not freeze exact x/y coordinates, left/right side, camera, hero crop, or line break.
+- title may reflow across 1–3 lines. Reflow/reposition before shrinking to poor readability or obstructing face/food/hand focal regions.
+- a separate menu tag remains an editor capability, but automatic production should not redundantly repeat the same `food_name` when the standardized title already carries it.
+- typography-role styling is standardized; exact artwork staging remains fluid.
+
+General COVER / lettering presentation defaults:
 - COVER is a separate design surface, not a default reuse of S01. Accepted BODY artwork may be reused only when it reads strongly as a cover composition.
 - COVER automatic layout is a full-canvas artwork layer with editable vector lettering/decoration over it; it is not a rigid header-frame + hero-frame split.
 - COVER artwork provenance is explicit and sticky. Once automatic assembly selects the approved source raster and crop for the final-preview candidate, the scene records that source/crop as `cover_artwork_provenance`; later presentation repairs must not silently replace it with S01/S06/another BODY cell.
@@ -345,10 +359,12 @@ Frozen FOOD result characteristics:
 - immediately appetizing
 - clearly illustrated rather than food-photo realism
 - enough material detail to read ingredient, doneness, moisture and current food state
-- microtexture is simplified
-- highlights and gloss are restrained
+- microtexture is simplified into grouped shapes / line cues rather than exhaustive grain-by-grain or fiber-by-fiber rendering
+- highlights and gloss are restrained and broad; avoid dense specular highlights that make sauce, yolk, rice or meat read like food photography
 - no advertisement-style sauce splash, excessive steam, lacquer gloss or photographic depth-of-field
+- macro / extreme-close food shots do not authorize a realism jump; they must preserve the same drawing-medium abstraction as wider PERSON+FOOD shots
 - food may carry slightly more surface detail than PERSON, but both must still look drawn in the same medium
+- abstraction/detail density should remain reasonably consistent across the six BODY panels so one food close-up does not look as if it came from a different renderer or illustrator
 
 ### 2.3 Cross-domain coherence
 Hard style principle:
@@ -359,9 +375,11 @@ Hard style principle:
 ### 2.4 Background
 Frozen policy:
 - omit background and decorative assets unless they materially explain the eating moment.
-- when needed, use only the minimum contextual shapes/objects required.
+- when needed, use only the minimum contextual shapes/objects required to identify place, motion, or action.
+- do not add generic lamps, plants, utensils, shelves, extra diners, street furniture or room decor merely to make a frame feel "finished".
 - no ornamental cozy-room filling by default.
 - background must not become the visual focal point over food/action.
+- a situational establishing panel may use more context than a bite/detail panel, but contextual density should fall away once the story function is already readable.
 
 ### 2.5 Text
 - no meaning-bearing text is baked into generated BODY raster.
@@ -428,7 +446,9 @@ If a menu/moment cannot support six publishable visual beats without procedural 
 Frozen copy grammar:
 - use short, conversational Korean that can plausibly sound like a real person, Korean community post or thread reaction rather than polished script prose
 - fragments, dropped subjects, brief exclamations and reaction-first wording are allowed when natural
-- do not force slang, memes or trendy expressions merely to simulate community speech
+- "community/thread-like" means natural spoken Korean or plausible inner speech, not a stock internet persona
+- do not default to compressed internet endings such as `~함` / `~임`, or stock meme-like phrases such as `못 참지`, `게임 끝`, `반칙`, merely to simulate community speech
+- do not force slang, memes or trendy expressions merely to simulate community speech; memes/drips are added only when the episode/user actually calls for them
 - when copy adds food information, prefer one concrete sensory observation from the immediate bite: aroma, heat, texture, seasoning, moisture, aftertaste or the effect of combining foods
 - describe why the bite works rather than relying on generic praise such as simply saying it is delicious
 - copy should add what the image cannot fully show — mouthfeel, smell, temperature, flavor transition, aftertaste or the impulse to take another bite — rather than narrating an obvious hand motion
@@ -472,8 +492,11 @@ The following are normally score/repair observations, not automatic hard failure
 - a board whose overall staging/emotional range feels flatter than ideal while remaining publishable
 - a reaction that could be modestly more expressive
 - cover title/font/placement that could be better integrated with accepted artwork
+- standardized COVER title grammar / role hierarchy that needs deterministic reflow or wording compression
+- FOOD that is slightly too glossy, micro-detailed or advertisement-like while remaining otherwise publishable
+- panel-to-panel FOOD abstraction/detail density that is less consistent than ideal
 - slightly imperfect utensil placement
-- background that is a little generic
+- background that is a little generic or unnecessarily dense while still readable
 - minor tableware preference
 - small style variance above the publishable floor
 - composition that could be more elegant
