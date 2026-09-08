@@ -1,5 +1,6 @@
 {
   "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "template_id": "JIPBAP_PRESENTATION_SHELL_V1",
   "page": {
     "width": 1080,
     "height": 1350,
@@ -10,93 +11,79 @@
       "id": "s05_art",
       "type": "artwork",
       "source": "../artwork/S05.png",
-      "x": 30,
-      "y": 75,
-      "width": 1020,
-      "height": 1020,
-      "crop": {
-        "mode": "fit"
-      },
-      "corner_radius": 26,
-      "border": {
-        "width": 4,
-        "color": "#1c1c1c"
-      },
+      "x": 40,
+      "y": 175,
+      "width": 1000,
+      "height": 1000,
+      "fit": "contain_1to1",
+      "allow_stretch": false,
       "z": 1
     },
     {
-      "id": "s05_bubble_reaction",
+      "id": "s05_bubble",
       "type": "bubble",
       "role": "speech",
       "x": 70,
-      "y": 1040,
-      "width": 360,
-      "height": 145,
-      "radius": 28,
+      "y": 40,
+      "width": 300,
+      "height": 105,
+      "tail_to": {
+        "x": 250,
+        "y": 225
+      },
       "fill": "#ffffff",
-      "stroke": "#2a2a2a",
+      "stroke": "#221f1d",
       "stroke_width": 4,
       "z": 10
     },
     {
-      "id": "s05_text_reaction",
+      "id": "s05_speech",
       "type": "text",
       "role": "speech",
       "text": "아 뜨거…",
-      "x": 96,
-      "y": 1066,
-      "width": 308,
-      "height": 90,
+      "x": 98,
+      "y": 62,
+      "width": 245,
+      "height": 60,
       "font": {
         "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
         "weight": 700,
-        "size": 49
+        "size": 40
       },
       "fill": "#221f1d",
-      "align": "left",
       "rotation": 0,
-      "z": 11,
-      "group_id": "s05_bubble_reaction"
+      "z": 11
     },
     {
-      "id": "s05_bubble_thought",
-      "type": "bubble",
+      "id": "s05_thought",
+      "type": "thought_box",
       "role": "inner_thought",
-      "x": 405,
-      "y": 1015,
-      "width": 605,
-      "height": 280,
-      "radius": 28,
-      "fill": "#ffffff",
-      "stroke": "#2a2a2a",
-      "stroke_width": 4,
+      "x": 410,
+      "y": 1182,
+      "width": 600,
+      "height": 128,
+      "fill": "#fff7e8",
+      "stroke": "#b7a995",
+      "stroke_width": 2,
       "z": 10
     },
     {
-      "id": "s05_text_thought",
+      "id": "s05_thought_text",
       "type": "text",
       "role": "inner_thought",
-      "text": "근데 좋다. 김치는 아삭하고 밥알은 고슬고슬한데,\n노른자가 싹 감싸줘.",
-      "x": 431,
-      "y": 1041,
-      "width": 553,
-      "height": 228,
+      "text": "김치는 아삭하고,\n노른자는 부드럽게 감싸네.",
+      "x": 436,
+      "y": 1202,
+      "width": 548,
+      "height": 90,
       "font": {
         "family_intent": "NanumSquareRound",
-        "fallback": [
-          "sans-serif"
-        ],
         "weight": 400,
-        "size": 44
+        "size": 37
       },
       "fill": "#221f1d",
-      "align": "left",
       "rotation": 0,
-      "z": 11,
-      "group_id": "s05_bubble_thought"
+      "z": 11
     }
   ]
 }
