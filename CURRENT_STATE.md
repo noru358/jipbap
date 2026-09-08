@@ -12,7 +12,7 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E005
-Stage: PRESENTATION_MASTER_DRAFT
+Stage: FINAL_PUBLISH_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -473,15 +473,16 @@ Structural changes applied:
 - rejection reason: editor/shell defaults were allowed to define the upstream bubble/typography design, causing visible quality regression versus the earlier quality-first lettered drafts
 - approved BOARD/COVER artwork remain locked and are NOT reopened
 - new presentation architecture: `PRESENTATION_MASTER_FIRST`
-- current stage: create a quality-first fully lettered 7-page `PRESENTATION_MASTER_DRAFT` using the approved artwork/story/copy
+- current stage: `FINAL_PUBLISH_GATE` on a quality-first `PRESENTATION_MASTER_DRAFT`
+- presentation-master candidate session SHA-256: `38f25a32289af32631279c2ec8afecf3997292e8043b649dddf2e0c6b4a6b226`
+- candidate is visual-design target only; approved literal copy and accepted BOARD/COVER artwork remain authority
 - final editable package must be reconstructed from the approved visual target and pass `PRESENTATION_PARITY_QC`
 - tool limitation must not silently simplify approved presentation design; extend ToonDesk/scene capability when required
 
 ## Exact next action
 
-1. For V1_E005, keep the approved BODY BOARD and distinct COVER hero unchanged.
-2. Rebuild only the presentation layer as a quality-first `PRESENTATION_MASTER_DRAFT`: complete 7-page copy, speech/thought/SFX, line breaks, bubble silhouettes/tails, typography and cover lettering, without constraining design to current ToonDesk defaults.
-3. Present that completed visual carousel at `FINAL_PUBLISH_GATE`.
-4. After approval, reconstruct the approved presentation in `EDITABLE_COMPOSITION_PACKAGE_V1` using the exact accepted artwork bytes and approved literal copy.
-5. Run `PRESENTATION_PARITY_QC`. If editor output visibly regresses, repair scene data or extend ToonDesk; do not simplify the approved design and do not regenerate BOARD/COVER.
-6. When parity passes, persist canonical composition / presentation-target provenance / RUN_RECEIPT and mark V1_E005 DONE.
+1. Await user decision on the current V1_E005 quality-first `PRESENTATION_MASTER_DRAFT`.
+2. If approved, bind page-level presentation-target provenance/hash and reconstruct the approved presentation in `EDITABLE_COMPOSITION_PACKAGE_V1` using the exact accepted artwork bytes and exact approved copy.
+3. Run `PRESENTATION_PARITY_QC`. If editor output visibly regresses, repair scene data or extend ToonDesk; do not simplify the approved design and do not regenerate BOARD/COVER.
+4. When parity passes, persist canonical composition / RUN_RECEIPT and mark V1_E005 DONE.
+5. If the presentation master is rejected, revise only presentation design unless the user explicitly reopens artwork.
