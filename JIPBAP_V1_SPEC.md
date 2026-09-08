@@ -613,7 +613,7 @@ They are created in the same initial image-authoring phase, but they are **not o
 COVER is defined by role, not by a hardcoded relation to specific BODY slots:
 - it should function as the episode's cover/hero image and represent the episode's food/emotion/situation;
 - camera, framing, pose, expression, food placement and title-safe negative space remain story-driven;
-- do not encode rules such as “different from S04/S06” or any other slot-specific prohibition;
+- do not encode any BODY-slot-specific camera/composition restriction as a permanent COVER rule;
 - similarity to a BODY composition is a soft quality consideration unless it causes an actual publish-blocking failure or source/provenance confusion.
 
 Run the existing V1 hard-fail logic on the BODY board. Apply the same publish-blocking standard to COVER for unintended generated text, wrong core menu/entity, catastrophic PERSON/style drift, or focal anatomy/contact failure.
