@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 Architecture: SIX_PANEL_BOARD_FIRST
-Stage reached: FINAL_PUBLISH_GATE
+Stage reached: DONE
 
 ## Inputs
 
@@ -53,8 +53,9 @@ Soft observations:
 
 ## Gate
 
-FINAL_PUBLISH_GATE: PENDING USER REVIEW
-Do not mark DONE until explicit user publish approval.
+FINAL_PUBLISH_GATE: APPROVED
+User decision: publish pass accepted; remaining imperfections are preserved as soft quality notes, not blockers.
+EPISODE STATUS: DONE
 
 
 ## Fixed-shell deterministic retrofit
@@ -90,3 +91,19 @@ Runtime editable-package ZIP SHA-256:
 - 29ca16ead377b2cf63d7653cfcfd633ef380e4b1979d57c59c5653a4d4278ecc
 
 No stochastic BOARD regeneration was performed.
+
+
+## Final publish record
+
+User final decision:
+- publish: APPROVED
+- episode status: DONE
+- user explicitly accepted publication while keeping remaining imperfections as record for future refinement
+
+Preserved soft follow-up:
+- keep the fixed presentation shell
+- keep copy shorter / more natural on mobile
+- keep speech / inner-thought / SFX visually distinct
+- apply existing FOOD rendering guidance more strictly to reduce glossy / ad-like appearance
+- S05 artwork-payoff intervention remains deferred
+- none of these observations creates a new hard gate
