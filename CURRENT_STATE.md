@@ -4,18 +4,17 @@ Updated: 2026-09-08
 Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
-Status: DONE
+Status: ACTIVE
 
 ## Active production state
 
-Active episode: V1_E001
-Stage: DONE
+Active episode: V1_E002
+Stage: STORYBOARD_USER_GATE
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
 Final page ratio: 4:5
-Plan: episodes/V1_E001/PLAN.md
-Run receipt: episodes/V1_E001/RUN_RECEIPT.md
+Plan: episodes/V1_E002/PLAN.md
 
 ## Runtime authority
 
@@ -42,60 +41,43 @@ Renderer-safe production carrier:
 
 The carrier is style-delivery authority only and does not own menu, staging, camera, layout, story or copy.
 
-## V1_E001 approval state
+## V1_E002 storyboard state
 
-- STORYBOARD_USER_GATE: APPROVED
-- BOARD_STYLE_USER_GATE: APPROVED
+Menu:
+- 김치볶음밥 + 반숙 계란후라이
+
+Core arc:
+- intact yolk → break → partial mix → scoop with crisped edge → actual bite → second-scoop impulse
+
+Refinement goals exercised in PLAN:
+1. community / real-person cadence rather than polished script prose
+2. concrete bite-level sensory wording
+3. varied but non-mechanical camera / expression rhythm
+4. cover treated as a separate design surface
+
+Approval:
+- STORYBOARD_USER_GATE: PENDING
+- BOARD_STYLE_USER_GATE: NOT_APPLICABLE_UNTIL_BOARD
+- FINAL_PUBLISH_GATE: NOT_REACHED
+
+No BOARD generation is authorized before storyboard approval.
+
+## Previous episode provenance
+
+V1_E001:
 - FINAL_PUBLISH_GATE: APPROVED
 - EPISODE STATUS: DONE
+- do not mutate unless explicitly reopened
 
-Accepted BOARD:
-- generation id: 3c20747b-7e9c-421c-8a00-1c4b5b481139
-- SHA-256: 59740618ec87d67acc0c5e1ac53a1705d585258e0228d16122fa99a8a50084f1
-- hard-fail QC: PASS
-
-User-requested BOARD corrections that were applied before approval:
-1. stronger camera/composition/expression variety
-2. S05 shows pork already on lettuce while sliced garlic is being added
-3. FOOD rendering reduced away from photorealism toward the PERSON's illustrated medium
-
-## Deterministic assembly
-
-Complete:
-1. six-cell extraction
-2. 4:5 page fit
-3. cover assembly
-4. lettering / inner-thought / speech composition
-5. final seven-page export
-
-Final carousel ZIP SHA-256:
-- 2f701ceb3e6044962cd8d6d4438d9d89268ad988bba4500854b6c7767f9b4da5
-
-No stochastic BOARD regeneration is authorized for lettering/layout-only feedback.
-
-## Postmortem refinement applied after V1_E001
-
-JIPBAP_V1_SPEC.md was minimally refined without changing SIX_PANEL_BOARD_FIRST or adding a new user gate/hard-fail class.
-
-The next episode should exercise three soft-result improvements:
-1. COPY: more natural real-person / Korean community-thread cadence, with concrete bite-level sensory information instead of polished generic lines.
-2. COVER / LETTERING: cover-specific composition, better title hierarchy/line-break/font fit, and deterministic repair for typography/layout defects.
-3. STAGING / EXPRESSION: broader visual rhythm across the six cells and modestly stronger emotional expression, without hardcoding shot quotas or expression templates.
-
-These are production-quality directions and soft observations, not new permanent gates.
-
-## Prior calibration provenance
-
-V1_CAL_001 remains prior calibration provenance and is not the active episode.
-Its rejected boards remain non-reference material.
-Its kimchi-pancake story is not reused for V1_E001.
+V1_CAL_001:
+- prior calibration provenance only
+- rejected boards remain non-reference material
 
 ## Exact next action
 
-1. V1_E001 is complete. Do not mutate it unless the user explicitly reopens it.
-2. On the next new-episode request, boot from latest main and create a fresh PLAN under the refined JIPBAP_V1_SPEC.md.
-3. In that PLAN, explicitly demonstrate improved copy cadence, concrete food-sensation wording, and a non-mechanical but varied camera/expression rhythm for storyboard review.
-4. Preserve SIX_PANEL_BOARD_FIRST, the locked style authority, and the single-carrier production rule.
-5. At deterministic ASSEMBLY, treat cover typography/composition as an actual design task rather than default BODY reuse + centered title.
-6. Evaluate these refinements through normal STORYBOARD_USER_GATE and FINAL_PUBLISH_GATE only; add no new routine approval gate.
-7. Do not promote isolated soft-quality observations from V1_E001 or the next run into new permanent hard gates without repeated publish-blocking evidence.
+1. Present `episodes/V1_E002/PLAN.md` for STORYBOARD_USER_GATE.
+2. Wait for the user's storyboard review.
+3. Do not generate images, master BOARD, crop pages, cover artwork, or lettering before approval.
+4. If approved, continue in the same chat to BOARD using only the locked `JIPBAP_STYLE_CARRIER_V1` as the production runtime carrier.
+5. Preserve SIX_PANEL_BOARD_FIRST, the locked style authority, and the single-carrier production rule.
+6. Add no new routine approval gate or hard-fail class from isolated soft-quality observations.
