@@ -1,0 +1,53 @@
+{
+  "schema": "EDITABLE_COMPOSITION_PACKAGE_V1",
+  "page": {
+    "width": 1080,
+    "height": 1350,
+    "background": "#fff9f0"
+  },
+  "objects": [
+    {
+      "id": "s02_art",
+      "type": "artwork",
+      "source": "../artwork/S02.png",
+      "x": 30,
+      "y": 145,
+      "width": 1020,
+      "height": 1020,
+      "crop": {
+        "mode": "fit"
+      },
+      "corner_radius": 26,
+      "border": {
+        "width": 4,
+        "color": "#1c1c1c"
+      },
+      "z": 1
+    },
+    {
+      "id": "s02_sfx_01",
+      "type": "sfx",
+      "role": "food_contact",
+      "text": "톡",
+      "x": 720,
+      "y": 270,
+      "width": 170,
+      "height": 100,
+      "font": {
+        "family_intent": "handdrawn_display",
+        "fallback": [
+          "NanumSquareRound",
+          "sans-serif"
+        ],
+        "weight": 700,
+        "size": 76
+      },
+      "fill": "#e0562b",
+      "stroke": "#ffffff",
+      "stroke_width": 5,
+      "align": "left",
+      "rotation": 0,
+      "z": 20
+    }
+  ]
+}
