@@ -12,7 +12,7 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E004
-Stage: STORYBOARD_USER_GATE
+Stage: BOARD_ACCEPTED_AWAITING_CANONICAL_ASSEMBLY
 BODY count: 6
 Carousel: COVER + 6 BODY
 Master board: 2 columns × 3 rows, text-free
@@ -53,9 +53,9 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_FULL_ART_OVERLAY`
+- V2 revision: `2026-09-09_COVER_TITLE_SYSTEM_V1`
 - canvas: 1080 × 1350
-- COVER: full-canvas artwork + vector menu tag/title/decor; title region is a soft placement hint, not a separate frame
+- COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
 - speech / inner-thought / narration / SFX are independent freeform vector/scene overlays
 - automatic placement is focal-aware and may use optional face/food/hand avoid metadata
@@ -375,11 +375,41 @@ Primary interactive-editor transport changed 2026-09-09:
 - ToonDesk may report explicit profile deviations as `CUSTOM_OVERRIDE`; this is not corruption and does not change scene-format authority.
 - Automatic Chat production does not invent per-episode custom overrides. Overrides require explicit user/editor action.
 
+## V1_E004 production checkpoint
+
+User approvals / runtime facts:
+- STORYBOARD_USER_GATE: APPROVED
+- approved renderer carrier supplied in-session as the already locked `JIPBAP_STYLE_CARRIER_V1`
+- first generated 2×3 BOARD was not accepted because background/context density was too high
+- revised 2×3 BOARD with reduced background density: USER APPROVED
+- approved revised BOARD generation id: `5203ada2-e4fb-4f49-bd88-865f763e7eaa`
+- approved revised BOARD dimensions: 1024 × 1536
+- BODY count / panel geometry: six visually extractable cells
+- BOARD hard-fail QC: PASS at the user-approved checkpoint
+
+Accepted E004 QC findings:
+- background simplification improved the board and should remain the automatic default
+- later per-page food renders became too photoreal / glossy relative to the simplified PERSON drawing language
+- FOOD should stay appetizing but use grouped illustrated texture, restrained gloss and consistent abstraction across wide and macro shots
+- the current COVER artwork/text balance was acceptable to the user; the improvement target is series-level standardization rather than changing the basic hero-art composition
+- standardized COVER title system accepted: `COVER_TITLE_SYSTEM_V1`
+- E004 semantic cover title: `EP.4 퇴근길과 김치볶음밥`
+
+Canonicality correction:
+- the separately re-generated 4:5 COVER/S01..S06 images shown after BOARD approval are NON-CANONICAL exploratory previews.
+- they were stochastic re-imaginings rather than deterministic derivatives of the accepted 2×3 BOARD, so they must not become E004 presentation authority or final approval identity.
+- this does not create a new gate; it restores the already-defined BOARD → deterministic composition rule.
+
+Structural changes applied:
+- `JIPBAP_V1_SPEC.md`: natural-spoken copy interpretation clarified; FOOD de-photorealization and panel-consistency guidance strengthened; unnecessary background density added to soft QC; COVER title grammar standardized without fixed coordinates.
+- `templates/JIPBAP_PRESENTATION_SHELL_V2.json`: revision advanced to `2026-09-09_COVER_TITLE_SYSTEM_V1`; episode label + semantic title fields added; duplicate menu tag disabled by automatic default while remaining an editor capability.
+- `episodes/V1_E004/PLAN.md`: COVER title updated to `EP.4 퇴근길과 김치볶음밥`.
+
 ## Exact next action
 
-1. V1_E004 storyboard is prepared at `episodes/V1_E004/PLAN.md`.
-2. Stop at `STORYBOARD_USER_GATE` and await explicit user approval; do not generate production imagery before approval.
-3. After approval, continue in the same conversation and bind the already USER_LOCKED `JIPBAP_STYLE_CARRIER_V1` once for BOARD generation, preferring repository-direct validated bytes when the runtime can bind them and using the identical SESSION_ONLY carrier only if repository-byte binding is unavailable.
-4. Generate exactly one text-free 2×3 BODY master board, apply only JIPBAP_V1 hard-fail QC, then proceed without a routine BOARD approval gate if it passes.
-5. After BOARD PASS, use actual panel-boundary extraction and deterministic full-art V2 composition for COVER + S01..S06; the final approval preview must be rendered from the same canonical composition package.
-6. Present the complete carousel once at `FINAL_PUBLISH_GATE`; do not create a new permanent gate from one-off quality issues.
+1. Preserve the user-approved revised V1_E004 2×3 BOARD as the accepted BODY source; do not use the separately generated 4:5 exploratory images as canonical artwork.
+2. Materialize/extract the six BODY cells from the approved BOARD using actual detected panel boundaries, not nominal equal slicing.
+3. Build COVER + S01..S06 through the deterministic full-art V2 composition path. Apply `COVER_TITLE_SYSTEM_V1` with E004 fields: episode_no=4, topic_phrase=`퇴근길`, food_name=`김치볶음밥`.
+4. Do not stochastically regenerate BODY solely to chase the soft FOOD-realism score. If the accepted BOARD itself is later rejected by the user at final publish review, reopen BOARD deliberately rather than silently replacing it.
+5. Render the final seven-page preview from the exact same editable composition package that will be handed off.
+6. Present that canonical carousel once at `FINAL_PUBLISH_GATE`.
