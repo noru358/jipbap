@@ -55,7 +55,8 @@ COVER title system — `COVER_TITLE_SYSTEM_V1`:
 - default semantic fields are `episode_no`, `topic_phrase`, and `food_name`.
 - default composed grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`.
 - the grammar is a series identity/default, not an episode-specific hardcode. The field values remain episode data.
-- visually, `EP.{episode_no}` may render as a compact episode label while `{topic_phrase}와 {food_name}` renders as the dominant title; together they must read as the same composed title grammar.
+- visually, `EP.{episode_no}` renders as a compact episode label while `{topic_phrase}와 {food_name}` renders as the dominant title; together they must read as the same composed title grammar.
+- the automatic episode label is plain lettering by default: no surrounding speech bubble, pill, badge outline or decorative container unless an episode-specific design actually benefits from one.
 - `topic_phrase` should be a short natural noun phrase that captures the episode situation rather than a full plot-summary sentence.
 - `food_name` uses the canonical reader-facing menu name and may receive restrained emphasis such as accent color or underline.
 - automatic COVER title layout uses the existing soft title region and focal-aware placement. It does not freeze exact x/y coordinates, left/right side, camera, hero crop, or line break.
@@ -64,14 +65,17 @@ COVER title system — `COVER_TITLE_SYSTEM_V1`:
 - typography-role styling is standardized; exact artwork staging remains fluid.
 
 General COVER / lettering presentation defaults:
-- COVER is a separate design surface, not a default reuse of S01. Accepted BODY artwork may be reused only when it reads strongly as a cover composition.
+- COVER is a separate design surface and the automatic default is a distinct text-free COVER hero artwork, not reuse of a BODY cell.
+- After BODY BOARD PASS, one separate COVER hero generation may occur using the same locked style delivery and approved episode intent. This does not add a user gate; it is the normal cover-art source step before deterministic lettering/composition.
+- Reusing accepted BODY artwork for COVER is allowed only when the user explicitly prefers that reuse or when a distinct cover source is genuinely unavailable; silent BODY reuse is not the automatic default.
 - COVER automatic layout is a full-canvas artwork layer with editable vector lettering/decoration over it; it is not a rigid header-frame + hero-frame split.
 - COVER artwork provenance is explicit and sticky. Once automatic assembly selects the approved source raster and crop for the final-preview candidate, the scene records that source/crop as `cover_artwork_provenance`; later presentation repairs must not silently replace it with S01/S06/another BODY cell.
 - Replacing COVER artwork is an explicit artwork-level override or a deliberate pre-final deterministic reselection, never an incidental consequence of shell/profile changes.
 - Prefer one clear focal food/action image plus intentional negative space for the title. A soft title-safe region may guide automatic placement but does not crop the artwork into a separate lower hero box.
 - automatic COVER placement scores title/menu/decor against declared `face_primary`, `food_primary`, and `hand_action` avoid regions. Reflow/reline/reposition lettering before covering a focal subject.
 - Title hierarchy, line break, scale and placement must be composed together with the artwork; do not merely place a centered text block above an image.
-- Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and slightly organic rather than office/document-like.
+- Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and visibly hand-drawn rather than office/document-like or mechanically typeset.
+- BODY speech containers should default toward soft organic oval/pillow silhouettes with a restrained curved tail, not rigid rounded rectangles. Bubble geometry remains editable and may be horizontally flipped without mirroring the text.
 - No single font family is a V1 creative lock. Each typography role may declare a preferred real font plus fallback chain. Runtime substitution is allowed only when the preferred font is unavailable, and the editor must surface the substitution rather than silently changing appearance.
 - The final publish preview and the handed-off editable package must resolve the same scene and font choices. A separately generated lookalike preview is never the approval artifact.
 - Cover or BODY lettering defects are deterministic presentation defects. Repair typography/layout without regenerating accepted BOARD artwork.
@@ -472,6 +476,7 @@ Do not build a full asset dependency DAG.
 
 For eating interactions:
 - spoon/chopstick/hand/food/mouth geometry must make physical sense at the visible moment.
+- flavor / mouthfeel / aftertaste copy must not occur before the depicted bite has actually entered the mouth, unless a prior panel already established ingestion. A pre-bite panel may express smell, appearance, anticipation or remain silent; do not let the character taste food that has not yet been eaten.
 - bridge actions may occur between panels, but before/after states must be compatible.
 - cultural meal details follow the current episode context; no global Korean table-setting pose is hardcoded.
 
@@ -493,6 +498,8 @@ The following are normally score/repair observations, not automatic hard failure
 - a reaction that could be modestly more expressive
 - cover title/font/placement that could be better integrated with accepted artwork
 - standardized COVER title grammar / role hierarchy that needs deterministic reflow or wording compression
+- speech typography/container that feels too mechanically typeset or boxy relative to the artwork
+- a sensory line whose timing is slightly ahead of the depicted ingestion state and can be repaired by copy/layout/shot selection without changing the whole story
 - FOOD that is slightly too glossy, micro-detailed or advertisement-like while remaining otherwise publishable
 - panel-to-panel FOOD abstraction/detail density that is less consistent than ideal
 - slightly imperfect utensil placement
@@ -550,8 +557,9 @@ Normal steady-state user gates are therefore:
 1. storyboard approval;
 2. final publish approval.
 
-### 8.4 ASSEMBLY + FINAL
+### 8.4 COVER HERO + ASSEMBLY + FINAL
 After BOARD PASS:
+- create/select one distinct text-free COVER hero artwork under the approved episode intent and locked renderer style delivery; this is not a new user gate.
 - detect/confirm the six actual panel boundaries and extract six cells as accepted raster artwork; never assume equal pixel split coordinates merely from board dimensions;
 - fit the extracted artwork into full-canvas 4:5 BODY scenes without stretching;
 - assemble COVER as full-canvas artwork plus independent editable title/menu/decor objects;
@@ -594,14 +602,18 @@ Observed calibration evidence showed that content-rich or multi-subject referenc
 Therefore raw creative references are **not normal production renderer attachments**.
 
 ### 9.2 Renderer-safe projection
-Production image generation should use a separately approved runtime projection:
+Production image generation uses renderer-safe runtime projections rather than raw creative references.
 
-`JIPBAP_STYLE_CARRIER_V1`
+PERSON projection:
+- `JIPBAP_STYLE_CARRIER_V1`
 
-This carrier is not a third creative style authority.
-It is a runtime-safe projection of the locked creative authorities.
+FOOD projection:
+- `JIPBAP_FOOD_STYLE_CARRIER_V1`
+- status until calibrated: REQUIRED_BEFORE_NEXT_PRODUCTION_BOARD
 
-Required carrier properties:
+Neither carrier is a new creative style authority. They are runtime-safe projections of the locked creative authorities.
+
+`JIPBAP_STYLE_CARRIER_V1` required properties:
 - exactly one person;
 - no food;
 - no tableware or meal scene;
@@ -609,17 +621,24 @@ Required carrier properties:
 - no comic panel/grid structure;
 - no story sequence;
 - plain or transparent/minimal background;
-- enough face/upper-body information to express the desired face construction, eye grammar, hair silhouette, line, fill, shading and texture;
-- no visual element whose count or narrative role should be copied into an episode.
+- enough face/upper-body information to express the desired face construction, eye grammar, hair silhouette, line, fill, shading and texture.
 
-Its authority scope is style delivery only.
+`JIPBAP_FOOD_STYLE_CARRIER_V1` required properties:
+- no person, hand or character;
+- no text, logo, panel/grid or story sequence;
+- no environment/background staging;
+- use a tightly cropped, semantically neutral illustrated food-style study whose purpose is line/fill/highlight/microtexture abstraction rather than a recognizable episode menu;
+- avoid a complete branded/plated dish composition when possible, so menu/entity semantics are not copied into production;
+- demonstrate restrained broad highlights, grouped texture, drawn edges and the same medium abstraction as PERSON.
+
+Both carriers have style-delivery scope only. Neither owns menu, ingredient identity, tableware, camera, staging, story or copy.
 
 ### 9.3 One-time carrier creation isolation
-Creating or replacing `JIPBAP_STYLE_CARRIER_V1` is a **separate calibration task** from episode production.
+Creating or replacing either renderer carrier is a **separate calibration task** from episode production.
 
 During carrier creation:
 - raw `PERSON_STYLE_REF_1` / `TARGET_LOOK_BOARD_REF_1` may be attached so the renderer can derive the intended look;
-- user approval is required before the result becomes `JIPBAP_STYLE_CARRIER_V1`;
+- user approval is required before a new projection becomes `JIPBAP_STYLE_CARRIER_V1` or `JIPBAP_FOOD_STYLE_CARRIER_V1`;
 - the approved carrier should be stored/registered as the runtime carrier.
 
 Do **not** generate a production episode board later in that same raw-reference calibration chat.
@@ -628,10 +647,10 @@ Start episode production in a clean chat and attach only the approved renderer-s
 This separation prevents raw-reference semantic content from sharing the same image-runtime context as production BOARD generation.
 
 ### 9.4 Production attachment timing
-For normal episode production:
+For normal episode production after both projections are USER_LOCKED:
 1. start the chat with no image attachment and reach storyboard approval;
-2. in the same chat, the user's storyboard-approval message attaches `JIPBAP_STYLE_CARRIER_V1` once;
-3. continue BOARD → ASSEMBLY → FINAL in that conversation.
+2. in the same chat, bind `JIPBAP_STYLE_CARRIER_V1` and `JIPBAP_FOOD_STYLE_CARRIER_V1` once, preferring repository-direct validated bytes and using identical SESSION_ONLY carriers only when direct binding is unavailable;
+3. continue BOARD → distinct COVER hero → deterministic ASSEMBLY → FINAL in that conversation.
 
 The attachment does not reset episode/state/story and does not create a new reference.
 It is a SESSION_ONLY pixel carrier for the already locked runtime style projection.
