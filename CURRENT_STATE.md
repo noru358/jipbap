@@ -7,7 +7,7 @@ Architecture: SIX_PANEL_BOARD_FIRST
 Presentation architecture: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1_BASELINE
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
-Status: DONE
+Status: ACTIVE_REPAIR
 
 ## Active production state
 
@@ -84,7 +84,7 @@ Resolved and frozen in this design pass:
 - editor capability remains broader: explicit unlock may move/resize/rotate artwork frames and is recorded as CUSTOM_OVERRIDE
 - crop editing remains available without changing source artwork bytes
 - semantic typography-role presets
-- V2 BODY semantic placement defaults: speech/SFX inside artwork; inner-thought/narration in lower meta region
+- V2 full-art semantic placement defaults: speech/thought/narration/SFX are freeform lettering overlays with focal-aware soft placement hints
 - page add/delete/duplicate/type-change remain editor capabilities rather than being deleted for JIPBAP
 - flat objects[] retained for Chat renderer compatibility; groups[] carries future editor semantics
 
@@ -138,8 +138,10 @@ No stochastic BOARD regeneration is authorized for presentation-only feedback.
 
 - STORYBOARD_USER_GATE: IMPLICITLY_ACCEPTED_BY_PRODUCTION_CONTINUATION
 - BOARD hard-fail QC: PASS
-- FINAL_PUBLISH_GATE: APPROVED
-- user final decision recorded: 2026-09-08
+- prior visual preview: APPROVED
+- FINAL_PUBLISH_GATE: REOPENED_FOR_CANONICAL_IDENTITY
+- reason: approved preview and handed-off package were not the same deterministic artifact
+- user prior decision recorded: 2026-09-08
 
 Important implementation note:
 - the approved visual preview was shown successfully, but the repository has not yet received the canonical V2 editable composition package / RUN_RECEIPT for V1_E003.
