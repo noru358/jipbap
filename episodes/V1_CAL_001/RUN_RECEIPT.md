@@ -21,9 +21,9 @@ TARGET_LOOK_BOARD_REF_1 session carrier:
 
 ## Generation attempts
 
-Total image-generation calls: 5
+Total image-generation calls: 8
 First-pass publishable: NO
-Rework loops: 4
+Rework loops: 7
 Accepted master board: NONE
 
 ### Attempt 01
@@ -61,17 +61,42 @@ Hard FAIL:
 - wrong core menu/entity
 - wrong BODY geometry/layout and group-scene substitution
 
+### Attempt 06
+SHA-256: 11f87a3a9d838315013d7982f8698705db8954a8cd1538d221d74f1a302e98b9
+Hard FAIL:
+- unintended generated text and cover/title content
+- wrong core menu/entity: spicy-pork/egg/soup group meal instead of kimchi pancake
+- group-scene substitution and wrong BODY geometry/layout
+
+### Attempt 07
+SHA-256: 8f5f75b3dc3c4f6068c41c0bb01c803a4ef62790e5e0b9c4690293051a2d6b0c
+Hard FAIL:
+- unintended generated text
+- wrong core menu/entity and grocery/cooking story substitution
+- six-character reference-content leakage instead of one proxy eater
+- wrong BODY geometry/layout
+
+### Attempt 08
+SHA-256: 742d1ecb0c8b07bad30415a284d846335f1c298354dcd9126f7620f687616b19
+Hard FAIL:
+- unintended generated text
+- wrong core menu/entity and multi-dish group-meal substitution
+- six-character reference-content leakage
+- not the specified text-free six-beat kimchi-pancake BODY master board
+
 ## Diagnosis
 
-The current image runtime repeatedly treated non-authoritative reference content (egg-rice/menu/text/layout/group-story cues) as content authority even after retries that progressively reduced or removed reference conditioning.
+The image runtime repeatedly treated non-authoritative reference content and stale group-story cues as content authority even after retries with increasingly explicit BODY-only constraints.
 This is a runtime execution failure, not evidence that JIPBAP_V1_SPEC requires a new permanent gate or architecture change.
 
 Rejected outputs are not references and must not be used for continuity or repair.
+
+The current chat image-runtime context is now contaminated by multiple rejected generations, so further same-context retries would violate the clean-runtime requirement in CURRENT_STATE.
 
 ## Exact continuation
 
 Resume V1_CAL_001 at BOARD only.
 Do not re-plan the episode.
-In a clean image-runtime context, generate exactly one text-free 2×3 BODY master board for the six kimchi-pancake beats in PLAN.md.
+Use a clean image-runtime context and generate exactly one text-free 2×3 BODY master board for the six kimchi-pancake beats in PLAN.md.
 Apply only JIPBAP_V1 hard-fail QC.
 On PASS, continue deterministically through ASSEMBLY → FINAL and present the completed 7-page carousel for the single user publish gate.
