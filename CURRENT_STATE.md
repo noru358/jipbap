@@ -14,16 +14,16 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: STORYBOARD_USER_GATE
+Stage: PAGE_FINAL_RECOMPOSE
 
 ## Boot snapshot — V1_E006 user-reset / fresh storyboard
 
 - Active episode: `V1_E006`
-- Current stage: `STORYBOARD_USER_GATE`
+- Current stage: `PAGE_FINAL_RECOMPOSE`
 - Food: 두부조림
 - Reset authority: USER_EXPLICIT_RESET on 2026-09-09
-- STORYBOARD_USER_GATE: AWAITING_USER_REVIEW
-- ART_BUNDLE_USER_GATE: NOT_STARTED
+- STORYBOARD_USER_GATE: APPROVED
+- ART_BUNDLE_USER_GATE: APPROVED
 - FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E006/PLAN.md`
 - Required S01: rainy 먹자골목; protagonist notices/smells 두부조림 aroma
@@ -51,11 +51,12 @@ Session policy:
 - such reattachment is transport only: no new reference, no new episode, no reset, no re-approval.
 
 Exact next action for episode production:
-1. Present the reset E006 storyboard in `episodes/V1_E006/PLAN.md` for user review.
-2. Stop at `STORYBOARD_USER_GATE`; do not generate new episode artwork before approval.
-3. On approval, bind the already locked PERSON/FOOD renderer carriers according to V1 runtime policy.
-4. Create `INITIAL_ART_BUNDLE`: one text-free 2×3 BODY master board plus one separate text-free COVER hero.
-5. Do not use any superseded E006 BODY/COVER/presentation artifact as an anchor or reference.
+1. Run PAGE_FINAL_RECOMPOSE from the approved E006 BODY/COVER anchor set.
+2. Approved BODY anchor SHA-256: d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76.
+3. Approved COVER anchor SHA-256: 063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db.
+4. Preserve scene events, PERSON/FOOD identity, food-state progression, key actions and continuity; do not reuse any superseded E006 artifact.
+5. After final 4:5 artwork passes contract QC, lock those bytes and create PRESENTATION_MASTER_DRAFT.
+6. Stop at FINAL_PUBLISH_GATE for user review.
 
 Infrastructure upgrade completed for future/new work:
 - `INITIAL_ART_BUNDLE` is now the canonical initial image-authoring phase: BODY 2×3 master board + separate COVER hero are created before one combined artwork approval gate.
