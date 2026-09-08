@@ -52,7 +52,10 @@ Flattened PNG is a publish/export derivative only.
 Cover / lettering presentation defaults:
 - COVER is a separate design surface, not a default reuse of S01. Accepted BODY artwork may be reused only when it reads strongly as a cover composition.
 - COVER automatic layout is a full-canvas artwork layer with editable vector lettering/decoration over it; it is not a rigid header-frame + hero-frame split.
+- COVER artwork provenance is explicit and sticky. Once automatic assembly selects the approved source raster and crop for the final-preview candidate, the scene records that source/crop as `cover_artwork_provenance`; later presentation repairs must not silently replace it with S01/S06/another BODY cell.
+- Replacing COVER artwork is an explicit artwork-level override or a deliberate pre-final deterministic reselection, never an incidental consequence of shell/profile changes.
 - Prefer one clear focal food/action image plus intentional negative space for the title. A soft title-safe region may guide automatic placement but does not crop the artwork into a separate lower hero box.
+- automatic COVER placement scores title/menu/decor against declared `face_primary`, `food_primary`, and `hand_action` avoid regions. Reflow/reline/reposition lettering before covering a focal subject.
 - Title hierarchy, line break, scale and placement must be composed together with the artwork; do not merely place a centered text block above an image.
 - Korean display typography should feel compatible with a casual hand-drawn food comic: readable, friendly and slightly organic rather than office/document-like.
 - No single font family is a V1 creative lock. Each typography role may declare a preferred real font plus fallback chain. Runtime substitution is allowed only when the preferred font is unavailable, and the editor must surface the substitution rather than silently changing appearance.
@@ -134,6 +137,13 @@ Editable text/SFX objects additionally preserve:
 - alignment
 
 Bubble geometry remains separate from the text string at the data level so either may be edited independently.
+Speech-bubble tail geometry is also explicit scene data, not a fixed renderer triangle. A bubble may preserve:
+- tail enabled/style
+- tip x/y
+- attachment side + normalized attachment position
+- base width
+- curvature/softness
+The editor should expose direct-manipulation handles for tail tip and attachment point plus width/curve controls. Legacy `tail_to` remains readable for backward compatibility but new saves should emit the richer tail geometry.
 The future editor may expose related objects as a convenience group without flattening them.
 SFX such as `톡` is a text/SFX object, not part of the generated artwork raster.
 
@@ -218,6 +228,7 @@ Placement freedom:
 - speech, inner thought, narration and SFX are all freeform lettering overlays. Their semantic roles remain distinct even when their geometry is fluid.
 - automatic placement is focal-aware: prefer naturally empty areas and avoid covering primary face, food or hand-action regions when reasonable.
 - a page may carry optional `placement_guides` / `avoid_regions` metadata such as `face_primary`, `food_primary`, `hand_action`; these are soft placement hints, not new BOARD gates.
+- the interactive editor should be able to visualize these soft guides on demand and include them as snapping targets while never exporting them into the flattened publish image.
 - if no safe area exists, shorten/reline copy, reduce container footprint, or use a restrained translucent/light container before obscuring the focal action.
 - explicit human/editor repositioning remains allowed and is a normal scene edit; it becomes `CUSTOM_OVERRIDE` only when it changes project-profile structural defaults such as artwork-frame geometry/page structure, not merely because a lettering object moved.
 - unnecessary coverage of focal food/face is a presentation quality defect; obvious obstruction that makes the focal action unreadable must be repaired before publish.
