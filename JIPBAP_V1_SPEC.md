@@ -84,6 +84,35 @@ The governing rule is: **approve art once, then preserve it; everything after ap
 - literal copy remains PLAN/approved-copy authority;
 - ToonDesk/editor primitives do not define the upstream aesthetic ceiling. If the editor cannot reproduce an accepted design, repair/extend scene capability rather than lowering the design to a generic preset.
 
+### Presentation-stage separation contract
+
+The presentation pipeline has two deliberately different artifacts and they MUST NOT be collapsed into one renderer pass:
+
+1. `PRESENTATION_MASTER_DRAFT` = **tool-independent, quality-first flattened visual target**.
+   - It uses the locked approved artwork and approved literal copy.
+   - It is not required to instantiate `EDITOR_SCENE_MODEL_V1`.
+   - It must not inherit ToonDesk/editor primitive geometry, generic shell bubble presets, editor-safe font substitutions, or reconstruction limitations merely for future editability.
+   - Its job is to establish the desired final look: bubble silhouette, text rhythm, typography character, title integration, SFX treatment, spacing and page-level visual balance.
+
+2. `EDITABLE_RECONSTRUCTION` = downstream editable reproduction of the approved presentation target.
+   - It is allowed to use `EDITOR_SCENE_MODEL_V1` and ToonDesk capabilities.
+   - It must reconstruct the approved target rather than regenerate a generic editor-default design.
+   - If parity cannot be reached because the editor lacks a capability, extend/repair the editor or scene model; do not lower the upstream presentation target.
+
+This does not add another routine user gate. The existing `FINAL_PUBLISH_GATE` is the approval of the tool-independent presentation master. After that approval, editable reconstruction and parity QC complete without another routine approval unless approved intent cannot be reproduced.
+
+User-facing final-gate previews:
+- must show the actual presentation-master page pixels without diagnostic annotations;
+- page ids such as `COVER`, `S01`...`S06`, crop boxes, safe guides, QC labels or debug badges belong in filenames/manifest/internal QC sheets only;
+- a labeled diagnostic contact sheet may exist internally, but it is not the artifact shown for publish approval.
+
+Typography / container execution rules for the presentation master:
+- do not silently use an undeclared runtime font outside the declared preferred/fallback chain;
+- if the preferred font is unavailable, resolve an allowed fallback and record/surface it before the final-gate preview;
+- reflow, reposition or resize the container before shrinking text below the semantic role's minimum readable size;
+- do not use a fixed shrink-to-fit loop that creates tiny text merely to satisfy a box;
+- inner-thought/speech/SFX presentation may vary per scene; do not stamp one generic pill/oval shape across all pages.
+
 `PRESENTATION_PARITY_QC` checks:
 - approved BODY/COVER source identity: exact;
 - BODY cell extraction provenance: exact;
