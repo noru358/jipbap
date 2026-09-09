@@ -13,7 +13,7 @@
     "allow_custom_override": true,
     "override_class": "CUSTOM_OVERRIDE",
     "override_is_scene_corruption": false,
-    "revision": "2026-09-09_PRESENTATION_STAGE_SEPARATION_V2"
+    "revision": "2026-09-09_TOOL_INDEPENDENT_PRESENTATION_MASTER_V3"
   },
   "page_structure": {
     "automatic_default": {
@@ -431,7 +431,7 @@
     "reflow_or_reposition_before_shrink": true
   },
   "presentation_design": {
-    "mode": "PRESENTATION_MASTER_FIRST",
+    "mode": "TOOL_INDEPENDENT_PRESENTATION_MASTER_FIRST",
     "approved_master_is_upstream_visual_target": true,
     "editor_scene_is_downstream_reconstruction": true,
     "editor_defaults_are_fallback_only": true,
@@ -446,7 +446,7 @@
     "master_artifact_kind": "flattened_tool_independent_visual_target",
     "master_must_not_instantiate_editor_scene": true,
     "master_must_not_inherit_editor_defaults": true,
-    "final_publish_gate_approves": "presentation_master_visual_intent",
+    "final_publish_gate_approves": "tool_independent_presentation_master_visual_intent",
     "editable_reconstruction_occurs_after_gate": true,
     "additional_routine_gate_after_reconstruction": false,
     "user_facing_preview": {
@@ -456,7 +456,45 @@
       "qc_labels_in_pixels": false,
       "debug_guides_in_pixels": false,
       "internal_labeled_contact_sheet_allowed": true
-    }
+    },
+    "master_allowed_inputs": [
+      "locked_artwork_pixels",
+      "approved_literal_copy",
+      "semantic_role_hints",
+      "placement_hints",
+      "quality_first_presentation_rules"
+    ],
+    "master_forbidden_inputs": [
+      "toondesk_export",
+      "composition_layout_json",
+      "editor_default_geometry",
+      "editor_font_substitution_receipt",
+      "editor_capability_ceiling"
+    ],
+    "master_output": [
+      "seven_flattened_target_pages",
+      "page_target_hashes",
+      "unannotated_user_gate_preview"
+    ],
+    "internal_qc_preview": {
+      "separate_artifact": true,
+      "annotations_allowed": true,
+      "user_gate_artifact": false
+    },
+    "user_gate_preview": {
+      "annotations_allowed": false,
+      "page_ids_in_pixels": false,
+      "qc_labels_in_pixels": false,
+      "debug_guides_in_pixels": false,
+      "must_show_actual_page_pixels": true
+    },
+    "gate_name": "PRESENTATION_MASTER_USER_GATE",
+    "gate_compatibility_alias": "FINAL_PUBLISH_GATE",
+    "editable_reconstruction_after_gate": true,
+    "parity_failure_loop": "EDITABLE_RECONSTRUCTION<->PRESENTATION_PARITY_QC",
+    "parity_failure_must_not_mutate_approved_master": true,
+    "parity_failure_must_not_reopen_art_gate": true,
+    "additional_routine_gate_after_parity": false
   },
   "artwork_finalization": {
     "mode": "APPROVED_ART_PIXEL_LOCK",
@@ -476,5 +514,27 @@
     ],
     "artwork_change_requires_reopened_art_gate": true
   },
-  "revision": "2026-09-09_PRESENTATION_STAGE_SEPARATION_V2"
+  "revision": "2026-09-09_TOOL_INDEPENDENT_PRESENTATION_MASTER_V3",
+  "pipeline_contract": {
+    "id": "JIPBAP_PRESENTATION_PIPELINE_V3",
+    "stages": [
+      "DETERMINISTIC_PAGE_ASSEMBLY",
+      "TOOL_INDEPENDENT_PRESENTATION_MASTER",
+      "PRESENTATION_MASTER_USER_GATE",
+      "EDITABLE_RECONSTRUCTION",
+      "PRESENTATION_PARITY_QC",
+      "FINAL_EXPORT"
+    ],
+    "user_gate_count": 3,
+    "user_gates": [
+      "STORYBOARD_USER_GATE",
+      "ART_BUNDLE_USER_GATE",
+      "PRESENTATION_MASTER_USER_GATE"
+    ],
+    "compatibility_aliases": {
+      "FINAL_PUBLISH_GATE": "PRESENTATION_MASTER_USER_GATE"
+    },
+    "extra_routine_gate_after_editable_reconstruction": false,
+    "artwork_gate_reopen_required_for_artwork_change": true
+  }
 }
