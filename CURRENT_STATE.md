@@ -5,7 +5,7 @@ Project: jipbap
 Runtime spec: JIPBAP_V1_SPEC.md
 Architecture: SIX_PANEL_BOARD_FIRST
 Artwork finalization: APPROVED_ART_PIXEL_LOCK
-Presentation architecture: PRESENTATION_MASTER_FIRST
+Presentation architecture: TOOL_INDEPENDENT_PRESENTATION_MASTER_FIRST
 Editable scene package: EDITABLE_COMPOSITION_PACKAGE_V1
 Editor scene model: EDITOR_SCENE_MODEL_V1
 Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
@@ -19,7 +19,7 @@ Stage: PRESENTATION_MASTER_REPAIR
 ## Boot snapshot — V1_E006 fresh reset at 2026-09-09 08:43 KST
 
 - Active episode: `V1_E006`
-- Current stage: `STORYBOARD_USER_GATE`
+- Current stage: `PRESENTATION_MASTER_REPAIR`
 - Food: 두부조림
 - Reset authority: USER_EXPLICIT_FULL_RESET on 2026-09-09 08:43 KST
 - STORYBOARD_USER_GATE: APPROVED
@@ -33,6 +33,24 @@ Stage: PRESENTATION_MASTER_REPAIR
 - All E006 storyboards, copy, BODY/COVER artwork, approvals, pixel locks, crops, presentation drafts and packages that predate this reset are SUPERSEDED_NON_AUTHORITY.
 - Prior files may remain only as historical provenance and MUST NOT be reused as current E006 source/reference/anchor/crop input.
 - V1_E005 and all other episodes remain preserved unchanged.
+
+## Architecture revision — tool-independent presentation master
+
+Applied 2026-09-09 after E006 presentation QC.
+
+The user-facing lettered draft is now an explicit upstream artifact that is independent of ToonDesk/editor reconstruction.
+
+Frozen stage boundary:
+- `TOOL_INDEPENDENT_PRESENTATION_MASTER` consumes only locked artwork + approved copy + semantic presentation hints;
+- it MUST NOT consume ToonDesk exports, editor scene JSON, editor primitive defaults or editor font-substitution output;
+- the user approves this artifact at `PRESENTATION_MASTER_USER_GATE`;
+- historical field/state name `FINAL_PUBLISH_GATE` is a compatibility alias for the same gate, not an additional approval;
+- only after approval does `EDITABLE_RECONSTRUCTION` map that look into `EDITOR_SCENE_MODEL_V1`;
+- `PRESENTATION_PARITY_QC` compares the tool-linked reconstruction against the approved master;
+- parity failure repairs the editor/reconstruction layer only and cannot mutate the approved master or approved artwork;
+- user-gate preview and internal QC sheet are separate artifacts; diagnostic page labels never appear in the user-gate preview.
+
+Normal user approvals per episode remain exactly three: storyboard → artwork bundle → tool-independent presentation master.
 
 ## Architecture revision — approved artwork is pixel-locked
 
@@ -50,7 +68,7 @@ Canonical rule now:
 - presentation/layout feedback never authorizes artwork regeneration.
 
 Canonical flow:
-`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
+`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → TOOL_INDEPENDENT_PRESENTATION_MASTER → PRESENTATION_MASTER_USER_GATE (= FINAL_PUBLISH_GATE compatibility alias) → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → FINAL_EXPORT → DONE`
 
 Prior E006 artwork provenance from the superseded run:
 - former BODY source SHA-256: `d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76`
@@ -94,7 +112,7 @@ Exact next action for episode production:
 6. Only after user approval, perform `EDITABLE_RECONSTRUCTION` and `PRESENTATION_PARITY_QC`.
 
 Infrastructure change applied for future/new work:
-- `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` as the canonical finalization mode.
+- `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` plus `TOOL_INDEPENDENT_PRESENTATION_MASTER` as the canonical art/presentation boundary.
 - `templates/JIPBAP_PRESENTATION_SHELL_V2.json` revision is `2026-09-09_APPROVED_ART_PIXEL_LOCK_V1`.
 - BODY source policy is `approved_board_cell_exact_derivative` + `EXACT_EXTRACTION_REUSE`.
 - COVER source policy is `approved_cover_exact_source` + `EXACT_ANCHOR_REUSE`.
@@ -149,7 +167,7 @@ Completed episode provenance:
 
 Default for new episodes:
 - template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
-- V2 revision: `2026-09-09_APPROVED_ART_PIXEL_LOCK_V1`
+- V2 revision: `2026-09-09_TOOL_INDEPENDENT_PRESENTATION_MASTER_V3`
 - canvas: 1080 × 1350
 - COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
 - BODY: full-canvas artwork; no fixed lower meta band
