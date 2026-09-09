@@ -1,6 +1,6 @@
 # V1_E006 PRESENTATION_MASTER_DRAFT RECEIPT
 
-Status: AWAITING_FINAL_PUBLISH_GATE
+Status: REJECTED_PRESENTATION_QC
 Generated: 2026-09-09
 Architecture: SIX_PANEL_BOARD_FIRST / APPROVED_ART_PIXEL_LOCK / PRESENTATION_MASTER_FIRST
 
@@ -52,3 +52,24 @@ On approval:
 - PRESENTATION_PARITY_QC
 - canonical package / run receipt persistence
 - DONE if parity passes
+
+
+## Presentation QC rejection — 2026-09-09
+
+The artwork source is NOT rejected. BODY and COVER remain pixel-locked current authority.
+
+Rejected layer:
+- presentation-master lettering / review-preview treatment only.
+
+Root causes:
+1. The contact-sheet renderer added page-id badges (COVER/S01..S06) directly into the user-facing review sheet. These were diagnostic annotations, not page pixels.
+2. The runtime presentation compositor used local ad-hoc fonts outside the declared preferred/fallback policy, creating a silent typography substitution.
+3. Generic procedural organic blobs were used as containers across pages, producing editor-like/mechanical repetition instead of a quality-first presentation target.
+4. Long copy was solved with shrink-to-fit, producing visibly weak typography on S06.
+5. The cover episode label used an enclosure despite the default cover-title contract specifying plain episode-label lettering.
+
+Disposition:
+- current presentation ZIP/contact sheet are non-authority for publish approval;
+- approved BODY/COVER hashes remain valid;
+- rebuild only the presentation layer;
+- next gate remains the same FINAL_PUBLISH_GATE; no extra routine approval gate is added.
