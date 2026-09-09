@@ -14,7 +14,7 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E006
-Stage: FINAL_PUBLISH_GATE
+Stage: PRESENTATION_MASTER_REPAIR
 
 ## Boot snapshot — V1_E006 fresh reset at 2026-09-09 08:43 KST
 
@@ -25,7 +25,7 @@ Stage: FINAL_PUBLISH_GATE
 - STORYBOARD_USER_GATE: APPROVED
 - ART_BUNDLE_USER_GATE: APPROVED
 - APPROVED_ART_PIXEL_LOCK: ACTIVE
-- FINAL_PUBLISH_GATE: AWAITING_USER_REVIEW
+- FINAL_PUBLISH_GATE: REOPENED_AFTER_PRESENTATION_QC
 - Plan: `episodes/V1_E006/PLAN.md`
 - Required S01: rainy 먹자골목; protagonist catches/smells 두부조림 aroma before seeing the dish.
 - Required action payoff: tofu is transferred onto rice, visibly crushed with a spoon, mixed 쓱쓱, then eaten.
@@ -77,11 +77,21 @@ Deterministic extraction / presentation draft:
 - presentation contact-sheet SHA-256: `1b65c0bc05f872395a73a43f5d92e7433bf6894f22f3c9a15f63f7a1aa3032d8`
 - receipt: `episodes/V1_E006/PRESENTATION_MASTER_DRAFT_RECEIPT.md`
 
+Presentation QC finding — 2026-09-09:
+- the approved BODY/COVER artwork remains valid and pixel-locked;
+- the current presentation master is REJECTED_PRESENTATION_QC, not an artwork failure;
+- user-facing contact sheet incorrectly carried diagnostic page-id badges (COVER/S01..S06);
+- the draft used an ad-hoc deterministic compositor with undeclared local font substitution and generic organic-blob containers, collapsing quality-first presentation design into reconstruction-like rendering;
+- S06 also demonstrated shrink-to-fit typography degradation;
+- the cover episode label was enclosed despite the automatic default requiring plain lettering.
+
 Exact next action for episode production:
-1. Show the complete `PRESENTATION_MASTER_DRAFT` at `FINAL_PUBLISH_GATE`.
-2. Stop for user publish approval.
-3. If approved, perform `EDITABLE_RECONSTRUCTION` from the same locked BODY/COVER source bytes and the approved presentation intent.
-4. Run `PRESENTATION_PARITY_QC`, persist canonical package/receipt, then mark DONE if parity passes.
+1. Do not regenerate BODY or COVER.
+2. Rebuild `PRESENTATION_MASTER_DRAFT` as a tool-independent quality-first flattened target from the same locked artwork.
+3. Produce an unannotated final-gate preview; keep page ids/debug labels in metadata/internal QC only.
+4. Use declared typography roles/fallbacks, no silent font substitution, no below-min shrink-to-fit, and scene-specific lettering/container treatment.
+5. Show the repaired presentation master at the existing `FINAL_PUBLISH_GATE`.
+6. Only after user approval, perform `EDITABLE_RECONSTRUCTION` and `PRESENTATION_PARITY_QC`.
 
 Infrastructure change applied for future/new work:
 - `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` as the canonical finalization mode.
