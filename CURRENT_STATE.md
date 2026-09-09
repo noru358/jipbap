@@ -13,26 +13,38 @@ Status: IN_PROGRESS
 
 ## Active production state
 
-Active episode: V1_E006
-Stage: PRESENTATION_MASTER_REPAIR
+Active episode: V1_E007
+Stage: STORYBOARD_USER_GATE
 
-## Boot snapshot — V1_E006 fresh reset at 2026-09-09 08:43 KST
+## Boot snapshot — V1_E007 full replacement of V1_E006 at 2026-09-09 09:25 KST
 
-- Active episode: `V1_E006`
-- Current stage: `PRESENTATION_MASTER_REPAIR`
-- Food: 두부조림
-- Reset authority: USER_EXPLICIT_FULL_RESET on 2026-09-09 08:43 KST
-- STORYBOARD_USER_GATE: APPROVED
-- ART_BUNDLE_USER_GATE: APPROVED
-- APPROVED_ART_PIXEL_LOCK: ACTIVE
-- FINAL_PUBLISH_GATE: REOPENED_AFTER_PRESENTATION_QC
-- Plan: `episodes/V1_E006/PLAN.md`
-- Required S01: rainy 먹자골목; protagonist catches/smells 두부조림 aroma before seeing the dish.
-- Required action payoff: tofu is transferred onto rice, visibly crushed with a spoon, mixed 쓱쓱, then eaten.
-- Fresh BODY arc: aroma trigger → hot dish reveal → intact tofu first bite → tofu+sauce onto rice → visible crush/mix → mixed-rice bite payoff.
-- All E006 storyboards, copy, BODY/COVER artwork, approvals, pixel locks, crops, presentation drafts and packages that predate this reset are SUPERSEDED_NON_AUTHORITY.
-- Prior files may remain only as historical provenance and MUST NOT be reused as current E006 source/reference/anchor/crop input.
-- V1_E005 and all other episodes remain preserved unchanged.
+- Active episode: `V1_E007`
+- Current stage: `STORYBOARD_USER_GATE`
+- Food: 수육국밥
+- Reset authority: USER_EXPLICIT_ABANDON_E006_AND_START_E007 on 2026-09-09 09:25 KST
+- STORYBOARD_USER_GATE: PENDING_USER_REVIEW
+- ART_BUNDLE_USER_GATE: NOT_STARTED
+- APPROVED_ART_PIXEL_LOCK: NOT_STARTED
+- PRESENTATION_MASTER_USER_GATE / FINAL_PUBLISH_GATE: NOT_STARTED
+- Plan: `episodes/V1_E007/PLAN.md`
+- Required S01: protagonist is already drunk and 휘적휘적/staggering into a 국밥집.
+- Required payoff: 깍두기 is visibly combined/mixed into the 수육국밥 and the transformed spoonful is actually eaten.
+- BODY arc: drunken arrival → steaming pork-soup reveal → first hot-broth sip → pork/rice satisfaction → 깍두기 transformation → transformed spoonful ingestion payoff.
+- COVER intent: distinct text-free hero of steaming 수육국밥 + slightly tipsy protagonist; BODY reuse is not the automatic default.
+- All V1_E006 storyboards, copy, BODY/COVER artwork, approvals, pixel locks, crops, presentation drafts, packages and exact-next-actions are now `SUPERSEDED_NON_AUTHORITY` for active production.
+- V1_E006 files may remain only as historical provenance and MUST NOT be reused as V1_E007 source/reference/anchor/crop/presentation input.
+- V1_E005 and all earlier closed episodes remain preserved unchanged.
+
+Exact next action for episode production:
+1. Present `episodes/V1_E007/PLAN.md` storyboard/copy/camera/expression/continuity to the user.
+2. Stop at `STORYBOARD_USER_GATE`.
+3. Do not generate BODY or COVER before storyboard approval.
+4. On approval, bind the already locked PERSON + FOOD renderer carriers, preferring repository-direct validated bytes and using identical `SESSION_ONLY` carriers only if direct binding is unavailable.
+5. Then create `INITIAL_ART_BUNDLE`: one text-free 2×3 BODY master board + one distinct text-free COVER hero.
+
+## Historical superseded V1_E006 production snapshot
+
+The former V1_E006 `PRESENTATION_MASTER_REPAIR` state, approved artwork hashes, extraction boxes, draft receipts and repair instructions appearing later in this file are retained only for provenance. They are not current runtime authority after the explicit V1_E007 reset above.
 
 ## Architecture revision — tool-independent presentation master
 
