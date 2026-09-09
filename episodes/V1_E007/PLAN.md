@@ -1,7 +1,7 @@
 # V1_E007 PLAN
 
 Updated: 2026-09-09
-Status: ART_BUNDLE_APPROVED_PIXEL_LOCKED
+Status: PRESENTATION_MASTER_APPROVED
 Episode: V1_E007
 Food: 수육국밥
 Product concept: PROXY_EATER
@@ -131,3 +131,12 @@ Approval record:
 - APPROVED_ART_PIXEL_LOCK: ACTIVE
 
 Exact next action: deterministically extract S01..S06 from the approved BODY using actual borders, reuse the exact approved COVER, assemble 4:5 pages, and build the tool-independent presentation master. No further stochastic artwork generation is allowed unless the user explicitly reopens BODY or COVER.
+
+
+## Final presentation approval
+
+- PRESENTATION_MASTER_USER_GATE / FINAL_PUBLISH_GATE: APPROVED by explicit user approval on 2026-09-09.
+- Approval receipt: `episodes/V1_E007/PRESENTATION_MASTER_APPROVAL.md`.
+- The approved preview is presentation-intent authority only because the preview pass accidentally used stochastic image editing after artwork pixel lock; locked BODY/COVER remain sole artwork authority.
+- No additional routine user gate is required.
+- Exact next action: EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → FINAL_EXPORT → DONE.
