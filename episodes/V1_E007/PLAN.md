@@ -45,7 +45,6 @@ Final page ratio: 4:5
 - Expression: eyes beginning to refocus on the bowl.
 - Copy:
   - inner_thought: `와… 냄새부터 좀 살겠다.`
-  - sfx: `후우-` (steam/breath rhythm, optional in final lettering)
 - Copy-space hint: side negative space, not over the pork.
 - Avoid: pork surface, steam plume, face.
 - Continuity: untouched bowl → first taste.
@@ -67,8 +66,7 @@ Final page ratio: 4:5
 - Camera: tight hand/food close-up with a partial lower-face reaction, different from S03.
 - Expression: small anticipatory grin / focused hunger.
 - Copy:
-  - speech or inner_thought: `고기 두께 봐.`
-  - inner_thought: `국물 머금으니까 더 부드럽네.` only if the bite is visibly completed in-panel; otherwise defer/omit.
+  - inner_thought: `고기 두께 봐.`
 - Copy-space hint: upper corner away from hand-food contact.
 - Avoid: pork, spoon, fingers.
 - Continuity: keep food geometry physically plausible; no taste claim before ingestion.
@@ -92,7 +90,6 @@ Final page ratio: 4:5
 - Expression: eyes brighten, cheeks still a little flushed; modestly amplified satisfaction.
 - Copy:
   - inner_thought: `아삭하고 새콤한 게 딱 끊어주네.`
-  - optional small speech after bite: `이거지.`
 - Copy-space hint: side opposite spoon entry.
 - Avoid: eyes, mouth/spoon contact, visible 깍두기 on spoon.
 - Continuity: this is the payoff of S05 transformation, not a separate untouched side-dish bite.
@@ -114,7 +111,7 @@ Final page ratio: 4:5
 - S01 user-required drunk/staggering entrance: PRESENT.
 - Core menu identity as 수육국밥: PRESENT.
 - 깍두기 is not decorative-only; transformation + ingestion payoff spans S05→S06: PRESENT.
-- Sensory copy occurs only after visible/established ingestion: PASS with S04 conditional note.
+- Sensory copy occurs only after visible/established ingestion: PASS.
 - Camera/shot rhythm does not collapse into repeated face-at-table composition: PASS.
 - No generated-text requirement is placed on the master BOARD: PASS.
 - No episode-specific rule is promoted into a permanent V1 hard gate: PASS.
