@@ -14,33 +14,39 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E007
-Stage: STORYBOARD_USER_GATE
+Stage: APPROVED_ART_PIXEL_LOCK
 
-## Boot snapshot — V1_E007 full replacement of V1_E006 at 2026-09-09 09:25 KST
+## Boot snapshot — V1_E007 approved artwork at 2026-09-09 KST
 
 - Active episode: `V1_E007`
-- Current stage: `STORYBOARD_USER_GATE`
+- Current stage: `APPROVED_ART_PIXEL_LOCK`
 - Food: 수육국밥
 - Reset authority: USER_EXPLICIT_ABANDON_E006_AND_START_E007 on 2026-09-09 09:25 KST
-- STORYBOARD_USER_GATE: PENDING_USER_REVIEW
-- ART_BUNDLE_USER_GATE: NOT_STARTED
-- APPROVED_ART_PIXEL_LOCK: NOT_STARTED
+- STORYBOARD_USER_GATE: APPROVED
+- ART_BUNDLE_USER_GATE: APPROVED
+- APPROVED_ART_PIXEL_LOCK: ACTIVE
 - PRESENTATION_MASTER_USER_GATE / FINAL_PUBLISH_GATE: NOT_STARTED
 - Plan: `episodes/V1_E007/PLAN.md`
-- Required S01: protagonist is already drunk and 휘적휘적/staggering into a 국밥집.
-- Required payoff: 깍두기 is visibly combined/mixed into the 수육국밥 and the transformed spoonful is actually eaten.
-- BODY arc: drunken arrival → steaming pork-soup reveal → first hot-broth sip → pork/rice satisfaction → 깍두기 transformation → transformed spoonful ingestion payoff.
-- COVER intent: distinct text-free hero of steaming 수육국밥 + slightly tipsy protagonist; BODY reuse is not the automatic default.
-- All V1_E006 storyboards, copy, BODY/COVER artwork, approvals, pixel locks, crops, presentation drafts, packages and exact-next-actions are now `SUPERSEDED_NON_AUTHORITY` for active production.
-- V1_E006 files may remain only as historical provenance and MUST NOT be reused as V1_E007 source/reference/anchor/crop/presentation input.
-- V1_E005 and all earlier closed episodes remain preserved unchanged.
+- Background direction: MINIMAL / SPARSE, per user approval.
+- BODY source SHA-256: `54bd5d32f2cc91fa846da371776c55a225af069fb7bcff23f2c7768d1346d230`
+- BODY dimensions: 1024 × 1536
+- BODY generation id: `e2151ecc-6722-42c9-bb55-617a7edb493f`
+- COVER source SHA-256: `68add7ddf89d332df1fb490a6a0714f8bb5f879b241cfbf5a0e483e0eaeaff5f`
+- COVER dimensions: 1122 × 1402
+- COVER generation id: `f93efb17-cff2-4961-8d2a-39b51e8597f0`
+- Artwork status: `PIXEL_LOCKED_CURRENT_AUTHORITY`
+- Repository binary materialization of these production-art bytes: NOT_CLAIMED_IN_THIS_RUNTIME.
+- The approved BODY/COVER must not be regenerated, redrawn, inpainted, outpainted, or replaced unless the user explicitly reopens the affected artwork component.
+- The failed image-generation call that occurred immediately after the user's artwork approval produced no replacement authority and is `NO_OUTPUT_NON_AUTHORITY`.
 
 Exact next action for episode production:
-1. Present `episodes/V1_E007/PLAN.md` storyboard/copy/camera/expression/continuity to the user.
-2. Stop at `STORYBOARD_USER_GATE`.
-3. Do not generate BODY or COVER before storyboard approval.
-4. On approval, bind the already locked PERSON + FOOD renderer carriers, preferring repository-direct validated bytes and using identical `SESSION_ONLY` carriers only if direct binding is unavailable.
-5. Then create `INITIAL_ART_BUNDLE`: one text-free 2×3 BODY master board + one distinct text-free COVER hero.
+1. Do not call image generation for V1_E007 artwork.
+2. Run `JIPBAP_BOARD_EXTRACTION_V1` on the approved BODY source using actual panel borders.
+3. Reuse the exact approved COVER source.
+4. Assemble deterministic 4:5 pages with crop / non-stretched scale / position only.
+5. Build the tool-independent quality-first `PRESENTATION_MASTER_DRAFT` from locked artwork + approved copy.
+6. Show the unannotated 7-page presentation master at `PRESENTATION_MASTER_USER_GATE` / `FINAL_PUBLISH_GATE`.
+7. After approval, perform editable reconstruction and parity QC without another routine user approval.
 
 ## Historical superseded V1_E006 production snapshot
 
