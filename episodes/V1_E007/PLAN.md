@@ -1,7 +1,7 @@
 # V1_E007 PLAN
 
 Updated: 2026-09-09
-Status: DRAFT_AWAITING_STORYBOARD_USER_GATE
+Status: ART_BUNDLE_APPROVED_PIXEL_LOCKED
 Episode: V1_E007
 Food: 수육국밥
 Product concept: PROXY_EATER
@@ -118,5 +118,16 @@ Final page ratio: 4:5
 
 ## Gate
 
-Current gate: `STORYBOARD_USER_GATE`
-Exact next action: show this storyboard to the user for revision/approval. Do not generate BODY or COVER before approval. On approval, bind the locked PERSON + FOOD renderer carriers and proceed to `INITIAL_ART_BUNDLE`.
+Current gate: `APPROVED_ART_PIXEL_LOCK`
+
+Approval record:
+- STORYBOARD_USER_GATE: APPROVED
+- ART_BUNDLE_USER_GATE: APPROVED
+- User direction: background minimal / sparse
+- BODY SHA-256: `54bd5d32f2cc91fa846da371776c55a225af069fb7bcff23f2c7768d1346d230`
+- BODY generation id: `e2151ecc-6722-42c9-bb55-617a7edb493f`
+- COVER SHA-256: `68add7ddf89d332df1fb490a6a0714f8bb5f879b241cfbf5a0e483e0eaeaff5f`
+- COVER generation id: `f93efb17-cff2-4961-8d2a-39b51e8597f0`
+- APPROVED_ART_PIXEL_LOCK: ACTIVE
+
+Exact next action: deterministically extract S01..S06 from the approved BODY using actual borders, reuse the exact approved COVER, assemble 4:5 pages, and build the tool-independent presentation master. No further stochastic artwork generation is allowed unless the user explicitly reopens BODY or COVER.
