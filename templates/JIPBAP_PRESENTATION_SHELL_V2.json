@@ -13,7 +13,7 @@
     "allow_custom_override": true,
     "override_class": "CUSTOM_OVERRIDE",
     "override_is_scene_corruption": false,
-    "revision": "2026-09-09_PAGE_FINAL_RECOMPOSE_V1"
+    "revision": "2026-09-09_PRESENTATION_STAGE_SEPARATION_V2"
   },
   "page_structure": {
     "automatic_default": {
@@ -425,7 +425,10 @@
     "silent_substitution_allowed": false,
     "surface_missing_preferred_font_warning": true,
     "preview_export_must_share_resolved_family": true,
-    "font_binary_is_authority": false
+    "font_binary_is_authority": false,
+    "undeclared_runtime_font_allowed": false,
+    "shrink_below_role_min_allowed": false,
+    "reflow_or_reposition_before_shrink": true
   },
   "presentation_design": {
     "mode": "PRESENTATION_MASTER_FIRST",
@@ -439,7 +442,21 @@
     "parity_qc_required_after_reconstruction": true,
     "routine_second_user_gate_after_parity": false,
     "stochastic_artwork_generation_after_art_bundle_approval": false,
-    "presentation_only_feedback_can_regenerate_artwork": false
+    "presentation_only_feedback_can_regenerate_artwork": false,
+    "master_artifact_kind": "flattened_tool_independent_visual_target",
+    "master_must_not_instantiate_editor_scene": true,
+    "master_must_not_inherit_editor_defaults": true,
+    "final_publish_gate_approves": "presentation_master_visual_intent",
+    "editable_reconstruction_occurs_after_gate": true,
+    "additional_routine_gate_after_reconstruction": false,
+    "user_facing_preview": {
+      "source": "presentation_master_page_pixels",
+      "diagnostic_annotations": false,
+      "page_ids_in_pixels": false,
+      "qc_labels_in_pixels": false,
+      "debug_guides_in_pixels": false,
+      "internal_labeled_contact_sheet_allowed": true
+    }
   },
   "artwork_finalization": {
     "mode": "APPROVED_ART_PIXEL_LOCK",
@@ -459,5 +476,5 @@
     ],
     "artwork_change_requires_reopened_art_gate": true
   },
-  "revision": "2026-09-09_APPROVED_ART_PIXEL_LOCK_V1"
+  "revision": "2026-09-09_PRESENTATION_STAGE_SEPARATION_V2"
 }
