@@ -99,6 +99,16 @@ The presentation pipeline has two deliberately different artifacts and they MUST
    - It must reconstruct the approved target rather than regenerate a generic editor-default design.
    - If parity cannot be reached because the editor lacks a capability, extend/repair the editor or scene model; do not lower the upstream presentation target.
 
+Stage I/O boundary:
+- presentation-master INPUT: locked COVER/BODY page pixels + approved literal copy + semantic role/placement hints;
+- presentation-master FORBIDDEN INPUT: ToonDesk export, `composition/*.layout.json`, generic editor shape defaults, editor font substitution receipts;
+- presentation-master OUTPUT: seven flattened target pages + per-page target hashes + one unannotated user preview; optional labeled QC sheet is internal-only;
+- editable-reconstruction INPUT: approved presentation-master targets + the same locked artwork provenance + exact literal copy;
+- editable-reconstruction OUTPUT: `composition/*.layout.json` + editable derivatives + deterministic export;
+- parity failure loops only inside `EDITABLE_RECONSTRUCTION ↔ PRESENTATION_PARITY_QC`; it does not rewrite the approved presentation target and never reopens artwork approval by itself.
+
+This is a stage separation, not a new permanent quality gate. It exists to prevent editor capability from contaminating upstream design quality.
+
 This does not add another routine user gate. The existing `FINAL_PUBLISH_GATE` is the approval of the tool-independent presentation master. After that approval, editable reconstruction and parity QC complete without another routine approval unless approved intent cannot be reproduced.
 
 User-facing final-gate previews:
@@ -123,7 +133,7 @@ Typography / container execution rules for the presentation master:
 - antialiasing/font-rasterization differences that do not alter design meaning are allowed;
 - a tool-linked render that becomes materially more mechanical/boxy than the approved presentation target FAILS.
 
-Cover / lettering presentation defaults:Cover / lettering presentation defaults:
+Cover / lettering presentation defaults:
 
 COVER title system — `COVER_TITLE_SYSTEM_V1`:
 - default semantic fields are `episode_no`, `topic_phrase`, and `food_name`.
@@ -635,7 +645,7 @@ Do not try to force PLAN → ART → FINAL into one assistant response.
 
 Canonical production flow:
 
-`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → PRESENTATION_MASTER_DRAFT → FINAL_PUBLISH_GATE → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → DONE`
+`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → TOOL_INDEPENDENT_PRESENTATION_MASTER → PRESENTATION_MASTER_USER_GATE (= legacy name FINAL_PUBLISH_GATE) → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → FINAL_EXPORT → DONE`
 
 `SIX_PANEL_BOARD_FIRST` remains the V1 BODY architecture. `INITIAL_ART_BUNDLE` is the only normal stochastic episode-art authoring phase.
 
@@ -674,14 +684,16 @@ On approval:
 - do not treat approval as a loose semantic anchor;
 - proceed immediately to deterministic extraction/assembly and lettering.
 
-Normal V1 user gates remain:
-1. storyboard approval;
-2. initial artwork bundle approval;
-3. final publish approval.
+Normal V1 user gates are exactly three:
+1. `STORYBOARD_USER_GATE`: storyboard/copy approval;
+2. `ART_BUNDLE_USER_GATE`: BODY + COVER artwork approval and pixel lock;
+3. `PRESENTATION_MASTER_USER_GATE`: approval of the complete tool-independent, lettered carousel draft.
+
+`FINAL_PUBLISH_GATE` is retained only as a backward-compatible state/field name for gate #3. It is NOT a fourth approval and does not mean the editor-linked reconstruction must exist before approval.
 
 If the user later asks to change the drawing itself, reopen only the affected BODY or COVER component of this existing artwork gate.
 
-### 8.4 DETERMINISTIC_PAGE_ASSEMBLY + PRESENTATION MASTER + EDITABLE RECONSTRUCTION
+### 8.4 DETERMINISTIC_PAGE_ASSEMBLY + TOOL-INDEPENDENT PRESENTATION MASTER + EDITABLE RECONSTRUCTION
 After artwork approval:
 
 **A. APPROVED_ART_PIXEL_LOCK / DETERMINISTIC_PAGE_ASSEMBLY**
@@ -692,17 +704,21 @@ After artwork approval:
 - record source hash, extraction metadata/box and crop transform in page provenance;
 - no stochastic image operation is permitted.
 
-**B. PRESENTATION_MASTER_DRAFT**
-- compose the complete 7-page carousel directly on those locked artwork sources with approved literal copy, natural bubble shapes/tails, line breaks, typography character, COVER title treatment, SFX and local spacing;
+**B. TOOL_INDEPENDENT_PRESENTATION_MASTER**
+- compose the complete 7-page carousel directly on the locked artwork with approved literal copy, natural bubble shapes/tails, line breaks, typography character, COVER title treatment, SFX and local spacing;
+- this artifact is intentionally NOT ToonDesk-linked and MUST NOT be generated from `composition/*.layout.json`, editor defaults, editor-safe primitive geometry, or an editor export;
+- its allowed upstream inputs are the locked artwork, approved literal copy, semantic role/placement hints, and quality-first presentation rules only;
 - optimize visual quality first without constraining the design to current ToonDesk primitive/default limits;
 - preserve semantic distinction between speech / thought / narration / SFX without forcing one universal container style;
-- image-generated sketches may be used only for abstract lettering/design inspiration if they do not redraw or replace approved episode artwork;
-- inspect the complete carousel as a visual design object.
+- the master may use richer deterministic raster/vector composition than the editor currently supports; editability is a downstream reconstruction concern;
+- inspect the complete carousel as a visual design object before exposing it to the user;
+- create two different review derivatives: (a) an internal diagnostic sheet that MAY show page ids/QC guides, and (b) an unannotated user-gate preview that MUST contain only the actual page pixels.
 
-At `FINAL_PUBLISH_GATE`:
-- show the quality-first `PRESENTATION_MASTER_DRAFT`;
+At `PRESENTATION_MASTER_USER_GATE` (backward-compatible field/name: `FINAL_PUBLISH_GATE`):
+- show only the unannotated tool-independent presentation master;
 - user approval locks presentation intent for all seven pages;
-- store page-level presentation-target provenance/hash.
+- store page-level presentation-target provenance/hash;
+- do NOT request a separate routine approval after editor reconstruction.
 
 After approval, do `EDITABLE_RECONSTRUCTION`:
 - use the same locked BODY-cell/COVER source bytes and deterministic crop transforms;
