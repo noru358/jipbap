@@ -14,39 +14,34 @@ Status: IN_PROGRESS
 ## Active production state
 
 Active episode: V1_E007
-Stage: APPROVED_ART_PIXEL_LOCK
+Stage: EDITABLE_RECONSTRUCTION
 
-## Boot snapshot — V1_E007 approved artwork at 2026-09-09 KST
+## Boot snapshot — V1_E007 final presentation approved at 2026-09-09 KST
 
 - Active episode: `V1_E007`
-- Current stage: `APPROVED_ART_PIXEL_LOCK`
+- Current stage: `EDITABLE_RECONSTRUCTION`
 - Food: 수육국밥
-- Reset authority: USER_EXPLICIT_ABANDON_E006_AND_START_E007 on 2026-09-09 09:25 KST
 - STORYBOARD_USER_GATE: APPROVED
 - ART_BUNDLE_USER_GATE: APPROVED
 - APPROVED_ART_PIXEL_LOCK: ACTIVE
-- PRESENTATION_MASTER_USER_GATE / FINAL_PUBLISH_GATE: NOT_STARTED
-- Plan: `episodes/V1_E007/PLAN.md`
-- Background direction: MINIMAL / SPARSE, per user approval.
+- PRESENTATION_MASTER_USER_GATE / FINAL_PUBLISH_GATE: APPROVED
+- Presentation approval receipt: `episodes/V1_E007/PRESENTATION_MASTER_APPROVAL.md`
+- Background direction: MINIMAL / SPARSE.
 - BODY source SHA-256: `54bd5d32f2cc91fa846da371776c55a225af069fb7bcff23f2c7768d1346d230`
-- BODY dimensions: 1024 × 1536
-- BODY generation id: `e2151ecc-6722-42c9-bb55-617a7edb493f`
 - COVER source SHA-256: `68add7ddf89d332df1fb490a6a0714f8bb5f879b241cfbf5a0e483e0eaeaff5f`
-- COVER dimensions: 1122 × 1402
-- COVER generation id: `f93efb17-cff2-4961-8d2a-39b51e8597f0`
 - Artwork status: `PIXEL_LOCKED_CURRENT_AUTHORITY`
-- Repository binary materialization of these production-art bytes: NOT_CLAIMED_IN_THIS_RUNTIME.
-- The approved BODY/COVER must not be regenerated, redrawn, inpainted, outpainted, or replaced unless the user explicitly reopens the affected artwork component.
-- The failed image-generation call that occurred immediately after the user's artwork approval produced no replacement authority and is `NO_OUTPUT_NON_AUTHORITY`.
+- Approved presentation preview: USER_APPROVED, with page hashes recorded in the approval receipt.
+- Provenance correction: the approved preview pass accidentally used stochastic image editing after artwork lock. Its altered artwork pixels are NON_AUTHORITY; only presentation intent is approved from that preview. Exact locked BODY/COVER remain sole artwork sources.
+- This is an E007-specific incident record, not a new permanent gate or V1 rule.
+- Repository binary materialization of current session artwork/presentation bytes remains NOT_CLAIMED_IN_THIS_RUNTIME.
 
 Exact next action for episode production:
 1. Do not call image generation for V1_E007 artwork.
-2. Run `JIPBAP_BOARD_EXTRACTION_V1` on the approved BODY source using actual panel borders.
-3. Reuse the exact approved COVER source.
-4. Assemble deterministic 4:5 pages with crop / non-stretched scale / position only.
-5. Build the tool-independent quality-first `PRESENTATION_MASTER_DRAFT` from locked artwork + approved copy.
-6. Show the unannotated 7-page presentation master at `PRESENTATION_MASTER_USER_GATE` / `FINAL_PUBLISH_GATE`.
-7. After approval, perform editable reconstruction and parity QC without another routine user approval.
+2. Perform `EDITABLE_RECONSTRUCTION` from the exact locked COVER source + exact BODY crops.
+3. Reproduce the approved title/bubble/thought/SFX placement and typography intent in `EDITOR_SCENE_MODEL_V1`.
+4. Run `PRESENTATION_PARITY_QC` with exact artwork-source identity and exact literal copy.
+5. If materially equivalent, persist composition/export artifacts + `RUN_RECEIPT.md` and mark V1_E007 `DONE`.
+6. Do not request another routine user approval; return only if a material parity mismatch cannot be resolved without changing approved intent.
 
 ## Historical superseded V1_E006 production snapshot
 
