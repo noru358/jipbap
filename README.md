@@ -7,8 +7,9 @@
 Architecture: **SIX_PANEL_BOARD_FIRST**
 
 Normal boot authority:
-1. `CURRENT_STATE.md`
-2. `JIPBAP_V1_SPEC.md`
+1. `runtime/state.json` (single machine authority)
+2. generated `runtime/RUN_CONTEXT.md`
+3. `JIPBAP_V1_SPEC.md`
 
 Product:
 - COVER 1 + BODY 6
@@ -86,3 +87,5 @@ Background/decorative assets are omitted unless needed to explain the moment.
 Legacy composition-first / BODY4 / ASSET_GAP / PERSON-FOOD foundation workflows are historical/debugging material only.
 
 See `JIPBAP_V1_SPEC.md` for the frozen/unfrozen boundary and runtime protocol.
+See `RUNTIME_IMPLEMENTATION.md` for the Chat host boundary, exact approval
+contract, asset persistence and recovery behavior.

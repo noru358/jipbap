@@ -1,0 +1,612 @@
+# CURRENT_STATE
+
+Updated: 2026-09-09
+Project: jipbap
+Runtime spec: JIPBAP_V1_SPEC.md
+Architecture: SIX_PANEL_BOARD_FIRST
+Artwork finalization: APPROVED_ART_PIXEL_LOCK
+Presentation architecture: TOOL_INDEPENDENT_PRESENTATION_MASTER_FIRST
+Editable scene package: EDITABLE_COMPOSITION_PACKAGE_V1
+Editor scene model: EDITOR_SCENE_MODEL_V1
+Default presentation shell for new episodes: JIPBAP_PRESENTATION_SHELL_V2
+Status: IN_PROGRESS
+
+## Active production state
+
+Active episode: V1_E007
+Stage: EDITABLE_RECONSTRUCTION
+
+## Boot snapshot — V1_E007 final presentation approved at 2026-09-09 KST
+
+- Active episode: `V1_E007`
+- Current stage: `EDITABLE_RECONSTRUCTION`
+- Food: 수육국밥
+- STORYBOARD_USER_GATE: APPROVED
+- ART_BUNDLE_USER_GATE: APPROVED
+- APPROVED_ART_PIXEL_LOCK: ACTIVE
+- PRESENTATION_MASTER_USER_GATE / FINAL_PUBLISH_GATE: APPROVED
+- Presentation approval receipt: `episodes/V1_E007/PRESENTATION_MASTER_APPROVAL.md`
+- Background direction: MINIMAL / SPARSE.
+- BODY source SHA-256: `54bd5d32f2cc91fa846da371776c55a225af069fb7bcff23f2c7768d1346d230`
+- COVER source SHA-256: `68add7ddf89d332df1fb490a6a0714f8bb5f879b241cfbf5a0e483e0eaeaff5f`
+- Artwork status: `PIXEL_LOCKED_CURRENT_AUTHORITY`
+- Approved presentation preview: USER_APPROVED, with page hashes recorded in the approval receipt.
+- Provenance correction: the approved preview pass accidentally used stochastic image editing after artwork lock. Its altered artwork pixels are NON_AUTHORITY; only presentation intent is approved from that preview. Exact locked BODY/COVER remain sole artwork sources.
+- This is an E007-specific incident record, not a new permanent gate or V1 rule.
+- Repository binary materialization of current session artwork/presentation bytes remains NOT_CLAIMED_IN_THIS_RUNTIME.
+
+Exact next action for episode production:
+1. Do not call image generation for V1_E007 artwork.
+2. Perform `EDITABLE_RECONSTRUCTION` from the exact locked COVER source + exact BODY crops.
+3. Reproduce the approved title/bubble/thought/SFX placement and typography intent in `EDITOR_SCENE_MODEL_V1`.
+4. Run `PRESENTATION_PARITY_QC` with exact artwork-source identity and exact literal copy.
+5. If materially equivalent, persist composition/export artifacts + `RUN_RECEIPT.md` and mark V1_E007 `DONE`.
+6. Do not request another routine user approval; return only if a material parity mismatch cannot be resolved without changing approved intent.
+
+## Historical superseded V1_E006 production snapshot
+
+The former V1_E006 `PRESENTATION_MASTER_REPAIR` state, approved artwork hashes, extraction boxes, draft receipts and repair instructions appearing later in this file are retained only for provenance. They are not current runtime authority after the explicit V1_E007 reset above.
+
+## Architecture revision — tool-independent presentation master
+
+Applied 2026-09-09 after E006 presentation QC.
+
+The user-facing lettered draft is now an explicit upstream artifact that is independent of ToonDesk/editor reconstruction.
+
+Frozen stage boundary:
+- `TOOL_INDEPENDENT_PRESENTATION_MASTER` consumes only locked artwork + approved copy + semantic presentation hints;
+- it MUST NOT consume ToonDesk exports, editor scene JSON, editor primitive defaults or editor font-substitution output;
+- the user approves this artifact at `PRESENTATION_MASTER_USER_GATE`;
+- historical field/state name `FINAL_PUBLISH_GATE` is a compatibility alias for the same gate, not an additional approval;
+- only after approval does `EDITABLE_RECONSTRUCTION` map that look into `EDITOR_SCENE_MODEL_V1`;
+- `PRESENTATION_PARITY_QC` compares the tool-linked reconstruction against the approved master;
+- parity failure repairs the editor/reconstruction layer only and cannot mutate the approved master or approved artwork;
+- user-gate preview and internal QC sheet are separate artifacts; diagnostic page labels never appear in the user-gate preview.
+
+Normal user approvals per episode remain exactly three: storyboard → artwork bundle → tool-independent presentation master.
+
+## Architecture revision — approved artwork is pixel-locked
+
+The prior `PAGE_FINAL_RECOMPOSE` default is superseded. It caused an approved BODY/COVER bundle to be sent through stochastic image generation again, which created style/identity drift despite the artwork already having user approval.
+
+Canonical rule now:
+- `SIX_PANEL_BOARD_FIRST` remains the BODY authoring architecture.
+- `INITIAL_ART_BUNDLE` remains BODY 2×3 master board + separate COVER hero.
+- `ART_BUNDLE_USER_GATE` approval is an **exact artwork source lock**, not a loose visual/semantic anchor.
+- after artwork approval, no episode-art image generation, inpainting, outpainting or redraw is allowed unless the user explicitly reopens the affected BODY/COVER component;
+- BODY S01..S06 are exact crops from the approved BODY board using `JIPBAP_BOARD_EXTRACTION_V1` actual-border detection;
+- COVER uses the exact approved COVER source;
+- 4:5 adaptation is deterministic crop / non-stretched scale / position / frame / optional padding only;
+- lettering, speech/thought containers, SFX and COVER title are overlays on the locked artwork.
+- presentation/layout feedback never authorizes artwork regeneration.
+
+Canonical flow:
+`BOOT → PLAN → STORYBOARD_USER_GATE + CARRIER_BIND → INITIAL_ART_BUNDLE → ART_BUNDLE_USER_GATE → APPROVED_ART_PIXEL_LOCK → DETERMINISTIC_PAGE_ASSEMBLY → TOOL_INDEPENDENT_PRESENTATION_MASTER → PRESENTATION_MASTER_USER_GATE (= FINAL_PUBLISH_GATE compatibility alias) → EDITABLE_RECONSTRUCTION → PRESENTATION_PARITY_QC → FINAL_EXPORT → DONE`
+
+Prior E006 artwork provenance from the superseded run:
+- former BODY source SHA-256: `d111fe69d02da338f48d2cde08c1a9db58e0fc03008613d5c281a3ae70839c76`
+- former COVER source SHA-256: `063b7c58e069a643072c6e0c8f81a4c2c50a88143c20c10fae49c2df7fbde8db`
+- former generation ids and rejected redraw attempts remain historical only.
+- status for this reset: `SUPERSEDED_NON_AUTHORITY`
+- they must not be used as E006 source, reference, anchor, presentation artwork, crop input or recovery material.
+
+Current approved E006 artwork authority:
+- BODY source SHA-256: `0c137977579bc72497a53d924305e3379b60197260af4f8b56bc9770fdadaf5e`
+- BODY dimensions: 1024 × 1536
+- BODY generation id: `0334542e-044b-4717-b36a-16411aba853e`
+- COVER source SHA-256: `01d55162dc66fdc54572bfd6a40452ed2f09df648a2c18e25c876a60c0be4e54`
+- COVER dimensions: 1122 × 1402
+- COVER generation id: `7de091b5-edd5-4182-8a34-45e52a3ff2af`
+- status: PIXEL_LOCKED_CURRENT_AUTHORITY
+- no stochastic episode-art generation is permitted after this approval unless the user explicitly reopens BODY or COVER.
+
+Deterministic extraction / presentation draft:
+- extraction mode: EXACT_CROP_FROM_APPROVED_BOARD
+- cell interiors (board xyxy): S01 [0,0,500,470]; S02 [521,0,1024,470]; S03 [0,489,500,954]; S04 [521,489,1024,954]; S05 [0,974,500,1536]; S06 [521,974,1024,1536]
+- 4:5 adaptation: deterministic crop + non-stretched scale only
+- presentation ZIP SHA-256: `13e40458103180be7bd8d9e5737221207832c0ca04d872bb4323b86d408746bf`
+- presentation contact-sheet SHA-256: `1b65c0bc05f872395a73a43f5d92e7433bf6894f22f3c9a15f63f7a1aa3032d8`
+- receipt: `episodes/V1_E006/PRESENTATION_MASTER_DRAFT_RECEIPT.md`
+
+Presentation QC finding — 2026-09-09:
+- the approved BODY/COVER artwork remains valid and pixel-locked;
+- the current presentation master is REJECTED_PRESENTATION_QC, not an artwork failure;
+- user-facing contact sheet incorrectly carried diagnostic page-id badges (COVER/S01..S06);
+- the draft used an ad-hoc deterministic compositor with undeclared local font substitution and generic organic-blob containers, collapsing quality-first presentation design into reconstruction-like rendering;
+- S06 also demonstrated shrink-to-fit typography degradation;
+- the cover episode label was enclosed despite the automatic default requiring plain lettering.
+
+Exact next action for episode production:
+1. Do not regenerate BODY or COVER.
+2. Rebuild `PRESENTATION_MASTER_DRAFT` as a tool-independent quality-first flattened target from the same locked artwork.
+3. Produce an unannotated final-gate preview; keep page ids/debug labels in metadata/internal QC only.
+4. Use declared typography roles/fallbacks, no silent font substitution, no below-min shrink-to-fit, and scene-specific lettering/container treatment.
+5. Show the repaired presentation master at the existing `FINAL_PUBLISH_GATE`.
+6. Only after user approval, perform `EDITABLE_RECONSTRUCTION` and `PRESENTATION_PARITY_QC`.
+
+Infrastructure change applied for future/new work:
+- `JIPBAP_V1_SPEC.md` now defines `APPROVED_ART_PIXEL_LOCK` plus `TOOL_INDEPENDENT_PRESENTATION_MASTER` as the canonical art/presentation boundary.
+- `templates/JIPBAP_PRESENTATION_SHELL_V2.json` revision is `2026-09-09_APPROVED_ART_PIXEL_LOCK_V1`.
+- BODY source policy is `approved_board_cell_exact_derivative` + `EXACT_EXTRACTION_REUSE`.
+- COVER source policy is `approved_cover_exact_source` + `EXACT_ANCHOR_REUSE`.
+- shell policy explicitly forbids stochastic regeneration after artwork approval and requires reopening the artwork gate for source replacement.
+- editor provenance schema records approved-source SHA, source-lock state and stochastic-regeneration policy while retaining historical `PAGE_FINAL_RECOMPOSE` enum readability for old packages only.
+- `JIPBAP_BOARD_EXTRACTION_V1` metadata now records `EXACT_CROP_FROM_APPROVED_BOARD`, `stochastic_generation=false`, approved-source identity requirement and no-stretch policy.
+- regression tests were updated to enforce the new source-lock contract.
+- no new routine user gate was added; the existing artwork approval gate now has stronger media authority.
+
+Remaining verification limits:
+- this reset now has approved BODY/COVER hashes and active-session exact bytes; repository binary materialization of those production-art bytes is not claimed in this runtime;
+- structural implementation/tests from the architecture revision remain PASS on GitHub Actions validate run #259 at `029b8f80fe32963b9151b299f353b4070fdc5de0`;
+- browser/mobile rendering differences remain presentation-layer concerns for later stages.
+
+BODY count: 6
+Carousel: COVER + 6 BODY
+Master board: 2 columns × 3 rows, text-free
+Final page ratio: 4:5
+Plan: episodes/V1_E006/PLAN.md
+Run receipt: presentation draft receipt recorded; final run receipt pending FINAL_PUBLISH_GATE
+
+## Runtime authority
+
+Normal boot reads only:
+1. CURRENT_STATE.md
+2. JIPBAP_V1_SPEC.md
+
+Legacy asset-composition, ASSET_GAP, BODY4 Lane A/B, PERSON/FOOD foundation DAG and old calibration chains remain historical/debugging material only.
+
+## Style authority and renderer state
+
+Creative style authority:
+- PERSON_STYLE_REF_1
+- TARGET_LOOK_BOARD_REF_1
+
+Renderer-safe production carrier:
+- JIPBAP_STYLE_CARRIER_V1
+- status: USER_LOCKED
+- approved session-source SHA-256: 43e791e8ebb1389fb7c469786f76fe118bcb96182d7c06e080d9088fb4057a80
+- dimensions: 583 × 622
+- repository registry: assets/reference_registry.json
+- repository binary materialization: NOT_COMPLETED_IN_THIS_RUNTIME
+- current permitted binding until materialization: same approved image as SESSION_ONLY fallback
+
+The carrier is style-delivery authority only and does not own menu, staging, camera, layout, story or copy.
+
+## Presentation shell versioning
+
+Completed episode provenance:
+- V1_E001 / V1_E002 remain on `JIPBAP_PRESENTATION_SHELL_V1`.
+- Do not mutate their layout solely because the project default changed.
+
+Default for new episodes:
+- template: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`
+- V2 revision: `2026-09-09_TOOL_INDEPENDENT_PRESENTATION_MASTER_V3`
+- canvas: 1080 × 1350
+- COVER: full-canvas artwork + standardized episode-label/title roles; `COVER_TITLE_SYSTEM_V1` default grammar is `EP.{episode_no} {topic_phrase}와 {food_name}`; title region is a soft placement hint, not a separate frame
+- BODY: full-canvas artwork; no fixed lower meta band
+- speech / inner-thought / narration / SFX are independent freeform vector/scene overlays
+- automatic placement is focal-aware and may use optional face/food/hand avoid metadata
+- artwork starts locked in automatic Chat production
+- lettering movement is ordinary presentation editing; explicit artwork-frame/page-structure deviation is `CUSTOM_OVERRIDE`
+- preferred real fonts + fallback chains are recorded; missing preferred fonts must be surfaced instead of silently substituted
+
+The presentation shell is a project default profile. The editor engine may expose broader capabilities without changing JIPBAP's automatic production defaults.
+
+## Editor architecture checkpoint
+
+Midpoint decision recorded:
+- `composition/*.layout.json` is the shared scene model for current Chat deterministic rendering and the future first-party Canva-like editor.
+- Canva itself is not a production dependency and no Canva/PPTX/PDF format becomes authority.
+- current Chat mode remains able to complete BOARD → scene/layout JSON → deterministic render → PNG without the future editor.
+- future API/editor may manipulate the same scene objects through selection, drag, resize, rotation, text edit, crop, z-order and grouping.
+- minimum scene support now includes stable ids, geometry, rotation, z-index, visibility/lock state, optional grouping and artwork crop metadata.
+- SVG remains an interchange/debug derivative; PNG remains a publish derivative.
+- no new user gate or BOARD hard-fail class is added by this editor architecture.
+
+Resolved and frozen in this design pass:
+- shared four-layer scene stack: background → artwork → lettering → overlay
+- COVER hierarchy: fixed top-level layers with menu-tag/title lettering groups
+- BODY hierarchy: fixed top-level layers with fluid speech/thought/narration/SFX instance groups
+- background and artwork-frame lock defaults for automatic production
+- editor capability remains broader: explicit unlock may move/resize/rotate artwork frames and is recorded as CUSTOM_OVERRIDE
+- crop editing remains available without changing source artwork bytes
+- semantic typography-role presets
+- V2 full-art semantic placement defaults: speech/thought/narration/SFX are freeform lettering overlays with focal-aware soft placement hints
+- page add/delete/duplicate/type-change remain editor capabilities rather than being deleted for JIPBAP
+- flat objects[] retained for Chat renderer compatibility; groups[] carries future editor semantics
+
+Schema:
+- schemas/editor_scene_model_v1.schema.json
+
+JIPBAP_PRESENTATION_SHELL_V1 remains unchanged for completed episodes. New automatic episodes instantiate JIPBAP_PRESENTATION_SHELL_V2.
+
+## V1_E002 approval state
+
+- STORYBOARD_USER_GATE: APPROVED
+- BOARD_STYLE_USER_GATE: APPROVED
+- FINAL_PUBLISH_GATE: APPROVED
+
+Accepted BOARD:
+- generation id: f11550ac-4963-465e-8262-fed8052e4ef4
+- SHA-256: df1c5c0d6a8c8dd6b38868c579dd4772747dc506591ec615cad007ec4dd736d9
+- dimensions: 1024 × 1536
+- hard-fail QC: PASS
+
+## V1_E002 deterministic retrofit
+
+Applied without BOARD regeneration:
+1. fixed BODY frame across all six pages
+2. fixed COVER title/hero shell
+3. removed artwork aspect distortion
+4. removed page markers
+5. compressed mobile copy
+6. made speech / inner-thought / SFX visually distinct
+7. kept S05 artwork unchanged per user decision
+
+Accepted content feedback:
+- shorter natural copy: APPLIED
+- speech/thought visual distinction: APPLIED
+- less glossy/ad-like FOOD on future BOARD runs: ACCEPTED, use existing FOOD spec more strictly
+- additional S05 artwork-payoff intervention: DEFERRED
+
+Presentation authority:
+- episodes/V1_E002/composition/*.layout.json
+- template_id: JIPBAP_PRESENTATION_SHELL_V1
+
+Current runtime package ZIP SHA-256:
+- 29ca16ead377b2cf63d7653cfcfd633ef380e4b1979d57c59c5653a4d4278ecc
+
+Current flattened carousel ZIP SHA-256:
+- 12b1fe0d0e13cee8bb72b94ec36300776dba9686f2115f3c27fdc8351ba0b418
+
+No stochastic BOARD regeneration is authorized for presentation-only feedback.
+
+## V1_E003 approval state
+
+- STORYBOARD_USER_GATE: IMPLICITLY_ACCEPTED_BY_PRODUCTION_CONTINUATION
+- BOARD hard-fail QC: PASS
+- prior visual preview: APPROVED
+- FINAL_PUBLISH_GATE: APPROVED_BY_EXPLICIT_USER_CLOSE
+- user close decision recorded: 2026-09-09
+- canonical composition: episodes/V1_E003/composition/*.layout.json
+- run receipt: episodes/V1_E003/RUN_RECEIPT.md
+
+Important implementation note:
+- the approved visual preview was shown successfully, but the repository has not yet received the canonical V2 editable composition package / RUN_RECEIPT for V1_E003.
+- therefore do not declare the episode repository state DONE until deterministic canonicalization and receipt persistence are completed.
+- this is artifact completion, not a new user gate and not a new permanent hard-fail class.
+
+## V1_E003 ToonDesk round-trip QC
+
+User test:
+- imported the supplied `.toondesk` into ToonDesk
+- made no edits
+- exported `V1_E003_package.zip`
+- returned the export for QC
+
+Round-trip integrity:
+- all 7 layout JSON files are byte-semantic equivalent to the source project pages: PASS
+- page count COVER + S01..S06: PASS
+- 1080 × 1350 PNG export for all 7 pages: PASS
+- manifest `custom_override=false`: PASS
+- all 7 SVG derivatives parse successfully and retain embedded artwork: PASS
+
+Authoring/package defects discovered:
+- S03 artwork contains an obvious strip of the next panel at the bottom: HARD VISUAL FAIL
+- S04 artwork contains an obvious strip of the next panel at the bottom: HARD VISUAL FAIL
+- root cause: the supplied package naively sliced the 1024×1536 generated board at nominal 512px row boundaries even though the actual generated panel borders were not located at equal 512px row boundaries
+- S06 speech bubble obscures a substantial part of the protagonist face/eye area: presentation defect requiring deterministic layout repair
+- the previously approved 7-page preview was separately generated instead of being the deterministic derivative of the accepted master BOARD; therefore approval identity and canonical package identity diverged
+
+Interpretation:
+- ToonDesk did NOT introduce these defects. The no-edit round trip preserved the supplied scene exactly.
+- this is a package-authoring / deterministic-assembly failure, not evidence for a new permanent V1 hard gate or new editor rule.
+- V1_E003 must not be declared DONE until the canonical package is rebuilt under the corrected full-art V2 shell and the changed final carousel is shown at the final publish gate.
+- the prior final preview approval is not canonical package approval because preview/package identity diverged; FINAL_PUBLISH_GATE is therefore REOPENED_FOR_CANONICAL_IDENTITY for E003 only.
+
+## V1_E003 full-art rebuild test
+
+Session rebuild created under corrected V2 profile:
+- profile revision: `2026-09-09_FULL_ART_OVERLAY`
+- handoff filename: `V1_E003_제육볶음_FULL_ART_V2.toondesk`
+- session SHA-256: `f5ecad7c32fd5f54ff7d13a211458c9465bef9b6ea35043f3d61fd6c9deac0be`
+- BODY artwork extraction: actual border-based, not nominal equal split
+- x interiors: [16,501], [522,1010]
+- y interiors: [11,488], [509,937], [958,1517]
+- crop contamination QC: PASS in session contact preview
+- COVER/BODY artwork frames: full-canvas 1080×1350
+- fixed lower meta band: REMOVED
+- lettering: independent editable overlays
+- local focal-overlap heuristic after placement repair: PASS (no text/container >35% overlap with declared primary avoid region)
+- preferred fonts: Jua / Gowun Dodum / Gaegu by semantic role
+- final publish gate: still reopened; this session file is a round-trip test handoff, not yet canonical repository completion
+
+## V1_E003 full-art round-trip #2
+
+User returned `V1_E003_package_1` after importing the full-art V2 handoff and exporting without edits.
+
+Verified:
+- COVER + S01..S06 layout JSON semantic equality against the supplied `.toondesk`: PASS for all 7 pages
+- ToonDesk did not mutate scene geometry/content during the no-edit round trip
+- font resolver receipt mostly matched preferred fonts
+- one old-build substitution remained: S04 SFX preferred `Gaegu` resolved to `Jua`
+
+Newly diagnosed content-authoring defect:
+- the full-art test package itself used `../artwork/S06.png` as COVER artwork, so the previously liked COVER visual source/composition was not preserved
+- this is not a ToonDesk round-trip mutation; it is COVER source/provenance loss in package authoring
+- COVER text placement also became awkward because source selection and focal-aware lettering were not treated as one deterministic composition problem
+
+Structural repairs accepted 2026-09-09:
+- sticky `cover_artwork_provenance` added to V1 scene/profile contract
+- presentation-only edits must not silently substitute another BODY source after a cover candidate source/crop is selected
+- COVER lettering placement is focal-aware against face/food/hand avoid regions
+- speech-bubble tail geometry is now explicit editable scene data (tip, attachment, base width, curve)
+- soft safe/avoid guides are editor-toggleable and snapping targets
+- font picker must mutate `preferred_family`; requested fonts are loaded before export and fallback remains visible in QC/manifest
+
+## ToonDesk 0.3 implementation checkpoint
+
+Implemented in `noru358/Toondesk`:
+- speech bubble tail upgraded from fixed triangle/`tail_to` to soft-curved geometry with direct tip + attachment handles
+- tail base width, curve and side controls added
+- legacy `tail_to` imports are upgraded on load
+- font-family selector bug fixed: changing font updates the real preferred family rather than leaving stale `preferred_family`
+- preferred fonts are explicitly loaded before project save/PNG/SVG/package export
+- guide toggle added (`G` / UI button); cover title-safe, body safe inset, placement guides and avoid regions can be visualized
+- snapping now includes placement-guide and avoid-region boundaries
+- focal overlap QC warning added for lettering covering high-priority avoid regions
+- exact layer clicks select exact objects for easier bubble/text editing
+- horizontal + vertical alignment and equal-spacing operations added
+- deterministic `빈곳 배치` helper added for selected lettering/containers
+- desktop version bumped to 0.3.0
+- relevant pushes to main still auto-build Windows dev artifacts
+- `vX.Y.Z` tag builds now publish executable files to GitHub Releases
+- workflow now performs static JS/JSON validation before packaging
+- auto-update remains intentionally deferred until signed/stable releases are established
+
+## ToonDesk 0.3 build result
+
+Latest Windows development build:
+- workflow run #20
+- static JS/JSON validation: PASS
+- Windows packaging: PASS
+- artifact: `ToonDesk-windows`
+- contents: `ToonDesk 0.3.0.exe`, `ToonDesk Setup 0.3.0.exe`
+
+E003 repaired local handoff candidate:
+- filename: `V1_E003_제육볶음_COVER_RESTORED_TD03.toondesk`
+- SHA-256: `82c3ab112aa935665b7d11e92d6c9bc046f66183571a0e9e4cbc0fb2278efe7f`
+- COVER source restored from the previously liked cover visual raster
+- source SHA-256: `12a701747e5fafc9ad36f20f729d91496f553a0d8a1b81c862d102f130b78a89`
+- old baked title/tag are hidden by deterministic artwork-band masks; visible title/menu are editable scene objects
+- `cover_artwork_provenance` recorded and locked for the final candidate
+- speech bubbles upgraded to rich soft-curved `tail` geometry
+
+## V1_E003 ToonDesk 0.3 returned-package QC
+
+User returned `V1_E003_package_Re` from the restored-cover TD03 candidate.
+
+Round-trip integrity:
+- COVER + S01..S06 layout JSON semantic equality against `V1_E003_제육볶음_COVER_RESTORED_TD03.toondesk`: PASS for all 7 pages
+- `cover_artwork_provenance`: preserved exactly, source `../artwork/COVER_APPROVED.png`
+- rich speech-tail objects: preserved in layout JSON
+- guide / avoid-region metadata: preserved through semantic page equality
+- `custom_override=false`: preserved
+
+Visual QC:
+- restored COVER source/composition: substantially restored and focal subject no longer covered by title
+- minor baked-title fragment remained in the cover mask edge: deterministic mask repair required
+- S04 speech tail is publish-blocking presentation failure: pointer is far too long and crosses the protagonist face
+- S06 speech tail is publish-blocking presentation failure: pointer crosses both eyes/face
+- BODY crop contamination remains resolved
+
+Font QC:
+- all preferred/resolved families match except S04 SFX: preferred `Gaegu`, resolved `Jua`
+- root cause found in ToonDesk font resolver: after loading weight 700, availability check used implicit weight 400; this can falsely mark Gaegu 700 unavailable
+- resolver corrected to check the requested weight and sample text
+- package did not contain a user font-family edit relative to the source candidate, so the manual font-change interaction itself was not exercised in this returned package
+
+Repairs prepared:
+- JIPBAP automatic speech-tail default now prefers short focal-safe pointers (roughly <=180px when practical; manual editor length remains unrestricted)
+- E003 S04/S06 tail geometry shortened and moved off focal facial regions
+- COVER residual baked-title fragment mask enlarged without covering the retained underline
+- repaired handoff candidate: `V1_E003_제육볶음_COVER_RESTORED_TD031.toondesk`
+- candidate SHA-256: `bdd412e63f80ef0bd5d1fc555efb9840cb6a1ccadda5b04d452036c2de850817`
+- ToonDesk 0.3.1 source fix committed; Windows development build pending
+
+## ToonDesk 0.3.1 build result
+
+Latest Windows development build:
+- workflow run #23
+- head: `26d7a0999e36fdc951d21164d23c3414f97d2b06`
+- static JS/JSON validation: PASS
+- Windows packaging: PASS
+- artifact: `ToonDesk-windows`
+- artifact id: 10066881620
+- contents: ToonDesk 0.3.1 installer + portable executables
+
+Font resolver repair:
+- availability checks now use the requested font weight and sample text
+- this specifically addresses the false `Gaegu 700 → Jua` fallback observed in the returned TD03 package
+
+## V1_E003 closure
+
+- EPISODE STATUS: DONE
+- closed by explicit user request on 2026-09-09
+- canonical shell: `JIPBAP_PRESENTATION_SHELL_V2`
+- profile revision: `2026-09-09_FULL_ART_OVERLAY`
+- canonical handoff candidate SHA-256: `bdd412e63f80ef0bd5d1fc555efb9840cb6a1ccadda5b04d452036c2de850817`
+- composition authority persisted under `episodes/V1_E003/composition/`
+- RUN_RECEIPT persisted
+- no additional TD031 user round-trip is required for E003 closure
+- do not mutate V1_E003 unless the user explicitly reopens episode 3
+
+## Previous episode provenance
+
+V1_E001:
+- FINAL_PUBLISH_GATE: APPROVED
+- EPISODE STATUS: DONE
+- do not mutate unless explicitly reopened
+
+V1_CAL_001:
+- prior calibration provenance only
+- rejected boards remain non-reference material
+
+## Board extraction implementation checkpoint
+
+Reusable implementation added:
+- `pipeline/extract_board.py`
+- `python -m pipeline.cli extract-board <source> <output_dir> --metadata <json>`
+- actual dark panel-border detection for the frozen 2×3 board
+- refuses implausible/missing border geometry rather than falling back to nominal 512px slicing
+- non-equal-boundary regression test added
+- CI run #166: PASS
+- repository validator now skips byte expectations only for explicitly non-materialized SESSION_ONLY carriers, consistent with JIPBAP_V1_SPEC §9.5; it still fails active materialized references without hashes
+
+This implementation prevents the V1_E003 adjacent-panel crop bug from becoming a one-off manual fix.
+
+## ToonDesk desktop usability checkpoint
+
+Implemented in `noru358/Toondesk`:
+- Electron desktop shell added while retaining static-browser fallback
+- native open/save dialogs
+- `.toondesk` OS file-association build configuration
+- double-click / OS-open project handoff
+- Ctrl/Cmd+S in-place save for an opened project
+- preferred-font resolution warnings in QC
+- JIPBAP full-art V2 example profile mirrored as non-authoritative example only
+- Windows desktop build workflow: PASS through run #4 (head `0492910...`); artifact contains `ToonDesk Setup 0.2.0.exe` and portable `ToonDesk 0.2.0.exe`
+- subsequent workflow revisions only narrow automatic triggers/artifact upload scope; they do not change scene authority
+
+The desktop wrapper is transport/UX only. It does not change JIPBAP `composition/*.layout.json` authority or create a new production gate.
+
+## ToonDesk Web Live checkpoint
+
+Primary interactive-editor transport changed 2026-09-09:
+- hosted ToonDesk web editor is now the normal development/use path
+- canonical URL: `https://noru358.github.io/Toondesk/`
+- ToonDesk `main` is automatically mirrored to the `gh-pages` branch through `Web Live Sync`
+- GitHub's branch-based Pages deployment is active; no EXE download is required for routine editor revisions
+- Chrome/Edge hosted mode uses the File System Access API for native project open/save and Ctrl/Cmd+S in-place save when supported
+- Electron/Windows builds remain optional for OS file association/offline use and are now manual/tag-driven instead of rebuilding on every `main` push
+- web/desktop transport does not change JIPBAP composition authority
+
+## Generic editor boundary
+
+- Generic editor implementation repository: `noru358/Toondesk`.
+- ToonDesk is a separate generic editor/renderer capability surface, not JIPBAP canonical authority.
+- JIPBAP owns its project profile/default shell; ToonDesk consumes it.
+- Canonical JIPBAP profile: `templates/JIPBAP_PRESENTATION_SHELL_V2.json`.
+- Any `profiles/jipbap_v2.example.json` copy in ToonDesk is a non-authoritative development/example mirror only.
+- ToonDesk transport/session wrappers (`TOONDESK_PACKAGE_V1`, `TOONDESK_PROJECT_V1`) are non-authoritative. `composition/*.layout.json` remains the JIPBAP presentation authority.
+- ToonDesk may report explicit profile deviations as `CUSTOM_OVERRIDE`; this is not corruption and does not change scene-format authority.
+- Automatic Chat production does not invent per-episode custom overrides. Overrides require explicit user/editor action.
+
+## V1_E004 production checkpoint
+
+User approvals / runtime facts:
+- STORYBOARD_USER_GATE: APPROVED
+- approved renderer carrier supplied in-session as the already locked `JIPBAP_STYLE_CARRIER_V1`
+- first generated 2×3 BOARD was not accepted because background/context density was too high
+- revised 2×3 BOARD with reduced background density: USER APPROVED
+- approved revised BOARD generation id: `5203ada2-e4fb-4f49-bd88-865f763e7eaa`
+- approved revised BOARD dimensions: 1024 × 1536
+- BODY count / panel geometry: six visually extractable cells
+- BOARD hard-fail QC: PASS at the user-approved checkpoint
+
+Accepted E004 QC findings:
+- background simplification improved the board and should remain the automatic default
+- later per-page food renders became too photoreal / glossy relative to the simplified PERSON drawing language
+- FOOD should stay appetizing but use grouped illustrated texture, restrained gloss and consistent abstraction across wide and macro shots
+- the current COVER artwork/text balance was acceptable to the user; the improvement target is series-level standardization rather than changing the basic hero-art composition
+- standardized COVER title system accepted: `COVER_TITLE_SYSTEM_V1`
+- E004 semantic cover title: `EP.4 퇴근길과 김치볶음밥`
+
+Canonicality correction:
+- the separately re-generated 4:5 COVER/S01..S06 images shown after BOARD approval are NON-CANONICAL exploratory previews.
+- they were stochastic re-imaginings rather than deterministic derivatives of the accepted 2×3 BOARD, so they must not become E004 presentation authority or final approval identity.
+- this does not create a new gate; it restores the already-defined BOARD → deterministic composition rule.
+
+Structural changes applied:
+- `JIPBAP_V1_SPEC.md`: natural-spoken copy interpretation clarified; FOOD de-photorealization and panel-consistency guidance strengthened; unnecessary background density added to soft QC; COVER title grammar standardized without fixed coordinates.
+- `templates/JIPBAP_PRESENTATION_SHELL_V2.json`: revision advanced to `2026-09-09_COVER_TITLE_SYSTEM_V1`; episode label + semantic title fields added; duplicate menu tag disabled by automatic default while remaining an editor capability.
+- `episodes/V1_E004/PLAN.md`: COVER title updated to `EP.4 퇴근길과 김치볶음밥`.
+
+## V1_E004 canonical candidate checkpoint
+
+- approved BODY source: revised 2×3 BOARD generation `5203ada2-e4fb-4f49-bd88-865f763e7eaa`
+- actual detected x border bands: [8,11], [503,505], [518,520], [1014,1016]
+- actual detected y border bands: [4,6], [490,492], [503,506], [1005,1007], [1020,1022], [1523,1525]
+- extracted x interiors: [12,503], [521,1014]
+- extracted y interiors: [7,490], [507,1005], [1023,1523]
+- nominal equal slicing: NOT USED
+- cover source: accepted S06 cell reused deterministically; provenance locked
+- cover title system: `COVER_TITLE_SYSTEM_V1`
+- composed cover title: `EP.4 퇴근길과 김치볶음밥`
+- candidate package SHA-256: `a93e34374aa4ba8ec2eb2c78ff7f483e19eb16ca89deb29836a16b386f6a08eb`
+- ToonDesk candidate SHA-256: `c994ec0ef46c27477636f9833e482d6697936a5684b8dc54fdb3df10bda7bbe4`
+- preferred profile webfonts were unavailable in this deterministic render runtime; candidate lettering is pinned to Noto Sans KR intent / local Noto Sans CJK KR fallback and this substitution is surfaced rather than hidden.
+- canonical composition/export files are prepared in-session but are not yet persisted to repository until FINAL_PUBLISH_GATE approval.
+## V1_E004 closure
+
+- EPISODE STATUS: DONE
+- STORYBOARD_USER_GATE: APPROVED
+- revised BOARD: APPROVED
+- FINAL_PUBLISH_GATE: APPROVED
+- final publish artifact: earlier 7-page stochastic draft, explicitly selected by user
+- final selection record: `episodes/V1_E004/FINAL_SELECTION.md`
+- run receipt: `episodes/V1_E004/RUN_RECEIPT.md`
+- later deterministic BOARD-derived candidate: preserved for feedback at `episodes/V1_E004/review_candidates/DETERMINISTIC_GATE_20260909.md`
+- known FOOD-realism / cross-domain coherence issues remain accepted soft-quality feedback for future episodes
+- the E004 page-level stochastic final selection was an explicit one-episode override under the then-current deterministic approval-identity path; that historical path was later superseded by the 2026-09-09 `PAGE_FINAL_RECOMPOSE` architecture
+## V1_E004 post-publish structural feedback
+
+- published V1_E004 artifact remains CLOSED and unchanged.
+- postmortem: `episodes/V1_E004/POSTMORTEM_20260909.md`
+- repeated FOOD photorealism is now classified as unresolved renderer style-delivery, not merely prompt wording.
+- new renderer-safe projection required before next production BOARD: `JIPBAP_FOOD_STYLE_CARRIER_V1`.
+- COVER automatic default: distinct text-free hero artwork; no silent BODY-cell reuse.
+- `COVER_TITLE_SYSTEM_V1` remains; EP label defaults to plain lettering without an enclosing bubble/pill.
+- BODY speech default: soft organic oval bubble + hand-drawn typography; horizontal bubble flip supported in ToonDesk.
+- ingestion/copy timing rule added: flavor/mouthfeel claims cannot precede visible or already-established ingestion.
+
+## ToonDesk 0.3.2 checkpoint
+
+- repository: `noru358/Toondesk`
+- package version: 0.3.2
+- speech bubble horizontal flip: IMPLEMENTED
+- default bubble silhouette: `soft_oval`
+- default tail: narrower + more curved
+- JIPBAP hand-drawn typography profile mirror: UPDATED
+- JavaScript syntax validation: PASS for core/render/panels/actions/interaction/io/wiring
+- this editor change does not mutate completed E004 output.
+## V1_E005 production state
+
+- STORYBOARD_USER_GATE: APPROVED
+- one-time FOOD renderer projection: APPROVED / USER_LOCKED
+- JIPBAP_FOOD_STYLE_CARRIER_V1 session SHA-256: `e2cb04ff82671fff655830b1a3be540561d3dde108eb18bed7a8cc6d09a9c73a`
+- FOOD carrier dimensions: 1254 × 1254
+- FOOD carrier repository binary materialization: NOT_COMPLETED_IN_THIS_RUNTIME
+- permitted binding until materialization: identical approved SESSION_ONLY fallback
+- BODY master BOARD: APPROVED
+- approved BOARD SHA-256: `f1c27c4a635406d616f1649127318767ba22ba5d2d51f87088db4808fd76c126`
+- approved BOARD dimensions: 1024 × 1536
+- detected cell interiors: x [12,503], [520,1012]; y [9,487], [504,986], [1003,1522]
+- BODY eye-design correction in S03/S06: APPROVED with revised BOARD
+- distinct COVER hero: APPROVED
+- COVER source SHA-256: `eba699359373e2534fe5edcfd027c78af0e77962c2609607b086047960828fc8`
+- COVER dimensions: 1122 × 1402
+- prior tool-first deterministic final candidate: REJECTED_AS_PRESENTATION_BASELINE_BY_STRUCTURAL_FEEDBACK
+- rejection reason: editor/shell defaults were allowed to define the upstream bubble/typography design, causing visible quality regression versus the earlier quality-first lettered drafts
+- approved BOARD/COVER artwork remain locked and are NOT reopened
+- new presentation architecture: `PRESENTATION_MASTER_FIRST`
+- current stage: `FINAL_PUBLISH_GATE` on a quality-first `PRESENTATION_MASTER_DRAFT`
+- presentation-master candidate session SHA-256: `38f25a32289af32631279c2ec8afecf3997292e8043b649dddf2e0c6b4a6b226`
+- candidate is visual-design target only; approved literal copy and accepted BOARD/COVER artwork remain authority
+- final editable package must be reconstructed from the approved visual target and pass `PRESENTATION_PARITY_QC`
+- tool limitation must not silently simplify approved presentation design; extend ToonDesk/scene capability when required
+
+## Historical location note
+
+The canonical episode exact-next-action is intentionally kept in the boot snapshot near the top of this file.
+Do not infer a newer runtime action from historical checkpoints below.

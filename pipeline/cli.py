@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from .extract_board import ExtractionError, extract_board
+from .runtime import EpisodeRuntime, RuntimeErrorClosed
 from .validate import ValidationError, validate_repository
 
 
@@ -13,6 +14,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Jipbap fail-closed validation CLI")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate", help="validate current repository media integrity")
+
+    runtime = sub.add_parser("runtime", help="inspect the single fail-closed episode runtime")
+    runtime.add_argument("--root", type=Path, default=Path.cwd())
+    runtime.add_argument("--next-action", action="store_true")
 
     extract = sub.add_parser(
         "extract-board",
@@ -46,6 +51,20 @@ def main(argv: list[str] | None = None) -> int:
             print(f"JIPBAP_FAIL:\n{exc}", file=sys.stderr)
             return 2
         print("JIPBAP_EXTRACTED " + json.dumps(result.to_json(), ensure_ascii=False))
+        return 0
+
+    if args.command == "runtime":
+        try:
+            controller = EpisodeRuntime(args.root)
+            state = controller.load()
+            payload = controller.next_action(state) if args.next_action else {
+                "episode": state["episode"], "stage": state["stage"], "version": state["version"],
+                "review": state.get("review"), "next_action": controller.next_action(state),
+            }
+        except (RuntimeErrorClosed, OSError, ValueError) as exc:
+            print(f"JIPBAP_FAIL:\n{exc}", file=sys.stderr)
+            return 2
+        print(json.dumps(payload, ensure_ascii=False))
         return 0
 
     return 2

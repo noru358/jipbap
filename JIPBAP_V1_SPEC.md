@@ -869,11 +869,16 @@ Shared deterministic code may still be reused. Its version belongs in implementa
 
 ## 11. Runtime authority
 
-Normal boot reads:
-1. `CURRENT_STATE.md`
-2. `JIPBAP_V1_SPEC.md`
+The machine authority is exactly one file: `runtime/state.json`
+(`JIPBAP_RUNTIME_V1`). It records the active episode, stage, current review
+artifact, assets, locks, approvals and event sequence. State transitions are
+made only by the runtime controller under its file lock.
 
-Only when actual reference bytes must be dispatched/materialized:
-3. `assets/REFERENCE_MANIFEST.md` or the specific reference registry entry
+`CURRENT_STATE.md` and `runtime/RUN_CONTEXT.md` are generated read models. They
+must never be manually used to advance a stage. Historical snapshots live under
+`history/` and are provenance only.
 
-Do not recursively load legacy protocol/calibration documents during normal production.
+Normal boot reads the generated RUN_CONTEXT and this spec. Only when actual
+reference bytes must be dispatched/materialized, it reads the specific
+reference-registry entry. Do not recursively load legacy protocol/calibration
+documents during normal production.

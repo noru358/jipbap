@@ -1,0 +1,36 @@
+{
+  "schema": "JIPBAP_RUNTIME_V1",
+  "version": 1,
+  "episode": "V1_E007",
+  "food": "",
+  "stage": "RECOVERY_BLOCKED",
+  "created_at": "2026-09-09T01:53:28+00:00",
+  "updated_at": "2026-09-09T01:53:28+00:00",
+  "assets": {},
+  "artifacts": {},
+  "approvals": [],
+  "events": [
+    {
+      "sequence": 1,
+      "type": "MIGRATED_RECOVERY_BLOCKED",
+      "at": "2026-09-09T01:53:28+00:00",
+      "reason": "E007 approved BODY/COVER/presentation original bytes are not materialized in persistent storage; do not reconstruct or mark DONE."
+    }
+  ],
+  "review": null,
+  "capabilities": {
+    "repository_image_bytes": true,
+    "automatic_reference_forwarding": false,
+    "generated_original_byte_recovery": false,
+    "controlled_compositor": true,
+    "chat_runtime_image_tool_control": "CHAT_RUNTIME_LIMIT"
+  },
+  "recovery": {
+    "reason": "E007 approved BODY/COVER/presentation original bytes are not materialized in persistent storage; do not reconstruct or mark DONE.",
+    "missing": [
+      "body_board",
+      "cover",
+      "approved_presentation"
+    ]
+  }
+}
